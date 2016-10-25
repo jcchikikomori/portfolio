@@ -126,13 +126,13 @@ $(document).ready(function() {
 			type: "iframe",
       height: 768,
       width: 1024,
-      href: this.href.replace(new RegExp("http:", "i"), 'https:'),
+      href: $(this).data("href").replace(new RegExp("http:", "i"), 'https:'),
       // autoDimensions: false,
 		});
 		return false;
 	});
 
-  $(".fancyajax").on("click", function(e) {
+  $(".fancy").on("click", function(e) {
     e.preventDefault();
 		var jWindow = $(window).width();
 		if (jWindow <= 768) {
