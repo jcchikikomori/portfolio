@@ -119,11 +119,12 @@ $(document).ready(function() {
 			return;
 		}
 		$.fancybox({
-			href: this.href,
+			// href: this.href,
 			padding: 4,
 			type: "iframe",
       height: 768,
       width: 1024,
+      href: this.href.replace(new RegExp("http:", "i"), 'https:'),
       // autoDimensions: false,
 		});
 		return false;
