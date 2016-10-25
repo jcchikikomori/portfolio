@@ -100,6 +100,7 @@ $(document).ready(function() {
 	/***************** Fancybox ******************/
 
 	$(".youtube-media").on("click", function(e) {
+    e.preventDefault();
 		var jWindow = $(window).width();
 		if (jWindow <= 768) {
 			return;
@@ -114,6 +115,7 @@ $(document).ready(function() {
 	});
 
   $(".fancyiframe").on("click", function(e) {
+    e.preventDefault();
 		var jWindow = $(window).width();
 		if (jWindow <= 1024) {
 			return;
@@ -131,6 +133,7 @@ $(document).ready(function() {
 	});
 
   $(".fancyajax").on("click", function(e) {
+    e.preventDefault();
 		var jWindow = $(window).width();
 		if (jWindow <= 768) {
 			return;
@@ -144,6 +147,7 @@ $(document).ready(function() {
 	});
 
   $(".aboutme").on("click", function(e) {
+    e.preventDefault();
 		// var jWindow = $(window).width();
 		// if (jWindow <= 768) {
 		// 	return;
