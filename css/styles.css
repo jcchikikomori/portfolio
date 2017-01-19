@@ -570,8 +570,9 @@ Navigation
 }
 .navicon-fixed {
     position: fixed;
-    top: 59px;
-    right: 143px;
+    z-index: 10000;
+    top: 90px;
+    /*right: 143px;*/
 }
 
 /* ==========================================================================
@@ -580,7 +581,7 @@ Hero
 .hero {
     position: relative;
     padding: 60px 0 60px 0;
-    min-height: 800px;
+    min-height: 400px;
     /*background: rgb(40, 70, 102) /*url('../img/hero-01.jpg')*/ no-repeat center center;*/
     /*background-size: cover;*/
 }
@@ -1110,4 +1111,20 @@ Corrections / Custom
 
 .bg-blue {
     background-color: #3f6184;
+}
+
+section.title {
+    background-color: #3f6184;
+}
+
+.navicon-fixed {
+    right: 8%;
+}
+
+.navicon-fixed a {
+    padding: 0 !important;
+}
+
+.navicon-fixed a div {
+    background-color: #284666;
 }

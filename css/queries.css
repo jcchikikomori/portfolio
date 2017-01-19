@@ -22,6 +22,9 @@
 	.overlay ul li a{padding:20px 0;min-width:120px;font-size:12px;}
 }
 @media screen and (max-width:465px){
+	.navicon-fixed {
+	    right: 2% !important;
+	}
 	.hero h1{
 		font-size:28px;
 		margin:40px 0 40px 0;

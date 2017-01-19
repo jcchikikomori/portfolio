@@ -6,44 +6,50 @@ function loadData() {
 
 /************** FUNCTIONS END ***************/
 
-$(window).on('beforeunload', function(){
-  $(window).scrollTop(0);
-});
+// $(window).on('beforeunload', function(){
+//   $(window).scrollTop(0);
+// });
 
 $(document).ready(function() {
 
-	// setTimeout(function() {
-	// 	$('body').removeAttr('hidden');
-	// }, 3000);
+  // setTimeout(function() {
+  // 	$('body').removeAttr('hidden');
+  // }, 3000);
 
-  $('html').css('overflow', 'hidden');
+  setTimeout(function() {
+  	$('.loader-wrap').remove();
+  	$('.contents').removeAttr('hidden');
+  	$('html').css('overflow', 'auto');
+  }, 1500);
 
-  $(".show-more").on("click", function(e) {
-    $(this).addClass('animated fadeOut');
-		// $('html').css('overflow', 'auto');
-    $('html').removeAttr('style');
-    // reset take tour btn
-    setTimeout(function() {
-      $(".show-more").removeClass('animated fadeInUp fadeOut fadeIn');
-    }, 2000);
-	});
+  // $(".show-more").on("click", function(e) {
+  //   $(this).addClass('animated fadeOut');
+  //   $('html').css('overflow', 'auto');
+  //   $('html').removeAttr('style');
+  // reset take tour btn
+  //   setTimeout(function() {
+  //     $(".show-more").removeClass('animated fadeInUp fadeOut fadeIn');
+  //   }, 2000);
+  // });
 
-  $('.top').on('click', function(){
-    $(window).scrollTop(0);
-  });
+  // SCROLL TO TOP ON CLICK
+  // $('.top').on('click', function(){
+  //   $(window).scrollTop(0);
+  // });
 
   $('.download-btn').on('click', function(){
   });
 
   $("a.single_image").fancybox({
 		padding: 4,
-	});
+  });
 
   // $('.lazy').Lazy({
   //   onFinishedAll: function() {
   //     $('.coverme').hide();
   //   }
   // });
+
 
 	/***************** Waypoints ******************/
 
