@@ -19,8 +19,11 @@ body {
     color: #fff;
 }
 
-section.title {
+section {
 	color: #fff !important;
+}
+
+section.title {
     background-color: #3f6184;
 }
 
