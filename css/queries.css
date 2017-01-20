@@ -24,6 +24,7 @@
 @media screen and (max-width:465px){
 	.navicon-fixed {
 	    right: 13% !important;
+	    top: 78px;
 	}
 	img.jcc-logo {
 		width: 100px !important;
