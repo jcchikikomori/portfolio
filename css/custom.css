@@ -1,0 +1,37 @@
+/* ==========================================================================
+Corrections / Custom
+========================================================================== */
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+body {
+	background: rgb(40, 70, 102) no-repeat center center;
+}
+
+.hero {
+    /*background: rgb(40, 70, 102) no-repeat center center;*/
+    background: url('../img/hero.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+}
+
+section.title {
+	color: #fff !important;
+    background-color: #3f6184;
+}
+
+.navicon-fixed {
+    right: 8%;
+}
+
+.navicon-fixed a {
+    padding: 0 !important;
+}
+
+.navicon-fixed a div {
+    background-color: #284666;
+}

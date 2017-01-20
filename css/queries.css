@@ -38,3 +38,10 @@
 	blockquote p{width:60%;}
 	.features-slider {padding: 11% 50px 10% 50px;}
 }
+/*SLIDESHOW*/
+@media screen and (max-width: 1140px) { 
+    .cb-slideshow li div h3 { font-size: 140px }
+}
+@media screen and (max-width: 600px) { 
+    .cb-slideshow li div h3 { font-size: 80px }
+}

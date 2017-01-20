@@ -30,20 +30,10 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>@jccultima123 GitHub repository page</title>
+		<title>@jccultima123</title>
 		<meta name="description" content="Set of demos and samples in my public repositories" />
 		<meta name="keywords" content="one page, git, portfolio, web design, repository page, development" />
 		<meta name="author" content="John Cyrill Corsanes" />
-		<!-- Bootstrap -->
-		<script src="js/modernizr.custom.js"></script>
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/jquery.fancybox.css" rel="stylesheet">
-		<link href="css/flickity.css" rel="stylesheet" >
-		<link href="css/animate.css" rel="stylesheet">
-		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-		<link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
-		<link href="css/styles.css" rel="stylesheet">
-		<link href="css/queries.css" rel="stylesheet">
 		<!-- Theme Color for Chrome's Address bar (Mobile) -->
 		<meta name="theme-color" content="#3E6083">
 		<!-- Facebook and Twitter integration -->
@@ -56,6 +46,18 @@
 		<meta name="twitter:image" content="img/jcc_logo_og.jpg" />
 		<meta name="twitter:url" content="jccultima123.github.io" />
 		<meta name="twitter:card" content="" />
+		<!-- Bootstrap -->
+		<script src="js/modernizr.custom.js"></script>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/jquery.fancybox.css" rel="stylesheet">
+		<link href="css/flickity.css" rel="stylesheet" >
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+		<link href="css/styles.css" rel="stylesheet">
+		<link href="css/queries.css" rel="stylesheet">
+		<link href="css/slideshow.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 		<!-- Others -->
 		<!-- <meta http-equiv="X-Frame-Options" content="deny"> -->
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -74,7 +76,27 @@
 		<!-- open/close -->
 		<header>
 			<section class="hero">
-				<div class="texture-overlay"></div>
+				<!-- SLIDESHOW -->
+				<ul class="cb-slideshow nopadding">
+					<li>
+						<span>01</span>
+						<div></div>
+					</li>
+					<!-- <li>
+						<span>02</span>
+						<div></div>
+					</li>
+					<li>
+						<span>03</span>
+						<div></div>
+					</li> -->
+				</ul>
+				<!-- <div class="container-fluid">
+					<div class="row">
+					
+					</div>
+				</div> -->
+				<!-- <div class="texture-overlay"></div> -->
 				<div class="container">
 					<div class="row nav-wrapper">
 						<div class="col-md-6 col-sm-6 col-xs-6 text-left">
@@ -96,10 +118,8 @@
 					<div class="row hero-content">
 						<div class="col-md-12">
 							<h1 class="custom animated fadeInDown">
-								Hello! <br class="visible-xs"/>I am John Cyrill C.<br />
-								I work almost everywhere in <u>Web</u> and <u>Computer</u> industry<br class="hidden-sm hidden-xs"/>
-								and i love learning these stuffs even now.<br class="hidden-sm hidden-xs"/>
-								I want to learn more by hiring or collab with me!
+								Hello everyone! <br class="visible-xs"/>I am John Cyrill C.<br />
+								I almost know anything in <u>Web</u> and <u>Computing</u> industry.<br />
 							</h1>
 							<!-- <h2 class="animated fadeInDown">
 								Welcome to my portfolio!<br />
@@ -116,7 +136,8 @@
 				<div class="container title">
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<h1>Please wait...</h1>
+							<!-- <h1>Please wait...</h1> -->
+							<img src="img/ellipsis.gif" width="70">
 						</div>
 					</div>
 				</div>
@@ -125,7 +146,7 @@
 
 		<div class="contents" hidden>
 			
-			<section class="title wp2" id="projects">
+			<section class="title wp6" id="projects">
 				<div class="container title">
 					<div class="row">
 						<div class="col-md-12">
@@ -255,7 +276,7 @@
 				<!--</div>-->
 			<!--</section>-->
 
-			<section class="screenshots wp2">
+			<section class="screenshots wp6">
 				<div class="container-fluid">
 					<div class="row">
 						<ul class="grid">
@@ -323,7 +344,7 @@
 				</div>
 			</section>
 
-			<section class="title wp2" id="involved">
+			<section class="title wp6" id="involved">
 				<div class="container title">
 					<div class="row">
 						<div class="col-md-12 text-left">
@@ -334,7 +355,7 @@
 				</div>
 			</section>
 
-			<section class="screenshots wp2">
+			<section class="screenshots wp6">
 				<div class="container-fluid">
 					<div class="row">
 						<ul class="grid">
@@ -409,8 +430,10 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12 text-center wp5">
-							<h2>Grab my CV / resume to know me more!</h2>
+							<h2>Contact me or Grab my CV / resume to know me even more!</h2>
+							<a href="#" class="aboutme btn download-btn">Contact Me!</a>
 							<a href="mailto:johncyrillcorsanes@gmail.com?subject=RESUME%20REQUEST" class="btn download-btn">Mail Me!</a>
+							<br /><br />
 							<h2>That's all! And hey, you can follow me with these links!</h2>
 							<!-- Place this tag where you want the button to render. -->
 							<a href="#" data-href="https://jccultima123.wordpress.com" target="_blank" class="btn"><i class="fa fa-wordpress fa-2x"></i></a>
@@ -465,7 +488,7 @@
 		<script src="js/flickity.pkgd.min.js"></script>
 		<script src="js/jquery.fancybox.pack.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<!-- <script src="js/retina.js"></script> -->
+		<script src="js/retina.js"></script>
 		<script src="js/waypoints.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<!-- <script src="js/min/scripts-min.js"></script> -->
