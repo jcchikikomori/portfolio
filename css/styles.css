@@ -595,6 +595,7 @@ Hero
     margin: 100px 0 45px 0;
     font-weight: 300;
     font-size: 35px;
+    text-shadow: rgb(46, 46, 46) 0px 4px 5px;
 }
 .hero h1 span {
     display: inline-block;

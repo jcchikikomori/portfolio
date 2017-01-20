@@ -23,7 +23,10 @@
 }
 @media screen and (max-width:465px){
 	.navicon-fixed {
-	    right: 2% !important;
+	    right: 13% !important;
+	}
+	img.jcc-logo {
+		width: 100px !important;
 	}
 	.hero h1{
 		font-size:28px;
