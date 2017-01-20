@@ -37,11 +37,6 @@ $(document).ready(function() {
     //   }, 2000);
     // });
 
-	// PREVENT OTHERS TO SCROLL ON TOP
-    $('a').on('click', function(e){
-      e.preventDefault();
-    });
-
     // SCROLL TO TOP ON CLICK
     $('.top').on('click', function(){
       $(window).scrollTop(0);
