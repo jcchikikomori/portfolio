@@ -114,6 +114,23 @@ $(document).ready(function() {
 
     /***************** Fancybox ******************/
 
+    $("a.uhref").on("click", function(e) {
+        e.preventDefault();
+        // var jWindow = $(window).width();
+        // if (jWindow <= 768) {
+        // 	return;
+        // }
+        var url = $(this).attr('href');
+        // alert(url);
+        $.fancybox({
+            href: url,
+            padding: 4,
+            type: "ajax",
+        });
+        return false;
+    });
+
+    // youtube
     $(".youtube-media").on("click", function(e) {
         e.preventDefault();
         var jWindow = $(window).width();
@@ -155,20 +172,6 @@ $(document).ready(function() {
         }
         $.fancybox({
             href: this.href,
-            padding: 4,
-            type: "ajax",
-        });
-        return false;
-    });
-
-    $(".aboutme").on("click", function(e) {
-        e.preventDefault();
-        // var jWindow = $(window).width();
-        // if (jWindow <= 768) {
-        // 	return;
-        // }
-        $.fancybox({
-            href: "aboutme.html",
             padding: 4,
             type: "ajax",
         });

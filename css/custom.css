@@ -20,11 +20,15 @@ body {
 }
 
 section {
-	color: #fff !important;
+    color: #fff !important;
 }
 
 section.title {
     background-color: #3f6184;
+}
+
+.nav-toggle, .navicon-fixed {
+    z-index: 7999;
 }
 
 .navicon-fixed {
@@ -37,4 +41,24 @@ section.title {
 
 .navicon-fixed a div {
     background-color: #284666;
+}
+
+p.browsehappy {
+    color: #fff !important;
+}
+
+/*a.aref, a.aref:focus {*/
+a.aref {
+    color: violet;
+    text-decoration: none;
+}
+
+ul.no-ul > li {
+    display: inline-block;
+    padding: 5px 2px;
+    text-decoration: none !important;
+}
+
+ul.no-ul > li > span.label {
+    font-size: 100% !important;
 }
