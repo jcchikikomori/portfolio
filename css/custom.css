@@ -14,7 +14,7 @@ body {
 
 .hero {
     /*background: rgb(40, 70, 102) no-repeat center center;*/
-    background: url('../img/hero.jpg') no-repeat center center;
+    background: url('../img/showcase-ide-01.jpg') no-repeat center center;
     background-size: cover;
     color: #fff;
 }

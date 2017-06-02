@@ -45,17 +45,17 @@
 }
 /*SLDESHOW IMAGES*/
 .cb-slideshow li:nth-child(1) span {
-    background-image: url(../img/01-screenshot.jpg);
+    background-image: url(../img/showcase-ide-01.jpg);
     animation-delay: 2s;
 }
-.cb-slideshow li:nth-child(2) span {
+/*.cb-slideshow li:nth-child(2) span {
     background-image: url(../img/showcase-ide-01.jpg);
     animation-delay: 6s;
 }
 .cb-slideshow li:nth-child(3) span {
     background-image: url(../img/03-screenshot.jpg);
     animation-delay: 12s;
-}
+}*/
 /*.cb-slideshow li:nth-child(4) span {
     background-image: url(../img/04-screenshot.jpg);
     animation-delay: 18s;
