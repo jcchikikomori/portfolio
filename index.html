@@ -30,18 +30,25 @@
 
 		<!-- Bootstrap -->
 		<script src="js/modernizr.custom.js"></script>
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/jquery.fancybox.css" rel="stylesheet">
-		<link href="css/theme.min.css" rel="stylesheet">
+		<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+		<!-- <link href="css/jquery.fancybox.css" rel="stylesheet"> -->
+		<!-- <link href="css/theme.min.css" rel="stylesheet"> -->
 		<!-- <link href="css/queries.css" rel="stylesheet"> -->
 		<!-- <link href="css/slideshow.css" rel="stylesheet"> -->
 		<!-- <link href="css/flickity.css" rel="stylesheet" > -->
 		<link href="css/animate.css" rel="stylesheet">
-		<link href="css/custom.css" rel="stylesheet">
+
 		<!-- CDN -->
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 		<link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+
+		<!-- NES.css -->
+		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+		<link href="https://unpkg.com/nes.css/css/nes.min.css" rel="stylesheet" />
+		<!-- <link href="./style.css" rel="stylesheet" /> -->
+
 		<!-- Others -->
+		<link href="css/custom.css" rel="stylesheet">
 		<!-- <meta http-equiv="X-Frame-Options" content="deny"> -->
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,6 +56,7 @@
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+
 	</head>
 	<body>
 
@@ -56,13 +64,51 @@
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#" data-href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 		
-		<div class="container">
+		<!-- <section class="container">
 			<div class="jumbotron jumbo-intro">
 				<h1>Hello, this is me!</h1>
 				<p>But still dressing up something new...</p>
 				<p><a class="btn btn-primary btn-lg" href="v1" role="button">Visit @jccultima123 v1</a></p>
 			</div>
-		</div>
+		</section> -->
+
+		<section class="nes-container main-container no-borders">
+			<!-- <h2 class="title">A.I. Bot</h2> -->
+			<div class="containers row">
+				<div class="nes-container is-rounded is-centered col-6-md">
+					<!-- <p class="title">Container.is-dark</p> -->
+					<!-- <p>Version 2 is not yet ready!</p> -->
+					<img src="img/jcc_logo.png" width="200" />
+					<p>@jccultima123</p>
+				</div>
+				<div class="nes-container is-rounded col-6-md">
+					<p>Web Developer, plays games when stressed!</p>
+				</div>
+			</div>
+			<div class="containers row">
+				<div class="nes-container is-rounded" style="max-width: 700px">
+					<p>I don't design my own portfolio page often, so i made it simple & minimalistic</p>
+					<br />
+					<button type="button" class="nes-btn"><i class="nes-icon github"></i> Github</button>
+					<button type="button" class="nes-btn"><i class="nes-icon gmail"></i> Gmail</button>
+				</div>
+			</div>
+		</section>
+
+		<section class="balloon nes-container no-borders">
+			<!-- <h2 class="title">A.I. Bot</h2> -->
+			<div class="messages">
+				<div class="message -left">
+					<i class="nes-bcrikko"></i>
+					<div class="nes-balloon from-left" id="message1">
+						<p>Initializing...</p>
+					</div>
+					<div class="nes-balloon from-left" id="message2" style="display: none;">
+						<p>Hello World! This is me, JCC!</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -90,6 +136,22 @@
 
 		<!-- GITHUB -->
 		<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+
+
+		<script>
+		
+			window.onload = function() {
+				$('.main-container').show();
+				if (!$('.main-container').is(':hidden')) {
+					
+					$('.main-container').addClass('animated zoomIn');
+					$('#message1').hide();
+					$('#message2').show();
+
+				}
+			}
+
+		</script>
 
 	</body>
 </html>
