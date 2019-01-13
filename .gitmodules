@@ -4,3 +4,6 @@
 [submodule "mapping-tools"]
 	path = mapping-tools
 	url = https://github.com/jccultima123/mapping-tools.git
+[submodule "v1"]
+	path = v1
+	url = git@github.com:jccultima123/older-jccultima123.github.io.git
