@@ -98,3 +98,12 @@ div.containers > .nes-container {
 .no-borders::after {
     border: none !important;
 }
+
+.profile-list {
+    font-size: 12.5px;
+    list-style: none;
+}
+
+.profile-list > li {
+    margin-left: -40px;
+}
