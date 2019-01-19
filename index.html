@@ -72,57 +72,73 @@
 			</div>
 		</section> -->
 
+		<section class="too-small-warning">
+			<h3>TOO SMALL!</h3>
+			<p>
+				Hey. This screen is too small to view this page!<br />
+				Try rotate your screen!
+			</p>
+		</section>
+
+		<div class="main-screen">
+			<section class="nes-container main-container no-borders">
+				<!-- <h2 class="title">A.I. Bot</h2> -->
+				<div class="containers">
+					<div class="nes-container is-rounded is-centered">
+						<img src="img/jcc_logo.png" width="200" />
+						<p>John Cyrill C.</p>
+						<ul class="profile-list">
+							<li>Casual I.T. Guy</li>
+							<li>Web Developer mostly PHP</li>
+							<li>Loves HTML as a web playground</li>
+							<li>Play games</li>
+						</ul>
+						<!-- <p style="font-size: 11px;">I don't often update my personal page like this, so i made it simple!</p> -->
+						<p style="font-size: 12px;">Let's catch up!</p>
+						<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button" class="nes-btn"><i class="nes-icon linkedin"></i> </button>
+						<button onclick="goToUrl('https://github.com/jccultima123')" id="github-btn" type="button" class="nes-btn"><i class="nes-icon github"></i> </button>
+						<button onclick="goToUrl('mailto:johncyrillcorsanes@gmail.com', false)" id="gmail-btn" type="button" class="nes-btn"><i class="nes-icon gmail"></i> </button>
+						<button onclick="goToUrl('https://www.youtube.com/user/jcstriker1')" id="youtube-btn" type="button" class="nes-btn"><i class="nes-icon youtube"></i> </button>
+						<br />
+						<span style="font-size: 9px;">v2.1</span>
+					</div>
+				</div>
+				<div class="containers">
+					<div class="nes-container is-rounded is-dark">
+						<button onclick="goToUrl('https://nostalgic-css.github.io/NES.css/')" id="sensei-btn" type="button" class="nes-btn">Check out NES.css</button>
+						<!-- <button onclick="goToUrl('v1')" id="v1-btn" type="button" class="nes-btn"></i>See v1.0</button> -->
+						<br /><br />
+						<p style="font-size: 9px;">
+							DISCLAIMER: This site is strictly using assets that are under compliance of
+							<a style="font-size: 9px" href="https://github.com/nostalgic-css/NES.css/blob/develop/LICENSE">MIT License</a>.
+							<br />
+							<br />
+							<a style="font-size: 9px" href="v1">Visit v1.0</a>
+						</p>
+					</div>
+				</div>
+			</section>
+	
+			<section class="balloon nes-container no-borders" id="baloon">
+				Loading...
+				<!-- <div class="messages">
+					<div class="message -left">
+						<i class="nes-bcrikko"></i>
+						<div class="nes-balloon from-left" id="message1">
+							<p>Loading...</p>
+						</div>
+						<div class="nes-balloon from-left" id="message2" style="display: none;">
+							<p>Hello World! This is me, JCC v2.0!</p>
+						</div>
+						<div class="nes-balloon from-left" id="message-custom" style="display: none;">
+							<p></p>
+						</div>
+					</div>
+				</div> -->
+			</section>
+		</div>
+
 		<a id="redirect" target="_blank" href="" hidden></a>
-
-		<section class="nes-container main-container no-borders">
-			<!-- <h2 class="title">A.I. Bot</h2> -->
-			<div class="containers">
-				<div class="nes-container is-rounded is-centered">
-					<img src="img/jcc_logo.png" width="200" />
-					<p>@jccultima123 2.0</p>
-					<ul class="profile-list">
-						<li>Casual I.T. Guy</li>
-						<li>Web Developer</li>
-						<li>Play games when stressed!</li>
-					</ul>
-					<p style="font-size: 11px;">I don't often update my personal page like this, so i made it simple!</p>
-					<p style="font-size: 12px;">Let's catch up!</p>
-					<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button" class="nes-btn"><i class="nes-icon linkedin"></i> </button>
-					<button onclick="goToUrl('https://github.com/jccultima123')" id="github-btn" type="button" class="nes-btn"><i class="nes-icon github"></i> </button>
-					<button onclick="goToUrl('mailto:johncyrillcorsanes@gmail.com', false)" id="gmail-btn" type="button" class="nes-btn"><i class="nes-icon gmail"></i> </button>
-					<button onclick="goToUrl('https://www.youtube.com/user/jcstriker1')" id="youtube-btn" type="button" class="nes-btn"><i class="nes-icon youtube"></i> </button>
-				</div>
-			</div>
-			<div class="containers">
-				<div class="nes-container is-rounded is-dark" style="max-width: 500px;">
-					<button onclick="goToUrl('https://nostalgic-css.github.io/NES.css/')" id="sensei-btn" type="button" class="nes-btn"><i class="nes-icon github"></i> NES.css</button>
-					<button onclick="goToUrl('v1')" id="v1-btn" type="button" class="nes-btn"></i>See v1.0</button>
-					<!-- <a href="v1">Visit v1.0</a> | <a href="https://nostalgic-css.github.io/NES.css/"></a> -->
-					<br /><br />
-					<p style="font-size: 9px;">
-						DISCLAIMER: This site is strictly using assets that are under compliance of MIT License.
-						<a style="font-size: 9px" href="https://github.com/nostalgic-css/NES.css/blob/develop/LICENSE">See more</a>
-					</p>
-				</div>
-			</div>
-		</section>
-
-		<section class="balloon nes-container no-borders" id="baloon">
-			<div class="messages">
-				<div class="message -left">
-					<i class="nes-bcrikko"></i>
-					<div class="nes-balloon from-left" id="message1">
-						<p>Loading...</p>
-					</div>
-					<div class="nes-balloon from-left" id="message2" style="display: none;">
-						<p>Hello World! This is me, JCC v2.0!</p>
-					</div>
-					<div class="nes-balloon from-left" id="message-custom" style="display: none;">
-						<p></p>
-					</div>
-				</div>
-			</div>
-		</section>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -155,12 +171,18 @@
 		<script>
 		
 			window.onload = function() {
-				$('.main-container').show();
-				if (!$('.main-container').is(':hidden')) {
-					// $('#message1').hide();
-					// $('#message2').show();
+				if ($('.too-small-warning').is(':hidden')) {
+					$('.main-container').show();
+					if (!$('.main-container').is(':hidden')) {
+						// $('#message1').hide();
+						// $('#message2').show();
+						$('#baloon').hide();
+						$('.main-container').addClass('animated fadeInUp');
+					}
+				} else {
+					// Skip animation
 					$('#baloon').hide();
-					$('.main-container').addClass('animated fadeInUp');
+					$('.main-container').show();
 				}
 			}
 

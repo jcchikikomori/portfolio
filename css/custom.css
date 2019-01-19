@@ -1,3 +1,12 @@
+/* Main */
+
+.is-dark a,
+.is-dark a:hover
+.is-dark a:active {
+    color: #fff;
+    text-decoration: underline;
+}
+
 body {
     padding: 0 2rem;
     margin: 2rem;
@@ -81,7 +90,6 @@ div.containers > .nes-container {
     .balloon.nes-container .nes-balloon {
         max-width: 70%;
     }
-
     .github-link {
         display: none;
     }
@@ -100,10 +108,44 @@ div.containers > .nes-container {
 }
 
 .profile-list {
-    font-size: 12.5px;
+    font-size: 11.5px;
     list-style: none;
 }
 
 .profile-list > li {
     margin-left: -40px;
 }
+
+.too-small-warning {
+    display: none;
+    text-align: center;
+    margin: 30% 5%;
+}
+
+.main-screen {
+    display: block;
+}
+
+#sensei-btn {
+    font-size: 11px;
+}
+
+/* Portrait and Landscape */
+@media only screen 
+  and (max-device-width: 320px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        font-size: 10px;
+    }
+    .too-small-warning {
+        display: block;
+        /* margin: 0 auto; */
+        margin: 10% 5%;
+    }
+    .main-screen {
+        display: none;
+    }
+}
+
+/* Smart watches */
+
