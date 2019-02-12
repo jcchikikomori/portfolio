@@ -86,25 +86,21 @@
 				<div class="containers">
 					<div class="nes-container is-rounded is-centered">
 						<img src="img/jcc_logo.png" width="200" />
-						<p>John Cyrill C.</p>
+						<p>John Cyrill Corsanes</p>
 						<ul class="profile-list">
 							<li>Casual I.T. Guy</li>
-							<li>Web Developer, mostly PHP</li>
-							<li>Loves HTML as a web playground</li>
-							<li>Play games</li>
+							<li>Casual Developer, loves Web</li>
 						</ul>
 						<!-- <p style="font-size: 11px;">I don't often update my personal page like this, so i made it simple!</p> -->
-						<p style="font-size: 12px;">Let's catch up!</p>
+						<!-- <p style="font-size: 12px;">Let's catch up!</p> -->
 						<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button" class="nes-btn"><i class="nes-icon linkedin"></i> </button>
 						<button onclick="goToUrl('https://github.com/jccultima123')" id="github-btn" type="button" class="nes-btn"><i class="nes-icon github"></i> </button>
 						<button onclick="goToUrl('mailto:johncyrillcorsanes@gmail.com', false)" id="gmail-btn" type="button" class="nes-btn"><i class="nes-icon gmail"></i> </button>
 						<button onclick="goToUrl('https://www.youtube.com/user/jcstriker1')" id="youtube-btn" type="button" class="nes-btn"><i class="nes-icon youtube"></i> </button>
-					</div>
-				</div>
-				<div class="containers">
-					<div class="nes-container is-rounded is-dark">
+
+						<br />
+						<br />
 						<button onclick="goToUrl('https://nostalgic-css.github.io/NES.css/')" id="sensei-btn" type="button" class="nes-btn">Check out NES.css</button>
-						<!-- <button onclick="goToUrl('v1')" id="v1-btn" type="button" class="nes-btn"></i>See v1.0</button> -->
 						<br /><br />
 						<p style="font-size: 9px;">
 							DISCLAIMER: This site is strictly using assets that are under compliance of
@@ -113,6 +109,12 @@
 							<br />
 							<span style="font-size: 9px;">v2.1</span> | <a style="font-size: 9px" href="v1">Visit v1.0</a>
 						</p>
+					</div>
+				</div>
+				<div id="update-container" class="containers animated fadeInUp" style="display: none;">
+					<div class="nes-container is-rounded">
+						<h4>Micro-updates</h4>
+						<ul id="all-post"></ul>
 					</div>
 				</div>
 			</section>
@@ -157,7 +159,7 @@
 		(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
 		function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
 		e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-		e.src='//www.google-analytics.com/analytics.js';
+		e.src='https://www.google-analytics.com/analytics.js';
 		r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
 		ga('create','UA-53297367-3');ga('send','pageview');
 		</script>
@@ -167,8 +169,53 @@
 
 
 		<script>
-		
-			window.onload = function() {
+
+			window.onload = function () {
+
+				/**
+				 * Micro GraphQL Client processor
+				 */
+				const microUpdateProcessor = {
+					allPost: function () {
+						return $.ajax({
+							url: "https://jcc-portfolio-api.herokuapp.com/graphql",
+							contentType: "application/json",
+							type: "POST",
+							data: JSON.stringify({
+								query: `{
+												allPost {
+													id
+													title
+													description
+													createdAt
+												}
+											}`
+							}),
+							success: function (result) {
+								let data = result.data // get data from graphql
+								let post = data.allPost // query name
+								// console.log(post.length);
+								let li = "";
+								for (let i = 0; i < post.length; i++) {
+									p = post[i];
+									console.log(p.id);
+									li += '<li class="post-list" id="post-' + p.id + '"><h5>' + p.title + '</h5><p class="post-sentence">' + p.description + '</p></li>';
+								}
+								$("#all-post").html(li);
+								$('#update-container').show();
+								console.log('done loading posts..');
+							},
+							error: function (result) {
+								$("#all-post").html('');
+								$('#update-container').hide();
+								console.log('error loading posts..');
+							}
+						});
+					}
+				}
+
+				microUpdates = microUpdateProcessor;
+
 				if ($('.too-small-warning').is(':hidden')) {
 					$('.main-container').show();
 					if (!$('.main-container').is(':hidden')) {
@@ -176,6 +223,9 @@
 						// $('#message2').show();
 						$('#baloon').hide();
 						$('.main-container').addClass('animated fadeInUp');
+
+						// load updates
+						microUpdates.allPost();
 					}
 				} else {
 					// Skip animation
@@ -194,9 +244,9 @@
 				$('#redirect')[0].click();
 			}
 
-			// $('#sensei-btn').on('click', function() {
-			// 	$('#sensei-link')[0].click();
-			// });
+					// $('#sensei-btn').on('click', function() {
+					// 	$('#sensei-link')[0].click();
+					// });
 
 		</script>
 

@@ -147,5 +147,14 @@ div.containers > .nes-container {
     }
 }
 
-/* Smart watches */
+/* Micro updates */
+
+.post-list {
+    list-style: none;
+    margin-left: -40px;
+}
+
+.post-list p {
+    font-size: 8.5px;
+}
 
