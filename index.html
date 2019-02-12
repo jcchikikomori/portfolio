@@ -80,79 +80,68 @@
 			</p>
 		</section>
 
-		<div class="main-screen">
-			<section class="nes-container main-container no-borders">
-				<!-- <h2 class="title">A.I. Bot</h2> -->
-				<div class="containers">
-					<div class="nes-container is-rounded is-centered">
-						<img src="img/jcc_logo.png" width="200" />
-						<p>John Cyrill Corsanes</p>
-						<ul class="profile-list">
-							<li>Casual I.T. Guy</li>
-							<li>Casual Developer, loves Web</li>
-						</ul>
-						<!-- <p style="font-size: 11px;">I don't often update my personal page like this, so i made it simple!</p> -->
-						<!-- <p style="font-size: 12px;">Let's catch up!</p> -->
-						<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button" class="nes-btn"><i class="nes-icon linkedin"></i> </button>
-						<button onclick="goToUrl('https://github.com/jccultima123')" id="github-btn" type="button" class="nes-btn"><i class="nes-icon github"></i> </button>
-						<button onclick="goToUrl('mailto:johncyrillcorsanes@gmail.com', false)" id="gmail-btn" type="button" class="nes-btn"><i class="nes-icon gmail"></i> </button>
-						<button onclick="goToUrl('https://www.youtube.com/user/jcstriker1')" id="youtube-btn" type="button" class="nes-btn"><i class="nes-icon youtube"></i> </button>
+		<!-- MAIN CONTAINER -->
+		<div id="main-container" class="main-screen">
 
-						<br />
-						<br />
-						<button onclick="goToUrl('https://nostalgic-css.github.io/NES.css/')" id="sensei-btn" type="button" class="nes-btn">Check out NES.css</button>
-						<br /><br />
-						<p style="font-size: 9px;">
-							DISCLAIMER: This site is strictly using assets that are under compliance of
-							<a style="font-size: 9px" href="https://github.com/nostalgic-css/NES.css/blob/develop/LICENSE">MIT License</a>.
+			<!-- MAIN INFO -->
+			<div id="profile-container" class="animated fadeInUp">
+				<section class="nes-container no-borders">
+					<!-- <h2 class="title">A.I. Bot</h2> -->
+					<div class="containers">
+						<div class="nes-container is-rounded is-centered">
+							<img src="img/jcc_logo.png" width="200" />
+							<p>John Cyrill Corsanes</p>
+							<ul class="profile-list">
+								<li>Casual I.T. Guy</li>
+								<li>Casual Developer, loves Web</li>
+							</ul>
+							<!-- <p style="font-size: 11px;">I don't often update my personal page like this, so i made it simple!</p> -->
+							<!-- <p style="font-size: 12px;">Let's catch up!</p> -->
+							<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button"
+								class="nes-btn"><i class="nes-icon linkedin"></i> </button>
+							<button onclick="goToUrl('https://github.com/jccultima123')" id="github-btn" type="button" class="nes-btn"><i
+									class="nes-icon github"></i> </button>
+							<button onclick="goToUrl('mailto:johncyrillcorsanes@gmail.com', false)" id="gmail-btn" type="button"
+								class="nes-btn"><i class="nes-icon gmail"></i> </button>
+							<button onclick="goToUrl('https://www.youtube.com/user/jcstriker1')" id="youtube-btn" type="button"
+								class="nes-btn"><i class="nes-icon youtube"></i> </button>
+			
 							<br />
 							<br />
-							<span style="font-size: 9px;">v2.1</span> | <a style="font-size: 9px" href="v1">Visit v1.0</a>
-						</p>
+							<button onclick="goToUrl('https://nostalgic-css.github.io/NES.css/')" id="sensei-btn" type="button"
+								class="nes-btn">NES.css</button>
+							<br /><br />
+							<p style="font-size: 9px;">
+								This site's content(s) are under compliance of
+								<a style="font-size: 9px" href="https://github.com/nostalgic-css/NES.css/blob/develop/LICENSE">MIT
+									License</a>.
+								<br />
+								<br />
+								<span style="font-size: 9px;">v2.1</span> | <a style="font-size: 9px" href="v1">Visit v1.0</a>
+							</p>
+						</div>
 					</div>
-				</div>
-				<div id="update-container" class="containers animated fadeInUp" style="display: none;">
-					<div class="nes-container is-rounded">
-						<h4>Micro-updates</h4>
-						<ul id="all-post"></ul>
+					<!-- UPDATE CONTAINER -->
+					<div id="update-container" class="containers" style="display: none;">
+						<div class="nes-container is-rounded">
+							<h4>Updates</h4>
+							<div id="all-post"></div>
+						</div>
 					</div>
-				</div>
-			</section>
-	
+				</section>
+			</div>
+			
+			<!-- LOADING BALOON -->
 			<section class="balloon nes-container no-borders" id="baloon">
-				Loading...
-				<!-- <div class="messages">
-					<div class="message -left">
-						<i class="nes-bcrikko"></i>
-						<div class="nes-balloon from-left" id="message1">
-							<p>Loading...</p>
-						</div>
-						<div class="nes-balloon from-left" id="message2" style="display: none;">
-							<p>Hello World! This is me, JCC v2.0!</p>
-						</div>
-						<div class="nes-balloon from-left" id="message-custom" style="display: none;">
-							<p></p>
-						</div>
-					</div>
-				</div> -->
+				<p id="baloon-message">Loading...</p>
 			</section>
+
 		</div>
 
 		<a id="redirect" target="_blank" href="" hidden></a>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<!-- <script src="js/min/toucheffects-min.js"></script> -->
-		<!-- <script src="js/flickity.pkgd.min.js"></script> -->
-		<!-- <script src="js/jquery.fancybox.pack.js"></script> -->
-
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<!-- <script src="js/retina.js"></script> -->
-		<!-- <script src="js/waypoints.min.js"></script> -->
-		<!-- <script src="js/bootstrap.min.js"></script> -->
-
-		<!-- <script src="js/min/scripts-min.js"></script> -->
-		<!-- <script src="js/scripts.js"></script> -->
 
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 		<script>
@@ -170,26 +159,27 @@
 
 		<script>
 
+			/** main */
 			window.onload = function () {
 
 				/**
-				 * Micro GraphQL Client processor
+				 * Micro Client processor
 				 */
-				const microUpdateProcessor = {
-					allPost: function () {
+				const microProcessor = {
+					init: function () {
 						return $.ajax({
 							url: "https://jcc-portfolio-api.herokuapp.com/graphql",
 							contentType: "application/json",
 							type: "POST",
 							data: JSON.stringify({
 								query: `{
-												allPost {
-													id
-													title
-													description
-													createdAt
-												}
-											}`
+									allPost {
+										id
+										title
+										description
+										createdAt
+									}
+								}`
 							}),
 							success: function (result) {
 								let data = result.data // get data from graphql
@@ -198,39 +188,49 @@
 								let li = "";
 								for (let i = 0; i < post.length; i++) {
 									p = post[i];
-									console.log(p.id);
-									li += '<li class="post-list" id="post-' + p.id + '"><h5>' + p.title + '</h5><p class="post-sentence">' + p.description + '</p></li>';
+									li += '<div id="post-' + p.id + '" class="post-list nes-container with-title is-centered">' +
+													'<p class="post-title">'+p.title+'</p>' +
+													'<p class="post-sentence">'+p.description+'</p>' +
+												'</div>';
 								}
-								$("#all-post").html(li);
-								$('#update-container').show();
+								if (post.length > 0) {
+									$("#all-post").html(li);
+									$('#update-container').show();
+								}
 								console.log('done loading posts..');
+
+								// finish
+								microProcessor.finishSetup();
 							},
 							error: function (result) {
 								$("#all-post").html('');
-								$('#update-container').hide();
+								// $('#update-container').hide();
+
 								console.log('error loading posts..');
 							}
 						});
+					},
+					finishSetup: function() {
+						$('#baloon').hide();
+						$('#profile-container').show();
 					}
 				}
 
-				microUpdates = microUpdateProcessor;
+				// set
+				microUpdates = microProcessor;
 
 				if ($('.too-small-warning').is(':hidden')) {
-					$('.main-container').show();
-					if (!$('.main-container').is(':hidden')) {
-						// $('#message1').hide();
-						// $('#message2').show();
-						$('#baloon').hide();
-						$('.main-container').addClass('animated fadeInUp');
-
+					// $('#profile-container').show();
+					if ($('#profile-container').is(':hidden')) {
+						// load posts first
+						$('#baloon-message').text('Loading updates...');
 						// load updates
-						microUpdates.allPost();
+						microUpdates.init();
 					}
 				} else {
 					// Skip animation
 					$('#baloon').hide();
-					$('.main-container').show();
+					$('#profile-container').show();
 				}
 			}
 
@@ -244,9 +244,9 @@
 				$('#redirect')[0].click();
 			}
 
-					// $('#sensei-btn').on('click', function() {
-					// 	$('#sensei-link')[0].click();
-					// });
+			// $('#sensei-btn').on('click', function() {
+			// 	$('#sensei-link')[0].click();
+			// });
 
 		</script>
 
