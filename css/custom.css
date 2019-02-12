@@ -95,12 +95,12 @@ div.containers > .nes-container {
     }
 }
 
-.main-container {
-    display: none;
+#main-container {
+    text-align: center;
 }
 
-.main-container {
-    text-align: center;
+#profile-container {
+    display: none;
 }
 
 .no-borders::after {
@@ -147,5 +147,19 @@ div.containers > .nes-container {
     }
 }
 
-/* Smart watches */
+/* Micro updates */
+
+#update-container {
+    display: none;
+}
+
+.post-list p {
+    font-size: 8px;
+}
+
+/* TODO: https://css-tricks.com/injecting-line-break/ */
+.post-list p.post-sentence {
+    text-align: left;
+    line-break: strict;
+}
 
