@@ -105,6 +105,7 @@ div.containers {
 
 #profile-container {
     display: none;
+    border: none !important;
 }
 
 .no-borders::after {
@@ -165,5 +166,9 @@ div.containers {
       display: none;
       font-size: 14px;
     }
-  }
+}
+
+dialog {
+    display: block;
+}
 

@@ -67,7 +67,7 @@ $too-small-warning-margin: 10% 5%;
   and (orientation: portrait) {
     #update-container {
       div {
-        max-width: $container-width-iphone;
+        /* max-width: $container-width-iphone; */
         margin: 0 auto;
       }
     }
@@ -108,7 +108,7 @@ $too-small-warning-margin: 10% 5%;
   and (orientation: portrait) { 
     #update-container {
       div {
-        max-width: $container-width-iphone;
+        /* max-width: $container-width-iphone; */
         margin: 0 auto;
       }
     }

@@ -22,7 +22,7 @@
 /* Portrait */
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #update-container div {
-    max-width: 95%;
+    /* max-width: $container-width-iphone; */
     margin: 0 auto;
   }
   .nes-btn {
@@ -41,7 +41,7 @@
 /* Portrait */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   #update-container div {
-    max-width: 95%;
+    /* max-width: $container-width-iphone; */
     margin: 0 auto;
   }
   .nes-btn {
