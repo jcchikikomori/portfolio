@@ -108,6 +108,7 @@ div.containers .nes-container {
 
 #profile-container {
   display: none;
+  border: none !important;
 }
 
 .no-borders::after {
@@ -165,4 +166,8 @@ div.containers .nes-container {
 .nes-btn span {
   display: none;
   font-size: 14px;
+}
+
+dialog {
+  display: block;
 }

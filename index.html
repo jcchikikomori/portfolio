@@ -41,9 +41,14 @@
 		<link href="https://unpkg.com/nes.css/css/nes.min.css" rel="stylesheet" />
 		<!-- <link href="./style.css" rel="stylesheet" /> -->
 
+		<!-- Polyfill -->
+		<!-- <script async src="js/dialog-polyfill.js"></script> -->
+		<!-- <link rel="stylesheet" href="css/dialog-polyfill.css"> -->
+
 		<!-- Others -->
 		<link href="css/custom.css" rel="stylesheet">
 		<link href="css/media.css" rel="stylesheet">
+
 		<!-- <meta http-equiv="X-Frame-Options" content="deny"> -->
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,12 +64,21 @@
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#" data-href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
-		<section class="too-small-warning">
-			<h3>TOO SMALL!</h3>
-			<p>
-				Hey. This screen is too small to view this page!<br />
-				Try rotate your screen!
-			</p>
+		<!-- <section class="too-small-warning">
+		</section> -->
+
+		<section>
+			<dialog class="nes-dialog too-small-warning is-dark">
+				<h3>TOO SMALL!</h3>
+				<p>
+					Hey. This screen is too small to view this page!<br />
+					Try rotate your screen!
+				</p>
+			</dialog>
+			<!-- LOADING BALOON -->
+			<dialog class="nes-dialog" id="loading-dialog">
+				<p id="loading-message">Loading...</p>
+			</dialog>
 		</section>
 
 		<!-- MAIN CONTAINER -->
@@ -107,6 +121,7 @@
 						</p>
 					</div>
 				</div>
+				<br />
 				<!-- UPDATE CONTAINER -->
 				<div id="update-container" class="containers" style="display: none;">
 					<div class="nes-container is-rounded">
@@ -114,11 +129,6 @@
 						<div id="all-post"></div>
 					</div>
 				</div>
-			</section>
-			
-			<!-- LOADING BALOON -->
-			<section class="balloon nes-container no-borders" id="baloon">
-				<p id="baloon-message">Loading...</p>
 			</section>
 
 		</div>
@@ -147,6 +157,9 @@
 			/** main */
 			window.onload = function () {
 
+				// document.getElementById("#loading-dialog").showModal();
+				$("#main-container").removeAttr("hidden");
+
 				/**
 				 * Micro Client processor
 				 */
@@ -166,6 +179,7 @@
 									}
 								}`
 							}),
+							timeout: 2000,
 							success: function (result) {
 								let data = result.data // get data from graphql
 								let post = data.allPost // query name
@@ -192,11 +206,13 @@
 								// $('#update-container').hide();
 
 								console.log('error loading posts..');
+								// render anyway
+								microProcessor.finishSetup();
 							}
 						});
 					},
 					finishSetup: function() {
-						$('#baloon').hide();
+						$('#loading-dialog').hide();
 						$('#profile-container').show();
 					}
 				}
@@ -208,13 +224,13 @@
 					// $('#profile-container').show();
 					if ($('#profile-container').is(':hidden')) {
 						// load posts first
-						$('#baloon-message').text('Loading updates...');
+						$('#loading-message').text('Loading updates...');
 						// load updates
 						microUpdates.init();
 					}
 				} else {
 					// Skip animation
-					$('#baloon').hide();
+					// $('#dialog').hide();
 					$('#profile-container').show();
 				}
 			}
@@ -228,10 +244,6 @@
 				}
 				$('#redirect')[0].click();
 			}
-
-			// $('#sensei-btn').on('click', function() {
-			// 	$('#sensei-link')[0].click();
-			// });
 
 		</script>
 
