@@ -1,9 +1,8 @@
 const gulp = require('gulp')
-const shell = require('gulp-shell')
+const validator = require('gulp-html')
 
-gulp.task('tidy', () => {
-	return new Promise(function(resolve, reject) {
-		console.log("HTTP Server Started");
-		resolve();
-	});
-})
+gulp.task('html-check', () => {
+  return gulp.src('index.html')
+    .pipe(validator());
+    // .pipe(gulp.dest('')); // default destination instead
+});

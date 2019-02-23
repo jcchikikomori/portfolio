@@ -5,7 +5,7 @@ var spawn = require('child_process').spawn,
     gulp = (process.platform === 'win32' ? 'gulp.cmd' : 'gulp'),
     path = require('path'),
     cwd = '', //no problem if undefined, defaults to cwd if so
-    tasks = ["tidy"];
+    tasks = ["html-check"];
 
 var hook = spawn(gulp, [tasks], {
     stdio: 'inherit',
