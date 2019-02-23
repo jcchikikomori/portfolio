@@ -1,0 +1,32 @@
+{
+  "name": "jccultima123.github.io",
+  "version": "2.2.1",
+  "description": "JCC's Portfolio",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jccultima123/jccultima123.github.io.git"
+  },
+  "keywords": [
+    "portfolio",
+    "html5",
+    "nes.css"
+  ],
+  "author": "John Cyrill Corsanes",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/jccultima123/jccultima123.github.io/issues"
+  },
+  "homepage": "https://github.com/jccultima123/jccultima123.github.io#readme",
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "gulp": "^4.0.0",
+    "gulp-shell": "^0.6.5"
+  },
+  "dependencies": {
+    "htmltidy2": "^0.3.0"
+  }
+}

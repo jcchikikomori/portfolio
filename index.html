@@ -89,7 +89,7 @@
 				<!-- <h2 class="title">A.I. Bot</h2> -->
 				<div class="containers">
 					<div class="nes-container is-rounded is-centered">
-						<img src="img/jcc_logo.png" width="200" />
+						<img src="img/jcc_logo.png" width="200" alt="My Logo" />
 						<p>John Cyrill Corsanes</p>
 						<ul class="profile-list">
 							<li>Casual I.T. Guy</li>
@@ -125,7 +125,7 @@
 				<!-- UPDATE CONTAINER -->
 				<div id="update-container" class="containers" style="display: none;">
 					<div class="nes-container is-rounded">
-						<h4>Updates</h4>
+						<h4>Updates</h4>	
 						<div id="all-post"></div>
 					</div>
 				</div>
@@ -133,7 +133,7 @@
 
 		</div>
 
-		<a id="redirect" target="_blank" href="" hidden></a>
+		<a id="redirect" target="_blank" href="#" hidden></a>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -188,9 +188,9 @@
 								for (let i = 0; i < post.length; i++) {
 									p = post[i];
 									li += '<div id="post-' + p.id + '" class="post-list nes-container with-title is-centered">' +
-													'<p class="post-title">'+p.title+'</p>' +
-													'<p class="post-sentence">'+p.description+'</p>' +
-												'</div>';
+											'<p class="post-title">'+p.title+'</p>' +
+											'<p class="post-sentence">'+p.description+'</p>' +
+										'</div>';
 								}
 								if (post.length > 0) {
 									$("#all-post").html(li);
@@ -201,7 +201,7 @@
 								// finish
 								microProcessor.finishSetup();
 							},
-							error: function (result) {
+							error: function () {
 								$("#all-post").html('');
 								// $('#update-container').hide();
 
@@ -235,7 +235,7 @@
 				}
 			}
 
-			function goToUrl(url, includeTarget = true) {
+			function goToUrl(url, includeTarget = true) { //eslint-disable-line no-unused-vars
 				$('#redirect').attr('href', url);
 				if (!includeTarget) {
 					$('#redirect').attr('target', null);
