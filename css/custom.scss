@@ -24,6 +24,7 @@ div.containers {
     .nes-container {
         display: inline-block;
         max-width: 400px;
+        background: #fff;
     }
 }
 
@@ -108,8 +109,10 @@ div.containers {
     border: none !important;
 }
 
-.no-borders::after {
-    border: none !important;
+.no-borders, .nes-dialog {
+    &self::after {
+        border: none !important;
+    }
 }
 
 .profile-list {
