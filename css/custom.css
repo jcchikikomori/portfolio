@@ -3,65 +3,47 @@
 .is-dark a:hover
 .is-dark a:active {
   color: #fff;
-  text-decoration: underline;
-}
+  text-decoration: underline; }
 
 body {
   padding: 0 2rem;
   margin: 2rem;
-}
+  background: blue; }
 
 .nes-container:not(:last-child) {
-  margin-bottom: 1rem;
-}
+  margin-bottom: 1rem; }
 
 i.brand {
-  margin-right: 1rem;
-}
+  margin-right: 1rem; }
 
 div.containers .nes-container {
   display: inline-block;
-  max-width: 400px;
-}
+  max-width: 400px; }
 
 .balloon.nes-container .nes-balloon {
   max-width: 600px;
-  margin: 2rem 2rem;
-}
+  margin: 2rem 2rem; }
 
 .balloon.nes-container .messages {
   display: flex;
-  flex-direction: column;
-}
-
+  flex-direction: column; }
 .balloon.nes-container .message {
-  display: flex;
-}
-
-.balloon.nes-container .message i {
-  align-self: flex-end;
-}
-
+  display: flex; }
+  .balloon.nes-container .message i {
+    align-self: flex-end; }
 .balloon.nes-container .message.-left {
-  align-self: flex-start;
-}
-
+  align-self: flex-start; }
 .balloon.nes-container .message.-right {
-  align-self: flex-end;
-}
+  align-self: flex-end; }
 
 .form.nes-container > .nes-field:not(:last-child) {
-  margin-bottom: 1rem;
-}
+  margin-bottom: 1rem; }
 
 .footer {
-  text-align: center;
-}
-
-.footer a {
-  color: #333;
-  text-decoration: none;
-}
+  text-align: center; }
+  .footer a {
+    color: #333;
+    text-decoration: none; }
 
 .github-link {
   position: fixed;
@@ -71,103 +53,77 @@ div.containers .nes-container {
   display: flex;
   height: 100px;
   color: #333;
-  text-decoration: none;
-}
-
-.github-link :hover {
-  text-decoration: none;
-}
-
-.github-link p.nes-balloon {
-  align-self: flex-start;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.8rem;
-  color: #333;
-}
-
-.github-link i.nes-octocat {
-  align-self: flex-end;
-}
+  text-decoration: none; }
+  .github-link :hover {
+    text-decoration: none; }
+  .github-link p.nes-balloon {
+    align-self: flex-start;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    color: #333; }
+  .github-link i.nes-octocat {
+    align-self: flex-end; }
 
 @media screen and (max-width: 768px) {
   body {
     padding: 0;
-    margin: 2rem 0.2rem;
-  }
-  .balloon.nes-container .nes-balloon {
-    max-width: 70%;
-  }
-  .github-link {
-    display: none;
-  }
-}
+    margin: 2rem 0.2rem; }
 
+  .balloon.nes-container .nes-balloon {
+    max-width: 70%; }
+
+  .github-link {
+    display: none; } }
 #main-container {
-  text-align: center;
-}
+  text-align: center; }
 
 #profile-container {
   display: none;
-  border: none !important;
-}
+  border: none !important; }
 
 .no-borders::after {
-  border: none !important;
-}
+  border: none !important; }
 
 .profile-list {
   font-size: 11.5px;
-  list-style: none;
-}
-
-.profile-list li {
-  margin-left: -40px;
-}
+  list-style: none; }
+  .profile-list li {
+    margin-left: -40px; }
 
 .too-small-warning {
   display: none;
   text-align: center;
-  margin: 30% 5%;
-}
+  margin: 30% 5%; }
 
 .main-screen {
-  display: block;
-}
+  display: block; }
 
 #sensei-btn {
-  font-size: 11px;
-}
+  font-size: 11px; }
 
 /* Micro updates */
 #update-container {
-  display: none;
-}
-
-#update-container div {
-  max-width: 400px;
-}
+  display: none; }
+  #update-container div {
+    max-width: 400px; }
 
 #all-post {
-  min-width: 240px;
-}
+  min-width: 240px; }
 
 .post-list p.title {
-  font-size: 10px;
-}
-
+  font-size: 10px; }
 .post-list p.post-sentence {
   font-size: 8.5px;
   text-align: left;
   line-break: strict;
-  word-wrap: normal;
-}
+  word-wrap: normal; }
 
 /* Patches */
 .nes-btn span {
   display: none;
-  font-size: 14px;
-}
+  font-size: 14px; }
 
 dialog {
-  display: block;
-}
+  display: block; }
+
+/*# sourceMappingURL=custom.css.map */
