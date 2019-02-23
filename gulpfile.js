@@ -3,17 +3,20 @@ const gulp = require('gulp')
 const shell = require('gulp-shell')
 const validator = require('gulp-html')
 
-gulp.task('html-check', () => {
-  return gulp.src('index.html')
-    .pipe(validator());
-    // .pipe(gulp.dest('')); // default destination instead
+gulp.task('homepage', () => {
+	return gulp.src('index.html')
+		.pipe(validator());
 });
 
-// TODO: Magic compile
-gulp.task('compile-sass', () => {
-  console.log('This requires sass gem!');
-  return gulp.src('*.js', {read: false})
-  .pipe(shell([
-    'sass '+argv.i+' '+argv.o
-  ]));
+gulp.task('csass', () => {
+	console.log('================================');
+	console.log('Compiling SASS assets using ruby');
+	console.log('================================');
+	return gulp.src('*.js', {
+			read: false
+		})
+		.pipe(shell([
+			'sass css/custom.scss css/custom.css && ' +
+			'sass css/media.scss css/media.css'
+		]));
 });

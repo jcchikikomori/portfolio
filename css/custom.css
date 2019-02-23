@@ -7,8 +7,7 @@
 
 body {
   padding: 0 2rem;
-  margin: 2rem;
-  background: blue; }
+  margin: 2rem; }
 
 .nes-container:not(:last-child) {
   margin-bottom: 1rem; }
@@ -18,7 +17,8 @@ i.brand {
 
 div.containers .nes-container {
   display: inline-block;
-  max-width: 400px; }
+  max-width: 400px;
+  background: #fff; }
 
 .balloon.nes-container .nes-balloon {
   max-width: 600px;
@@ -81,7 +81,7 @@ div.containers .nes-container {
   display: none;
   border: none !important; }
 
-.no-borders::after {
+.no-bordersself::after, .nes-dialogself::after {
   border: none !important; }
 
 .profile-list {

@@ -10,5 +10,5 @@
 		- `which sass`
 
 ## Required TODOs
-- For HTML tests: Run `gulp html-check`
-- To generate CSS from SASS: Run `sass sample.scss sample.css`
+- For HTML tests (Homepage): Run `gulp homepage`
+- To generate CSS from SASS: Run `gulp csass`

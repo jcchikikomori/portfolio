@@ -53,6 +53,8 @@
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
+		<script src="js/daynighttime.js"></script>
+
 	</head>
 	<body>
 
@@ -72,7 +74,7 @@
 				</p>
 			</dialog>
 			<!-- LOADING BALOON -->
-			<dialog class="nes-dialog" id="loading-dialog">
+			<dialog class="nes-dialog no-borders" id="loading-dialog">
 				<p id="loading-message">Loading...</p>
 			</dialog>
 		</section>
@@ -81,7 +83,7 @@
 		<div id="main-container" class="main-screen" hidden>
 
 			<!-- MAIN INFO -->
-			<section id="profile-container" class="animated fadeInUp nes-container no-borders">
+			<section id="profile-container" class="animated fadeIn nes-container">
 				<!-- <h2 class="title">A.I. Bot</h2> -->
 				<div class="containers">
 					<div class="nes-container is-rounded is-centered">
@@ -91,8 +93,6 @@
 							<li>Casual I.T. Guy</li>
 							<li>Casual Developer, loves Web</li>
 						</ul>
-						<!-- <p style="font-size: 11px;">I don't often update my personal page like this, so i made it simple!</p> -->
-						<!-- <p style="font-size: 12px;">Let's catch up!</p> -->
 						<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button"
 							class="nes-btn"><i class="nes-icon linkedin"></i> <span>LinkedIn</span> </button>
 						<button onclick="goToUrl('https://github.com/jccultima123')" id="github-btn" type="button" class="nes-btn"><i
