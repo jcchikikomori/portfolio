@@ -1,26 +1,19 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <h1>Whoops! I am not yet ready!</h1>
+    <Loader></Loader>
+    <Profile></Profile>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Loader from "./components/Loader.vue";
+import Profile from "./components/Profile.vue";
 
 export default {
   name: "app",
-  components: {}
+  components: {
+    Loader,
+    Profile
+  }
 };
 </script>
-
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

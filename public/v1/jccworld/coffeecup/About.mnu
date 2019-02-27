@@ -1,0 +1,45 @@
+[General]
+MenuName=about
+[Main Colors]
+MainBG=14145280
+MainMOBG=65535
+MainFont=0
+MainFontMO=0
+MainBorder=0
+[Sub Colors]
+SubBG=14145280
+SubMOBG=15244288
+SubFont=16777215
+SubFontMO=0
+SubBorder=0
+[Options]
+MenuType=0
+TextAlign=1
+TextAlignSub=1
+MenuTop=0
+MenuLeft=0
+LeftPadding=19
+TopPadding=4
+BorderWidth=0
+UseFixedWidth=1
+ItemWidth=100
+MenuFont=Tahoma, Verdana, Arial
+FontSize=12
+FontBold=0
+FontItalic=0
+FancyHover=0
+[Menus]
+MenuCount=2
+Menu_0=Menu1
+Menu_1=Menu1\Menu1_1
+[MenuData]
+MenuName_0=Menu1
+MenuText_0=About Us
+MenuLink_0=about.html
+MenuHeight0=20
+MenuWidth0=80
+MenuName_1=Menu1_1
+MenuText_1=Development
+MenuLink_1=development.html
+MenuHeight1=20
+MenuWidth1=80

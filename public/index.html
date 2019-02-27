@@ -91,6 +91,7 @@
 
         // document.getElementById("#loading-dialog").showModal();
         $("#main-container").removeAttr("hidden");
+        // $("#loading-button").trigger("click");
 
         /**
          * Micro Client processor
@@ -154,12 +155,14 @@
 
         if ($('.too-small-warning').is(':hidden')) {
           // $('#profile-container').show();
+          /**
           if ($('#profile-container').is(':hidden')) {
             // load posts first
             $('#loading-message').text('Loading updates...');
             // load updates
             microUpdates.init();
-          }
+          }*/
+          $('#profile-container').show();
         } else {
           // Skip animation
           // $('#dialog').hide();
