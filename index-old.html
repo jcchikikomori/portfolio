@@ -38,7 +38,8 @@
 		<!-- <link href="./style.css" rel="stylesheet" /> -->
 
 		<!-- Polyfill -->
-		<link rel="stylesheet" href="css/dialog-polyfill.css">
+		<!-- <script async src="js/dialog-polyfill.js"></script> -->
+		<!-- <link rel="stylesheet" href="css/dialog-polyfill.css"> -->
 
 		<!-- Others -->
 		<link href="css/custom.css" rel="stylesheet">
@@ -59,10 +60,73 @@
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#" data-href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
-		<div id="app"></div>
-    <!-- built files will be auto injected -->
+		<!-- <section class="too-small-warning">
+		</section> -->
 
-    <!-- redirect hidden elem -->
+		<section>
+			<dialog class="nes-dialog too-small-warning is-dark">
+				<h3>TOO SMALL!</h3>
+				<p>
+					Hey. This screen is too small to view this page!<br />
+					Try rotate your screen!
+				</p>
+			</dialog>
+			<!-- LOADING BALOON -->
+			<dialog class="nes-dialog no-borders" id="loading-dialog">
+				<p id="loading-message">Loading...</p>
+			</dialog>
+		</section>
+
+		<!-- MAIN CONTAINER -->
+		<div id="main-container" class="main-screen" hidden>
+
+			<!-- MAIN INFO -->
+			<section id="profile-container" class="animated fadeIn nes-container">
+				<!-- <h2 class="title">A.I. Bot</h2> -->
+				<div class="containers">
+					<div class="nes-container is-rounded is-centered">
+						<img src="img/jcc_logo.png" width="200" alt="My Logo" />
+						<p>John Cyrill Corsanes</p>
+						<ul class="profile-list">
+							<li>Casual I.T. Guy</li>
+							<li>Casual Developer, loves Web</li>
+						</ul>
+						<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button"
+							class="nes-btn"><i class="nes-icon linkedin"></i> <span>LinkedIn</span> </button>
+						<button onclick="goToUrl('https://github.com/jccultima123')" id="github-btn" type="button" class="nes-btn"><i
+								class="nes-icon github"></i> <span>GitHub</span> </button>
+						<button onclick="goToUrl('mailto:johncyrillcorsanes@gmail.com', false)" id="gmail-btn" type="button"
+							class="nes-btn"><i class="nes-icon gmail"></i> <span>E-mail</span> </button>
+						<button onclick="goToUrl('https://www.youtube.com/user/jcstriker1')" id="youtube-btn" type="button"
+							class="nes-btn"><i class="nes-icon youtube"></i> <span>YouTube</span> </button>
+		
+						<br />
+						<br />
+						<button onclick="goToUrl('https://nostalgic-css.github.io/NES.css/')" id="sensei-btn" type="button"
+							class="nes-btn">NES.css</button>
+						<br /><br />
+						<p style="font-size: 9px;">
+							This site's content(s) are under compliance of
+							<a style="font-size: 9px" href="https://github.com/nostalgic-css/NES.css/blob/develop/LICENSE">MIT
+								License</a>.
+							<br />
+							<br />
+							<span style="font-size: 9px;">v2.3</span> | <a style="font-size: 9px" href="v1">Visit v1.0</a>
+						</p>
+					</div>
+				</div>
+				<br />
+				<!-- UPDATE CONTAINER -->
+				<div id="update-container" class="containers" style="display: none;">
+					<div class="nes-container is-rounded">
+						<h4>Updates</h4>	
+						<div id="all-post"></div>
+					</div>
+				</div>
+			</section>
+
+		</div>
+
 		<a id="redirect" target="_blank" href="#" hidden></a>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -81,8 +145,6 @@
 		<!-- GITHUB -->
 		<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 
-		<!-- Polyfill -->
-		<script async src="js/dialog-polyfill.js"></script>
 
 		<script>
 
