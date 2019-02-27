@@ -6,5 +6,5 @@
 
 // direct deploy
 module.exports = {
-  publicPath: '/'
-}
+  publicPath: "/"
+};
