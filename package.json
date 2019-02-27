@@ -1,6 +1,6 @@
 {
   "name": "jccultima123",
-  "version": "2.4",
+  "version": "2.4.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
