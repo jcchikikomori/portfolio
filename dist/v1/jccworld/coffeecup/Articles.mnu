@@ -1,0 +1,51 @@
+[General]
+MenuName=home_articles
+[Main Colors]
+MainBG=3355443
+MainMOBG=10092543
+MainFont=16777215
+MainFontMO=0
+MainBorder=0
+[Sub Colors]
+SubBG=8421504
+SubMOBG=15244288
+SubFont=16777215
+SubFontMO=0
+SubBorder=0
+[Options]
+MenuType=0
+TextAlign=1
+TextAlignSub=1
+MenuTop=0
+MenuLeft=0
+LeftPadding=19
+TopPadding=11
+BorderWidth=1
+UseFixedWidth=1
+ItemWidth=130
+MenuFont=Tahoma, Verdana, Arial
+FontSize=12
+FontBold=0
+FontItalic=0
+FancyHover=0
+[Menus]
+MenuCount=3
+Menu_0=Menu1
+Menu_1=Menu1\Menu1_1
+Menu_2=Menu1\Menu1_2
+[MenuData]
+MenuName_0=Menu1
+MenuText_0=Articles
+MenuLink_0=articles.html
+MenuHeight0=20
+MenuWidth0=80
+MenuName_1=Menu1_1
+MenuText_1=Top Articles
+MenuLink_1=articles.html
+MenuHeight1=20
+MenuWidth1=80
+MenuName_2=Menu1_2
+MenuText_2=Untitled4
+MenuLink_2=http://
+MenuHeight2=20
+MenuWidth2=80

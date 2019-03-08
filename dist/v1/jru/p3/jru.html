@@ -1,0 +1,91 @@
+<!--
+*************************************************************
+* DISCLAIMER:								                *
+* This HTML file is intended for educational purposes only. *
+*************************************************************
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Jose Rizal University - Courses Offered</title>
+</head>
+
+<!-- CSS PROPERTIES -->
+
+<style type="text/css">
+
+html {background-color:#E6E6E6;}
+#jrustrong {font-size:16px; font-family: 'Segoe UI', sans-serif; font-style: normal; font-weight: normal; color: blue; background-color: transparent; text-decoration: none;}
+#jrumenu {width:500px;}
+#maincourse {font-weight:bold;}
+
+</style>
+
+<!-- END -->
+
+<center>
+
+<div id="jrustrong"> Course Offered </div>
+
+<script type="text/javascript">
+  function OpenInMyFrame(var1)
+  {
+    window.document.getElementById("selected").src = var1;
+  }
+  function OpenInMyFrameError(var2)
+  {
+    alert('Please Select your Course!');
+	return window.document.getElementById("selected").src = var2;
+  }
+</script>
+
+
+<form>
+<select name="jrumenu" id="jrumenu">
+
+<option onclick="OpenInMyFrameError('blank.html')">Please Select Your Desired Course</option>
+<option onclick="OpenInMyFrameError('blank.html')">----------------------------------------------------------------------------------------------------------------------------</option>
+
+<option id="maincourse" onclick="OpenInMyFrame('bsa.html')">*Bachelor of Science in Accountancy (B.S.A)</option>
+
+<option id="maincourse" onclick="OpenInMyFrame('bcs.html')">*Bachelor of Commercial Science (B.C.S.)</option>
+
+<option onclick="OpenInMyFrame('bcs.html#accounting')">&nbsp;&nbsp;-Major in Accounting</option>
+
+<option onclick="OpenInMyFrame('bcs.html#computerscience')">&nbsp;&nbsp;-Major in Computer Science</option>
+
+<option onclick="OpenInMyFrame('bcs.html#economics')">&nbsp;&nbsp;-Major in Economics</option>
+
+<option onclick="OpenInMyFrame('bcs.html#finance')">&nbsp;&nbsp;-Major in Finance</option>
+
+<option onclick="OpenInMyFrame('bcs.html#management')">&nbsp;&nbsp;-Major in Management</option>
+
+<option onclick="OpenInMyFrame('bcs.html#secretarialscience')">&nbsp;&nbsp;-Major in Secretarial Science</option>
+
+<option id="maincourse" onclick="OpenInMyFrame('bsed.html')">*Bachelor of Secondary Education (B.S.Ed.)</option>
+
+<option id="maincourse" onclick="OpenInMyFrame('beed.html')">*Bachelor of Elementary Education (B.E.Ed.)</option>
+
+<option id="maincourse" onclick="OpenInMyFrame('ba.html')">*Bachelor of Arts (B.A.)</option>
+
+<option id="maincourse" onclick="OpenInMyFrame('bscpe.html')">*Bachelor of Science in Computer Engineering (B.S.Cp.E.)</option>
+
+<option id="maincourse" onclick="OpenInMyFrame('bsit.html')">*Bachelor of Science in Information Technology (B.S.I.T.)</option>
+
+<option id="maincourse" onclick="OpenInMyFrame('bsn.html')">*Bachelor of Science in Nursing (B.S.N.)</option>
+
+<option id="maincourse" onclick="OpenInMyFrame('bshrm.html')">*Bachelor of Science in Hotel And Restaurant Management (B.S.H.R.M.)</option>
+
+</form>
+</select>
+
+<hr>
+
+<iframe id="selected" name="selected" height="350px" width="100%" scrolling="auto" frameborder="no"; framespacing="0"; border="0"></iframe>
+
+</center>
+
+</html>

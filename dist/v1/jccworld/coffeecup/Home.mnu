@@ -1,0 +1,39 @@
+[General]
+MenuName=index
+[Main Colors]
+MainBG=16777073
+MainMOBG=65535
+MainFont=0
+MainFontMO=0
+MainBorder=0
+[Sub Colors]
+SubBG=8421504
+SubMOBG=15244288
+SubFont=16777215
+SubFontMO=0
+SubBorder=0
+[Options]
+MenuType=0
+TextAlign=1
+TextAlignSub=1
+MenuTop=0
+MenuLeft=0
+LeftPadding=19
+TopPadding=4
+BorderWidth=0
+UseFixedWidth=1
+ItemWidth=100
+MenuFont=Tahoma, Verdana, Arial
+FontSize=12
+FontBold=0
+FontItalic=0
+FancyHover=0
+[Menus]
+MenuCount=1
+Menu_0=Menu1
+[MenuData]
+MenuName_0=Menu1
+MenuText_0=Home
+MenuLink_0=index.html
+MenuHeight0=20
+MenuWidth0=80
