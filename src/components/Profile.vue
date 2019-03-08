@@ -47,9 +47,20 @@
 			</div>
 			<br />
 			
-			<!-- <Updates></Updates> -->
+			<Updates></Updates>
 		</section>
 
 	</div>
 </template>
+
+<script>
+import Updates from "./Updates.vue";
+
+export default {
+  name: "Profile",
+  components: {
+    Updates
+  }
+};
+</script>
 

@@ -7,9 +7,3 @@
 		</div>
 	</div>
 </template>
-
-<script>
-	// load updates
-	// TODO: Cache updates
-	microUpdates.init();
-</script>
