@@ -34,7 +34,7 @@
 							License</a>.
 						<br />
 						<br />
-						<span style="font-size: 9px;">v2.3</span> | <a style="font-size: 9px" href="v1">Visit v1.0</a>
+						<span style="font-size: 9px;">v{{ app_version }}</span> | <a style="font-size: 9px" href="v1">Visit v1.0</a>
 
 						<br />
 						<br />
@@ -55,12 +55,20 @@
 
 <script>
 import Updates from "./Updates.vue";
+import {version} from '../../package.json';
+
+const appv = version;
 
 export default {
   name: "Profile",
   components: {
     Updates
-  }
+	},
+	data () {
+		return {
+			app_version: appv
+		}
+	}
 };
 </script>
 
