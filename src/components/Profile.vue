@@ -10,8 +10,7 @@
 					<img src="img/jcc_logo.png" width="200" alt="My Logo" />
 					<p>John Cyrill Corsanes</p>
 					<ul class="profile-list">
-						<li>Casual I.T. Guy</li>
-						<li>Casual Developer, loves Web</li>
+						<li>Casual I.T. Guy & Web Developer</li>
 					</ul>
 					<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button"
 						class="nes-btn"><i class="nes-icon linkedin"></i> <span>LinkedIn</span> </button>
@@ -34,7 +33,8 @@
 							License</a>.
 						<br />
 						<br />
-						<span style="font-size: 9px;">v{{ app_version }}</span> | <a style="font-size: 9px" href="v1">Visit v1.0</a>
+						<!-- <span style="font-size: 9px;">v2</span> | <a style="font-size: 9px" href="v1">Visit v1.0</a> -->
+						<span style="font-size: 9px;">v{{ app_version }}</span>
 
 						<br />
 						<br />

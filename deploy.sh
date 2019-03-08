@@ -15,12 +15,14 @@ cd dist
 # if you are deploying to a custom domain
 # echo 'www.example.com' > CNAME
 
-COMMIT_MSG = 'Deploy App Build - datetime'
-CURRENTDATETIME=`date +"%Y-%m-%d %T"`
+# COMMIT_MSG = 'Deploy App Build - datetime'
+# CURRENTDATETIME=`date +"%Y-%m-%d %T"`
 
 # git init
 git add -A
-git commit -m 'Deploy App Build - datetime'
+git commit -m 'Deploy App Build'
+
+cd ..
 
 # push `dist` folder
 git subtree push --prefix dist origin gh-pages
@@ -30,5 +32,3 @@ git subtree push --prefix dist origin gh-pages
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
 git push -f git@github.com:jccultima123/portfolio.git master:gh-pages
-
-cd -
