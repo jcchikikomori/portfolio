@@ -1,35 +1,52 @@
 {
-  "name": "jccultima123.github.io",
-  "version": "2.3",
-  "description": "JCC's Portfolio",
-  "main": "index.html",
+  "name": "jccultima123",
+  "version": "2.4.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Running test: `gulp html-check`\" && exit 0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jccultima123/jccultima123.github.io.git"
-  },
-  "keywords": [
-    "portfolio",
-    "html5",
-    "nes.css"
-  ],
-  "author": "John Cyrill Corsanes",
-  "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/jccultima123/jccultima123.github.io/issues"
-  },
-  "homepage": "https://github.com/jccultima123/jccultima123.github.io#readme",
-  "devDependencies": {
-    "eslint": "^5.14.1",
-    "gulp": "^4.0.0",
-    "gulp-html": "^0.5.0",
-    "gulp-shell": "^0.6.5",
-    "yargs": "^13.2.1"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "htmltidy2": "^0.3.0",
-    "vnu-jar": "^18.11.5"
-  }
+    "gulp": "^4.0.0",
+    "vue": "^2.6.6",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.5.21",
+    "gulp": "^4.0.0",
+    "gulp-html": "^0.5.0",
+    "gulp-shell": "^0.6.5"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/prettier"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

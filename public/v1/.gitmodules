@@ -1,0 +1,6 @@
+[submodule "jccworld"]
+	path = jccworld
+	url = https://github.com/jccultima123/jccworld.git
+[submodule "mapping-tools"]
+	path = mapping-tools
+	url = https://github.com/jccultima123/mapping-tools.git

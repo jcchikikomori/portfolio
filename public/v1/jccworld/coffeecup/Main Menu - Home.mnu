@@ -1,0 +1,39 @@
+[General]
+MenuName=main-menu
+[Main Colors]
+MainBG=10485760
+MainMOBG=10485760
+MainFont=16777215
+MainFontMO=65535
+MainBorder=10485760
+[Sub Colors]
+SubBG=0
+SubMOBG=10485760
+SubFont=16777215
+SubFontMO=65535
+SubBorder=10485760
+[Options]
+MenuType=0
+TextAlign=1
+TextAlignSub=1
+MenuTop=1
+MenuLeft=1
+LeftPadding=15
+TopPadding=8
+BorderWidth=1
+UseFixedWidth=1
+ItemWidth=145
+MenuFont=Segoe UI
+FontSize=14
+FontBold=0
+FontItalic=0
+FancyHover=0
+[Menus]
+MenuCount=1
+Menu_0=Menu1
+[MenuData]
+MenuName_0=Menu1
+MenuText_0=Home
+MenuLink_0=index.html
+MenuHeight0=20
+MenuWidth0=80
