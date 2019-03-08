@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>mapping-tools : Google Maps</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+		<!-- Custom Styles -->
+		<link rel="stylesheet" href="../misc.css" />
+		<link rel="stylesheet" href="custom.css" />
+	</head>
+	<body>
+		<!-- Then the maps -->
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="pull-left">
+						<b>mapping-tools</b><p>prepared by <a target="_blank" href="https://github.com/jccultima123/mapping-tools">jccultima123</a></p>
+					</div>
+					<div class="btn-group pull-right" role="group" aria-label="...">
+					  <a href=".." class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i></a>
+					  <a href="../leaflet" class="btn btn-default">Leaflet JS</a>
+					  <a class="btn btn-default active">Google Maps</a>
+					</div><br /><br />
+				</div>
+				<!-- Map Library first -->
+				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiXIyV3bnPU3FmT2dXBOPZYOjUfEke9Qc&callback=initMap" async defer></script>
+				<div class="panel-body" id="map">
+					<!-- <h1 class="text-center">Coming Soon</h1> -->
+					<script>
+
+						var map;
+						var long = 121.092648;
+						var lat = 14.586028;
+
+						function initMap() {
+							// var location = {lat: 14.572182, lng: 121.060615};
+						  var location = {lat: lat, lng: long};
+						  map = new google.maps.Map(document.getElementById('map'), {
+						    center: location,
+						    zoom: 15
+						  });
+
+						  var marker = new google.maps.Marker({
+						    position: location,
+						    map: map,
+						    title: 'My Home!'
+						  });
+
+							// var location2 = {lat: 14.572566, lng: 121.060341};
+						  // var location2 = {lat: lat, lng: long};
+
+						  // var marker = new google.maps.Marker({
+						  //   position: location2,
+						  //   map: map,
+						  //   title: 'Dito kami kakain!'
+						  // });
+						}
+
+				    </script>
+				</div>
+				<div class="panel-footer">
+					<h4><a target="_blank" href="http://maps.google.com/">Google Maps</a></h4>
+					<p>by Google Inc.</p>
+					<ul>
+						<li>It's good when in comes in user-friendliness</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

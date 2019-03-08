@@ -16,7 +16,7 @@ CURRENTDATETIME=`date +"%Y-%m-%d %T"`
 
 # git init
 git add -A
-git commit -m 'Deploy App Build (${CURRENTDATETIME})'
+git commit -m 'Deploy App Build'
 
 # push `dist` folder
 git subtree push --prefix dist origin gh-pages

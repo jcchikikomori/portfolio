@@ -1,0 +1,51 @@
+[General]
+MenuName=main-menu-2
+[Main Colors]
+MainBG=10485760
+MainMOBG=10485760
+MainFont=16777215
+MainFontMO=65535
+MainBorder=10485760
+[Sub Colors]
+SubBG=0
+SubMOBG=10485760
+SubFont=16777215
+SubFontMO=65535
+SubBorder=10485760
+[Options]
+MenuType=0
+TextAlign=1
+TextAlignSub=1
+MenuTop=1
+MenuLeft=1
+LeftPadding=15
+TopPadding=8
+BorderWidth=1
+UseFixedWidth=1
+ItemWidth=145
+MenuFont=Segoe UI
+FontSize=14
+FontBold=0
+FontItalic=0
+FancyHover=0
+[Menus]
+MenuCount=3
+Menu_0=Menu1
+Menu_1=Menu1\Menu1_1
+Menu_2=Menu1\Menu1_2
+[MenuData]
+MenuName_0=Menu1
+MenuText_0=Stuffs
+MenuLink_0=stuffs.html
+MenuHeight0=20
+MenuWidth0=80
+MenuName_1=Menu1_1
+MenuText_1=Game Portal
+MenuLink_1=gameportal.html
+MenuHeight1=20
+MenuWidth1=80
+MenuName_2=Menu1_2
+MenuText_2=Mobile Portal
+MenuLink_2=mobileportal.html
+MenuHeight2=20
+MenuWidth2=80
