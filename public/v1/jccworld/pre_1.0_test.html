@@ -1,0 +1,74 @@
+<!--
+
+		:: .:::: .::::
+		:: ::	 ::
+		:: ::	 ::
+		:: ::	 ::
+	.::::' ':::: '::::
+
+
+	(C) JCC Media Limited
+	
+	-Web Programmmer/Developer : jccultima123
+	-Additional HTML Support : w3schools.org
+	
+	DISCLAIMER:
+	This Website is under public, and under copyright to the owner.
+	To Obtain source codes, ask to developer/webmaster for permission, to
+	avoid copyright violations to the law.
+	Some codes copied from different sources and i
+	agreed their rules and conditions. The developer's intention is
+	to learn and practice HTML and other web languages.
+	
+	COPYRIGHT NOTICE:
+	I don't want to be suited by the law, so..
+	If you are a Web Developer/Programmer/Designer, please monitor these codes i type,
+	implementing/obtained some elements/parts without your/my permission or
+	i don't know that you are the owner/have your royalty/just obtained from the internet,
+	please don't hesitate to e-mail us at johncyrillcorsanes@hotmail.com or johncyrill.corsanes@yahoo.com
+	and i will remove whatever my element/part you have already owned.
+		
+***************************************************************************************************************** -->
+
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="JCC WORLD" name="Title">
+    <meta content="John Cyrill Corsanes" name="Author">
+    <meta content="0.20 Beta" name="Website Version">
+    <meta content="Sat, 3 Aug 2013 19:43:00 GMT+8" name="Date Created">
+    <meta content="THIS SITE IS FOR INTENDED FOR EDUCATIONAL PURPOSES ONLY" name="Description">
+    <meta content="JCC WORLD, John Cyrill's World" name="Keywords">
+    <link href="css/main-style-test.css" rel="stylesheet" type="text/css">
+    <title> John Cyrill's World </title>
+  
+<script>
+function clicker(){
+	var thediv=document.getElementById('displaybox');
+	if(thediv.style.display == "none"){
+		thediv.style.display = "";
+		thediv.innerHTML = '<div style="position:relative; box-shadow: 0.0em 0.3em 0.1em #000; border-radius:5px; border:solid 1px; border-color:#000000; margin: 0 auto; margin-top:15%; height:200px; width:600px; padding:40px; background-color:#0000A0;"><iframe src="welcome.html" style="height:200px; width:600px; border:none; overflow:hidden;"></iframe></div>';
+	}else{
+		thediv.style.display = "none";
+		thediv.innerHTML = '';
+	}
+	return false;
+}
+</script>
+  
+  </head>
+
+<body onload='return clicker();'>
+  
+  <!-- Headers -->
+  <div class="header">
+  	   <a href="" title="John CC's World. Copyright © 2013"><img alt="" id="title" src="files/banner-white.png" /></a>
+  </div>
+  
+  <!-- Body -->
+  <div id="displaybox" style="display:none;" onclick='return clicker();'></div>
+  
+  
+  </body>
+</html>

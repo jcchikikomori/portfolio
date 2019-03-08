@@ -1,0 +1,91 @@
+/* ==========================================================================
+Corrections / Custom
+========================================================================== */
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+body {
+	background: rgb(40, 70, 102) no-repeat center center;
+}
+
+.hero {
+    /*background: rgb(40, 70, 102) no-repeat center center;*/
+    background: url('../img/showcase-ide-01.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+}
+
+section {
+    color: #fff !important;
+}
+
+section.title {
+    background-color: #3f6184;
+}
+
+.nav-toggle, .navicon-fixed {
+    z-index: 7999;
+}
+
+.navicon-fixed {
+    right: 8%;
+}
+
+.navicon-fixed a {
+    padding: 0 !important;
+}
+
+.navicon-fixed a div {
+    background-color: #284666;
+}
+
+p.browsehappy {
+    color: #fff !important;
+}
+
+/*a.aref, a.aref:focus {*/
+a.aref {
+    color: violet;
+    text-decoration: none;
+}
+
+ul.no-ul > li {
+    display: inline-block;
+    padding: 5px 2px;
+    text-decoration: none !important;
+}
+
+ul.no-ul > li > span.label {
+    font-size: 100% !important;
+}
+
+/*override*/
+.hero h1 {
+    margin: 0 0 45px 0 !important;
+    font-weight: 300 !important;
+    font-size: 35px !important;
+    /*text-shadow: rgb(46, 46, 46) 0px 4px 5px;*/
+    text-shadow: none !important;
+}
+
+div.hero-content > div {
+    background: #3F6183;
+    margin: 60px 0;
+    padding: 15px 20px;
+    max-width: 700px;
+    border-radius: 12px;
+}
+
+a.social-buttons {
+    padding: 0;
+    margin-right: 20px;
+}
+
+a.social-buttons:hover {
+    color: #fff;
+}
+
