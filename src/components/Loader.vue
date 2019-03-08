@@ -8,8 +8,14 @@
 			</p>
 		</dialog>
 		<!-- LOADING BALOON -->
-		<dialog class="nes-dialog no-borders" id="loading-dialog">
+		<div id="loading-dialog">
 			<p id="loading-message">Loading...</p>
-		</dialog>
+		</div>
 	</section>
 </template>
+
+<style scoped>
+	#loading-dialog {
+		text-align: center;
+	}
+</style>
