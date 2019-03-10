@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><title>@jccultima123</title><meta name=description content="Master of None. Lazy Software Developer"><meta name=keywords content="one-page, git, portfolio, web-design, repository, page, development, graphql, html5, github-pages"><meta name=author content="John Cyrill Corsanes"><meta property=og:title content="JCC - Portfolio Page"><meta property=og:image content=img/jcc_logo_og.jpg><meta property=og:url content=jccultima123.github.io><meta property=og:site_name content="My Portfolio - @jccultima123"><meta property=og:description content="Master of None. Lazy Software Developer"><meta name=twitter:title content="JCC - Portfolio Page"><meta name=twitter:image content=img/jcc_logo_og.jpg><meta name=twitter:url content=jccultima123.github.io><meta name=twitter:card content=portfolio><script src=js/modernizr.custom.js></script><link href=css/animate.css rel=stylesheet><link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel=stylesheet><link href=https://unpkg.com/nes.css@2.0.0/css/nes.min.css rel=stylesheet><link rel=stylesheet href=css/dialog-polyfill.css><link href=css/custom.css rel=stylesheet><link href=css/media.css rel=stylesheet><!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]--><link href=/portfolio/css/app.cb344a36.css rel=preload as=style><link href=/portfolio/js/app.8130a02d.js rel=preload as=script><link href=/portfolio/js/chunk-vendors.a5d24f15.js rel=preload as=script><link href=/portfolio/css/app.cb344a36.css rel=stylesheet></head><body><!--[if lt IE 7]>
+    <![endif]--><link href=/portfolio/css/app.fb167257.css rel=preload as=style><link href=/portfolio/js/app.b64443bf.js rel=preload as=script><link href=/portfolio/js/chunk-vendors.a5d24f15.js rel=preload as=script><link href=/portfolio/css/app.fb167257.css rel=stylesheet></head><body><!--[if lt IE 7]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#" data-href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]--><div id=app></div><a id=redirect target=_blank href=# hidden></a><script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
     function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -42,7 +42,7 @@
                 let li = "";
                 for (let i = 0; i < post.length; i++) {
                   p = post[i];
-                  li += '<div id="post-' + p.id + '" class="post-list nes-container with-title is-centered">' +
+                  li += '<div id="post-' + p.id + '" class="post-list is-centered">' +
                       '<p class="post-title">'+p.title+'</p>' +
                       '<p class="post-sentence">'+p.description+'</p>' +
                     '</div>';
@@ -50,6 +50,8 @@
                 if (post.length > 0) {
                   $("#all-post").html(li);
                   $('#update-container').show();
+                } else {
+                  $("#all-post").parent().hide();
                 }
                 console.log('done loading posts..');
 
@@ -59,6 +61,7 @@
               error: function () {
                 $("#all-post").html('');
                 // $('#update-container').hide();
+                $("#all-post").parent().hide();
 
                 console.log('error loading posts..');
                 // render anyway
@@ -67,7 +70,8 @@
             });
           },
           finishSetup: function() {
-            $('#loading-dialog').hide();
+            // $('#loading-dialog').hide();
+            $('#loader-container').hide();
             $('#profile-container').show();
           }
         }
@@ -75,19 +79,19 @@
         // set
         microUpdates = microProcessor;
 
+        /**
         if ($('.too-small-warning').is(':hidden')) {
-          // $('#profile-container').show();
-          if ($('#profile-container').is(':hidden')) {
-            // load posts first
-            $('#loading-message').text('Loading updates...');
-            // load updates
-            microUpdates.init();
-          }
-          // $('#profile-container').show();
-        } else {
-          // Skip animation
-          // $('#dialog').hide();
           $('#profile-container').show();
+        } else {
+          $('#profile-container').show();
+        }
+        */
+
+        if ($('#profile-container').is(':hidden')) {
+          // load posts first
+          $('#loading-message').text('Loading updates...');
+          // load updates
+          microUpdates.init();
         }
       }
 
@@ -99,4 +103,4 @@
           $('#redirect').attr('target', '_blank');
         }
         $('#redirect')[0].click();
-      }</script><script src=js/daynighttime.js></script><script src=/portfolio/js/chunk-vendors.a5d24f15.js></script><script src=/portfolio/js/app.8130a02d.js></script></body></html>
+      }</script><script src=js/daynighttime.js></script><script src=/portfolio/js/chunk-vendors.a5d24f15.js></script><script src=/portfolio/js/app.b64443bf.js></script></body></html>
