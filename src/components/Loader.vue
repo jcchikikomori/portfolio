@@ -1,21 +1,18 @@
 <template>
-	<section>
-		<dialog class="nes-dialog too-small-warning is-dark">
-			<h3>TOO SMALL!</h3>
-			<p>
-				Hey. This screen is too small to view this page!<br />
-				Try rotate your screen!
-			</p>
-		</dialog>
-		<!-- LOADING BALOON -->
-		<div id="loading-dialog">
-			<p id="loading-message">Loading...</p>
+	<section id="loader-container">
+		<div class="containers">
+			<div id="loading-dialog" class="nes-container is-rounded is-centered">
+				<p id="loading-message">Loading...</p>
+			</div>
 		</div>
 	</section>
 </template>
 
 <style scoped>
-	#loading-dialog {
+	#loader-container {
 		text-align: center;
+	}
+	#loading-dialog {
+		/*min-width: 400px;*/
 	}
 </style>

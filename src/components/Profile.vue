@@ -27,6 +27,10 @@
 						class="nes-btn">NES.css</button>
 					<br /><br />
 
+					<div id="post-container" class="nes-container is-rounded">
+						<div id="all-post"></div>
+					</div>
+
 					<p style="font-size: 9px;">
 						This site's content(s) are under compliance of
 						<a style="font-size: 9px" href="https://github.com/nostalgic-css/NES.css/blob/develop/LICENSE">MIT
@@ -54,16 +58,13 @@
 </template>
 
 <script>
-import Updates from "./Updates.vue";
+
 import {version} from '../../package.json';
 
 const appv = version;
 
 export default {
-  name: "Profile",
-  components: {
-    Updates
-	},
+  name: 'Profile',
 	data () {
 		return {
 			app_version: appv
