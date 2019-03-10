@@ -148,7 +148,8 @@
             });
           },
           finishSetup: function() {
-            $('#loading-dialog').hide();
+            // $('#loading-dialog').hide();
+            $('#loader-container').hide();
             $('#profile-container').show();
           }
         }
@@ -156,19 +157,19 @@
         // set
         microUpdates = microProcessor;
 
+        /**
         if ($('.too-small-warning').is(':hidden')) {
-          // $('#profile-container').show();
-          if ($('#profile-container').is(':hidden')) {
-            // load posts first
-            $('#loading-message').text('Loading updates...');
-            // load updates
-            microUpdates.init();
-          }
-          // $('#profile-container').show();
-        } else {
-          // Skip animation
-          // $('#dialog').hide();
           $('#profile-container').show();
+        } else {
+          $('#profile-container').show();
+        }
+        */
+
+        if ($('#profile-container').is(':hidden')) {
+          // load posts first
+          $('#loading-message').text('Loading updates...');
+          // load updates
+          microUpdates.init();
         }
       }
 
