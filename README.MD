@@ -1,7 +1,12 @@
 # JCC Portfolio
 
+## Requirements
+- NodeJS
+- Yarn
+- Ruby (optional)
+
 ## Basic Setup
-- Run `npm install` 
+- Run `yarn install` 
 - Optional: If you have ruby, run the following: 
 	- `cd && gem install --no-ri --no-rdoc bundler`
 	- `bundle install`
