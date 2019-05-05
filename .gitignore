@@ -28,3 +28,7 @@ yarn-error.log*
 ### Vuejs ###
 docs/_book
 test/
+
+### Ruby ###
+.bundle/
+.bundler/
