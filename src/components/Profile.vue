@@ -14,7 +14,7 @@
 					</ul>
 					<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button"
 						class="nes-btn"><i class="nes-icon linkedin"></i> <span>LinkedIn</span> </button>
-					<button onclick="goToUrl('https://github.com/jccultima123')" id="github-btn" type="button" class="nes-btn"><i
+					<button onclick="goToUrl('https://github.com/jcchikikomori')" id="github-btn" type="button" class="nes-btn"><i
 							class="nes-icon github"></i> <span>GitHub</span> </button>
 					<button onclick="goToUrl('mailto:johncyrillcorsanes@gmail.com', false)" id="gmail-btn" type="button"
 						class="nes-btn"><i class="nes-icon gmail"></i> <span>E-mail</span> </button>
@@ -32,13 +32,13 @@
 					</div>
 
 					<p style="font-size: 9px;">
-						This site's content(s) are under compliance of
+						This site's design and content(s) are being used under compliance of
 						<a style="font-size: 9px" href="https://github.com/nostalgic-css/NES.css/blob/develop/LICENSE">MIT
 							License</a>.
 						<br />
 						<br />
 						<!-- <span style="font-size: 9px;">v2</span> | <a style="font-size: 9px" href="v1">Visit v1.0</a> -->
-						<span style="font-size: 9px;">v{{ app_version }}</span>
+						<span style="font-size: 9px;">v{{ app_version }} | <a target="_blank" style="font-size: 9px" href="v1">Visit old version</a></span>
 
 						<br />
 						<br />

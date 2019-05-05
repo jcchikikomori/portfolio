@@ -102,14 +102,6 @@ div.containers .nes-container {
   font-size: 11px; }
 
 /* Micro updates */
-#update-container {
-  display: none; }
-  #update-container div {
-    max-width: 400px; }
-
-#all-post {
-  min-width: 240px; }
-
 .post-list p.title {
   font-size: 10px; }
 .post-list p.post-sentence {
