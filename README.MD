@@ -1,7 +1,8 @@
 # JCC Portfolio
 
 ## Basic Setup
-- Run `npm install` 
+- Run `yarn install` 
+- Run required packages `yarn global add eslint; yarn global add prettier`
 - Optional: If you have ruby, run the following: 
 	- `cd && gem install --no-ri --no-rdoc bundler`
 	- `bundle install`
