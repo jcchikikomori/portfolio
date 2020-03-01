@@ -26,7 +26,7 @@ cd ..
 
 # push `dist` folder
 git subtree split --prefix dist origin -b gh-pages
-# git subtree push --prefix dist origin gh-pages
+git subtree push --prefix dist origin gh-pages
 
 # if you are deploying to https://<USERNAME>.github.io
 # git push git@github.com:jccultima123/jccultima123.github.io.git master
