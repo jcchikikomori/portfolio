@@ -104,8 +104,10 @@ div.containers .nes-container {
 .main-screen {
   display: block; }
 
+.used-assets-btn,
 #sensei-btn {
-  font-size: 11px; }
+  font-size: 11px;
+  margin-right: 1em; }
 
 /* Micro updates */
 .post-list p.title {
@@ -117,6 +119,9 @@ div.containers .nes-container {
   word-wrap: normal; }
 
 /* Patches */
+.nes-btn {
+  margin-right: 0.6em; }
+
 .nes-btn span {
   display: none;
   font-size: 14px; }
