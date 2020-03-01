@@ -32,7 +32,7 @@ git subtree push --prefix dist origin gh-pages
 # git push git@github.com:jccultima123/jccultima123.github.io.git master
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:jccultima123/portfolio.git master:gh-pages
+git push -f origin master:gh-pages
 
 # delete local branch
 git branch -D gh-pages
