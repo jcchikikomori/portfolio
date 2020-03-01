@@ -25,7 +25,7 @@ git commit -m 'Deploy App Build'
 cd ..
 
 # push `dist` folder
-git subtree split --prefix dist origin -b gh-pages
+# git subtree split --prefix dist origin -b gh-pages
 git subtree push --prefix dist origin gh-pages
 
 # if you are deploying to https://<USERNAME>.github.io
