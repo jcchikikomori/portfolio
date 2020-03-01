@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>mapping-tools : LeafletJS</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+		<!-- Leaflet CSS -->
+		<link rel="stylesheet" href="../bower_components/leaflet-dist/leaflet.css" />
+		<!-- Custom Styles -->
+		<link rel="stylesheet" href="../misc.css" />
+		<link rel="stylesheet" href="custom.css" />
+	</head>
+	<body>
+		<!-- Leaflet lib first -->
+		<script src="../bower_components/leaflet-dist/leaflet.js"></script>
+		<!-- Then the maps -->
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="pull-left">
+						<b>mapping-tools</b><p>prepared by <a target="_blank" href="https://github.com/jccultima123/mapping-tools">jccultima123</a></p>
+					</div>
+					<div class="btn-group pull-right" role="group" aria-label="...">
+					  <a href=".." class="btn btn-default"><i class="glyphicon glyphicon-arrow-left"></i></a>
+					  <a class="btn btn-default active">Leaflet JS</a>
+					  <a href="../gmaps" class="btn btn-default">Google Maps</a>
+					</div><br /><br />
+				</div>
+				<div class="panel-body" id="map"></div>
+				<div class="panel-footer">
+					<h4><a target="_blank" href="http://leafletjs.com/">Leaflet JS</a></h4>
+					<p>by Vladimir Agafonkin</p>
+					<ul>
+						<li>Mobile Friendly</li>
+						<li>Fast and Lightweight</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="map.js"></script>
+	</body>
+</html>

@@ -1,0 +1,75 @@
+﻿/*
+  MAIN CSS PROPERTIES
+  CAUTION:Please do not modify codes without permission.
+  If you are a Web Developer/Programmer/Designer, please monitor these codes i type, in order to
+  avoid copyright conflicts.
+*/
+
+html {font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;}
+
+body
+{
+font-size:14px;
+margin:0 auto;
+background-color:lime;
+}
+
+div.header
+{
+height:52px;
+width:100%;
+}
+
+.nav-header
+{
+text-indent: 0px;
+padding: 0px 0px 0px 0px;
+height:53px;
+width:100%;
+position:fixed;
+background-color:#0000A0;
+box-shadow: 0.0em 0.1em 0.1em #000;
+margin:0 auto;
+}
+
+.header-table{border-width: 0px; background-color: transparent;}
+
+img#title
+{
+height:50px;
+width:368px;
+margin-top:2px;
+}
+
+div#welcome-message
+{
+height:auto;
+width:650px;
+margin:0 auto;
+color:#FFFFFF;
+}
+
+div#footer
+{
+height:auto;
+font-size:15px;
+color:#FFFFFF;
+box-shadow: 0.0em -0.1em 0.1em #000;
+}
+
+/* Color and Text/Font Properties */
+
+a {color:#0000A0;}
+a:hover {color:#808080;}
+a:visited {color:#0000A0;}
+.header, .nav-header, #welcome-message, #footer {background-color:#0000A0;} /* Default Color: #0000A0*/
+.footer-text {color:#FFFFFF; font-size:12px;}
+.footer-text:hover {color:lime;}
+.container {color:#000000; background-color:lime; width:830px; height:auto; margin:0 auto; padding:9px; padding-left:15px; padding-right:35px;}
+
+/* Advanced Properties */
+
+div#displaybox {
+background-color:#FFFFFF; opacity:0.9;
+position:fixed; top:0px; left:0px; width:100%; height:100%; color:#FFFFFF; text-align:center; vertical-align:1px;
+}
