@@ -9,30 +9,12 @@ set -e
 # build
 npm run build --fix
 
-# navigate into the build output directory
-cd dist
+# rename
+mv dist/ docs/
 
-# if you are deploying to a custom domain
-# echo 'www.example.com' > CNAME
+# commit changes
+git add docs/
+git commit -m "Deploy App Build"
 
-# COMMIT_MSG = 'Deploy App Build - datetime'
-# CURRENTDATETIME=`date +"%Y-%m-%d %T"`
-
-# git init
-git add -A
-git commit -m 'Deploy App Build'
-
-cd ..
-
-# push `dist` folder
-# git subtree split --prefix dist origin -b gh-pages
-git subtree push --prefix dist origin gh-pages
-
-# if you are deploying to https://<USERNAME>.github.io
-# git push git@github.com:jccultima123/jccultima123.github.io.git master
-
-# if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f origin master:gh-pages
-
-# delete local branch
-git branch -D gh-pages
+# push
+git push origin master
