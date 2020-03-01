@@ -25,10 +25,14 @@ git commit -m 'Deploy App Build'
 cd ..
 
 # push `dist` folder
-git subtree push --prefix dist origin gh-pages
+git subtree split --prefix dist origin -b gh-pages
+# git subtree push --prefix dist origin gh-pages
 
 # if you are deploying to https://<USERNAME>.github.io
 # git push git@github.com:jccultima123/jccultima123.github.io.git master
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
 git push -f git@github.com:jccultima123/portfolio.git master:gh-pages
+
+# delete local branch
+git branch -D gh-pages
