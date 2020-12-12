@@ -7,12 +7,15 @@
 			<div class="containers">
 				<div class="nes-container is-rounded is-centered">
 					<img id="profile-logo" src="img/jcc_logo.png" width="200" alt="My Logo" />
-					<p>@jcchikikomori</p>
+					<!-- <p>@jcchikikomori</p> -->
 					<ul class="profile-list">
             <li>Lazy Geek & Developer</li>
 						<li>Android & Web</li><br />
 						<li>
 							I love <a href="#" v-on:click="showSpotify">dance music!</a>
+						</li><br />
+						<li>
+							<a href="#" v-on:click="showProjects">My projects</a>
 						</li>
 					</ul>
 					<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button"

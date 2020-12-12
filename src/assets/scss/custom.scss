@@ -30,8 +30,7 @@ a {
 	}
 }
 body {
-	padding: 0 2rem;
-	margin: 2rem;
+	padding: 1.5rem;
 }
 .nes-container {
 	&:not(:last-child) {
@@ -111,6 +110,7 @@ div.containers {
 #profile-container {
 	display: none;
 	border: none !important;
+	padding: 0;
 }
 .no-bordersself {
 	&::after {
