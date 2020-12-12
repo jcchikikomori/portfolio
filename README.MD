@@ -1,11 +1,14 @@
-# JCC Portfolio
+# JCC Portfolio v2.5.0
 
 ## Requirements
+
 - NodeJS
+- VueJS
 - Yarn
 - Ruby (optional)
 
 ## Basic Setup
+
 - Run `yarn install` 
 - Run required packages `yarn global add eslint; yarn global add prettier`
 - Optional: If you have ruby, run the following either: 
@@ -16,6 +19,10 @@
 		- `which bundler`
 		- `which sass`
 
-## Required TODOs
-- For HTML tests (Homepage): Run `gulp homepage`
-- To generate CSS from SASS: Run `gulp csass`
+## Building
+
+- `yarn run build --fix`
+
+## Testing
+
+- `yarn run serve`

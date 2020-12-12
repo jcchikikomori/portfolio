@@ -1,3 +1,9 @@
+<style lang="scss">
+@import "../node_modules/nes.css/css/nes.css";
+@import "./assets/scss/custom";
+@import "./assets/scss/media";
+</style>
+
 <template>
   <div id="app">
     <Loader></Loader>

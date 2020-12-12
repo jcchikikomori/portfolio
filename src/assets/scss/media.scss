@@ -1,16 +1,15 @@
 /* -------------- Too Small -------------- */
 @media only screen and (max-device-width: 320px) and (-webkit-min-device-pixel-ratio: 2) {
-  body {
-    font-size: 10px;
-  }
-  .too-small-warning {
-    display: block;
-    /* margin: 0 auto; */
-    margin: 10% 5%;
-  }
-  .main-screen {
-    display: none;
-  }
+	body {
+		font-size: 10px;
+	}
+	.too-small-warning {
+		display: block;
+		margin: 10% 5%;
+	}
+	.main-screen {
+		display: none;
+	}
 }
 
 /* ----------- iPhone 4 and 4S ----------- */
@@ -21,18 +20,19 @@
 /* Portrait and Landscape */
 /* Portrait */
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  #update-container div {
-    /* max-width: $container-width-iphone; */
-    margin: 0 auto;
-  }
-  .nes-btn {
-    min-width: 90%;
-    margin: 0 auto;
-    display: block;
-  }
-  .nes-btn span {
-    display: inline;
-  }
+	#update-container {
+		div {
+			margin: 0 auto;
+		}
+	}
+	.nes-btn {
+		min-width: 90%;
+		margin: 0 auto;
+		display: block;
+		span {
+			display: inline;
+		}
+	}
 }
 
 /* Landscape */
@@ -40,21 +40,24 @@
 /* Portrait and Landscape */
 /* Portrait */
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  #update-container div {
-    /* max-width: $container-width-iphone; */
-    margin: 0 auto;
-  }
-  .nes-btn {
-    min-width: 90%;
-    margin: 0 auto;
-    display: block;
-  }
-  .nes-btn span {
-    display: inline;
-  }
-  .post-list p {
-    word-wrap: break-word !important;
-  }
+	#update-container {
+		div {
+			margin: 0 auto;
+		}
+	}
+	.nes-btn {
+		min-width: 90%;
+		margin: 0 auto;
+		display: block;
+		span {
+			display: inline;
+		}
+	}
+	.post-list {
+		p {
+			word-wrap: break-word !important;
+		}
+	}
 }
 
 /* Landscape */
@@ -62,18 +65,20 @@
 /* Portrait and Landscape */
 /* Portrait */
 @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
-  #update-container div {
-    max-width: 95%;
-    margin: 0 auto;
-  }
-  .nes-btn {
-    min-width: 90%;
-    margin: 0 auto;
-    display: block;
-  }
-  .nes-btn span {
-    display: inline;
-  }
+	#update-container {
+		div {
+			max-width: 95%;
+			margin: 0 auto;
+		}
+	}
+	.nes-btn {
+		min-width: 90%;
+		margin: 0 auto;
+		display: block;
+		span {
+			display: inline;
+		}
+	}
 }
 
 /* Landscape */
@@ -81,18 +86,18 @@
 /* Portrait and Landscape */
 /* Portrait */
 @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
-  #update-container div {
-    max-width: 95%;
-    margin: 0 auto;
-  }
-  .nes-btn {
-    min-width: 90%;
-    margin: 0 auto;
-    display: block;
-  }
-  .nes-btn span {
-    display: inline;
-  }
+	#update-container {
+		div {
+			max-width: 95%;
+			margin: 0 auto;
+		}
+	}
+	.nes-btn {
+		min-width: 90%;
+		margin: 0 auto;
+		display: block;
+		span {
+			display: inline;
+		}
+	}
 }
-
-/* Landscape */
