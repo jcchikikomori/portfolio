@@ -10,8 +10,9 @@
 					<p>@jcchikikomori</p>
 					<ul class="profile-list">
             <li>Lazy Geek & Developer</li>
+						<li>Android & Web</li><br />
 						<li>
-							I love <a target="_blank" href="https://open.spotify.com/user/johncyrillcorsanes?si=nvkKy3khSIqs9JvlgJEOIw">music</a>
+							I love <a target="_blank" href="https://open.spotify.com/user/johncyrillcorsanes?si=nvkKy3khSIqs9JvlgJEOIw">dance music!</a>
 						</li>
 					</ul>
 					<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button"
@@ -52,7 +53,6 @@
 				</div>
 			</div>
 
-			<br />
 			<br />
 			<div class="containers">
 				<div id="post-container" class="nes-container is-rounded">
