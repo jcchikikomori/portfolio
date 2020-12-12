@@ -1,8 +1,21 @@
-var currentTime = new Date().getHours();
-if (7 <= currentTime && currentTime < 20) {
-    $('body').css('background','#FFF');
+if (
+  window.matchMedia &&
+  window.matchMedia("(prefers-color-scheme: dark)").matches
+) {
+  // dark mode
+  $("body").css("background", "#23272a");
 } else {
-    $('body').css('background','#23272a');
-    // TODO: Use classes instead
-    // $('.nes-container').css('background','#99aab5');
+  // normal
+  $("body").css("background", "#FFF");
 }
+
+window
+  .matchMedia("(prefers-color-scheme: dark)")
+  .addEventListener("change", e => {
+    const newColorScheme = e.matches ? "dark" : "light";
+    if (newColorScheme == "dark") {
+      $("body").css("background", "#23272a");
+    } else {
+      $("body").css("background", "#FFF");
+    }
+  });

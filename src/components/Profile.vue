@@ -7,7 +7,7 @@
 			<div class="containers">
 				<div class="nes-container is-rounded is-centered">
 					<img src="img/jcc_logo.png" width="200" alt="My Logo" />
-					<p>John Cyrill C.</p>
+					<p>@jcchikikomori</p>
 					<ul class="profile-list">
             <li>Lazy Geek & Developer</li>
 						<li>
@@ -22,12 +22,6 @@
 						class="nes-btn"><i class="nes-icon gmail"></i> <span>E-mail</span> </button> -->
 					<button onclick="goToUrl('https://www.youtube.com/user/jcstriker1')" id="youtube-btn" type="button"
 						class="nes-btn"><i class="nes-icon youtube"></i> <span>YouTube</span> </button>
-	
-					<br /><br />
-
-					<div id="post-container" class="nes-container is-rounded">
-						<div id="all-post"></div>
-					</div>
 
 					<br /><br />
 					<p style="font-size: 11px;">
@@ -41,9 +35,11 @@
 							class="used-assets-btn nes-btn">GraphQL</button>
 						<br /><br />
 						<br />
+						<!--
 						<button onclick="goToUrl('https://jccorsanes.site')" type="button"
 							class="used-assets-btn nes-btn is-primary">Visit my blog</button>
 						<br /><br /><br />
+						-->
 						<span style="font-size: 9px;">v{{ app_version }} | <a target="_blank" style="font-size: 9px" href="v1">Visit old version</a></span>
 
 						<br />

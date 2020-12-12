@@ -21,7 +21,8 @@ body {
 i.brand {
   margin-right: 1rem; }
 
-div.containers .nes-container {
+div.containers .nes-container,
+#post-container {
   display: inline-block;
   max-width: 400px;
   background: #fff; }

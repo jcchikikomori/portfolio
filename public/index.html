@@ -160,14 +160,6 @@
         }
       }
 
-
-      if ($('#profile-container').is(':hidden')) {
-        // load posts first
-        $('#loading-message').text('Obtaining messages...');
-        // load updates
-        microUpdates.init();
-      }
-
       // set
       microUpdates = microProcessor;
 
