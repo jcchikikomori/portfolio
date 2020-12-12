@@ -21,11 +21,10 @@ body {
 i.brand {
   margin-right: 1rem; }
 
-div.containers .nes-container,
-#post-container {
+div.containers .nes-container {
   display: inline-block;
   max-width: 400px;
-  background: #fff; }
+}
 
 .balloon.nes-container .nes-balloon {
   max-width: 600px;

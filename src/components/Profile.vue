@@ -6,7 +6,7 @@
 		<section id="profile-container" class="animated fadeIn nes-container">
 			<div class="containers">
 				<div class="nes-container is-rounded is-centered">
-					<img src="img/jcc_logo.png" width="200" alt="My Logo" />
+					<img id="profile-logo" src="img/jcc_logo.png" width="200" alt="My Logo" />
 					<p>@jcchikikomori</p>
 					<ul class="profile-list">
             <li>Lazy Geek & Developer</li>
@@ -54,8 +54,10 @@
 
 			<br />
 			<br />
-			<div id="post-container" class="nes-container is-rounded">
-				<div id="all-post"></div>
+			<div class="containers">
+				<div id="post-container" class="nes-container is-rounded">
+					<div id="all-post"></div>
+				</div>
 			</div>
 			
 			<Updates></Updates>
