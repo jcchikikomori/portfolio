@@ -12,7 +12,7 @@
             <li>Lazy Geek & Developer</li>
 						<li>Android & Web</li><br />
 						<li>
-							I love <a target="_blank" href="https://open.spotify.com/user/johncyrillcorsanes?si=nvkKy3khSIqs9JvlgJEOIw">dance music!</a>
+							I love <a href="#" v-on:click="showSpotify">dance music!</a>
 						</li>
 					</ul>
 					<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button"
@@ -60,6 +60,8 @@
 				</div>
 			</div>
 			
+			<Projects></Projects>
+			<Spotify></Spotify>
 			<Updates></Updates>
 		</section>
 
@@ -68,6 +70,10 @@
 
 <script>
 
+import dialogPolyfill from "dialog-polyfill";
+
+import Projects from "../components/Projects.vue";
+import Spotify from "../components/Spotify.vue";
 import Updates from "../components/Updates.vue";
 import {version} from '../../package.json';
 
@@ -76,7 +82,23 @@ const appv = version;
 export default {
 	name: 'Profile',
 	components: {
-		Updates
+		Projects, Spotify, Updates
+	},
+	methods: {
+		showProjects: function () {
+			var projectsDialog = document.getElementById("dialog-projects");
+
+			dialogPolyfill.registerDialog(projectsDialog);
+			projectsDialog.showModal();
+			// projectsDialog.classList.add("-is-open");
+		},
+		showSpotify: function() {
+			var spotifyDialog = document.getElementById("dialog-spotify");
+
+			dialogPolyfill.registerDialog(spotifyDialog);
+			spotifyDialog.showModal();
+			// spotifyDialog.classList.remove("-is-open");
+		}
 	},
 	data () {
 		return {
@@ -84,5 +106,5 @@ export default {
 		}
 	}
 };
-</script>
 
+</script>
