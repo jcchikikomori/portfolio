@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
+dist
 
 # local env files
 .env.local
@@ -28,3 +29,7 @@ yarn-error.log*
 ### Vuejs ###
 docs/_book
 test/
+
+### Ruby ###
+.bundle/
+.bundler/
