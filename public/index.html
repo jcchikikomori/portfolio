@@ -36,7 +36,7 @@
 
   <!-- NES.css -->
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-  <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
   <!-- <link href="./style.css" rel="stylesheet" /> -->
 
   <!-- Polyfill -->
@@ -97,6 +97,48 @@
       // document.getElementById("#loading-dialog").showModal();
       // $("#main-container").removeAttr("hidden");
       // $("#loading-button").trigger("click");
+
+      // DARK MODE ==============================================
+
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        // dark mode
+        $("body").css("background", "#212529");
+        $(".nes-container").each(function (i, obj) {
+          $(this).addClass("is-dark");
+          $("#profile-logo").attr("src", "img/jcc_logo_w.png");
+        });
+      } else {
+        // normal
+        $("body").css("background", "#FFF");
+        $(".nes-container").each(function (i, obj) {
+          $(this).removeClass("is-dark");
+          $("#profile-logo").attr("src", "img/jcc_logo.png");
+        });
+      }
+
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", e => {
+          const newColorScheme = e.matches ? "dark" : "light";
+          if (newColorScheme == "dark") {
+            $("body").css("background", "#212529");
+            $(".nes-container").each(function (i, obj) {
+              $(this).addClass("is-dark");
+              $("#profile-logo").attr("src", "img/jcc_logo_w.png");
+            });
+          } else {
+            $("body").css("background", "#FFF");
+            $(".nes-container").each(function (i, obj) {
+              $(this).removeClass("is-dark");
+              $("#profile-logo").attr("src", "img/jcc_logo.png");
+            });
+          }
+        });
+
+      // DARK MODE END ==============================================
 
       /**
        * Micro Client processor
@@ -191,7 +233,7 @@
 
   </script>
 
-  <script src="js/daynighttime.js"></script>
+  <!-- <script src="js/daynighttime.js"></script> -->
 
 </body>
 

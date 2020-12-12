@@ -3,17 +3,23 @@
 	<div id="main-container" class="main-screen">
 
 		<!-- MAIN INFO -->
-		<section id="profile-container" class="nes-container">
+		<section id="profile-container" class="animated fadeIn nes-container">
 			<div class="containers">
 				<div class="nes-container is-rounded is-centered">
-					<img src="img/jcc_logo.png" width="200" alt="My Logo" />
+					<img id="profile-logo" src="img/jcc_logo.png" width="200" alt="My Logo" />
+					<p>@jcchikikomori</p>
 					<ul class="profile-list">
-						<li>Lazy Geek & Developer</li>
+            <li>Lazy Geek & Developer</li>
+						<li>
+							I love <a target="_blank" href="https://open.spotify.com/user/johncyrillcorsanes?si=nvkKy3khSIqs9JvlgJEOIw">music</a>
+						</li>
 					</ul>
 					<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button"
 						class="nes-btn"><i class="nes-icon linkedin"></i> <span>LinkedIn</span> </button>
 					<button onclick="goToUrl('https://github.com/jcchikikomori')" id="github-btn" type="button" class="nes-btn"><i
 							class="nes-icon github"></i> <span>GitHub</span> </button>
+					<!-- <button onclick="goToUrl('mailto:johncyrillcorsanes@gmail.com', false)" id="gmail-btn" type="button"
+						class="nes-btn"><i class="nes-icon gmail"></i> <span>E-mail</span> </button> -->
 					<button onclick="goToUrl('https://www.youtube.com/user/jcstriker1')" id="youtube-btn" type="button"
 						class="nes-btn"><i class="nes-icon youtube"></i> <span>YouTube</span> </button>
 
@@ -29,9 +35,11 @@
 							class="used-assets-btn nes-btn">GraphQL</button>
 						<br /><br />
 						<br />
+						<!--
 						<button onclick="goToUrl('https://jccorsanes.site')" type="button"
 							class="used-assets-btn nes-btn is-primary">Visit my blog</button>
 						<br /><br /><br />
+						-->
 						<span style="font-size: 9px;">v{{ app_version }} | <a target="_blank" style="font-size: 9px" href="v1">Visit old version</a></span>
 
 						<br />
@@ -46,8 +54,10 @@
 
 			<br />
 			<br />
-			<div id="post-container" class="nes-container is-rounded">
-				<div id="all-post"></div>
+			<div class="containers">
+				<div id="post-container" class="nes-container is-rounded">
+					<div id="all-post"></div>
+				</div>
 			</div>
 			
 			<Updates></Updates>
