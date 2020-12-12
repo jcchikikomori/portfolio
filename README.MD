@@ -1,5 +1,10 @@
 # JCC Portfolio
 
+## Requirements
+- NodeJS
+- Yarn
+- Ruby (optional)
+
 ## Basic Setup
 - Run `yarn install` 
 - Run required packages `yarn global add eslint; yarn global add prettier`

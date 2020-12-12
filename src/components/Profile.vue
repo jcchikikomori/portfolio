@@ -1,6 +1,6 @@
 <template>
 	<!-- MAIN CONTAINER -->
-	<div id="main-container" class="main-screen" hidden>
+	<div id="main-container" class="main-screen">
 
 		<!-- MAIN INFO -->
 		<section id="profile-container" class="animated fadeIn nes-container">
@@ -9,14 +9,14 @@
 					<img src="img/jcc_logo.png" width="200" alt="My Logo" />
 					<p>John Cyrill C.</p>
 					<ul class="profile-list">
-						<li>Programming, Multimedia, and other I.T. stuffs</li>
+            <li>Lazy Geek & Developer</li>
 						<li>
 							I love <a target="_blank" href="https://open.spotify.com/user/johncyrillcorsanes?si=nvkKy3khSIqs9JvlgJEOIw">music</a>
 						</li>
 					</ul>
 					<button onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')" id="linkedin-btn" type="button"
 						class="nes-btn"><i class="nes-icon linkedin"></i> <span>LinkedIn</span> </button>
-					<button onclick="goToUrl('https://github.com/jccultima123')" id="github-btn" type="button" class="nes-btn"><i
+					<button onclick="goToUrl('https://github.com/jcchikikomori')" id="github-btn" type="button" class="nes-btn"><i
 							class="nes-icon github"></i> <span>GitHub</span> </button>
 					<!-- <button onclick="goToUrl('mailto:johncyrillcorsanes@gmail.com', false)" id="gmail-btn" type="button"
 						class="nes-btn"><i class="nes-icon gmail"></i> <span>E-mail</span> </button> -->
@@ -29,18 +29,22 @@
 						<div id="all-post"></div>
 					</div>
 
+					<br /><br />
+					<p style="font-size: 11px;">
+						This is made with</p>
 					<p style="font-size: 9px;">
-						<!-- The external content(s) are provided under the compliance of
-						<a style="font-size: 9px" href="https://github.com/nostalgic-css/NES.css/blob/develop/LICENSE">MIT
-							License</a>. -->
-						<!-- <br /> -->
+						<button onclick="goToUrl('https://vuejs.org')" type="button"
+							class="used-assets-btn nes-btn">VueJS</button>
+						<button onclick="goToUrl('https://nostalgic-css.github.io/NES.css/')" type="button"
+							class="used-assets-btn nes-btn">NES.css</button>
+						<button onclick="goToUrl('https://graphql.org')" type="button"
+							class="used-assets-btn nes-btn">GraphQL</button>
+						<br /><br />
 						<br />
-						The 8-bit design was made possible with
-						<a style="font-size: 9px" href="https://nostalgic-css.github.io/NES.css/" target="_blank">NES.css</a>
-						<br />
-						<br />
-						<!-- <span style="font-size: 9px;">v2</span> | <a style="font-size: 9px" href="v1">Visit v1.0</a> -->
-						<span style="font-size: 9px;">v{{ app_version }}</span>
+						<button onclick="goToUrl('https://jccorsanes.site')" type="button"
+							class="used-assets-btn nes-btn is-primary">Visit my blog</button>
+						<br /><br /><br />
+						<span style="font-size: 9px;">v{{ app_version }} | <a target="_blank" style="font-size: 9px" href="v1">Visit old version</a></span>
 
 						<br />
 						<br />
@@ -51,7 +55,12 @@
 
 				</div>
 			</div>
+
 			<br />
+			<br />
+			<div id="post-container" class="nes-container is-rounded">
+				<div id="all-post"></div>
+			</div>
 			
 			<Updates></Updates>
 		</section>
@@ -61,12 +70,16 @@
 
 <script>
 
+import Updates from "../components/Updates.vue";
 import {version} from '../../package.json';
 
 const appv = version;
 
 export default {
-  name: 'Profile',
+	name: 'Profile',
+	components: {
+		Updates
+	},
 	data () {
 		return {
 			app_version: appv

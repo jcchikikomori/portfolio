@@ -1,4 +1,10 @@
 /* Main */
+a,
+a:hover,
+a:active {
+  color: #555;
+  text-decoration: underline; }
+
 .is-dark a,
 .is-dark a:hover
 .is-dark a:active {
@@ -98,18 +104,12 @@ div.containers .nes-container {
 .main-screen {
   display: block; }
 
+.used-assets-btn,
 #sensei-btn {
-  font-size: 11px; }
+  font-size: 11px;
+  margin-right: 1em; }
 
 /* Micro updates */
-#update-container {
-  display: none; }
-  #update-container div {
-    max-width: 400px; }
-
-#all-post {
-  min-width: 240px; }
-
 .post-list p.title {
   font-size: 10px; }
 .post-list p.post-sentence {
@@ -119,6 +119,9 @@ div.containers .nes-container {
   word-wrap: normal; }
 
 /* Patches */
+.nes-btn {
+  margin-right: 0.6em; }
+
 .nes-btn span {
   display: none;
   font-size: 14px; }
