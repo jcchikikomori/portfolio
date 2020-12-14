@@ -1,13 +1,21 @@
 <style lang="scss">
-@import "../node_modules/nes.css/css/nes.css";
 @import "./assets/scss/custom";
 @import "./assets/scss/media";
+
+.app {
+  .-content {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
 </style>
 
 <template>
-  <div id="app">
-    <Loader></Loader>
-    <Profile></Profile>
+  <div id="app" class="app container-fluid">
+    <div class="-content">
+      <Loader></Loader>
+      <Profile></Profile>
+    </div>
   </div>
 </template>
 
