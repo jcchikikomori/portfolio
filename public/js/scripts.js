@@ -1,217 +1,156 @@
-/************** FUNCTIONS FIRST ***************/
+/** main */
+window.onload = function() {
+  // document.getElementById("#loading-dialog").showModal();
+  // $("#main-container").removeAttr("hidden");
+  // $("#loading-button").trigger("click");
 
-function loadData() {
+  // DARK MODE ==============================================
 
-}
-
-/************** FUNCTIONS END ***************/
-
-// $(window).on('beforeunload', function(){
-//   $(window).scrollTop(0);
-// });
-
-$(document).ready(function() {
-
-    // setTimeout(function() {
-    // 	$('body').removeAttr('hidden');
-    // }, 3000);
-
-    setTimeout(function() {
-        // $('.loader-wrap').slideOut();
-        $('html').removeAttr('style', 'hidden');
-        $('.contents').removeAttr('hidden');
-        // $('html').css('overflow', 'auto');
-        // $('.loader-wrap img').addClass('animated zoomOut');
-        // setTimeout(function() {
-        	$('.loader-wrap img').remove();
-        // }, 350);
-    }, 1500);
-
-    // $(".show-more").on("click", function(e) {
-    //   $(this).addClass('animated fadeOut');
-    //   $('html').css('overflow', 'auto');
-    //   $('html').removeAttr('style');
-    // reset take tour btn
-    //   setTimeout(function() {
-    //     $(".show-more").removeClass('animated fadeInUp fadeOut fadeIn');
-    //   }, 2000);
-    // });
-
-    // SCROLL TO TOP ON CLICK
-    $('.top').on('click', function(){
-      $(window).scrollTop(0);
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    // dark mode
+    $("body").css("background", "#212529");
+    $("#profile-logo").attr("src", "img/jcc_logo_w.png");
+    $(".nes-container").each(function(i, obj) {
+      $(this).addClass("is-dark");
     });
-
-    $('.download-btn').on('click', function() {});
-
-    $("a.single_image").fancybox({
-        padding: 4,
+    $(".nes-dialog").each(function(i, obj) {
+      $(this).addClass("is-dark");
     });
-
-    // $('.lazy').Lazy({
-    //   onFinishedAll: function() {
-    //     $('.coverme').hide();
-    //   }
-    // });
-
-
-    /***************** Waypoints ******************/
-
-    $('.wp1').waypoint(function() {
-        $('.wp1').addClass('animated fadeInLeft');
-    }, {
-        offset: '75%'
+  } else {
+    // normal
+    $("body").css("background", "#FFF");
+    $("#profile-logo").attr("src", "img/jcc_logo.png");
+    $(".nes-container").each(function(i, obj) {
+      $(this).removeClass("is-dark");
     });
-    $('.wp2').waypoint(function() {
-        $('.wp2').addClass('animated fadeInDown');
-    }, {
-        offset: '75%'
+    $(".nes-dialog").each(function(i, obj) {
+      $(this).removeClass("is-dark");
     });
-    $('.wp3').waypoint(function() {
-        $('.wp3').addClass('animated bounceInDown');
-    }, {
-        offset: '75%'
-    });
-    $('.wp4').waypoint(function() {
-        $('.wp4').addClass('animated fadeInDown');
-    }, {
-        offset: '75%'
-    });
-    $('.wp5').waypoint(function() {
-        $('.wp5').addClass('animated flipInX');
-    }, {
-        offset: '100%'
-    });
-    $('.wp6').waypoint(function() {
-        $('.wp6').addClass('animated fadeInUp');
-    }, {
-        offset: '75%'
-    });
+  }
 
-    // $(".show-more").waypoint(function() {
-    //     $(this).addClass('animated fadeIn');
-    // }, {
-    //     offset: '75%'
-    // });
-    // $('#projects').waypoint(function() {
-    //     $('html').removeAttr('style');
-    // });
-
-    /***************** Flickity ******************/
-
-    $('#featuresSlider').flickity({
-        cellAlign: 'left',
-        contain: true,
-        prevNextButtons: false
-    });
-
-    $('#showcaseSlider').flickity({
-        cellAlign: 'left',
-        contain: true,
-        prevNextButtons: false,
-        imagesLoaded: true
-    });
-
-    /***************** Fancybox ******************/
-
-    $("a.uhref").on("click", function(e) {
-        e.preventDefault();
-        // var jWindow = $(window).width();
-        // if (jWindow <= 768) {
-        // 	return;
-        // }
-        var url = $(this).attr('href');
-        // alert(url);
-        $.fancybox({
-            href: url,
-            padding: 4,
-            type: "ajax",
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", e => {
+      const newColorScheme = e.matches ? "dark" : "light";
+      if (newColorScheme == "dark") {
+        $("body").css("background", "#212529");
+        $(".nes-container").each(function(i, obj) {
+          $(this).addClass("is-dark");
+          $("#profile-logo").attr("src", "img/jcc_logo_w.png");
         });
-        return false;
-    });
-
-    // youtube
-    $(".youtube-media").on("click", function(e) {
-        e.preventDefault();
-        var jWindow = $(window).width();
-        if (jWindow <= 768) {
-            return;
-        }
-        $.fancybox({
-            href: this.href,
-            padding: 4,
-            type: "iframe",
-            'href': this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
+      } else {
+        $("body").css("background", "#FFF");
+        $(".nes-container").each(function(i, obj) {
+          $(this).removeClass("is-dark");
+          $("#profile-logo").attr("src", "img/jcc_logo.png");
         });
-        return false;
+      }
     });
 
-    $(".fancyiframe").on("click", function(e) {
-        e.preventDefault();
-        var jWindow = $(window).width();
-        if (jWindow <= 1024) {
-            return;
+  // DARK MODE END ==============================================
+
+  /**
+   * Micro Client processor
+   */
+  const microProcessor = {
+    init: function() {
+      return $.ajax({
+        url: "https://jcc-portfolio-api.herokuapp.com/graphql",
+        contentType: "application/json",
+        type: "POST",
+        data: JSON.stringify({
+          query: `{
+                  allPost {
+                    id
+                    title
+                    description
+                    createdAt
+                  }
+                }`
+        }),
+        timeout: 5000,
+        success: function(result) {
+          let data = result.data; // get data from graphql
+          let post = data.allPost; // query name
+          // console.log(post.length);
+          let li = "";
+          for (let i = 0; i < post.length; i++) {
+            p = post[i];
+            li +=
+              '<div id="post-' +
+              p.id +
+              '" class="post-list is-centered">' +
+              '<p class="post-title">' +
+              p.title +
+              "</p>" +
+              '<p class="post-sentence">' +
+              p.description +
+              "</p>" +
+              "</div>";
+          }
+          if (post.length > 0) {
+            $("#all-post").html(li);
+            $("#update-container").show();
+          } else {
+            $("#all-post")
+              .parent()
+              .hide();
+          }
+          console.log("done loading posts..");
+
+          // finish
+          microProcessor.finishSetup();
+        },
+        error: function() {
+          $("#all-post").html("");
+          $("#all-post")
+            .parent()
+            .hide();
+
+          console.log("error loading posts..");
+
+          // render anyway
+          $("#main-container").removeAttr("hidden");
+          microProcessor.finishSetup();
         }
-        $.fancybox({
-            // href: this.href,
-            padding: 4,
-            type: "iframe",
-            height: 768,
-            width: 1024,
-            href: $(this).data("href").replace(new RegExp("http:", "i"), 'https:'),
-            // autoDimensions: false,
-        });
-        return false;
-    });
-
-    $(".fancy").on("click", function(e) {
-        e.preventDefault();
-        var jWindow = $(window).width();
-        if (jWindow <= 768) {
-            return;
-        }
-        $.fancybox({
-            href: this.href,
-            padding: 4,
-            type: "ajax",
-        });
-        return false;
-    });
-
-});
-
-/***************** Nav Transformicon ******************/
-
-/* When user clicks the Icon */
-$(".nav-toggle").click(function() {
-    $(this).toggleClass("active");
-    $(".overlay-boxify").toggleClass("open");
-});
-
-/* When user clicks a link */
-$(".overlay ul li a").click(function() {
-    $(".nav-toggle").toggleClass("active");
-    $(".overlay-boxify").toggleClass("open");
-});
-
-/* When user clicks outside */
-$(".overlay").click(function() {
-    $(".nav-toggle").toggleClass("active");
-    $(".overlay-boxify").toggleClass("open");
-});
-
-/***************** Smooth Scrolling ******************/
-
-$('a[href*=#]:not([href=#])').click(function() {
-    if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
-
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-        if (target.length) {
-            $('html,body').animate({
-                scrollTop: target.offset().top
-            }, 2000);
-            return false;
-        }
+      });
+    },
+    finishSetup: function() {
+      // $('#loading-dialog').hide();
+      $("#loader-container").hide();
+      $("#profile-container").show();
     }
-});
+  };
+
+  // set
+  microUpdates = microProcessor;
+
+  /**
+      if ($('.too-small-warning').is(':hidden')) {
+        $('#profile-container').show();
+      } else {
+        $('#profile-container').show();
+      }
+      */
+
+  if ($("#profile-container").is(":hidden")) {
+    // load posts first
+    $("#loading-message").text("Load shenanigans...");
+    // load updates
+    microUpdates.init();
+  }
+};
+
+function goToUrl(url, includeTarget = true) {
+  //eslint-disable-line no-unused-vars
+  $("#redirect").attr("href", url);
+  if (!includeTarget) {
+    $("#redirect").attr("target", null);
+  } else {
+    $("#redirect").attr("target", "_blank");
+  }
+  $("#redirect")[0].click();
+}

@@ -1,7 +1,7 @@
-/* Main */
-/* Micro updates */
-/* Patches */
-/*# sourceMappingURL=custom.css.map */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import "../../../node_modules/dialog-polyfill/dialog-polyfill";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
 a {
 	color: #555;
 	text-decoration: underline;
@@ -31,8 +31,7 @@ a {
 	}
 }
 body {
-	padding: 0 2rem;
-	margin: 2rem;
+	padding: 1.5rem;
 }
 .nes-container {
 	&:not(:last-child) {
@@ -112,6 +111,7 @@ div.containers {
 #profile-container {
 	display: none;
 	border: none !important;
+	padding: 0;
 }
 .no-bordersself {
 	&::after {

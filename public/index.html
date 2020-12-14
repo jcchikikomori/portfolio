@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JCC - Lazy Geek & Developer</title>
-  <meta name="description" content="Lazy Geek & Developer" />
+  <meta name="description" content="Software Developer" />
   <meta name="keywords"
     content="one-page, git, portfolio, web-design, repository, page, development, graphql, html5, github-pages" />
   <meta name="author" content="John Cyrill C." />
@@ -16,11 +16,11 @@
   <!-- <meta name="theme-color" content="#3E6083"> -->
 
   <!-- Facebook and Twitter integration -->
-  <meta property="og:title" content="JCC - Portfolio Page" />
+  <meta property="og:title" content="JCC - Lazy Geek & Developer" />
   <meta property="og:image" content="img/jcc_logo_og.jpg" />
   <meta property="og:url" content="jcchikikomori.github.io" />
   <meta property="og:site_name" content="My Portfolio - @jccultima123" />
-  <meta property="og:description" content="Lazy Software Developer" />
+  <meta property="og:description" content="Software Developer" />
   <meta name="twitter:title" content="JCC's Portfolio" />
   <meta name="twitter:image" content="img/jcc_logo_og.jpg" />
   <meta name="twitter:url" content="jcchikikomori.github.io" />
@@ -30,21 +30,9 @@
   <script src="js/modernizr.custom.js"></script>
   <link href="css/animate.css" rel="stylesheet">
 
-  <!-- CDN -->
-  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
-  <!-- <link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'> -->
-
-  <!-- NES.css -->
-  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-  <!-- <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" /> -->
-  <!-- <link href="./style.css" rel="stylesheet" /> -->
-
   <!-- Polyfill -->
-  <link rel="stylesheet" href="css/dialog-polyfill.css">
-
-  <!-- Others -->
-  <!-- <link href="css/custom.css" rel="stylesheet"> -->
-  <!-- <link href="css/media.css" rel="stylesheet"> -->
+  <!-- <link rel="stylesheet" href="css/dialog-polyfill.css"> -->
+  <!-- <script async src="js/dialog-polyfill.js"></script> -->
 
   <!-- <meta http-equiv="X-Frame-Options" content="deny"> -->
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -86,154 +74,7 @@
   <!-- GITHUB -->
   <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 
-  <!-- Polyfill -->
-  <script async src="js/dialog-polyfill.js"></script>
-
-  <script>
-
-    /** main */
-    window.onload = function () {
-
-      // document.getElementById("#loading-dialog").showModal();
-      // $("#main-container").removeAttr("hidden");
-      // $("#loading-button").trigger("click");
-
-      // DARK MODE ==============================================
-
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        // dark mode
-        $("body").css("background", "#212529");
-        $(".nes-container").each(function (i, obj) {
-          $(this).addClass("is-dark");
-          $("#profile-logo").attr("src", "img/jcc_logo_w.png");
-        });
-      } else {
-        // normal
-        $("body").css("background", "#FFF");
-        $(".nes-container").each(function (i, obj) {
-          $(this).removeClass("is-dark");
-          $("#profile-logo").attr("src", "img/jcc_logo.png");
-        });
-      }
-
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .addEventListener("change", e => {
-          const newColorScheme = e.matches ? "dark" : "light";
-          if (newColorScheme == "dark") {
-            $("body").css("background", "#212529");
-            $(".nes-container").each(function (i, obj) {
-              $(this).addClass("is-dark");
-              $("#profile-logo").attr("src", "img/jcc_logo_w.png");
-            });
-          } else {
-            $("body").css("background", "#FFF");
-            $(".nes-container").each(function (i, obj) {
-              $(this).removeClass("is-dark");
-              $("#profile-logo").attr("src", "img/jcc_logo.png");
-            });
-          }
-        });
-
-      // DARK MODE END ==============================================
-
-      /**
-       * Micro Client processor
-       */
-      const microProcessor = {
-        init: function () {
-          return $.ajax({
-            url: "https://jcc-portfolio-api.herokuapp.com/graphql",
-            contentType: "application/json",
-            type: "POST",
-            data: JSON.stringify({
-              query: `{
-                  allPost {
-                    id
-                    title
-                    description
-                    createdAt
-                  }
-                }`
-            }),
-            timeout: 5000,
-            success: function (result) {
-              let data = result.data // get data from graphql
-              let post = data.allPost // query name
-              // console.log(post.length);
-              let li = "";
-              for (let i = 0; i < post.length; i++) {
-                p = post[i];
-                li += '<div id="post-' + p.id + '" class="post-list is-centered">' +
-                  '<p class="post-title">' + p.title + '</p>' +
-                  '<p class="post-sentence">' + p.description + '</p>' +
-                  '</div>';
-              }
-              if (post.length > 0) {
-                $("#all-post").html(li);
-                $('#update-container').show();
-              } else {
-                $("#all-post").parent().hide();
-              }
-              console.log('done loading posts..');
-
-              // finish
-              microProcessor.finishSetup();
-            },
-            error: function () {
-              $("#all-post").html('');
-              $("#all-post").parent().hide();
-
-              console.log('error loading posts..');
-
-              // render anyway
-              $("#main-container").removeAttr("hidden");
-              microProcessor.finishSetup();
-            }
-          });
-        },
-        finishSetup: function () {
-          // $('#loading-dialog').hide();
-          $('#loader-container').hide();
-          $('#profile-container').show();
-        }
-      }
-
-      // set
-      microUpdates = microProcessor;
-
-      /**
-      if ($('.too-small-warning').is(':hidden')) {
-        $('#profile-container').show();
-      } else {
-        $('#profile-container').show();
-      }
-      */
-
-      if ($('#profile-container').is(':hidden')) {
-        // load posts first
-        $('#loading-message').text('Load shenanigans...');
-        // load updates
-        microUpdates.init();
-      }
-    }
-
-    function goToUrl(url, includeTarget = true) { //eslint-disable-line no-unused-vars
-      $('#redirect').attr('href', url);
-      if (!includeTarget) {
-        $('#redirect').attr('target', null);
-      } else {
-        $('#redirect').attr('target', '_blank');
-      }
-      $('#redirect')[0].click();
-    }
-
-  </script>
-
-  <!-- <script src="js/daynighttime.js"></script> -->
+  <script src="js/scripts.js"></script>
 
 </body>
 
