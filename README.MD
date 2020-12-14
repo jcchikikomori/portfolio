@@ -1,4 +1,4 @@
-# JCC Portfolio v2.5.0
+# JCC Portfolio v2.5.1
 
 ## Requirements
 
