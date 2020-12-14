@@ -12,16 +12,22 @@ window.onload = function() {
   ) {
     // dark mode
     $("body").css("background", "#212529");
+    $("#profile-logo").attr("src", "img/jcc_logo_w.png");
     $(".nes-container").each(function(i, obj) {
       $(this).addClass("is-dark");
-      $("#profile-logo").attr("src", "img/jcc_logo_w.png");
+    });
+    $(".nes-dialog").each(function(i, obj) {
+      $(this).addClass("is-dark");
     });
   } else {
     // normal
     $("body").css("background", "#FFF");
+    $("#profile-logo").attr("src", "img/jcc_logo.png");
     $(".nes-container").each(function(i, obj) {
       $(this).removeClass("is-dark");
-      $("#profile-logo").attr("src", "img/jcc_logo.png");
+    });
+    $(".nes-dialog").each(function(i, obj) {
+      $(this).removeClass("is-dark");
     });
   }
 
