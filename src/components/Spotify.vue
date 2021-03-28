@@ -1,8 +1,5 @@
 <style lang="scss" scoped>
 #dialog-spotify {
-  height: auto;
-  min-width: 35rem;
-
   .title {
     margin: 0;
   }
@@ -25,11 +22,11 @@
         <p class="title">My Party Box</p>
         <p class="subtitle">powered by Spotify</p>
         <iframe
+          class="spotify-iframe"
+          title="My Party Box"
           src="https://open.spotify.com/embed/playlist/64mrMELI7nTWZWbYAww4Zv"
           width="450"
           height="250"
-          frameborder="0"
-          allowtransparency="true"
           allow="encrypted-media"
         ></iframe>
         <menu class="dialog-menu">
