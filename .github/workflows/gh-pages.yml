@@ -21,9 +21,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install and Build 🔧
         run: |
-          npm install -g yarn
-          yarn install
-          yarn run build --fix
+          npm install -g pnpm
+          pnpm install
+          pnpm run build
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
