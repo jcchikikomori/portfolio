@@ -19,7 +19,7 @@
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^4.5.9",
     "@vue/eslint-config-prettier": "^4.0.1",
-    "babel-eslint": "^10.0.1",
+    "@babel/eslint-parser": "^7.13.10",
     "bootstrap": "^4.5.3",
     "dialog-polyfill": "^0.5.4",
     "eslint": "^6.1.0",
