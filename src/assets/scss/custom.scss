@@ -1,7 +1,17 @@
+// TODO: Move to variables file
+$mq-breakpoints: (
+	iphonese:	240px,
+	mobile:		320px,
+	tablet:		740px,
+	desktop:	980px,
+	wide:			1300px
+);
+
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import "/node_modules/dialog-polyfill/dialog-polyfill";
 @import "/node_modules/bootstrap/scss/bootstrap";
 @import "/node_modules/nes.css/css/nes.css";
+@import "/node_modules/sass-mq/mq";
 
 body {
 	font-family: 'Press Start 2P', sans-serif;
@@ -114,6 +124,34 @@ div.containers {
 	display: none;
 	border: none !important;
 	padding: 0;
+}
+#dialog-projects, #dialog-spotify {
+	height: auto;
+  min-width: 35rem;
+
+	@include mq($from: iphonese, $until: mobile) {
+		min-width: unset;
+		width: 100%;
+		padding: 1rem;
+
+		// explicit
+		.title {
+			font-size: 1rem;
+		}
+	}
+
+	@include mq($from: iphonese, $until: tablet) {
+		// explicit
+		.spotify-iframe {
+			width: auto;
+		}
+	}
+
+	@include mq($from: mobile, $until: tablet) {
+		min-width: unset;
+		width: 100%;
+		padding: 1rem;
+	}
 }
 .no-bordersself {
 	&::after {

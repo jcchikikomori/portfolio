@@ -4,6 +4,7 @@ dependencies:
   gulp: 4.0.2
   nes.css: 2.3.0
   prettier: 1.19.1
+  sass-mq: 5.0.1
   vue: 2.6.12
   vuex: 3.6.2_vue@2.6.12
 devDependencies:
@@ -9080,6 +9081,10 @@ packages:
         optional: true
     resolution:
       integrity: sha512-W6gVDXAd5hR/WHsPicvZdjAWHBcEJ44UahgxcIE196fW2ong0ZHMPO1kZuI5q0VlvMQZh32gpv69PLWQm70qrw==
+  /sass-mq/5.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-ugSVZO5fzasSFrGfKCtY02spnkOOfo9U9sXuzCuSXoCl1CgcoqdJRdNmigZkhvRVph1GKM6o0pgI00Jjc445CA==
   /sax/1.2.4:
     dev: true
     resolution:
@@ -11063,6 +11068,7 @@ specifiers:
   node-sass: ^5.0.0
   prettier: ^1.18.2
   sass-loader: ^10.1.0
+  sass-mq: ^5.0.1
   vue: 2.6.12
   vue-template-compiler: ^2.5.21
   vuex: ^3.0.1
