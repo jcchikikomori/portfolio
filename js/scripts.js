@@ -5,28 +5,29 @@ window.onload = function() {
   // $("#loading-button").trigger("click");
 
   // DARK MODE ==============================================
+  const darkBgColor = "#212529";
 
   if (
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches
   ) {
     // dark mode
-    $("body").css("background", "#212529");
+    $("body").css("background", darkBgColor);
     $("#profile-logo").attr("src", "img/jcc_logo_w.png");
-    $(".nes-container").each(function(i, obj) {
+    $(".nes-container").each(function() {
       $(this).addClass("is-dark");
     });
-    $(".nes-dialog").each(function(i, obj) {
+    $(".nes-dialog").each(function() {
       $(this).addClass("is-dark");
     });
   } else {
     // normal
     $("body").css("background", "#FFF");
     $("#profile-logo").attr("src", "img/jcc_logo.png");
-    $(".nes-container").each(function(i, obj) {
+    $(".nes-container").each(function() {
       $(this).removeClass("is-dark");
     });
-    $(".nes-dialog").each(function(i, obj) {
+    $(".nes-dialog").each(function() {
       $(this).removeClass("is-dark");
     });
   }
@@ -36,14 +37,14 @@ window.onload = function() {
     .addEventListener("change", e => {
       const newColorScheme = e.matches ? "dark" : "light";
       if (newColorScheme == "dark") {
-        $("body").css("background", "#212529");
-        $(".nes-container").each(function(i, obj) {
+        $("body").css("background", darkBgColor);
+        $(".nes-container").each(function() {
           $(this).addClass("is-dark");
           $("#profile-logo").attr("src", "img/jcc_logo_w.png");
         });
       } else {
         $("body").css("background", "#FFF");
-        $(".nes-container").each(function(i, obj) {
+        $(".nes-container").each(function() {
           $(this).removeClass("is-dark");
           $("#profile-logo").attr("src", "img/jcc_logo.png");
         });
@@ -78,7 +79,7 @@ window.onload = function() {
           // console.log(post.length);
           let li = "";
           for (let i = 0; i < post.length; i++) {
-            p = post[i];
+            let p = post[i];
             li +=
               '<div id="post-' +
               p.id +
@@ -126,7 +127,7 @@ window.onload = function() {
   };
 
   // set
-  microUpdates = microProcessor;
+  let microUpdates = microProcessor;
 
   /**
       if ($('.too-small-warning').is(':hidden')) {
@@ -144,6 +145,7 @@ window.onload = function() {
   }
 };
 
+// eslint-disable-next-line no-unused-vars
 function goToUrl(url, includeTarget = true) {
   //eslint-disable-line no-unused-vars
   $("#redirect").attr("href", url);
