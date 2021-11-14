@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "babel-loader": "^8.2.2",
+    "bulma": "^0.9.3",
     "cache-loader": "^4.1.0",
     "gulp": "^4.0.0",
     "nes.css": "^2.3.0",
@@ -37,7 +38,8 @@
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "node": true,
+      "jquery": true
     },
     "extends": [
       "plugin:vue/essential",

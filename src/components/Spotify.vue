@@ -17,7 +17,7 @@
 <template>
   <!-- SPOTIFY CONTAINER -->
   <div id="spotify-container">
-    <dialog class="nes-dialog is-rounded" id="dialog-spotify">
+    <dialog class="nes-dialog" id="dialog-spotify">
       <form method="dialog">
         <p class="title">My Party Box</p>
         <p class="subtitle">powered by Spotify</p>

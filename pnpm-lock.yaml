@@ -8,6 +8,7 @@ specifiers:
   '@vue/eslint-config-prettier': ^4.0.1
   babel-loader: ^8.2.2
   bootstrap: ^4.5.3
+  bulma: ^0.9.3
   cache-loader: ^4.1.0
   dialog-polyfill: ^0.5.4
   eslint: ^6.1.0
@@ -26,6 +27,7 @@ specifiers:
 
 dependencies:
   babel-loader: 8.2.2
+  bulma: 0.9.3
   cache-loader: 4.1.0
   gulp: 4.0.2
   nes.css: 2.3.0
@@ -2417,6 +2419,10 @@ packages:
   /builtin-status-codes/3.0.0:
     resolution: {integrity: sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=}
     dev: true
+
+  /bulma/0.9.3:
+    resolution: {integrity: sha512-0d7GNW1PY4ud8TWxdNcP6Cc8Bu7MxcntD/RRLGWuiw/s0a9P+XlH/6QoOIrmbj6o8WWJzJYhytiu9nFjTszk1g==}
+    dev: false
 
   /bytes/3.0.0:
     resolution: {integrity: sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg=}

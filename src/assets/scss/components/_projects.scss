@@ -1,0 +1,38 @@
+#dialog-projects {
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .dialog-menu {
+    padding: 0; // tentative
+    margin-bottom: 0;
+  }
+
+  .card-group {
+    @include mq($from: tablet, $until: desktop) {
+      display: unset;
+    }
+
+    .card .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .card-text {
+        font-size: 13px;
+        text-align: center;
+        word-break: break-word;
+        hyphens: auto;
+      }
+    }
+  }
+
+  // FOR DARK MODE
+  &.is-dark {
+    .card-group {
+      .card .card-body {
+        background: #212529;
+      }
+    }
+  }
+}
