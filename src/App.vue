@@ -1,6 +1,5 @@
 <style lang="scss">
-@import "./assets/scss/custom";
-@import "./assets/scss/media";
+@import "./assets/scss/main";
 
 .app {
   .-content {

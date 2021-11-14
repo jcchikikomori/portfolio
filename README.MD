@@ -1,28 +1,32 @@
-# JCC Portfolio v2.5.3
+# JCC Portfolio v2.6.0
 
 ## Requirements
 
-- NodeJS via NVM
+- NodeJS 12 (16 is compatible too!)
 - VueJS
-- Yarn
-- Ruby (optional)
+- `pnpm`
+
+### For VSCode Dev Environment
+
+- Docker
+- Remote Extension Pack for VSCode
 
 ## Basic Setup
 
-- Run `yarn install` 
-- Run required packages `yarn global add eslint; yarn global add prettier`
-- Optional: If you have ruby, run the following either:
-  - `cd && gem install --no-ri --no-rdoc bundler`
-  - `gem install bundler -v $(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1) --no-document --conservative`
-  - Then test the following if exist(s):
-    - `bundle install`
-    - `which bundler`
-    - `which sass`
+### Normal
+
+- Run required packages `pnpm install -g eslint prettier`
+- Then run `pnpm install` 
+
+### VSCode
+
+- Run VSCode then open the project directory
+- Then reopen in container
 
 ## Building
 
-- `yarn run build --fix`
+- `pnpm run build`
 
 ## Testing
 
-- `yarn run serve`
+- `pnpm run serve`

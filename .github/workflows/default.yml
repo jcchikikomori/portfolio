@@ -1,11 +1,14 @@
 # Reference: https://dev.to/pierresaid/deploy-node-projects-to-github-pages-with-github-actions-4jco
-name: Build and Deploy
+name: Build Test
 on:
   push:
     branches:
-      - master
+      - develop
+      - feature/*
+      - release/*
+      - hotfix/*
 jobs:
-  build-and-deploy:
+  build-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -24,9 +27,3 @@ jobs:
           npm install -g pnpm
           pnpm install
           pnpm run build
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.6.2
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: dist
