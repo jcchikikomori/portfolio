@@ -27,6 +27,7 @@ export default {
   components: {
     Loader,
     Profile
-  }
+  },
+  methods: {}
 };
 </script>

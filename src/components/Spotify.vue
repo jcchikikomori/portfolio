@@ -17,7 +17,7 @@
 <template>
   <!-- SPOTIFY CONTAINER -->
   <div id="spotify-container">
-    <dialog class="nes-dialog" id="dialog-spotify">
+    <dialog class="nes-dialog animate__animated animate__bounceInUp animate__faster" id="dialog-spotify">
       <form method="dialog">
         <p class="title">My Party Box</p>
         <p class="subtitle">powered by Spotify</p>
@@ -26,7 +26,7 @@
           title="My Party Box"
           src="https://open.spotify.com/embed/playlist/64mrMELI7nTWZWbYAww4Zv"
           width="450"
-          height="250"
+          height="450"
           allow="encrypted-media"
         ></iframe>
         <menu class="dialog-menu">

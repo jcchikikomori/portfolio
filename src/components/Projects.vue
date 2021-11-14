@@ -1,12 +1,12 @@
 <template>
   <!-- PROJECTS CONTAINER -->
   <div id="projects-container">
-    <dialog class="nes-dialog" id="dialog-projects">
+    <dialog class="nes-dialog animate__animated animate__bounceInDown animate__faster" id="dialog-projects">
       <form method="dialog">
         <h5 class="title">Projects & Contributions</h5>
         <p class="subtitle">
           See more by
-          <a href="javascript:goToUrl('https://github.com/jcchikikomori')"
+          <a v-on:click="goToUrl('https://github.com/jcchikikomori')"
             >contacting me</a
           >
           for my CV!
@@ -17,7 +17,7 @@
               src="img/projects/placeholder.png"
               class="card-img-top"
               alt="Chatgenie.ph"
-              onclick="goToUrl('https://chatgenie.ph')"
+              v-on:click="goToUrl('https://chatgenie.ph')"
             />
             <div class="card-body">
               <h6 class="card-title">Chatgenie.ph</h6>
@@ -34,7 +34,7 @@
               src="img/projects/placeholder.png"
               class="card-img-top"
               alt="php7-starter"
-              onclick="goToUrl('https://github.com/jcchikikomori/hello-php')"
+              v-on:click="goToUrl('https://github.com/jcchikikomori/hello-php')"
             />
             <div class="card-body">
               <h6 class="card-title">hello-php</h6>
@@ -51,7 +51,7 @@
               src="img/projects/placeholder.png"
               class="card-img-top"
               alt="PayMaya"
-              onclick="goToUrl('https://github.com/jcchikikomori?org=PayMaya&year_list=1')"
+              v-on:click="goToUrl('https://github.com/jcchikikomori?org=PayMaya&year_list=1')"
             />
             <div class="card-body">
               <h6 class="card-title">PayMaya</h6>
@@ -68,7 +68,7 @@
               src="img/projects/placeholder.png"
               class="card-img-top"
               alt="GCash Mini Program"
-              onclick="goToUrl('https://miniprogram.gcash.com')"
+              v-on:click="goToUrl('https://miniprogram.gcash.com')"
             />
             <div class="card-body">
               <h6 class="card-title">GCash Mini Program</h6>
@@ -85,7 +85,7 @@
               src="img/projects/covemanila.png"
               class="card-img-top"
               alt="Cove Manila"
-              onclick="goToUrl('https://covemanila.com')"
+              v-on:click="goToUrl('https://covemanila.com')"
             />
             <div class="card-body">
               <h6 class="card-title">Cove Manila WordPress Project</h6>
@@ -97,7 +97,7 @@
               src="img/projects/mcdelivery.png"
               class="card-img-top"
               alt="McDelivery PH"
-              onclick="goToUrl('https://mcdelivery.com.ph')"
+              v-on:click="goToUrl('https://mcdelivery.com.ph')"
             />
             <div class="card-body">
               <h6 class="card-title">McDelivery PH for Android</h6>
@@ -117,8 +117,21 @@
 </template>
 
 <script>
+import $ from "jquery";
+
 export default {
   name: "Projects",
-  components: {}
+  components: {},
+  methods: {
+    goToUrl: function(url, includeTarget = true) {
+      $("#redirect").attr("href", url);
+      if (!includeTarget) {
+        $("#redirect").attr("target", null);
+      } else {
+        $("#redirect").attr("target", "_blank");
+      }
+      $("#redirect")[0].click();
+    },
+  }
 };
 </script>

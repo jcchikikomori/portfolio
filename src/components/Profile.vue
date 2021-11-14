@@ -2,7 +2,7 @@
   <!-- MAIN CONTAINER -->
   <div id="main-container" class="main-screen">
     <!-- MAIN INFO -->
-    <section id="profile-container" class="animated fadeIn nes-container">
+    <section id="profile-container" class="nes-container animate__animated animate__fadeIn animate__faster">
       <div class="containers">
         <div class="nes-container is-centered">
           <img
@@ -24,7 +24,7 @@
             <!-- <li><a href="#" v-on:click="showProjects">My projects</a></li> -->
           </ul>
           <button
-            onclick="goToUrl('https://johncyrillcorsanes.medium.com')"
+            v-on:click="goToUrl('https://johncyrillcorsanes.medium.com')"
             id="medium-btn"
             type="button"
             class="nes-btn"
@@ -32,7 +32,7 @@
             <i class="nes-icon medium"></i> <span>Medium</span>
           </button>
           <button
-            onclick="goToUrl('https://linkedin.com/in/johncyrillcorsanes')"
+            v-on:click="goToUrl('https://linkedin.com/in/johncyrillcorsanes')"
             id="linkedin-btn"
             type="button"
             class="nes-btn"
@@ -40,7 +40,7 @@
             <i class="nes-icon linkedin"></i> <span>LinkedIn</span>
           </button>
           <button
-            onclick="goToUrl('https://github.com/jcchikikomori')"
+            v-on:click="goToUrl('https://github.com/jcchikikomori')"
             id="github-btn"
             type="button"
             class="nes-btn"
@@ -48,7 +48,7 @@
             <i class="nes-icon github"></i> <span>GitHub</span>
           </button>
           <button
-            onclick="goToUrl('https://www.youtube.com/user/jcstriker1')"
+            v-on:click="goToUrl('https://www.youtube.com/user/jcstriker1')"
             id="youtube-btn"
             type="button"
             class="nes-btn"
@@ -60,7 +60,8 @@
           <p>
             <span style="font-size: 9px;">
               <a
-                href="javascript:goToUrl('https://github.com/jcchikikomori/portfolio/releases')"
+                href="#"
+                v-on:click="goToUrl('https://github.com/jcchikikomori/portfolio/releases/tag/v' + app_version)"
               >
                 v{{ app_version }}
               </a>
@@ -69,18 +70,19 @@
           <p>
             <span style="font-size: 9px;">
               <a
-                href="javascript:goToUrl('https://jcchikikomori.github.io/blog')"
+                href="#"
+                v-on:click="goToUrl('https://jcchikikomori.github.io/blog')"
                 >Visit my blog!</a
               >
             </span>
           </p>
-          <p>
+          <!-- <p>
             <span style="font-size: 9px;">
               <a target="_blank" style="font-size: 9px" href="v1"
                 >Visit older version..</a
               >
             </span>
-          </p>
+          </p> -->
         </div>
       </div>
 
@@ -104,6 +106,7 @@ import dialogPolyfill from "dialog-polyfill";
 import Projects from "../components/Projects.vue";
 import Spotify from "../components/Spotify.vue";
 import Updates from "../components/Updates.vue";
+import $ from "jquery";
 import { version } from "../../package.json";
 
 const appv = version;
@@ -116,6 +119,15 @@ export default {
     Updates
   },
   methods: {
+    goToUrl: function(url, includeTarget = true) {
+      $("#redirect").attr("href", url);
+      if (!includeTarget) {
+        $("#redirect").attr("target", null);
+      } else {
+        $("#redirect").attr("target", "_blank");
+      }
+      $("#redirect")[0].click();
+    },
     showProjects: function() {
       var projectsDialog = document.getElementById("dialog-projects");
 
