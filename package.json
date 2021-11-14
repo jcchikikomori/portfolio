@@ -15,7 +15,7 @@
     "bulma": "^0.9.3",
     "cache-loader": "^4.1.0",
     "gulp": "^4.0.2",
-    "jquery": "1.11.0",
+    "jquery": ">=3.5.8",
     "nes.css": "^2.3.0",
     "prettier": "^1.19.1",
     "sass-mq": "^5.0.1",
