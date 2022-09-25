@@ -1,10 +1,10 @@
 <style lang="scss" scoped>
-#loader-container {
-  text-align: center;
-}
-#loading-dialog {
-  margin-top: 2em;
-}
+  #loader-container {
+    text-align: center;
+  }
+  #loading-dialog {
+    margin-top: 2em;
+  }
 </style>
 
 <template>
@@ -16,3 +16,9 @@
     </div>
   </section>
 </template>
+
+<script>
+  export default {
+    name: "LoaderComponent"
+  };
+</script>

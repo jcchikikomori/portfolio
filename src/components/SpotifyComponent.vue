@@ -38,8 +38,8 @@
 </template>
 
 <script>
-export default {
-  name: "Spotify",
-  components: {}
-};
+  export default {
+    name: "SpotifyComponent",
+    components: {}
+  };
 </script>

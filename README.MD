@@ -1,9 +1,9 @@
-# JCC Portfolio v2.6.1
+# JCC Portfolio
 
 ## Requirements
 
-- NodeJS 12 (16 is compatible too!)
-- VueJS
+- NodeJS 16
+- VueJS CLI
 - `pnpm`
 
 ### For VSCode Dev Environment

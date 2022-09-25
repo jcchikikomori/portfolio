@@ -13,6 +13,22 @@
       display: unset;
     }
 
+    & > .card {
+      border: 1px solid rgba(0, 0, 0, 0.125) !important;
+      flex: 1 1 30%; /*grow | shrink | basis */
+      height: 40vh;
+
+      &:hover > .card-body {
+        // TODO: Set this as variable
+          // TODO: Color not final
+        background: #e3e3e4;
+
+        .text-muted {
+          color: #000 !important;
+        }
+      }
+    }
+
     .card .card-body {
       display: flex;
       flex-direction: column;
@@ -30,8 +46,20 @@
   // FOR DARK MODE
   &.is-dark {
     .card-group {
-      .card .card-body {
-        background: #212529;
+      .card {
+        .card-body {
+          background: #212529;
+        }
+
+        &:hover > .card-body {
+          // TODO: Set this as variable
+          // TODO: Color not final
+          background: #4d565f;
+
+          .text-muted {
+            color: #fff !important;
+          }
+        }
       }
     }
   }
