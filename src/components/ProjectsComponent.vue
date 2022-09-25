@@ -3,7 +3,7 @@
   <div id="projects-container">
     <dialog class="nes-dialog animate__animated animate__bounceInDown animate__faster" id="dialog-projects">
       <form method="dialog">
-        <h5 class="title">Projects & Contributions</h5>
+        <h1 class="title">My Career History</h1>
         <p class="subtitle">
           See more by
           <a v-on:click="goToUrl('https://github.com/jcchikikomori')"
@@ -21,11 +21,12 @@
             />
             <div class="card-body">
               <h6 class="card-title">Chatgenie.ph</h6>
-              <!-- <p class="card-text">
-                <br />
-              </p> -->
               <p class="card-text">
-                <small class="text-muted">2019-present</small>
+                Developed some integrations for Chatgenie.ph
+                Such as GCash (GLife), Viber, Facebook & Instagram
+              </p>
+              <p class="card-text">
+                <small class="text-muted">2019-2022</small>
               </p>
             </div>
           </div>
@@ -76,7 +77,7 @@
                 For serving Chatgenie merchants for GLife<br />
               </p>
               <p class="card-text">
-                <small class="text-muted">2020-present</small>
+                <small class="text-muted">2020-2022</small>
               </p>
             </div>
           </div>
@@ -109,7 +110,7 @@
         </div>
 
         <menu class="dialog-menu">
-          <button class="nes-btn is-primary">Okay</button>
+          <button class="nes-btn is-primary is-block">Okay</button>
         </menu>
       </form>
     </dialog>
@@ -120,7 +121,7 @@
 import $ from "jquery";
 
 export default {
-  name: "Projects",
+  name: "ProjectsComponent",
   components: {},
   methods: {
     goToUrl: function(url, includeTarget = true) {

@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "2.6.1",
+  "version": "2.7.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,34 +10,28 @@
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@types/jquery": "^3.5.8",
+    "@vue/babel-preset-app": "^5.0.8",
     "animate.css": "^4.1.1",
-    "babel-loader": "^8.2.3",
-    "bulma": "^0.9.3",
-    "cache-loader": "^4.1.0",
+    "core-js": "^3.25.2",
+    "eslint-plugin-vue": "^9.5.1",
     "gulp": "^4.0.2",
     "jquery": ">=3.5.8",
     "nes.css": "^2.3.0",
-    "prettier": "^1.19.1",
-    "sass-mq": "^5.0.1",
-    "thread-loader": "^3.0.4",
+    "sass": "^1.55.0",
+    "sass-mq": "^6.0.0",
     "vue": "^2.6.14",
-    "vue-template-compiler": "^2.6.14",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.3",
-    "@vue/cli-plugin-babel": "^3.12.1",
-    "@vue/cli-plugin-eslint": "^3.12.1",
-    "@vue/cli-service": "^4.5.15",
-    "@vue/eslint-config-prettier": "^4.0.1",
+    "@vue/cli-plugin-babel": "~5.0.8",
+    "@vue/cli-plugin-eslint": "~5.0.8",
+    "@vue/cli-service": "~5.0.8",
     "bootstrap": "^4.6.1",
     "dialog-polyfill": "^0.5.6",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^5.2.3",
     "gulp": "^4.0.0",
     "gulp-html": "^0.5.0",
     "gulp-shell": "^0.6.5",
-    "node-sass": "^6.0.1",
     "sass-loader": "^10.2.0"
   },
   "eslintConfig": {
@@ -47,12 +41,11 @@
       "jquery": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "@vue/prettier"
+      "plugin:vue/essential"
     ],
     "rules": {},
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser"
     }
   },
   "postcss": {

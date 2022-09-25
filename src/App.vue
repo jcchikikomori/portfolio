@@ -12,21 +12,21 @@
 <template>
   <div id="app" class="app container-fluid">
     <div class="-content">
-      <Loader></Loader>
-      <Profile></Profile>
+      <LoaderComponent></LoaderComponent>
+      <ProfileComponent></ProfileComponent>
     </div>
   </div>
 </template>
 
 <script>
-import Loader from "./components/Loader.vue";
-import Profile from "./components/Profile.vue";
+import LoaderComponent from "./components/LoaderComponent.vue";
+import ProfileComponent from "./components/ProfileComponent.vue";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
-    Loader,
-    Profile
+    LoaderComponent,
+    ProfileComponent
   },
   methods: {}
 };

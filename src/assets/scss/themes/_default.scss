@@ -5,7 +5,7 @@
 
 body {
 	font-family: 'Press Start 2P', sans-serif;
-	transition: background-color 1.5ms linear;
+	transition: background-color 666ms linear;
 }
 
 a {
@@ -194,6 +194,10 @@ div.containers {
 	span {
 		display: none;
 		font-size: 14px;
+	}
+	&.is-block {
+		display: block;
+        width: 100%;
 	}
 }
 dialog {
