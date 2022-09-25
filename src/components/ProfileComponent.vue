@@ -12,32 +12,22 @@
             alt="My Logo"
           />
           <br /><br />
-          <!-- <p>@jcchikikomori</p> -->
+          <p>@jcchikikomori</p>
           <ul class="profile-list">
             <li>
-              Lazy Geek & <a href="#" v-on:click="showProjects">Developer</a>,
+              Lazy Geek & Developer,
             </li>
-            <!-- <li>for Android & Web.</li> -->
-            <!-- <br /> -->
             <li>and i love <a href="#" v-on:click="showSpotify"> music</a>!</li>
             <br />
-            <!-- <li><a href="#" v-on:click="showProjects">My projects</a></li> -->
+            <li><a href="#" v-on:click="showProjects">My Career</a></li>
           </ul>
-          <button
-            v-on:click="goToUrl('https://johncyrillcorsanes.medium.com')"
-            id="medium-btn"
-            type="button"
-            class="nes-btn"
-          >
-            <i class="nes-icon medium"></i> <span>Medium</span>
-          </button>
           <button
             v-on:click="goToUrl('https://linkedin.com/in/johncyrillcorsanes')"
             id="linkedin-btn"
             type="button"
             class="nes-btn"
           >
-            <i class="nes-icon linkedin"></i> <span>LinkedIn</span>
+            <em class="nes-icon linkedin"></em> <span>LinkedIn</span>
           </button>
           <button
             v-on:click="goToUrl('https://github.com/jcchikikomori')"
@@ -45,7 +35,7 @@
             type="button"
             class="nes-btn"
           >
-            <i class="nes-icon github"></i> <span>GitHub</span>
+            <em class="nes-icon github"></em> <span>GitHub</span>
           </button>
           <button
             v-on:click="goToUrl('https://www.youtube.com/user/jcstriker1')"
@@ -53,7 +43,7 @@
             type="button"
             class="nes-btn"
           >
-            <i class="nes-icon youtube"></i> <span>YouTube</span>
+            <em class="nes-icon youtube"></em> <span>YouTube</span>
           </button>
 
           <br /><br />
@@ -93,9 +83,9 @@
         </div>
       </div>
 
-      <Projects></Projects>
-      <Spotify></Spotify>
-      <Updates></Updates>
+      <ProjectsComponent></ProjectsComponent>
+      <SpotifyComponent></SpotifyComponent>
+      <UpdatesComponent></UpdatesComponent>
     </section>
   </div>
 </template>
@@ -103,20 +93,20 @@
 <script>
 import dialogPolyfill from "dialog-polyfill";
 
-import Projects from "../components/Projects.vue";
-import Spotify from "../components/Spotify.vue";
-import Updates from "../components/Updates.vue";
+import ProjectsComponent from "./ProjectsComponent.vue";
+import SpotifyComponent from "./SpotifyComponent.vue";
+import UpdatesComponent from "./UpdatesComponent.vue";
 import $ from "jquery";
 import { version } from "../../package.json";
 
 const appv = version;
 
 export default {
-  name: "Profile",
+  name: "ProfileComponent",
   components: {
-    Projects,
-    Spotify,
-    Updates
+    ProjectsComponent,
+    SpotifyComponent,
+    UpdatesComponent
   },
   methods: {
     goToUrl: function(url, includeTarget = true) {
@@ -129,18 +119,19 @@ export default {
       $("#redirect")[0].click();
     },
     showProjects: function() {
-      var projectsDialog = document.getElementById("dialog-projects");
+      let projectsDialog = document.getElementById("dialog-projects");
 
       dialogPolyfill.registerDialog(projectsDialog);
       projectsDialog.showModal();
-      // projectsDialog.classList.add("-is-open");
+      projectsDialog.classList.add("-is-open");
+      projectsDialog.scrollTo({ top: 0, behavior: 'smooth' });
     },
     showSpotify: function() {
-      var spotifyDialog = document.getElementById("dialog-spotify");
+      let spotifyDialog = document.getElementById("dialog-spotify");
 
       dialogPolyfill.registerDialog(spotifyDialog);
       spotifyDialog.showModal();
-      // spotifyDialog.classList.remove("-is-open");
+      spotifyDialog.classList.remove("-is-open");
     }
   },
   data() {
