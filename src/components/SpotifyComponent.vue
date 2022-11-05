@@ -1,5 +1,6 @@
 <style lang="scss" scoped>
 #dialog-spotify {
+  height: fit-content;
   .title {
     margin: 0;
   }
@@ -24,7 +25,7 @@
         <iframe
           class="spotify-iframe"
           title="My Party Box"
-          src="https://open.spotify.com/embed/playlist/64mrMELI7nTWZWbYAww4Zv"
+          src="https://open.spotify.com/embed/playlist/4Y2LRSUHUvBtO3VEjtnD6x?si=374e9d80a4f34f51"
           width="450"
           height="450"
           allow="encrypted-media"

@@ -16,11 +16,44 @@
     & > .card {
       border: 1px solid rgba(0, 0, 0, 0.125) !important;
       flex: 1 1 30%; /*grow | shrink | basis */
-      height: 40rem;
+      min-height: 25rem;
+
+      // TODO: Not yet mobile-friendly
+      .card-img-top {
+        height: 15.1rem;
+        background-image: url(/public/img/projects/placeholder.png);
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+
+        &.chatgenie {
+          background-image: url(/public/img/projects/chatgenie.png);
+          background-position: top left;
+        }
+
+        &.hello-php {
+          background-image: url(/public/img/projects/placeholder.png);
+        }
+
+        &.gcash-miniprogram {
+          background-image: url(/public/img/projects/miniprogram.png);
+          background-position: top left;
+        }
+
+        &.covemanila {
+          background-image: url(/public/img/projects/covemanila.png);
+          background-position: top left;
+        }
+
+        &.mcdelivery {
+          background-image: url(/public/img/projects/mcdelivery.png);
+          background-position: top left;
+        }
+      }
 
       &:hover > .card-body {
         // TODO: Set this as variable
-          // TODO: Color not final
+        // TODO: Color not final
         background: #e3e3e4;
 
         .text-muted {
@@ -47,8 +80,13 @@
   &.is-dark {
     .card-group {
       .card {
+        .card-img-top {
+          background-color: #212529;
+        }
+
         .card-body {
           background: #212529;
+          border-top: #fff 1px solid;
         }
 
         &:hover > .card-body {
