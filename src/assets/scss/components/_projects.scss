@@ -16,7 +16,7 @@
     & > .card {
       border: 1px solid rgba(0, 0, 0, 0.125) !important;
       flex: 1 1 30%; /*grow | shrink | basis */
-      height: 40vh;
+      height: 40rem;
 
       &:hover > .card-body {
         // TODO: Set this as variable
