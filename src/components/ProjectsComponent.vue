@@ -13,12 +13,11 @@
         </p>
         <div class="card-group">
           <div class="card">
-            <img
-              src="img/projects/placeholder.png"
-              class="card-img-top"
+            <div
+              class="card-img-top chatgenie"
               alt="Chatgenie.ph"
               v-on:click="goToUrl('https://chatgenie.ph')"
-            />
+            ></div>
             <div class="card-body">
               <h6 class="card-title">Chatgenie.ph</h6>
               <p class="card-text">
@@ -31,12 +30,11 @@
             </div>
           </div>
           <div class="card">
-            <img
-              src="img/projects/placeholder.png"
-              class="card-img-top"
+            <div
+              class="card-img-top hello-php"
               alt="php7-starter"
               v-on:click="goToUrl('https://github.com/jcchikikomori/hello-php')"
-            />
+            ></div>
             <div class="card-body">
               <h6 class="card-title">hello-php</h6>
               <p class="card-text">
@@ -65,12 +63,11 @@
             </div>
           </div> -->
           <div class="card">
-            <img
-              src="img/projects/placeholder.png"
-              class="card-img-top"
+            <div
+              class="card-img-top gcash-miniprogram"
               alt="GCash Mini Program"
               v-on:click="goToUrl('https://miniprogram.gcash.com')"
-            />
+            ></div>
             <div class="card-body">
               <h6 class="card-title">GCash Mini Program</h6>
               <p class="card-text">
@@ -82,24 +79,22 @@
             </div>
           </div>
           <div class="card">
-            <img
-              src="img/projects/covemanila.png"
-              class="card-img-top"
+            <div
+              class="card-img-top covemanila"
               alt="Cove Manila"
               v-on:click="goToUrl('https://covemanila.com')"
-            />
+            ></div>
             <div class="card-body">
               <h6 class="card-title">Cove Manila WordPress Project</h6>
               <p class="card-text"><small class="text-muted">2019</small></p>
             </div>
           </div>
           <div class="card">
-            <img
-              src="img/projects/mcdelivery.png"
-              class="card-img-top"
+            <div
+              class="card-img-top mcdelivery"
               alt="McDelivery PH"
               v-on:click="goToUrl('https://mcdelivery.com.ph')"
-            />
+            ></div>
             <div class="card-body">
               <h6 class="card-title">McDelivery PH for Android</h6>
               <p class="card-text">
