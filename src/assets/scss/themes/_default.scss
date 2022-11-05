@@ -133,18 +133,30 @@ div.containers {
   height: auto;
   min-width: 35rem;
 
-  @include mq($from: iphonese, $until: mobile) {
-    min-width: unset;
-    width: 100%;
-    padding: 1rem;
+  @include mq($from: smallest, $until: mobile) {
+    min-width: 110%;
+    bottom: -16%;
 
-    // explicit
+    h1,
     .title {
       font-size: 1rem;
     }
   }
 
-  @include mq($from: iphonese, $until: tablet) {
+  @include mq($from: smartphone, $until: tablet) {
+    h1,
+    .title {
+      font-size: 2rem;
+    }
+  }
+
+  @include mq($from: mobile, $until: tablet) {
+    min-width: unset;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  @include mq($from: smallest, $until: tablet) {
     // explicit
     .spotify-iframe {
       width: auto;
@@ -155,6 +167,12 @@ div.containers {
     min-width: unset;
     width: 100%;
     padding: 1rem;
+  }
+}
+
+#dialog-projects {
+  @include mq($from: tablet) {
+    width: 90%;
   }
 }
 

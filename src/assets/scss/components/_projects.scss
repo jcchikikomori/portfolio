@@ -49,6 +49,14 @@
           background-image: url(/public/img/projects/mcdelivery.png);
           background-position: top left;
         }
+
+        @include mq($from: smallest, $until: mobile) {
+          height: 10rem;
+        }
+
+        @include mq($from: smartphone, $until: tablet) {
+          height: 12rem;
+        }
       }
 
       &:hover > .card-body {
