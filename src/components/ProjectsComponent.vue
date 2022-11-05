@@ -14,7 +14,7 @@
         <div class="card-group">
           <div class="card">
             <img
-              src="img/projects/placeholder.png"
+              src="img/projects/chatgenie.png"
               class="card-img-top"
               alt="Chatgenie.ph"
               v-on:click="goToUrl('https://chatgenie.ph')"
@@ -66,7 +66,7 @@
           </div> -->
           <div class="card">
             <img
-              src="img/projects/placeholder.png"
+              src="img/projects/miniprogram.png"
               class="card-img-top"
               alt="GCash Mini Program"
               v-on:click="goToUrl('https://miniprogram.gcash.com')"
