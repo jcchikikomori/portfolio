@@ -1,3 +1,11 @@
 module.exports = {
-  presets: ["@vue/app"]
-};
+  presets: [
+    [
+      "@vue/app", 
+      { 
+        targets: { esmodules: true },
+        polyfills: false
+      }
+    ]
+  ]
+}
