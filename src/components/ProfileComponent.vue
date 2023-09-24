@@ -97,9 +97,7 @@ import ProjectsComponent from "./ProjectsComponent.vue";
 import SpotifyComponent from "./SpotifyComponent.vue";
 import UpdatesComponent from "./UpdatesComponent.vue";
 import $ from "jquery";
-import { version } from "../../package.json";
-
-const appv = version;
+import packageInfo from '../../package.json';
 
 export default {
   name: "ProfileComponent",
@@ -136,7 +134,7 @@ export default {
   },
   data() {
     return {
-      app_version: appv
+      app_version: packageInfo.version
     };
   }
 };
