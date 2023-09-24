@@ -30,9 +30,9 @@
     "@vue/cli-service": "~5.0.8",
     "bootstrap": "^4.6.2",
     "dialog-polyfill": "^0.5.6",
-    "gulp": "^4.0.0",
-    "gulp-html": "^0.5.0",
-    "gulp-shell": "^0.6.5",
+    "gulp": ">=4.0.0",
+    "gulp-html": "^6.0.0",
+    "gulp-shell": "^0.8.0",
     "sass-loader": "^10.3.1"
   },
   "eslintConfig": {
