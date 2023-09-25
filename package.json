@@ -14,11 +14,11 @@
     "animate.css": "^4.1.1",
     "core-js": "^3.26.0",
     "eslint-plugin-vue": "^9.7.0",
-    "gulp": "^4.0.2",
     "jquery": "^3.6.1",
     "nes.css": "^2.3.0",
     "sass": "^1.56.0",
     "sass-mq": "^6.0.0",
+    "volar-service-vetur": "^0.0.13",
     "vue": "^2.7.13",
     "vuex": "^3.6.2"
   },
@@ -29,9 +29,6 @@
     "@vue/cli-service": "~5.0.8",
     "bootstrap": "^4.6.2",
     "dialog-polyfill": "^0.5.6",
-    "gulp": "^4.0.0",
-    "gulp-html": "^0.5.0",
-    "gulp-shell": "^0.6.5",
     "sass-loader": "^10.3.1"
   },
   "eslintConfig": {

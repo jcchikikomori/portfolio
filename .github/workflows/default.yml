@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [16.x, 18.x]
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
@@ -23,8 +23,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install and Build 🔧
+      - name: Install and check for dependencies
         run: |
           npm install -g pnpm
           pnpm install --no-frozen-lockfile
+          pnpx depcheck
+      - name: Testing ☢️
+        run: |
+          pnpm run lint
+      - name: Build 🔧
+        run: |
           pnpm run build
