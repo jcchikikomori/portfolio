@@ -3,8 +3,11 @@ import App from "./App.vue";
 import $ from "jquery";
 import "nes.css/css/nes.min.css";
 import { darkMode, normalTheme } from './theme';
+
 // import { isAudioPlaying, visualizerIsOn, visualizerIsOff } from "./visualizer";
 import { microProcessor } from "./http";
+
+import './registerServiceWorker'
 
 Vue.config.productionTip = false;
 
