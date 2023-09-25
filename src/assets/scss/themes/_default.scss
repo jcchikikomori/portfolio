@@ -5,7 +5,6 @@
 
 body {
   font-family: "Press Start 2P", sans-serif;
-  transition: background-color 666ms linear;
 }
 
 a {
@@ -39,7 +38,6 @@ a {
 }
 
 .nes-container {
-  transition: background-color 1.5ms linear;
   &:not(:last-child) {
     margin-bottom: 1rem;
   }
@@ -50,6 +48,8 @@ i.brand {
 }
 
 div.containers {
+  background: transparent;
+
   .nes-container {
     display: inline-block;
     max-width: 400px;

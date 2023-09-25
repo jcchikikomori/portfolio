@@ -20,18 +20,23 @@
   <div id="spotify-container">
     <dialog class="nes-dialog animate__animated animate__bounceInUp animate__faster" id="dialog-spotify">
       <form method="dialog">
-        <p class="title">My Party Box</p>
+        <p class="title">My Chosen Music</p>
         <p class="subtitle">powered by Spotify</p>
         <iframe
+          loading="lazy"
           class="spotify-iframe"
-          title="My Party Box"
-          src="https://open.spotify.com/embed/playlist/4Y2LRSUHUvBtO3VEjtnD6x?si=374e9d80a4f34f51"
+          title="My Dopamine"
+          src="https://open.spotify.com/embed/playlist/0ibvqi75kCZBSey9DddtTG?si=bdbadbe287124b77"
           width="450"
           height="450"
           allow="encrypted-media"
         ></iframe>
         <menu class="dialog-menu">
-          <button class="nes-btn is-primary">Close</button>
+          <button
+            v-on:click="closeSpotify()"
+            class="nes-btn is-primary">
+              Close
+          </button>
         </menu>
       </form>
     </dialog>
@@ -39,8 +44,14 @@
 </template>
 
 <script>
+  import { visualizerIsOff } from "../visualizer";
   export default {
     name: "SpotifyComponent",
-    components: {}
+    components: {},
+    methods: {
+      closeSpotify: () => {
+        visualizerIsOff();
+      }
+    },
   };
 </script>

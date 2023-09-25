@@ -37,14 +37,6 @@
           >
             <em class="nes-icon github"></em> <span>GitHub</span>
           </button>
-          <button
-            v-on:click="goToUrl('https://www.youtube.com/user/jcstriker1')"
-            id="youtube-btn"
-            type="button"
-            class="nes-btn"
-          >
-            <em class="nes-icon youtube"></em> <span>YouTube</span>
-          </button>
 
           <br /><br />
           <p>
@@ -97,9 +89,8 @@ import ProjectsComponent from "./ProjectsComponent.vue";
 import SpotifyComponent from "./SpotifyComponent.vue";
 import UpdatesComponent from "./UpdatesComponent.vue";
 import $ from "jquery";
-import { version } from "../../package.json";
-
-const appv = version;
+import { visualizerIsOn } from "../visualizer";
+import packageInfo from '../../package.json';
 
 export default {
   name: "ProfileComponent",
@@ -109,7 +100,7 @@ export default {
     UpdatesComponent
   },
   methods: {
-    goToUrl: function(url, includeTarget = true) {
+    goToUrl: (url, includeTarget = true) => {
       $("#redirect").attr("href", url);
       if (!includeTarget) {
         $("#redirect").attr("target", null);
@@ -118,7 +109,7 @@ export default {
       }
       $("#redirect")[0].click();
     },
-    showProjects: function() {
+    showProjects: () => {
       let projectsDialog = document.getElementById("dialog-projects");
 
       dialogPolyfill.registerDialog(projectsDialog);
@@ -126,17 +117,18 @@ export default {
       projectsDialog.classList.add("-is-open");
       projectsDialog.scrollTo({ top: 0, behavior: 'smooth' });
     },
-    showSpotify: function() {
+    showSpotify: () => {
       let spotifyDialog = document.getElementById("dialog-spotify");
 
       dialogPolyfill.registerDialog(spotifyDialog);
       spotifyDialog.showModal();
       spotifyDialog.classList.remove("-is-open");
+      visualizerIsOn();
     }
   },
   data() {
     return {
-      app_version: appv
+      app_version: packageInfo.version
     };
   }
 };
