@@ -14,6 +14,20 @@
         <div class="card-group">
           <div class="card">
             <div
+              class="card-img-top placeholder"
+              alt="Accenture"
+              v-on:click="goToUrl('https://accenture.com')"
+            ></div>
+            <div class="card-body">
+              <h6 class="card-title">Accenture</h6>
+              <!-- <p class="card-text"></p> -->
+              <p class="card-text">
+                <small class="text-muted">2022-present</small>
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <div
               class="card-img-top chatgenie"
               alt="Chatgenie.ph"
               v-on:click="goToUrl('https://chatgenie.ph')"
@@ -33,7 +47,7 @@
             <div
               class="card-img-top hello-php"
               alt="php7-starter"
-              v-on:click="goToUrl('https://github.com/jcchikikomori/hello-php')"
+              v-on:click="alert('Preview not available anymore.')"
             ></div>
             <div class="card-body">
               <h6 class="card-title">hello-php</h6>
@@ -82,7 +96,7 @@
             <div
               class="card-img-top covemanila"
               alt="Cove Manila"
-              v-on:click="goToUrl('https://covemanila.com')"
+              v-on:click="alert('Preview not available anymore.')"
             ></div>
             <div class="card-body">
               <h6 class="card-title">Cove Manila WordPress Project</h6>
@@ -93,7 +107,7 @@
             <div
               class="card-img-top mcdelivery"
               alt="McDelivery PH"
-              v-on:click="goToUrl('https://mcdelivery.com.ph')"
+              v-on:click="goToUrl('https://web.archive.org/web/20191228231219if_/https://www.mcdelivery.com.ph/')"
             ></div>
             <div class="card-body">
               <h6 class="card-title">McDelivery PH for Android</h6>
@@ -127,6 +141,9 @@ export default {
         $("#redirect").attr("target", "_blank");
       }
       $("#redirect")[0].click();
+    },
+    alert: function(msg) {
+      alert(msg);
     },
   }
 };

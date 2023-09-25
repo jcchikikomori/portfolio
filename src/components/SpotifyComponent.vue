@@ -23,6 +23,7 @@
         <p class="title">My Party Box</p>
         <p class="subtitle">powered by Spotify</p>
         <iframe
+          loading="lazy"
           class="spotify-iframe"
           title="My Party Box"
           src="https://open.spotify.com/embed/playlist/4Y2LRSUHUvBtO3VEjtnD6x?si=374e9d80a4f34f51"
