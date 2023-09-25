@@ -119,7 +119,7 @@
         </div>
 
         <menu class="dialog-menu">
-          <button class="nes-btn is-primary is-block">Okay</button>
+          <button class="btn nes-btn is-primary is-block">Okay</button>
         </menu>
       </form>
     </dialog>

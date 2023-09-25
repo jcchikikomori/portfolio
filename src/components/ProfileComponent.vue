@@ -12,35 +12,43 @@
             alt="My Logo"
           />
           <br /><br />
-          <p>@jcchikikomori</p>
+          <p>The Lazy Geek</p>
           <ul class="profile-list">
             <li>
-              Lazy Geek & Developer,
+              A Lazy Geek with
             </li>
-            <li>and i love <a href="#" v-on:click="showSpotify"> music</a>!</li>
-            <br />
-            <li><a href="#" v-on:click="showProjects">My Career</a></li>
+            <li>Back Pains & Music Addiction</li>
           </ul>
-          <button
-            v-on:click="goToUrl('https://linkedin.com/in/johncyrillcorsanes')"
-            id="linkedin-btn"
-            type="button"
-            class="nes-btn"
-          >
-            <em class="nes-icon linkedin"></em> <span>LinkedIn</span>
-          </button>
-          <button
-            v-on:click="goToUrl('https://github.com/jcchikikomori')"
-            id="github-btn"
-            type="button"
-            class="nes-btn"
-          >
-            <em class="nes-icon github"></em> <span>GitHub</span>
-          </button>
+
+          <div class="btn-group-vertical btn-block">
+            <button v-on:click="showSpotify" class="btn nes-btn is-default is-block">Music</button>
+            <button v-on:click="showProjects" class="btn nes-btn is-default is-block">Careers</button>
+            <button class="btn nes-btn is-disabled is-block">Industries</button>
+            <button v-on:click="goToUrl('https://jcchikikomori.github.io/blog')"
+              class="btn nes-btn is-primary is-block">Blog</button>
+          </div>
+          <br /><br />
+          <div class="btn-group">
+            <button
+              v-on:click="goToUrl('https://linkedin.com/in/johncyrillcorsanes')"
+              id="linkedin-btn"
+              type="button"
+              class="btn nes-btn">
+              <em class="nes-icon linkedin"></em> <span>LinkedIn</span>
+            </button>
+            <button
+              v-on:click="goToUrl('https://github.com/jcchikikomori')"
+              id="github-btn"
+              type="button"
+              class="btn nes-btn">
+              <em class="nes-icon github"></em> <span>GitHub</span>
+            </button>
+          </div>
 
           <br /><br />
           <p>
             <span style="font-size: 9px;">
+              Portfolio Build
               <a
                 href="#"
                 v-on:click="goToUrl('https://github.com/jcchikikomori/portfolio/releases/tag/v' + app_version)"
@@ -51,20 +59,9 @@
           </p>
           <p>
             <span style="font-size: 9px;">
-              <a
-                href="#"
-                v-on:click="goToUrl('https://jcchikikomori.github.io/blog')"
-                >Visit my blog!</a
-              >
+              Powered by VueJS
             </span>
           </p>
-          <!-- <p>
-            <span style="font-size: 9px;">
-              <a target="_blank" style="font-size: 9px" href="v1"
-                >Visit older version..</a
-              >
-            </span>
-          </p> -->
         </div>
       </div>
 
