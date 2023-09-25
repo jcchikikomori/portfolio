@@ -34,7 +34,7 @@
         <menu class="dialog-menu">
           <button
             v-on:click="closeSpotify()"
-            class="nes-btn is-primary">
+            class="btn nes-btn is-primary">
               Close
           </button>
         </menu>
