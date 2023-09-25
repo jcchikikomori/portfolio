@@ -23,10 +23,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install, then begin Testing ☢️
+      - name: Install and check for dependencies
         run: |
           npm install -g pnpm
           pnpm install --no-frozen-lockfile
+          pnpx depcheck
+      - name: Testing ☢️
+        run: |
           pnpm run lint
       - name: Build 🔧
         run: |
