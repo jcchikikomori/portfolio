@@ -1,2 +1,2 @@
 ignores: ["@types/jquery", "sass-mq", "@vue/*", "@babel/*", "bootstrap", "core-js"]
-# skip-missing: true
+skip-missing: true

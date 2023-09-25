@@ -1,0 +1,11 @@
+@keyframes breathing-visualizer {
+    0% {
+        background-image: linear-gradient(0deg, rgba(33,37,41,1) 0%, rgba(33,37,41,1) 11%, rgba(33,37,41,1) 28%, rgba(33,37,41,1) 100%);
+    }
+    50% {
+        background-image: linear-gradient(0deg, rgba(75,79,24,0.5046393557422969) 0%, #212529 11%, #212529 28%, #212529 100%);
+    }
+    100% {
+        background-image: inherit;
+    }
+}

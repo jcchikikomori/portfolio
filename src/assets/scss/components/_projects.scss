@@ -25,6 +25,7 @@
         background-repeat: no-repeat;
         background-position: top center;
         background-size: cover;
+        cursor: pointer;
 
         &.chatgenie {
           background-image: url(/public/img/projects/chatgenie.png);
