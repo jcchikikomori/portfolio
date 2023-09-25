@@ -3,6 +3,7 @@ import App from "./App.vue";
 import $ from "jquery";
 import "nes.css/css/nes.min.css";
 import { darkMode, normalTheme } from './theme';
+// import { isAudioPlaying, visualizerIsOn, visualizerIsOff } from "./visualizer";
 import { microProcessor } from "./http";
 
 Vue.config.productionTip = false;
@@ -21,6 +22,15 @@ window.onload = function() {
   } else {
     normalTheme();
   }
+
+  // Currently not working
+  // setInterval(() => {
+  //   if (isAudioPlaying()) {
+  //     visualizerIsOn();
+  //   } else {
+  //     visualizerIsOff();
+  //   }
+  // }, 1000);
 
   window
     .matchMedia("(prefers-color-scheme: dark)")
