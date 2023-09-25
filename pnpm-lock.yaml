@@ -13,13 +13,13 @@ dependencies:
     version: 3.5.14
   '@vue/babel-preset-app':
     specifier: ^5.0.8
-    version: 5.0.8(@babel/core@7.20.2)(core-js@3.26.0)(vue@2.7.13)
+    version: 5.0.8(@babel/core@7.20.2)(core-js@3.32.2)(vue@2.7.13)
   animate.css:
     specifier: ^4.1.1
     version: 4.1.1
   core-js:
     specifier: ^3.26.0
-    version: 3.26.0
+    version: 3.32.2
   eslint-plugin-vue:
     specifier: ^9.7.0
     version: 9.7.0(eslint@8.50.0)
@@ -51,7 +51,7 @@ devDependencies:
     version: 7.19.1(@babel/core@7.20.2)(eslint@8.50.0)
   '@vue/cli-plugin-babel':
     specifier: ~5.0.8
-    version: 5.0.8(@vue/cli-service@5.0.8)(core-js@3.26.0)(vue@2.7.13)
+    version: 5.0.8(@vue/cli-service@5.0.8)(core-js@3.32.2)(vue@2.7.13)
   '@vue/cli-plugin-eslint':
     specifier: ~5.0.8
     version: 5.0.8(@vue/cli-service@5.0.8)(eslint@8.50.0)
@@ -1551,7 +1551,7 @@ packages:
       lodash.kebabcase: 4.1.1
       svg-tags: 1.0.0
 
-  /@vue/babel-preset-app@5.0.8(@babel/core@7.20.2)(core-js@3.26.0)(vue@2.7.13):
+  /@vue/babel-preset-app@5.0.8(@babel/core@7.20.2)(core-js@3.32.2)(vue@2.7.13):
     resolution: {integrity: sha512-yl+5qhpjd8e1G4cMXfORkkBlvtPCIgmRf3IYCWYDKIQ7m+PPa5iTm4feiNmCMD6yGqQWMhhK/7M3oWGL9boKwg==}
     peerDependencies:
       '@babel/core': '*'
@@ -1576,7 +1576,7 @@ packages:
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.20.2)
       '@vue/babel-preset-jsx': 1.4.0(@babel/core@7.20.2)(vue@2.7.13)
       babel-plugin-dynamic-import-node: 2.3.3
-      core-js: 3.26.0
+      core-js: 3.32.2
       core-js-compat: 3.26.0
       semver: 7.3.8
       vue: 2.7.13
@@ -1662,13 +1662,13 @@ packages:
     resolution: {integrity: sha512-KmtievE/B4kcXp6SuM2gzsnSd8WebkQpg3XaB6GmFh1BJGRqa1UiW9up7L/Q67uOdTigHxr5Ar2lZms4RcDjwQ==}
     dev: true
 
-  /@vue/cli-plugin-babel@5.0.8(@vue/cli-service@5.0.8)(core-js@3.26.0)(vue@2.7.13):
+  /@vue/cli-plugin-babel@5.0.8(@vue/cli-service@5.0.8)(core-js@3.32.2)(vue@2.7.13):
     resolution: {integrity: sha512-a4qqkml3FAJ3auqB2kN2EMPocb/iu0ykeELwed+9B1c1nQ1HKgslKMHMPavYx3Cd/QAx2mBD4hwKBqZXEI/CsQ==}
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0 || ^5.0.0-0
     dependencies:
       '@babel/core': 7.20.2
-      '@vue/babel-preset-app': 5.0.8(@babel/core@7.20.2)(core-js@3.26.0)(vue@2.7.13)
+      '@vue/babel-preset-app': 5.0.8(@babel/core@7.20.2)(core-js@3.32.2)(vue@2.7.13)
       '@vue/cli-service': 5.0.8(@babel/core@7.20.2)(sass-loader@10.3.1)(vue@2.7.13)
       '@vue/cli-shared-utils': 5.0.8
       babel-loader: 8.3.0(@babel/core@7.20.2)(webpack@5.88.2)
@@ -2921,8 +2921,8 @@ packages:
     dependencies:
       browserslist: 4.21.4
 
-  /core-js@3.26.0:
-    resolution: {integrity: sha512-+DkDrhoR4Y0PxDz6rurahuB+I45OsEUv8E1maPTB6OuHRohMMcznBq9TMpdpDMm/hUPob/mJJS3PqgbHpMTQgw==}
+  /core-js@3.32.2:
+    resolution: {integrity: sha512-pxXSw1mYZPDGvTQqEc5vgIb83jGQKFGYWY76z4a7weZXUolw3G+OvpZqSRcfYOoOVUQJYEPsWeQK8pKEnUtWxQ==}
     requiresBuild: true
 
   /core-util-is@1.0.3:
@@ -2989,7 +2989,7 @@ packages:
       postcss-modules-scope: 3.0.0(postcss@8.4.18)
       postcss-modules-values: 4.0.0(postcss@8.4.18)
       postcss-value-parser: 4.2.0
-      semver: 7.3.8
+      semver: 7.5.4
       webpack: 5.88.2
     dev: true
 
@@ -5105,7 +5105,7 @@ packages:
       cosmiconfig: 7.0.1
       klona: 2.0.5
       postcss: 8.4.18
-      semver: 7.3.8
+      semver: 7.5.4
       webpack: 5.88.2
     dev: true
 
@@ -5775,7 +5775,6 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
-    dev: false
 
   /send@0.18.0:
     resolution: {integrity: sha512-qqWzuOjSFOuqPjFe4NOsMLafToQQwBSOEpS+FwEt3A2V3vKubTquT3vmLTQpFgMXp8AlFWFuP1qKaJZOtPpVXg==}
@@ -6461,7 +6460,7 @@ packages:
       espree: 9.4.0
       esquery: 1.4.0
       lodash: 4.17.21
-      semver: 7.3.8
+      semver: 7.5.4
     transitivePeerDependencies:
       - supports-color
     dev: false
