@@ -6,6 +6,8 @@ import { darkMode, normalTheme } from './theme';
 import { handlePlayback } from "./visualizer";
 import { microProcessor } from "./http";
 
+import './registerServiceWorker'
+
 Vue.config.productionTip = false;
 
 /** main */
