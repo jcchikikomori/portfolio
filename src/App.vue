@@ -10,23 +10,21 @@
 </style>
 
 <template>
-  <div id="app" class="app container-fluid">
-    <div class="-content">
-      <LoaderComponent></LoaderComponent>
-      <ProfileComponent></ProfileComponent>
+  <div id="app" class="app container">
+    <div class="row -content">
+      <div class="col-md-12">
+        <ProfileComponent></ProfileComponent>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import LoaderComponent from "./components/LoaderComponent.vue";
 import ProfileComponent from "./components/ProfileComponent.vue";
-
 export default {
   name: "App",
   components: {
-    LoaderComponent,
-    ProfileComponent
+    ProfileComponent,
   },
   methods: {}
 };
