@@ -20,7 +20,7 @@
     "sass": "^1.56.0",
     "sass-mq": "^6.0.0",
     "volar-service-vetur": "^0.0.13",
-    "vue": "^2.7.13"
+    "vue": "^3.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
