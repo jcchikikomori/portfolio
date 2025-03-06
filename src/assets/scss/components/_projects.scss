@@ -1,4 +1,6 @@
 #dialog-projects {
+  max-width: 1280px;
+
   .subtitle {
     font-size: 13px;
   }
@@ -20,7 +22,7 @@
 
       // TODO: Not yet mobile-friendly
       .card-img-top {
-        height: 15.1rem;
+        min-height: 20vh;
         background-image: url(/public/img/projects/placeholder.png);
         background-repeat: no-repeat;
         background-position: top center;

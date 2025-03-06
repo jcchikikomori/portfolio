@@ -12,7 +12,7 @@
             alt="My Logo"
           />
           <br /><br />
-          <p>The Lazy Geek</p>
+          <!-- <p>The Lazy Geek</p> -->
           <ul class="profile-list">
             <li>
               A Lazy Geek with
