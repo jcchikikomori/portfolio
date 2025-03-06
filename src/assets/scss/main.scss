@@ -7,6 +7,7 @@
 @import "vendors/v2", "vendors/animate";
 
 // 3. Base stuff
+@import "base/reset";
 @import "base/base", "base/fonts", "base/typography", "base/helpers";
 @import "base/animations", "base/transitions";
 

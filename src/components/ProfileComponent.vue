@@ -1,3 +1,17 @@
+<style lang="scss" scoped>
+  .nes-container > .containers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .updates-wrapper {
+      width: 100%;
+      margin-top: 1em;
+    }
+  }
+</style>
+
 <template>
   <!-- MAIN CONTAINER -->
   <div id="main-container" class="main-screen">
@@ -25,22 +39,22 @@
             <button v-on:click="showProjects" class="btn nes-btn is-default is-block">Careers</button>
             <button class="btn nes-btn is-disabled is-block">Industries</button>
             <button v-on:click="goToUrl('https://jcchikikomori.github.io/blog')"
-              class="btn nes-btn is-primary is-block">Blog</button>
+              class="btn nes-btn is-default is-block">Blog</button>
           </div>
           <br /><br />
-          <div class="btn-group">
+          <div class="btn-group-vertical btn-block">
             <button
               v-on:click="goToUrl('https://linkedin.com/in/johncyrillcorsanes')"
               id="linkedin-btn"
               type="button"
-              class="btn nes-btn">
+              class="btn nes-btn is-default is-block">
               <em class="nes-icon linkedin"></em> <span>LinkedIn</span>
             </button>
             <button
               v-on:click="goToUrl('https://github.com/jcchikikomori')"
               id="github-btn"
               type="button"
-              class="btn nes-btn">
+              class="btn nes-btn is-default is-block">
               <em class="nes-icon github"></em> <span>GitHub</span>
             </button>
           </div>
@@ -63,18 +77,14 @@
             </span>
           </p>
         </div>
-      </div>
 
-      <br />
-      <div class="containers">
-        <div id="post-container" class="nes-container">
-          <div id="all-post"></div>
+        <div class="updates-wrapper">
+          <UpdatesComponent></UpdatesComponent>
         </div>
       </div>
 
       <ProjectsComponent></ProjectsComponent>
       <SpotifyComponent></SpotifyComponent>
-      <UpdatesComponent></UpdatesComponent>
     </section>
   </div>
 </template>
