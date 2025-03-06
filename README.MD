@@ -1,29 +1,24 @@
-# JCC Portfolio
+# portfolio
+
+## Deprecation Notice
+
+Will migrate to version 3 very soon.
+The version 2 is no longer maintained due to outdated dependencies.
 
 ## Requirements
 
-- NodeJS 16
+- NodeJS 18
 - VueJS CLI
 - `pnpm`
 
-### For VSCode Dev Environment
+## Setup
 
-- Docker
-- Remote Extension Pack for VSCode
-
-## Basic Setup
-
-### Normal
+### First step
 
 - Run required packages `pnpm install -g eslint prettier`
 - Then run `pnpm install` 
 
-### VSCode
-
-- Run VSCode then open the project directory
-- Then reopen in container
-
-## Building
+### Building
 
 - `pnpm run build`
 
