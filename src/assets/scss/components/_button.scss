@@ -1,3 +1,7 @@
-// -----------------------------------------------------------------------------
-// This file contains all styles related to the button component.
-// -----------------------------------------------------------------------------
+.btn-group-vertical {
+  &.btn-block {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+  }
+}
