@@ -1,14 +1,23 @@
 import $ from "jquery";
 
-export const isAudioPlaying = () => {
+const isAudioPlaying = () => {
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
   return audioContext.state === 'running';
 }
 
-export const visualizerIsOn = () => {
-    $("body").addClass("breathing-visualizer");
+export const handlePlayback = () => {
+  console.debug("handlePlayback");
+  if (isAudioPlaying()) {
+    visualizerIsOn();
+  } else {
+    visualizerIsOff();
+  }
 }
 
-export const visualizerIsOff = () => {
-    $("body").removeClass("breathing-visualizer");
+const visualizerIsOn = () => {
+  $("body").addClass("breathing-visualizer");
+}
+
+const visualizerIsOff = () => {
+  $("body").removeClass("breathing-visualizer");
 }

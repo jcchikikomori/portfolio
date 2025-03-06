@@ -3,8 +3,7 @@ import App from "./App.vue";
 import $ from "jquery";
 import "nes.css/css/nes.min.css";
 import { darkMode, normalTheme } from './theme';
-
-// import { isAudioPlaying, visualizerIsOn, visualizerIsOff } from "./visualizer";
+import { handlePlayback } from "./visualizer";
 import { microProcessor } from "./http";
 
 import './registerServiceWorker'
@@ -62,6 +61,10 @@ window.onload = function() {
     $("#post-container").parent().hide();
     microProcessor.finishSetup();
   }
+
+  document.addEventListener('play', handlePlayback, true);
+  document.addEventListener('pause', handlePlayback, true);
+  document.addEventListener('ended', handlePlayback, true);
 };
 
 new Vue({

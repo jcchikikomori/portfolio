@@ -1,7 +1,7 @@
 <template>
   <!-- PROJECTS CONTAINER -->
   <div id="projects-container">
-    <dialog class="nes-dialog animate__animated animate__bounceInDown animate__faster" id="dialog-projects">
+    <dialog class="nes-dialog" id="dialog-projects">
       <form method="dialog">
         <h1 class="title">My Career History</h1>
         <p class="subtitle">
@@ -119,7 +119,7 @@
         </div>
 
         <menu class="dialog-menu">
-          <button class="nes-btn is-primary is-block">Okay</button>
+          <button class="btn nes-btn is-primary is-block">Okay</button>
         </menu>
       </form>
     </dialog>

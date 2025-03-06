@@ -18,7 +18,7 @@
 <template>
   <!-- SPOTIFY CONTAINER -->
   <div id="spotify-container">
-    <dialog class="nes-dialog animate__animated animate__bounceInUp animate__faster" id="dialog-spotify">
+    <dialog class="nes-dialog" id="dialog-spotify">
       <form method="dialog">
         <p class="title">My Chosen Music</p>
         <p class="subtitle">powered by Spotify</p>
@@ -34,7 +34,7 @@
         <menu class="dialog-menu">
           <button
             v-on:click="closeSpotify()"
-            class="nes-btn is-primary">
+            class="btn nes-btn is-primary">
               Close
           </button>
         </menu>
@@ -44,13 +44,15 @@
 </template>
 
 <script>
-  import { visualizerIsOff } from "../visualizer";
+  // import { visualizerIsOff } from "../visualizer";
+
   export default {
     name: "SpotifyComponent",
     components: {},
     methods: {
       closeSpotify: () => {
-        visualizerIsOff();
+        // visualizerIsOff();
+        console.debug("SpotifyComponent: Spotify dialog closed.");
       }
     },
   };
