@@ -44,13 +44,15 @@
 </template>
 
 <script>
-  import { visualizerIsOff } from "../visualizer";
+  // import { visualizerIsOff } from "../visualizer";
+
   export default {
     name: "SpotifyComponent",
     components: {},
     methods: {
       closeSpotify: () => {
-        visualizerIsOff();
+        // visualizerIsOff();
+        console.debug("SpotifyComponent: Spotify dialog closed.");
       }
     },
   };
