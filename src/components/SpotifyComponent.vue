@@ -18,7 +18,7 @@
 <template>
   <!-- SPOTIFY CONTAINER -->
   <div id="spotify-container">
-    <dialog class="nes-dialog animate__animated animate__bounceInUp animate__faster" id="dialog-spotify">
+    <dialog class="nes-dialog" id="dialog-spotify">
       <form method="dialog">
         <p class="title">My Chosen Music</p>
         <p class="subtitle">powered by Spotify</p>
