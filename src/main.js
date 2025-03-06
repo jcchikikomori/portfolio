@@ -12,10 +12,6 @@ Vue.config.productionTip = false;
 
 /** main */
 window.onload = function() {
-  // document.getElementById("#loading-dialog").showModal();
-  // $("#main-container").removeAttr("hidden");
-  // $("#loading-button").trigger("click");
-
   if (
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -45,26 +41,11 @@ window.onload = function() {
       }
     });
 
-  /**
-    if ($('.too-small-warning').is(':hidden')) {
-      $('#profile-container').show();
-    } else {
-      $('#profile-container').show();
-    }
-    */
-
-  if ($("#profile-container").is(":hidden")) {
-    // load posts first
-    $("#loading-message").text("Load shenanigans...");
-    // load updates
-    // microProcessor.init(); // Skip for a while
-    $("#post-container").parent().hide();
-    microProcessor.finishSetup();
-  }
-
   document.addEventListener('play', handlePlayback, true);
   document.addEventListener('pause', handlePlayback, true);
   document.addEventListener('ended', handlePlayback, true);
+
+  $("#profile-container").show();
 };
 
 new Vue({
