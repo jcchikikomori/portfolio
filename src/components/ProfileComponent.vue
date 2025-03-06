@@ -120,7 +120,6 @@ export default {
       dialogPolyfill.registerDialog(spotifyDialog);
       spotifyDialog.showModal();
       spotifyDialog.classList.remove("-is-open");
-      visualizerIsOn();
     }
   },
   data() {
