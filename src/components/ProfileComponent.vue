@@ -21,7 +21,7 @@
         <div class="nes-container is-centered">
           <img
             id="profile-logo"
-            src="img/jcc_logo.png"
+            src="/img/jcc_logo.png"
             width="200"
             alt="My Logo"
           />

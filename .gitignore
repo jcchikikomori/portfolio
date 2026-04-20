@@ -1,3 +1,7 @@
+# Claude
+.claude/
+
+# NodeJS
 .DS_Store
 node_modules
 dist
