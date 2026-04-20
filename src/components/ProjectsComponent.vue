@@ -127,20 +127,12 @@
 </template>
 
 <script>
-import $ from "jquery";
-
 export default {
   name: "ProjectsComponent",
   components: {},
   methods: {
-    goToUrl: function(url, includeTarget = true) {
-      $("#redirect").attr("href", url);
-      if (!includeTarget) {
-        $("#redirect").attr("target", null);
-      } else {
-        $("#redirect").attr("target", "_blank");
-      }
-      $("#redirect")[0].click();
+    goToUrl(url) {
+      window.open(url, '_blank', 'noopener,noreferrer')
     },
     alert: function(msg) {
       alert(msg);

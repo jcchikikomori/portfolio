@@ -20,11 +20,11 @@ jQuery imports and the `window.onload` jQuery DOM call from `main.js`. Replace t
 
 ## Target Files
 
-- [ ] `src/main.js` — rewrite to Vue 3 `createApp`; remove jQuery import and `window.onload` call
-- [ ] `src/components/ProfileComponent.vue` — remove jQuery import; remove UpdatesComponent import
+- [x] `src/main.js` — rewrite to Vue 3 `createApp`; remove jQuery import and `window.onload` call
+- [x] `src/components/ProfileComponent.vue` — remove jQuery import; remove UpdatesComponent import
   and usage; replace `goToUrl`; remove `dialogPolyfill.registerDialog` calls
-- [ ] `src/components/ProjectsComponent.vue` — remove jQuery import; replace `goToUrl`
-- [ ] `src/registerServiceWorker.js` — replace `process.env.NODE_ENV` and `process.env.BASE_URL`
+- [x] `src/components/ProjectsComponent.vue` — remove jQuery import; replace `goToUrl`
+- [x] `src/registerServiceWorker.js` — replace `process.env.NODE_ENV` and `process.env.BASE_URL`
   with `import.meta.env.MODE` and `import.meta.env.BASE_URL`
 
 ## Investigation Targets
@@ -48,9 +48,9 @@ Files to read before starting:
 
 ### 1. Red Phase
 
-- [ ] Read all Investigation Targets
-- [ ] Confirm `pnpm run build` exits 0 after Phase 2 Task 1 (deleted files are gone; build clean)
-- [ ] Run search to confirm remaining jQuery imports before this task:
+- [x] Read all Investigation Targets
+- [x] Confirm `pnpm run build` exits 0 after Phase 2 Task 1 (deleted files are gone; build clean)
+- [x] Run search to confirm remaining jQuery imports before this task:
   ```bash
   grep -rn "from 'jquery'\|import \$\|process\.env" src/
   ```
@@ -59,30 +59,30 @@ Files to read before starting:
 ### 2. Green Phase
 
 **`src/main.js`**
-- [ ] Remove `import $ from 'jquery'` (or equivalent jQuery import line)
-- [ ] Remove `Vue.config.productionTip = false` (no Vue 3 equivalent)
-- [ ] Remove the `window.onload` callback that calls `$("#profile-container").show()`
-- [ ] Replace `new Vue({ render: h => h(App) }).$mount('#app')` with:
+- [x] Remove `import $ from 'jquery'` (or equivalent jQuery import line)
+- [x] Remove `Vue.config.productionTip = false` (no Vue 3 equivalent)
+- [x] Remove the `window.onload` callback that calls `$("#profile-container").show()`
+- [x] Replace `new Vue({ render: h => h(App) }).$mount('#app')` with:
   ```js
   import { createApp } from 'vue'
   import App from './App.vue'
   createApp(App).mount('#app')
   ```
-- [ ] Retain existing `import` statements for `theme.js`, `visualizer.js`, `registerServiceWorker`
+- [x] Retain existing `import` statements for `theme.js`, `visualizer.js`, `registerServiceWorker`
 
 **`src/components/ProfileComponent.vue`**
-- [ ] Remove `import $ from 'jquery'`
-- [ ] Remove `import UpdatesComponent from './UpdatesComponent.vue'` (file deleted in Task 1)
-- [ ] Remove `UpdatesComponent` from the `components` registration object
-- [ ] Remove `<UpdatesComponent />` from the template
-- [ ] Replace the `goToUrl(url, includeTarget = true)` method body with:
+- [x] Remove `import $ from 'jquery'`
+- [x] Remove `import UpdatesComponent from './UpdatesComponent.vue'` (file deleted in Task 1)
+- [x] Remove `UpdatesComponent` from the `components` registration object
+- [x] Remove `<UpdatesComponent />` from the template
+- [x] Replace the `goToUrl(url, includeTarget = true)` method body with:
   ```js
   goToUrl(url) {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
   ```
   Remove the `includeTarget` parameter entirely.
-- [ ] For each dialog open call, replace:
+- [x] For each dialog open call, replace:
   ```js
   dialogPolyfill.registerDialog(el); el.showModal()
   ```
@@ -91,11 +91,11 @@ Files to read before starting:
   el.showModal()
   ```
   (Keep `showModal()`; remove only the `dialogPolyfill.registerDialog` call)
-- [ ] Remove `dialogPolyfill` import if it exists in this file
+- [x] Remove `dialogPolyfill` import if it exists in this file
 
 **`src/components/ProjectsComponent.vue`**
-- [ ] Remove `import $ from 'jquery'`
-- [ ] Replace `goToUrl(url, includeTarget = true)` method body with:
+- [x] Remove `import $ from 'jquery'`
+- [x] Replace `goToUrl(url, includeTarget = true)` method body with:
   ```js
   goToUrl(url) {
     window.open(url, '_blank', 'noopener,noreferrer')
@@ -104,19 +104,19 @@ Files to read before starting:
   Remove the `includeTarget` parameter entirely.
 
 **`src/registerServiceWorker.js`**
-- [ ] Replace all `process.env.NODE_ENV` occurrences with `import.meta.env.MODE`
-- [ ] Replace all `process.env.BASE_URL` occurrences with `import.meta.env.BASE_URL`
+- [x] Replace all `process.env.NODE_ENV` occurrences with `import.meta.env.MODE`
+- [x] Replace all `process.env.BASE_URL` occurrences with `import.meta.env.BASE_URL`
 
-- [ ] Run `pnpm run build` — must exit 0
+- [x] Run `pnpm run build` — must exit 0
 
 ### 3. Refactor Phase
 
-- [ ] Run verification grep:
+- [x] Run verification grep:
   ```bash
   grep -r "from 'jquery'\|import \$\|process\.env" src/
   ```
   Expected: no results
-- [ ] Open `pnpm run dev` in browser; confirm:
+- [x] Open `pnpm run dev` in browser; confirm:
   - Vue app mounts at `#app` with no Vue warnings in browser console
   - "Music" button opens Spotify `<dialog>`
   - "Careers" button opens Projects `<dialog>`
@@ -150,13 +150,13 @@ Files to read before starting:
 
 ## Completion Criteria
 
-- [ ] `main.js` uses `createApp(App).mount('#app')`; no jQuery import; no `window.onload` jQuery call
-- [ ] `ProfileComponent.vue`: no jQuery import; no `UpdatesComponent` import or template usage;
+- [x] `main.js` uses `createApp(App).mount('#app')`; no jQuery import; no `window.onload` jQuery call
+- [x] `ProfileComponent.vue`: no jQuery import; no `UpdatesComponent` import or template usage;
   `goToUrl(url)` uses `window.open(url, '_blank', 'noopener,noreferrer')`; no `dialogPolyfill.registerDialog` calls
-- [ ] `ProjectsComponent.vue`: no jQuery import; `goToUrl(url)` uses `window.open`
-- [ ] `registerServiceWorker.js`: no `process.env` occurrences
-- [ ] `grep -r "from 'jquery'\|import \$\|process\.env" src/` returns no results
-- [ ] `pnpm run build` exits 0
+- [x] `ProjectsComponent.vue`: no jQuery import; `goToUrl(url)` uses `window.open`
+- [x] `registerServiceWorker.js`: no `process.env` occurrences
+- [x] `grep -r "from 'jquery'\|import \$\|process\.env" src/` returns no results
+- [x] `pnpm run build` exits 0
 - [ ] Browser check: Vue app mounts; dialogs open; links open in new tab
 
 ## Notes

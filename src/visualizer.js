@@ -1,5 +1,3 @@
-import $ from "jquery";
-
 const isAudioPlaying = () => {
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
   return audioContext.state === 'running';
@@ -15,9 +13,9 @@ export const handlePlayback = () => {
 }
 
 const visualizerIsOn = () => {
-  $("body").addClass("breathing-visualizer");
+  document.body.classList.add("breathing-visualizer");
 }
 
 const visualizerIsOff = () => {
-  $("body").removeClass("breathing-visualizer");
+  document.body.classList.remove("breathing-visualizer");
 }

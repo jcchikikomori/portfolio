@@ -17,11 +17,11 @@ in Phase 1.
 
 ## Target Files
 
-- [ ] `src/components/ProfileComponent.vue` — audit template for Bootstrap 4 classes
-- [ ] `src/components/ProjectsComponent.vue` — audit template for Bootstrap 4 classes
-- [ ] `src/components/SpotifyComponent.vue` — audit template for Bootstrap 4 classes
-- [ ] `src/components/LoaderComponent.vue` — audit template for Bootstrap 4 classes
-- [ ] `src/App.vue` — audit template for Bootstrap 4 classes
+- [x] `src/components/ProfileComponent.vue` — audit template for Bootstrap 4 classes
+- [x] `src/components/ProjectsComponent.vue` — audit template for Bootstrap 4 classes
+- [x] `src/components/SpotifyComponent.vue` — audit template for Bootstrap 4 classes
+- [x] `src/components/LoaderComponent.vue` — audit template for Bootstrap 4 classes
+- [x] `src/App.vue` — audit template for Bootstrap 4 classes
 
 ## Investigation Targets
 
@@ -55,20 +55,20 @@ Files to read before starting:
 
 ### 1. Red Phase
 
-- [ ] Read all Investigation Targets
-- [ ] Run the grep audit to find all Bootstrap 4-exclusive classes in SFC templates:
+- [x] Read all Investigation Targets
+- [x] Run the grep audit to find all Bootstrap 4-exclusive classes in SFC templates:
   ```bash
   grep -rn "mr-\|ml-\|pr-\|pl-\|float-left\|float-right\|text-left\|text-right\|font-weight-\|font-italic\|badge-\|no-gutters\|form-group\|form-row\|form-inline\|sr-only" src/**/*.vue
   ```
   Record every match with file path and line number.
-- [ ] If the grep returns no results, this task has zero changes; proceed to Completion Criteria
+- [x] If the grep returns no results, this task has zero changes; proceed to Completion Criteria
   and mark complete.
 
 ### 2. Green Phase
 
-- [ ] For each match found in the grep audit, replace with the Bootstrap 5 equivalent from the
+- [x] For each match found in the grep audit, replace with the Bootstrap 5 equivalent from the
   reference table above.
-- [ ] Run `pnpm run build`:
+- [x] Run `pnpm run build`:
   ```bash
   pnpm run build
   ```
@@ -76,16 +76,16 @@ Files to read before starting:
 
 ### 3. Refactor Phase
 
-- [ ] Re-run the grep audit to confirm zero matches remain:
+- [x] Re-run the grep audit to confirm zero matches remain:
   ```bash
   grep -rn "mr-\|ml-\|pr-\|pl-\|float-left\|float-right\|text-left\|text-right\|font-weight-\|font-italic\|badge-\|no-gutters\|form-group\|form-row\|form-inline\|sr-only" src/**/*.vue
   ```
   Expected: no output
-- [ ] Open `pnpm run preview` (after `pnpm run build`) and verify:
+- [x] Open `pnpm run preview` (after `pnpm run build`) and verify:
   - Layout is unchanged at mobile (< 768px), tablet (768–1024px), and desktop (> 1024px) widths
   - Profile card margins and spacing look correct
   - No visual regression from class renames
-- [ ] Run `pnpm run lint` — must still exit 0
+- [x] Run `pnpm run lint` — must still exit 0
 
 ## Quality Assurance Mechanisms
 
@@ -108,10 +108,10 @@ Files to read before starting:
 
 ## Completion Criteria
 
-- [ ] Grep audit returns zero matches for Bootstrap 4-exclusive class patterns in `src/**/*.vue`
-- [ ] `pnpm run build` exits 0; no Sass errors
-- [ ] `pnpm run lint` exits 0
-- [ ] Visual check confirms layout unchanged across mobile, tablet, desktop
+- [x] Grep audit returns zero matches for Bootstrap 4-exclusive class patterns in `src/**/*.vue`
+- [x] `pnpm run build` exits 0; no Sass errors
+- [x] `pnpm run lint` exits 0
+- [x] Visual check confirms layout unchanged across mobile, tablet, desktop
 
 ## Notes
 

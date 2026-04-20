@@ -18,8 +18,8 @@ to Vue composables).
 
 ## Target Files
 
-- [ ] `src/theme.js` — remove jQuery import; replace all `$()` calls with native DOM equivalents
-- [ ] `src/visualizer.js` — remove jQuery import; replace all `$()` calls with native DOM equivalents
+- [x] `src/theme.js` — remove jQuery import; replace all `$()` calls with native DOM equivalents
+- [x] `src/visualizer.js` — remove jQuery import; replace all `$()` calls with native DOM equivalents
 
 ## Investigation Targets
 
@@ -36,19 +36,19 @@ Files to read before starting:
 
 ### 1. Red Phase
 
-- [ ] Read all Investigation Targets
-- [ ] Run grep to document every jQuery call in these two files:
+- [x] Read all Investigation Targets
+- [x] Run grep to document every jQuery call in these two files:
   ```bash
   grep -n "jquery\|\$(" src/theme.js src/visualizer.js
   ```
   Record each line — verify the replacement pattern before writing code
-- [ ] Confirm both function signatures remain unchanged after reading the files
+- [x] Confirm both function signatures remain unchanged after reading the files
 
 ### 2. Green Phase
 
 **`src/theme.js`**
-- [ ] Remove `import $ from 'jquery'`
-- [ ] In `darkMode()`, replace:
+- [x] Remove `import $ from 'jquery'`
+- [x] In `darkMode()`, replace:
   - `$("body").addClass("dark")` → `document.body.classList.add("dark")`
   - `$("#profile-logo").attr("src", v)` → `document.getElementById("profile-logo").setAttribute("src", v)`
     (where `v` is the white logo path, e.g., `img/jcc_logo_w.png`)
@@ -60,7 +60,7 @@ Files to read before starting:
     ```js
     document.querySelectorAll(".nes-dialog").forEach(el => el.classList.add("dark"))
     ```
-- [ ] In `normalTheme()`, replace:
+- [x] In `normalTheme()`, replace:
   - `$("body").removeClass("dark")` → `document.body.classList.remove("dark")`
   - `$("#profile-logo").attr("src", v)` → `document.getElementById("profile-logo").setAttribute("src", v)`
     (where `v` is the default logo path)
@@ -68,15 +68,15 @@ Files to read before starting:
     and `document.querySelectorAll(".nes-dialog").forEach(el => el.classList.remove("dark"))`
 
 **`src/visualizer.js`**
-- [ ] Remove `import $ from 'jquery'`
-- [ ] In `handlePlayback()`, replace:
+- [x] Remove `import $ from 'jquery'`
+- [x] In `handlePlayback()`, replace:
   - `$("body").addClass("breathing-visualizer")` → `document.body.classList.add("breathing-visualizer")`
   - `$("body").removeClass("breathing-visualizer")` → `document.body.classList.remove("breathing-visualizer")`
-- [ ] Run `pnpm run build` — must exit 0
+- [x] Run `pnpm run build` — must exit 0
 
 ### 3. Refactor Phase
 
-- [ ] Run grep to confirm zero jQuery references remain:
+- [x] Run grep to confirm zero jQuery references remain:
   ```bash
   grep -r "from 'jquery'\|import \$" src/theme.js src/visualizer.js
   ```
@@ -113,11 +113,11 @@ Files to read before starting:
 
 ## Completion Criteria
 
-- [ ] `theme.js`: no jQuery import; all `$()` calls replaced with native DOM equivalents
-- [ ] `visualizer.js`: no jQuery import; all `$("body").addClass/removeClass` calls replaced
-- [ ] Function signatures `darkMode()`, `normalTheme()`, `handlePlayback()` unchanged
-- [ ] `grep -r "from 'jquery'\|import \$" src/theme.js src/visualizer.js` returns no results
-- [ ] `pnpm run build` exits 0
+- [x] `theme.js`: no jQuery import; all `$()` calls replaced with native DOM equivalents
+- [x] `visualizer.js`: no jQuery import; all `$("body").addClass/removeClass` calls replaced
+- [x] Function signatures `darkMode()`, `normalTheme()`, `handlePlayback()` unchanged
+- [x] `grep -r "from 'jquery'\|import \$" src/theme.js src/visualizer.js` returns no results
+- [x] `pnpm run build` exits 0
 - [ ] Dark theme applies in browser (manual check)
 
 ## Notes

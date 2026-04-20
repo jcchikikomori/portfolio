@@ -1,10 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import $ from "jquery";
 import "nes.css/css/nes.min.css";
 import { darkMode, normalTheme } from './theme';
 import { handlePlayback } from "./visualizer";
-import { microProcessor } from "./http";
 
 import './registerServiceWorker'
 
@@ -42,8 +40,6 @@ window.onload = function() {
   document.addEventListener('play', handlePlayback, true);
   document.addEventListener('pause', handlePlayback, true);
   document.addEventListener('ended', handlePlayback, true);
-
-  $("#profile-container").show();
 };
 
 createApp(App).mount("#app");

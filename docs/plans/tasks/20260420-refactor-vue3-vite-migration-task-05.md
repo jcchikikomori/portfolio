@@ -22,8 +22,8 @@ This task must run after Tasks 2 and 3 so that the Vue 3 source is in place; run
 
 ## Target Files
 
-- [ ] `.eslintrc.json` — NEW: standalone ESLint config file
-- [ ] `package.json` — remove `eslintConfig` inline block; add `eslint-plugin-security` to
+- [x] `.eslintrc.json` — NEW: standalone ESLint config file
+- [x] `package.json` — remove `eslintConfig` inline block; add `eslint-plugin-security` to
   `devDependencies`
 
 ## Investigation Targets
@@ -42,20 +42,20 @@ Files to read before starting:
 
 ### 1. Red Phase
 
-- [ ] Read all Investigation Targets
-- [ ] Run current lint to see baseline violation count:
+- [x] Read all Investigation Targets
+- [x] Run current lint to see baseline violation count:
   ```bash
   pnpm run lint
   ```
   Record any existing violations — these must all be zero after this task
-- [ ] Install `eslint-plugin-security@^3`:
+- [x] Install `eslint-plugin-security@^3`:
   ```bash
   pnpm add -D eslint-plugin-security@^3
   ```
 
 ### 2. Green Phase
 
-- [ ] Create `.eslintrc.json` at project root:
+- [x] Create `.eslintrc.json` at project root:
   ```json
   {
     "root": true,
@@ -73,12 +73,12 @@ Files to read before starting:
   ```
   Note: `"jquery": true` is NOT included in `env` (jQuery removed); `@babel/eslint-parser` is
   NOT set as parser (not needed with Vite/esbuild).
-- [ ] Remove the `"eslintConfig"` key and its entire value from `package.json`
-- [ ] Run `pnpm run lint`:
+- [x] Remove the `"eslintConfig"` key and its entire value from `package.json`
+- [x] Run `pnpm run lint`:
   ```bash
   pnpm run lint
   ```
-- [ ] For each violation reported:
+- [x] For each violation reported:
   - Vue 3 template violations (e.g., `vue/no-deprecated-*`, `vue/multi-word-component-names`):
     fix in the relevant `.vue` file
   - Security violations: fix the flagged pattern in the relevant file
@@ -86,9 +86,9 @@ Files to read before starting:
 
 ### 3. Refactor Phase
 
-- [ ] Run `pnpm run lint` a final time and confirm exit code 0 with zero errors
-- [ ] Run `pnpm run build` to confirm lint config changes did not break the build
-- [ ] Confirm no `// eslint-disable` lines were added to any production file:
+- [x] Run `pnpm run lint` a final time and confirm exit code 0 with zero errors
+- [x] Run `pnpm run build` to confirm lint config changes did not break the build
+- [x] Confirm no `// eslint-disable` lines were added to any production file:
   ```bash
   grep -r "eslint-disable" src/
   ```
@@ -118,12 +118,12 @@ Files to read before starting:
 
 ## Completion Criteria
 
-- [ ] `.eslintrc.json` exists at project root with correct extends
-- [ ] `eslint-plugin-security@^3` in `devDependencies`
-- [ ] `package.json` has no `eslintConfig` block
-- [ ] `pnpm run lint` exits 0 with zero errors
-- [ ] No `// eslint-disable` lines added to production code
-- [ ] `pnpm run build` still exits 0
+- [x] `.eslintrc.json` exists at project root with correct extends
+- [x] `eslint-plugin-security@^3` in `devDependencies`
+- [x] `package.json` has no `eslintConfig` block
+- [x] `pnpm run lint` exits 0 with zero errors
+- [x] No `// eslint-disable` lines added to production code
+- [x] `pnpm run build` still exits 0
 
 ## Notes
 
