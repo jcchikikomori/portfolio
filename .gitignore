@@ -1,5 +1,9 @@
 # Claude
 .claude/
+docs/qa/
+docs/**/*.png
+docs/**/*.html
+docs/**/*.json
 
 # NodeJS
 .DS_Store
