@@ -19,12 +19,12 @@ branches.
 
 ## Target Files (test files to create)
 
-- [ ] `src/tests/App.spec.js`
-- [ ] `src/tests/ProfileComponent.spec.js`
-- [ ] `src/tests/ProjectsComponent.spec.js`
-- [ ] `src/tests/SpotifyComponent.spec.js`
-- [ ] `src/tests/theme.spec.js`
-- [ ] `src/tests/visualizer.spec.js`
+- [x] `src/tests/App.spec.js`
+- [x] `src/tests/ProfileComponent.spec.js`
+- [x] `src/tests/ProjectsComponent.spec.js`
+- [x] `src/tests/SpotifyComponent.spec.js`
+- [x] `src/tests/theme.spec.js`
+- [x] `src/tests/visualizer.spec.js`
 
 ## Investigation Targets
 
@@ -46,80 +46,80 @@ Files to read before starting:
 
 ### 1. Red Phase
 
-- [ ] Read all Investigation Targets above
-- [ ] Create all six empty test files (stubs) with `describe` blocks only; run `pnpm run test`
+- [x] Read all Investigation Targets above
+- [x] Create all six empty test files (stubs) with `describe` blocks only; run `pnpm run test`
   and confirm it exits with a coverage failure (0% coverage, threshold not met) — this is the
   expected RED state
 
 ### 2. Green Phase
 
 **`src/tests/App.spec.js`**
-- [ ] Import `mount` from `@vue/test-utils` and `App` from `../App.vue`
-- [ ] Before each test, spy on `console.warn` and `console.error` with `vi.spyOn`
-- [ ] Test case 1: "mounts without Vue warnings" — mount `App`; assert `console.warn` not called;
+- [x] Import `mount` from `@vue/test-utils` and `App` from `../App.vue`
+- [x] Before each test, spy on `console.warn` and `console.error` with `vi.spyOn`
+- [x] Test case 1: "mounts without Vue warnings" — mount `App`; assert `console.warn` not called;
   assert `console.error` not called
-- [ ] Test case 2: "renders root element" — mount `App`; assert the wrapper contains a root element
+- [x] Test case 2: "renders root element" — mount `App`; assert the wrapper contains a root element
   (e.g., `wrapper.find('#app')` or `wrapper.element` is truthy)
 
 **`src/tests/ProfileComponent.spec.js`**
-- [ ] Import `mount` and `ProfileComponent`
-- [ ] Before each test, create a mock dialog element with `showModal` as a `vi.fn()` spy and
+- [x] Import `mount` and `ProfileComponent`
+- [x] Before each test, create a mock dialog element with `showModal` as a `vi.fn()` spy and
   inject it into jsdom: `document.body.innerHTML` can include `<dialog id="dialog-spotify">` and
   `<dialog id="dialog-projects">`; or use `document.createElement('dialog')` and
   `document.getElementById` mock
-- [ ] Test case 1: "Music button opens Spotify dialog" — mount component; find the "Music" button
+- [x] Test case 1: "Music button opens Spotify dialog" — mount component; find the "Music" button
   and trigger a click; assert `document.getElementById("dialog-spotify").showModal` was called
-- [ ] Test case 2: "Careers button opens Projects dialog" — same pattern for "Careers" button and
+- [x] Test case 2: "Careers button opens Projects dialog" — same pattern for "Careers" button and
   `#dialog-projects`
-- [ ] Test case 3: "link button calls window.open with noopener" — find a link button (LinkedIn,
+- [x] Test case 3: "link button calls window.open with noopener" — find a link button (LinkedIn,
   GitHub, or Blog); trigger a click; assert `window.open` was called; assert the call included
   `'noopener,noreferrer'` as the third argument
 
 **`src/tests/ProjectsComponent.spec.js`**
-- [ ] Import `mount` and `ProjectsComponent`
-- [ ] Test case 1: "project link button calls window.open with noopener" — mount component; find
+- [x] Import `mount` and `ProjectsComponent`
+- [x] Test case 1: "project link button calls window.open with noopener" — mount component; find
   a project card link button; trigger a click; assert `window.open` was called with
   `'noopener,noreferrer'`
 
 **`src/tests/SpotifyComponent.spec.js`**
-- [ ] Import `mount` and `SpotifyComponent`
-- [ ] Test case 1: "renders without errors" — mount component; assert no errors; assert wrapper
+- [x] Import `mount` and `SpotifyComponent`
+- [x] Test case 1: "renders without errors" — mount component; assert no errors; assert wrapper
   exists
-- [ ] Test case 2: "close button triggers dialog close" — mount component; find the close button;
+- [x] Test case 2: "close button triggers dialog close" — mount component; find the close button;
   trigger a click; assert the expected close method was called (inspect `SpotifyComponent.vue` to
   determine whether it calls `dialog.close()`, a custom method, or emits an event)
 
 **`src/tests/theme.spec.js`**
-- [ ] Import `darkMode` and `normalTheme` from `../theme.js`
-- [ ] Before each test:
+- [x] Import `darkMode` and `normalTheme` from `../theme.js`
+- [x] Before each test:
   - Reset `document.body.className = ''`
   - Ensure `#profile-logo` exists in jsdom: append `<img id="profile-logo" src="">` to
     `document.body` if not already present; clean up in `afterEach`
-- [ ] Test case 1: "darkMode adds dark class to body" — call `darkMode()`; assert
+- [x] Test case 1: "darkMode adds dark class to body" — call `darkMode()`; assert
   `document.body.classList.contains('dark')` is `true`
-- [ ] Test case 2: "normalTheme removes dark class from body" — call `darkMode()` then
+- [x] Test case 2: "normalTheme removes dark class from body" — call `darkMode()` then
   `normalTheme()`; assert `document.body.classList.contains('dark')` is `false`
-- [ ] Test case 3: "darkMode sets logo to white variant" — call `darkMode()`; assert
+- [x] Test case 3: "darkMode sets logo to white variant" — call `darkMode()`; assert
   `document.getElementById("profile-logo").getAttribute("src")` contains `jcc_logo_w.png` or
   the white logo filename (read from actual `theme.js` source)
-- [ ] Test case 4: "normalTheme sets logo to default variant" — call `darkMode()` then
+- [x] Test case 4: "normalTheme sets logo to default variant" — call `darkMode()` then
   `normalTheme()`; assert `document.getElementById("profile-logo").getAttribute("src")` contains
   the default logo filename
 
 **`src/tests/visualizer.spec.js`**
-- [ ] Import `handlePlayback` from `../visualizer.js`
-- [ ] Before each test: reset `document.body.className = ''`
-- [ ] Understand how `handlePlayback` determines play vs pause — read `visualizer.js` to see if
+- [x] Import `handlePlayback` from `../visualizer.js`
+- [x] Before each test: reset `document.body.className = ''`
+- [x] Understand how `handlePlayback` determines play vs pause — read `visualizer.js` to see if
   it uses `event.type` or checks a media element state; set up accordingly
-- [ ] Test case 1: "play event adds breathing-visualizer class" — call `handlePlayback` or
+- [x] Test case 1: "play event adds breathing-visualizer class" — call `handlePlayback` or
   dispatch a `play` event as the function expects; assert
   `document.body.classList.contains('breathing-visualizer')` is `true`
-- [ ] Test case 2: "pause event removes breathing-visualizer class" — after adding the class,
+- [x] Test case 2: "pause event removes breathing-visualizer class" — after adding the class,
   trigger the pause equivalent; assert class is `false`
-- [ ] Test case 3: "ended event removes breathing-visualizer class" — same as pause but with
+- [x] Test case 3: "ended event removes breathing-visualizer class" — same as pause but with
   `ended` event
 
-- [ ] Run `pnpm run test`:
+- [x] Run `pnpm run test`:
   ```bash
   pnpm run test
   ```
@@ -127,11 +127,11 @@ Files to read before starting:
 
 ### 3. Refactor Phase
 
-- [ ] If coverage is below 95%, identify which lines/branches are not covered and add targeted
+- [x] If coverage is below 95%, identify which lines/branches are not covered and add targeted
   test cases
-- [ ] Ensure no `vi.mock()` suppression is hiding untested code paths
-- [ ] Run `pnpm run lint` — test files must also lint cleanly
-- [ ] Run `pnpm run test` a final time — confirm all green and coverage threshold met
+- [x] Ensure no `vi.mock()` suppression is hiding untested code paths
+- [x] Run `pnpm run lint` — test files must also lint cleanly
+- [x] Run `pnpm run test` a final time — confirm all green and coverage threshold met
 
 ## Quality Assurance Mechanisms
 
@@ -158,13 +158,13 @@ Files to read before starting:
 
 ## Completion Criteria
 
-- [ ] Six test files created in `src/tests/`
-- [ ] All tests pass (`pnpm run test` exits 0)
-- [ ] Coverage report: >= 95% lines and >= 95% branches over `src/`
-- [ ] `window.open` test cases assert `'noopener,noreferrer'` as the third argument
-- [ ] `document.body.classList` state verified for `dark` and `breathing-visualizer` classes
-- [ ] No `vi.mock()` suppressions hiding untested paths
-- [ ] `pnpm run lint` exits 0 (test files lint cleanly)
+- [x] Six test files created in `src/tests/`
+- [x] All tests pass (`pnpm run test` exits 0)
+- [x] Coverage report: >= 95% lines and >= 95% branches over `src/`
+- [x] `window.open` test cases assert `'noopener,noreferrer'` as the third argument
+- [x] `document.body.classList` state verified for `dark` and `breathing-visualizer` classes
+- [x] No `vi.mock()` suppressions hiding untested paths
+- [x] `pnpm run lint` exits 0 (test files lint cleanly)
 
 ## Notes
 

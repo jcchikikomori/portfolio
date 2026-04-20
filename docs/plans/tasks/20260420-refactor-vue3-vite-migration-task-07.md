@@ -20,11 +20,11 @@ zero test files — it is the foundation on which Task 2 writes the actual tests
 
 ## Target Files
 
-- [ ] `package.json` — add `vitest`, `@vue/test-utils@^2`, `jsdom`, `@vitest/coverage-v8` to
+- [x] `package.json` — add `vitest`, `@vue/test-utils@^2`, `jsdom`, `@vitest/coverage-v8` to
   `devDependencies`; add `"test": "vitest run --coverage"` script
-- [ ] `vite.config.js` — add `test` configuration block
-- [ ] `src/tests/setup.js` — NEW: global mock setup file for jsdom environment
-- [ ] `.github/workflows/default.yml` — add `pnpm run test` step after build step
+- [x] `vite.config.js` — add `test` configuration block
+- [x] `src/tests/setup.js` — NEW: global mock setup file for jsdom environment
+- [x] `.github/workflows/default.yml` — add `pnpm run test` step after build step
 
 ## Investigation Targets
 
@@ -42,9 +42,9 @@ Files to read before starting:
 
 ### 1. Red Phase
 
-- [ ] Read all Investigation Targets
-- [ ] Confirm `pnpm run build` and `pnpm run lint` both exit 0 (Phase 2 gate passed)
-- [ ] Confirm `pnpm run test` does not yet exist:
+- [x] Read all Investigation Targets
+- [x] Confirm `pnpm run build` and `pnpm run lint` both exit 0 (Phase 2 gate passed)
+- [x] Confirm `pnpm run test` does not yet exist:
   ```bash
   pnpm run test
   # Expected: error — script not found
@@ -52,12 +52,12 @@ Files to read before starting:
 
 ### 2. Green Phase
 
-- [ ] Install Vitest dependencies:
+- [x] Install Vitest dependencies:
   ```bash
   pnpm add -D vitest@^1 @vue/test-utils@^2 jsdom @vitest/coverage-v8
   ```
-- [ ] Add `"test": "vitest run --coverage"` to `scripts` in `package.json`
-- [ ] Add the `test` block to `vite.config.js`. Edit the file to append a `test` key inside
+- [x] Add `"test": "vitest run --coverage"` to `scripts` in `package.json`
+- [x] Add the `test` block to `vite.config.js`. Edit the file to append a `test` key inside
   `defineConfig({...})`:
   ```js
   test: {
@@ -73,7 +73,7 @@ Files to read before starting:
     }
   }
   ```
-- [ ] Create `src/tests/setup.js` with the following global mocks:
+- [x] Create `src/tests/setup.js` with the following global mocks:
   ```js
   import { vi } from 'vitest'
 
@@ -112,13 +112,13 @@ Files to read before starting:
     register: vi.fn()
   }))
   ```
-- [ ] Create `src/tests/` directory if it does not exist (the setup.js creation above creates it)
-- [ ] Update `.github/workflows/default.yml`: add a step after the build step:
+- [x] Create `src/tests/` directory if it does not exist (the setup.js creation above creates it)
+- [x] Update `.github/workflows/default.yml`: add a step after the build step:
   ```yaml
   - name: Test
     run: pnpm run test
   ```
-- [ ] Run `pnpm run test`:
+- [x] Run `pnpm run test`:
   ```bash
   pnpm run test
   ```
@@ -127,13 +127,13 @@ Files to read before starting:
 
 ### 3. Refactor Phase
 
-- [ ] Confirm `vite.config.js` still produces a valid Vite build:
+- [x] Confirm `vite.config.js` still produces a valid Vite build:
   ```bash
   pnpm run build
   ```
   Expected: exits 0 (the `test` block in vite.config.js should not affect the build)
-- [ ] Confirm `pnpm run lint` still exits 0
-- [ ] Confirm `src/tests/setup.js` is excluded from the coverage report (via the `exclude` list)
+- [x] Confirm `pnpm run lint` still exits 0
+- [x] Confirm `src/tests/setup.js` is excluded from the coverage report (via the `exclude` list)
 
 ## Quality Assurance Mechanisms
 
@@ -160,15 +160,15 @@ Files to read before starting:
 
 ## Completion Criteria
 
-- [ ] `vitest`, `@vue/test-utils@^2`, `jsdom`, `@vitest/coverage-v8` in `devDependencies`
-- [ ] `package.json` scripts includes `"test": "vitest run --coverage"`
-- [ ] `vite.config.js` contains `test` block with `environment: 'jsdom'`, `setupFiles`, and
+- [x] `vitest`, `@vue/test-utils@^2`, `jsdom`, `@vitest/coverage-v8` in `devDependencies`
+- [x] `package.json` scripts includes `"test": "vitest run --coverage"`
+- [x] `vite.config.js` contains `test` block with `environment: 'jsdom'`, `setupFiles`, and
   coverage threshold at 95%
-- [ ] `src/tests/setup.js` exists with mocks for `window.matchMedia`, `window.AudioContext`,
+- [x] `src/tests/setup.js` exists with mocks for `window.matchMedia`, `window.AudioContext`,
   `window.open`, and `register-service-worker`
-- [ ] `pnpm run test` exits 0
-- [ ] `pnpm run build` exits 0
-- [ ] `.github/workflows/default.yml` includes `pnpm run test` step
+- [x] `pnpm run test` exits 0
+- [x] `pnpm run build` exits 0
+- [x] `.github/workflows/default.yml` includes `pnpm run test` step
 
 ## Notes
 

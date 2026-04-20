@@ -14,5 +14,17 @@ export default defineConfig({
         quietDeps: true
       }
     }
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./src/tests/setup.js'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'lcov'],
+      thresholds: { lines: 95, branches: 95, functions: 95 },
+      include: ['src/**/*.{js,vue}'],
+      exclude: ['src/tests/**', 'src/registerServiceWorker.js']
+    }
   }
 })
