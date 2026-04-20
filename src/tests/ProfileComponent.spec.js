@@ -30,6 +30,30 @@ describe('ProfileComponent.vue', () => {
         attachDiv.remove()
     })
 
+    it('showProjects does nothing when dialog element is absent', async () => {
+        const original = document.getElementById.bind(document)
+        vi.spyOn(document, 'getElementById').mockImplementation((id) => {
+            if (id === 'dialog-projects') return null
+            return original(id)
+        })
+        const careersBtn = wrapper.findAll('button').find(b => b.text().includes('Careers'))
+        // Should not throw
+        await careersBtn.trigger('click')
+        vi.restoreAllMocks()
+    })
+
+    it('showSpotify does nothing when dialog element is absent', async () => {
+        const original = document.getElementById.bind(document)
+        vi.spyOn(document, 'getElementById').mockImplementation((id) => {
+            if (id === 'dialog-spotify') return null
+            return original(id)
+        })
+        const musicBtn = wrapper.findAll('button').find(b => b.text().includes('Music'))
+        // Should not throw
+        await musicBtn.trigger('click')
+        vi.restoreAllMocks()
+    })
+
     it('Music button opens Spotify dialog', async () => {
         const musicBtn = wrapper.findAll('button').find(b => b.text().includes('Music'))
         await musicBtn.trigger('click')
@@ -68,6 +92,16 @@ describe('ProfileComponent.vue', () => {
         expect(window.open).toHaveBeenCalled()
         const call = window.open.mock.calls[0]
         expect(call[0]).toContain('github.com/jcchikikomori/portfolio/releases/tag/v')
+        expect(call[2]).toBe('noopener,noreferrer')
+    })
+
+    it('Blog button calls window.open with blog URL and noopener', async () => {
+        const blogBtn = wrapper.findAll('button').find(b => b.text().includes('Blog'))
+        await blogBtn.trigger('click')
+        expect(window.open).toHaveBeenCalled()
+        const call = window.open.mock.calls[0]
+        expect(call[0]).toBe('https://jcchikikomori.github.io/blog')
+        expect(call[1]).toBe('_blank')
         expect(call[2]).toBe('noopener,noreferrer')
     })
 })

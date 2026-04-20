@@ -7,6 +7,13 @@ describe('ProjectsComponent.vue', () => {
         window.open.mockClear()
     })
 
+    it('renders #dialog-projects with nes-dialog class', () => {
+        const wrapper = mount(ProjectsComponent)
+        const dialog = wrapper.find('#dialog-projects')
+        expect(dialog.exists()).toBe(true)
+        expect(dialog.classes()).toContain('nes-dialog')
+    })
+
     it('project card link calls window.open with noopener', async () => {
         const wrapper = mount(ProjectsComponent)
         const contactLink = wrapper.find('a')

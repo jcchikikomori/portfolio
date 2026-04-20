@@ -682,7 +682,7 @@ ESLint config update:
   "env": { "node": true, "browser": true },
   "extends": [
     "plugin:vue/vue3-recommended",
-    "plugin:security/recommended"
+    "plugin:security/recommended-legacy"
   ],
   "rules": {},
   "parserOptions": {

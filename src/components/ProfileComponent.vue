@@ -102,17 +102,17 @@ export default {
       window.open(url, '_blank', 'noopener,noreferrer')
     },
     showProjects: () => {
-      let projectsDialog = document.getElementById("dialog-projects");
-
-      projectsDialog.showModal();
-      projectsDialog.classList.add("-is-open");
-      projectsDialog.scrollTo({ top: 0, behavior: 'smooth' });
+      const projectsDialog = document.getElementById('dialog-projects')
+      if (!projectsDialog) return
+      projectsDialog.showModal()
+      projectsDialog.classList.add('-is-open')
+      projectsDialog.scrollTo({ top: 0, behavior: 'smooth' })
     },
     showSpotify: () => {
-      let spotifyDialog = document.getElementById("dialog-spotify");
-
-      spotifyDialog.showModal();
-      spotifyDialog.classList.remove("-is-open");
+      const spotifyDialog = document.getElementById('dialog-spotify')
+      if (!spotifyDialog) return
+      spotifyDialog.classList.remove('-is-open')
+      spotifyDialog.showModal()
     }
   },
   data() {
