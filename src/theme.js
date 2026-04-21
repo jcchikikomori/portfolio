@@ -1,28 +1,16 @@
-import $ from "jquery";
-
 export const darkMode = () => {
-  // const darkBgColor = "#212529";
-
-  // $("body").css("background", darkBgColor);
-  $("body").addClass("dark");
-  $("#profile-logo").attr("src", "img/jcc_logo_w.png");
-  $(".nes-container").each(function() {
-    $(this).addClass("is-dark");
-  });
-  $(".nes-dialog").each(function() {
-    $(this).addClass("is-dark");
-  });
+  document.body.classList.add("dark");
+  const logo = document.getElementById("profile-logo");
+  if (logo) logo.setAttribute("src", "img/jcc_logo_w.png");
+  document.querySelectorAll(".nes-container").forEach(el => el.classList.add("is-dark"));
+  document.querySelectorAll(".nes-dialog").forEach(el => el.classList.add("is-dark"));
 };
-  
+
 export const normalTheme = () => {
-  // $("body").css("background", "#FFF");
-  $("body").removeClass("dark");
-  $("#profile-logo").attr("src", "img/jcc_logo.png");
-  $(".nes-container").each(function() {
-    $(this).removeClass("is-dark");
-  });
-  $(".nes-dialog").each(function() {
-    $(this).removeClass("is-dark");
-  });
+  document.body.classList.remove("dark");
+  const logo = document.getElementById("profile-logo");
+  if (logo) logo.setAttribute("src", "img/jcc_logo.png");
+  document.querySelectorAll(".nes-container").forEach(el => el.classList.remove("is-dark"));
+  document.querySelectorAll(".nes-dialog").forEach(el => el.classList.remove("is-dark"));
 };
   

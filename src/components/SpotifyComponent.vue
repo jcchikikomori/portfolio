@@ -44,8 +44,6 @@
 </template>
 
 <script>
-  // import { visualizerIsOff } from "../visualizer";
-
   export default {
     name: "SpotifyComponent",
     components: {},

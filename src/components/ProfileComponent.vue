@@ -21,7 +21,7 @@
         <div class="nes-container is-centered">
           <img
             id="profile-logo"
-            src="img/jcc_logo.png"
+            src="/img/jcc_logo.png"
             width="200"
             alt="My Logo"
           />
@@ -78,9 +78,6 @@
           </p>
         </div>
 
-        <div class="updates-wrapper">
-          <UpdatesComponent></UpdatesComponent>
-        </div>
       </div>
 
       <ProjectsComponent></ProjectsComponent>
@@ -90,46 +87,32 @@
 </template>
 
 <script>
-import dialogPolyfill from "dialog-polyfill";
-
 import ProjectsComponent from "./ProjectsComponent.vue";
 import SpotifyComponent from "./SpotifyComponent.vue";
-import UpdatesComponent from "./UpdatesComponent.vue";
-import $ from "jquery";
-import { visualizerIsOn } from "../visualizer";
 import packageInfo from '../../package.json';
 
 export default {
   name: "ProfileComponent",
   components: {
     ProjectsComponent,
-    SpotifyComponent,
-    UpdatesComponent
+    SpotifyComponent
   },
   methods: {
-    goToUrl: (url, includeTarget = true) => {
-      $("#redirect").attr("href", url);
-      if (!includeTarget) {
-        $("#redirect").attr("target", null);
-      } else {
-        $("#redirect").attr("target", "_blank");
-      }
-      $("#redirect")[0].click();
+    goToUrl(url) {
+      window.open(url, '_blank', 'noopener,noreferrer')
     },
     showProjects: () => {
-      let projectsDialog = document.getElementById("dialog-projects");
-
-      dialogPolyfill.registerDialog(projectsDialog);
-      projectsDialog.showModal();
-      projectsDialog.classList.add("-is-open");
-      projectsDialog.scrollTo({ top: 0, behavior: 'smooth' });
+      const projectsDialog = document.getElementById('dialog-projects')
+      if (!projectsDialog) return
+      projectsDialog.showModal()
+      projectsDialog.classList.add('-is-open')
+      projectsDialog.scrollTo({ top: 0, behavior: 'smooth' })
     },
     showSpotify: () => {
-      let spotifyDialog = document.getElementById("dialog-spotify");
-
-      dialogPolyfill.registerDialog(spotifyDialog);
-      spotifyDialog.showModal();
-      spotifyDialog.classList.remove("-is-open");
+      const spotifyDialog = document.getElementById('dialog-spotify')
+      if (!spotifyDialog) return
+      spotifyDialog.classList.remove('-is-open')
+      spotifyDialog.showModal()
     }
   },
   data() {

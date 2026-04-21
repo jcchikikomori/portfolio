@@ -1,14 +1,10 @@
-import Vue from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
-import $ from "jquery";
 import "nes.css/css/nes.min.css";
 import { darkMode, normalTheme } from './theme';
 import { handlePlayback } from "./visualizer";
-import { microProcessor } from "./http";
 
 import './registerServiceWorker'
-
-Vue.config.productionTip = false;
 
 /** main */
 window.onload = function() {
@@ -44,10 +40,6 @@ window.onload = function() {
   document.addEventListener('play', handlePlayback, true);
   document.addEventListener('pause', handlePlayback, true);
   document.addEventListener('ended', handlePlayback, true);
-
-  $("#profile-container").show();
 };
 
-new Vue({
-  render: h => h(App)
-}).$mount("#app");
+createApp(App).mount("#app");
