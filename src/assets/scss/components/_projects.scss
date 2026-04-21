@@ -1,5 +1,14 @@
 #dialog-projects {
   max-width: 1280px;
+  width: 90vw;
+  max-height: 90vh;
+  margin: auto;
+  padding: 1rem;
+
+  @include mq($from: smallest, $until: mobile) {
+    width: 95vw;
+    padding: 0.75rem;
+  }
 
   .subtitle {
     font-size: 13px;
@@ -22,14 +31,14 @@
       flex: 0 1 calc(33.333% - 1rem); // Desktop: 3 columns
       // min-height: 25rem;
 
-      @include mq($from: smartphone, $until: tablet) {
+      @include mq($from: tablet) {
         flex: 0 1 calc(50% - 1rem); // Tablet: 2 columns
         min-height: 20rem;
       }
 
-      @include mq($from: smallest, $until: mobile) {
+      @include mq($from: smallest, $until: tablet) {
         flex: 1 1 100%; // Mobile: 1 column
-        min-height: 18rem;
+        min-height: auto;
       }
 
       .card-img-top {
@@ -140,9 +149,11 @@
   .career-details-trigger {
     font-size: 0.75rem;
     margin-top: 0.5rem;
+    min-height: 44px;
 
     @include mq($from: smallest, $until: mobile) {
       width: 100%;
+      min-height: 44px;
     }
   }
 
@@ -280,6 +291,38 @@
   .dialog-menu {
     margin-top: 1rem;
     padding: 0;
+  }
+
+  @include mq($from: smallest, $until: mobile) {
+    width: 95vw;
+    max-height: 95vh;
+    padding: 0.75rem;
+
+    .career-details-content {
+      gap: 0.75rem;
+    }
+
+    .career-details-info {
+      .info-section {
+        margin-bottom: 0.75rem;
+
+        h3 {
+          font-size: 0.8rem;
+        }
+
+        p {
+          font-size: 0.85rem;
+        }
+      }
+    }
+
+    .career-cta {
+      min-height: 44px;
+    }
+
+    .dialog-menu {
+      margin-top: 0.75rem;
+    }
   }
 
   &.is-dark {

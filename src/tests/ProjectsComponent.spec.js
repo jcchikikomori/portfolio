@@ -72,68 +72,28 @@ describe('ProjectsComponent.vue', () => {
         })
     })
 
-    it('Accenture card click calls handleCardClick dispatching to window.open', async () => {
-        const wrapper = mount(ProjectsComponent)
+    it('card click opens career details modal', async () => {
+        const container = document.createElement('div')
+        document.body.appendChild(container)
+        const wrapper = mount(ProjectsComponent, { attachTo: container })
         const cards = wrapper.findAll('.card')
-        const accentureIndex = careers.findIndex(c => c.id === 'accenture')
-        await cards[accentureIndex].trigger('click')
-        expect(window.open).toHaveBeenCalled()
-        const call = window.open.mock.calls[0]
-        expect(call[0]).toBe('https://accenture.com')
-        expect(call[2]).toBe('noopener,noreferrer')
+        const dialog = document.getElementById('dialog-career-details')
+        const showModalSpy = vi.fn()
+        dialog.showModal = showModalSpy
+        
+        await cards[0].trigger('click')
+        expect(showModalSpy).toHaveBeenCalled()
+        
+        wrapper.unmount()
+        container.remove()
     })
 
-    it('hello-php card click calls handleCardClick dispatching to alert', async () => {
-        const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {})
+    it('card click sets selectedCareer correctly', async () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
-        const helloPhpIndex = careers.findIndex(c => c.id === 'hello-php')
-        await cards[helloPhpIndex].trigger('click')
-        expect(alertSpy).toHaveBeenCalledWith('Preview not available anymore.')
-        alertSpy.mockRestore()
-    })
-
-    it('Chatgenie card click calls window.open with correct URL', async () => {
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        const chatgenieIndex = careers.findIndex(c => c.id === 'chatgenie')
-        await cards[chatgenieIndex].trigger('click')
-        expect(window.open).toHaveBeenCalled()
-        const call = window.open.mock.calls[0]
-        expect(call[0]).toBe('https://chatgenie.ph')
-        expect(call[2]).toBe('noopener,noreferrer')
-    })
-
-    it('GCash card click calls window.open with correct URL', async () => {
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        const gcashIndex = careers.findIndex(c => c.id === 'gcash-miniprogram')
-        await cards[gcashIndex].trigger('click')
-        expect(window.open).toHaveBeenCalled()
-        const call = window.open.mock.calls[0]
-        expect(call[0]).toBe('https://miniprogram.gcash.com')
-        expect(call[2]).toBe('noopener,noreferrer')
-    })
-
-    it('Cove Manila card click calls alert for unavailable preview', async () => {
-        const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {})
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        const coveIndex = careers.findIndex(c => c.id === 'covemanila')
-        await cards[coveIndex].trigger('click')
-        expect(alertSpy).toHaveBeenCalledWith('Preview not available anymore.')
-        alertSpy.mockRestore()
-    })
-
-    it('McDelivery card click calls window.open with correct URL', async () => {
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        const mcIndex = careers.findIndex(c => c.id === 'mcdelivery')
-        await cards[mcIndex].trigger('click')
-        expect(window.open).toHaveBeenCalled()
-        const call = window.open.mock.calls[0]
-        expect(call[0]).toContain('mcdelivery.com.ph')
-        expect(call[2]).toBe('noopener,noreferrer')
+        
+        await cards[0].trigger('click')
+        expect(wrapper.vm.selectedCareer).toEqual(careers[0])
     })
 
     it('renders placeholder icon for careers with null logo', () => {
@@ -574,7 +534,7 @@ describe('ProjectsComponent.vue', () => {
         container.remove()
     })
 
-    it('career details dialog shows View Project button for url clickAction', async () => {
+    it('career details dialog shows Visit Project button for url clickAction', async () => {
         const container = document.createElement('div')
         document.body.appendChild(container)
         const wrapper = mount(ProjectsComponent, {
@@ -601,8 +561,45 @@ describe('ProjectsComponent.vue', () => {
 
         const ctaButton = wrapper.find('.career-cta')
         expect(ctaButton.exists()).toBe(true)
-        expect(ctaButton.text()).toBe('View Project')
-        expect(ctaButton.classes()).toContain('is-primary')
+        expect(ctaButton.text()).toBe('Visit Project')
+        expect(ctaButton.classes()).toContain('is-default')
+
+        wrapper.unmount()
+        container.remove()
+    })
+
+    it('Visit Project button calls window.open with correct URL', async () => {
+        const container = document.createElement('div')
+        document.body.appendChild(container)
+        const wrapper = mount(ProjectsComponent, {
+            attachTo: container,
+            data() {
+                return {
+                    careers: [
+                        {
+                            ...careers[0],
+                            clickAction: 'url',
+                            url: 'https://example.com',
+                            screenshots: ['/img/screenshots/test.png']
+                        }
+                    ]
+                }
+            }
+        })
+
+        const dialog = document.getElementById('dialog-career-details')
+        dialog.showModal = vi.fn()
+
+        wrapper.vm.showCareerDetails(careers[0].id)
+        await wrapper.vm.$nextTick()
+
+        const visitButton = wrapper.find('.career-cta')
+        await visitButton.trigger('click')
+        
+        expect(window.open).toHaveBeenCalled()
+        const call = window.open.mock.calls[0]
+        expect(call[0]).toBe('https://example.com')
+        expect(call[2]).toBe('noopener,noreferrer')
 
         wrapper.unmount()
         container.remove()
@@ -669,6 +666,62 @@ describe('ProjectsComponent.vue', () => {
         expect(screenshot.exists()).toBe(true)
         expect(screenshot.attributes('src')).toBe('/img/projects/placeholder.png')
 
+        wrapper.unmount()
+        container.remove()
+    })
+
+    it('close button closes careers dialog', async () => {
+        const container = document.createElement('div')
+        document.body.appendChild(container)
+        const wrapper = mount(ProjectsComponent, { attachTo: container })
+        
+        const careersDialog = document.getElementById('dialog-projects')
+        const closeSpy = vi.fn()
+        careersDialog.close = closeSpy
+        
+        // Get the close button from the dialog-menu in careers dialog
+        const closeButton = wrapper.findAll('.dialog-menu button').filter(b => b.text() === 'Okay')[0]
+        expect(closeButton.exists()).toBe(true)
+        
+        await closeButton.trigger('click')
+        expect(closeSpy).toHaveBeenCalled()
+        
+        wrapper.unmount()
+        container.remove()
+    })
+
+    it('close button closes career details dialog', async () => {
+        const container = document.createElement('div')
+        document.body.appendChild(container)
+        const wrapper = mount(ProjectsComponent, {
+            attachTo: container,
+            data() {
+                return {
+                    careers: [
+                        {
+                            ...careers[0],
+                            screenshots: ['/img/screenshots/test.png']
+                        }
+                    ]
+                }
+            }
+        })
+        
+        const detailsDialog = document.getElementById('dialog-career-details')
+        const closeSpy = vi.fn()
+        detailsDialog.close = closeSpy
+        detailsDialog.showModal = vi.fn()
+        
+        wrapper.vm.showCareerDetails(careers[0].id)
+        await wrapper.vm.$nextTick()
+        
+        // Get the close button from the dialog-menu in details dialog
+        const closeButton = wrapper.findAll('#dialog-career-details .dialog-menu button').filter(b => b.text() === 'Close')[0]
+        expect(closeButton.exists()).toBe(true)
+        
+        await closeButton.trigger('click')
+        expect(closeSpy).toHaveBeenCalled()
+        
         wrapper.unmount()
         container.remove()
     })
