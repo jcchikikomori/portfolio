@@ -287,6 +287,35 @@ describe('ProjectsComponent.vue', () => {
         container.remove()
     })
 
+    it('dark mode falls back to logo when logoDark is null', async () => {
+        const container = document.createElement('div')
+        document.body.appendChild(container)
+        const wrapper = mount(ProjectsComponent, {
+            attachTo: container,
+            data() {
+                return {
+                    careers: [
+                        {
+                            ...careers[0],
+                            logo: '/img/logos/light.svg',
+                            logoDark: null,
+                        }
+                    ]
+                }
+            }
+        })
+        const dialog = document.getElementById('dialog-projects')
+        dialog.classList.add('is-dark')
+        expect(wrapper.vm.isDark()).toBe(true)
+        await wrapper.vm.$forceUpdate()
+        await wrapper.vm.$nextTick()
+        const logoImg = wrapper.find('.career-logo')
+        expect(logoImg.exists()).toBe(true)
+        expect(logoImg.attributes('src')).toBe('/img/logos/light.svg')
+        wrapper.unmount()
+        container.remove()
+    })
+
     it('dark mode uses logoDark when available', async () => {
         const container = document.createElement('div')
         document.body.appendChild(container)

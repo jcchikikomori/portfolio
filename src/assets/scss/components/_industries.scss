@@ -1,5 +1,10 @@
 #dialog-industries {
   max-width: 960px;
+  height: fit-content;
+
+  .title {
+    margin: 0;
+  }
 
   .industry-card {
     margin-bottom: 1rem;

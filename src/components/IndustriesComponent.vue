@@ -1,12 +1,3 @@
-<style lang="scss" scoped>
-#dialog-industries {
-  height: fit-content;
-  .title {
-    margin: 0;
-  }
-}
-</style>
-
 <template>
   <!-- INDUSTRIES CONTAINER -->
   <div id="industries-container">
