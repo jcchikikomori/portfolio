@@ -1,17 +1,3 @@
-<style lang="scss" scoped>
-  .nes-container > .containers {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .updates-wrapper {
-      width: 100%;
-      margin-top: 1em;
-    }
-  }
-</style>
-
 <template>
   <!-- MAIN CONTAINER -->
   <div id="main-container" class="main-screen">
@@ -24,7 +10,7 @@
             src="/img/jcc_logo.png"
             width="200"
             alt="My Logo"
-          />
+          >
           <br /><br />
           <!-- <p>The Lazy Geek</p> -->
           <ul class="profile-list">
@@ -37,7 +23,7 @@
           <div class="btn-group-vertical btn-block">
             <button v-on:click="showSpotify" class="btn nes-btn is-default is-block">Music</button>
             <button v-on:click="showProjects" class="btn nes-btn is-default is-block">Careers</button>
-            <button class="btn nes-btn is-disabled is-block">Industries</button>
+            <button v-on:click="showIndustries" class="btn nes-btn is-default is-block">Industries</button>
             <button v-on:click="goToUrl('https://jcchikikomori.github.io/blog')"
               class="btn nes-btn is-default is-block">Blog</button>
           </div>
@@ -82,6 +68,7 @@
 
       <ProjectsComponent></ProjectsComponent>
       <SpotifyComponent></SpotifyComponent>
+      <IndustriesComponent></IndustriesComponent>
     </section>
   </div>
 </template>
@@ -89,13 +76,15 @@
 <script>
 import ProjectsComponent from "./ProjectsComponent.vue";
 import SpotifyComponent from "./SpotifyComponent.vue";
+import IndustriesComponent from "./IndustriesComponent.vue";
 import packageInfo from '../../package.json';
 
 export default {
   name: "ProfileComponent",
   components: {
     ProjectsComponent,
-    SpotifyComponent
+    SpotifyComponent,
+    IndustriesComponent
   },
   methods: {
     goToUrl(url) {
@@ -113,6 +102,11 @@ export default {
       if (!spotifyDialog) return
       spotifyDialog.classList.remove('-is-open')
       spotifyDialog.showModal()
+    },
+    showIndustries: () => {
+      const industriesDialog = document.getElementById('dialog-industries')
+      if (!industriesDialog) return
+      industriesDialog.showModal()
     }
   },
   data() {

@@ -1,6 +1,8 @@
 import { createApp } from "vue";
+
 import App from "./App.vue";
 import "nes.css/css/nes.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { darkMode, normalTheme } from './theme';
 import { handlePlayback } from "./visualizer";
 
@@ -30,7 +32,7 @@ window.onload = function() {
     .matchMedia("(prefers-color-scheme: dark)")
     .addEventListener("change", e => {
       const newColorScheme = e.matches ? "dark" : "light";
-      if (newColorScheme == "dark") {
+      if (newColorScheme === "dark") {
         darkMode();
       } else {
         normalTheme();

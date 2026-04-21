@@ -4,6 +4,7 @@ const isAudioPlaying = () => {
 }
 
 export const handlePlayback = () => {
+  // eslint-disable-next-line no-console
   console.debug("handlePlayback");
   if (isAudioPlaying()) {
     visualizerIsOn();

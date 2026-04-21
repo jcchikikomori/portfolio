@@ -1,142 +1,168 @@
-<template>
-  <!-- PROJECTS CONTAINER -->
-  <div id="projects-container">
-    <dialog class="nes-dialog" id="dialog-projects">
-      <form method="dialog">
-        <h1 class="title">My Career History</h1>
-        <p class="subtitle">
-          See more by
-          <a v-on:click="goToUrl('https://github.com/jcchikikomori')"
-            >contacting me</a
-          >
-          for my CV!
-        </p>
-        <div class="card-group">
-          <div class="card">
-            <div
-              class="card-img-top placeholder"
-              alt="Accenture"
-              v-on:click="goToUrl('https://accenture.com')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">Accenture</h6>
-              <!-- <p class="card-text"></p> -->
-              <p class="card-text">
-                <small class="text-muted">2022-present</small>
-              </p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top chatgenie"
-              alt="Chatgenie.ph"
-              v-on:click="goToUrl('https://chatgenie.ph')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">Chatgenie.ph</h6>
-              <p class="card-text">
-                Developed some integrations for Chatgenie.ph
-                Such as GCash (GLife), Viber, Facebook & Instagram
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2019-2022</small>
-              </p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top hello-php"
-              alt="php7-starter"
-              v-on:click="alert('Preview not available anymore.')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">hello-php</h6>
-              <p class="card-text">
-                For protyping PHP app with user authentication
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2017-present</small>
-              </p>
-            </div>
-          </div>
-          <!-- <div class="card">
-            <img
-              src="img/projects/placeholder.png"
-              class="card-img-top"
-              alt="PayMaya"
-              v-on:click="goToUrl('https://github.com/jcchikikomori?org=PayMaya&year_list=1')"
-            />
-            <div class="card-body">
-              <h6 class="card-title">PayMaya</h6>
-              <p class="card-text">
-                Contributed the issues & fixes for their SDKs.
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2020</small>
-              </p>
-            </div>
-          </div> -->
-          <div class="card">
-            <div
-              class="card-img-top gcash-miniprogram"
-              alt="GCash Mini Program"
-              v-on:click="goToUrl('https://miniprogram.gcash.com')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">GCash Mini Program</h6>
-              <p class="card-text">
-                For serving Chatgenie merchants for GLife<br />
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2020-2022</small>
-              </p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top covemanila"
-              alt="Cove Manila"
-              v-on:click="alert('Preview not available anymore.')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">Cove Manila WordPress Project</h6>
-              <p class="card-text"><small class="text-muted">2019</small></p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top mcdelivery"
-              alt="McDelivery PH"
-              v-on:click="goToUrl('https://web.archive.org/web/20191228231219if_/https://www.mcdelivery.com.ph/')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">McDelivery PH for Android</h6>
-              <p class="card-text">
-                <small class="text-muted">2019 - 2021</small>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <menu class="dialog-menu">
-          <button class="btn nes-btn is-primary is-block">Okay</button>
-        </menu>
-      </form>
-    </dialog>
-  </div>
-</template>
-
 <script>
+import { careers } from '../data/careers.js'
+
 export default {
   name: "ProjectsComponent",
   components: {},
+  data() {
+    return {
+      careers,
+      logoErrors: {},
+      selectedCareer: { company: '', screenshots: [] },
+    }
+  },
   methods: {
+    isDark() {
+      const dialog = document.getElementById('dialog-projects')
+      return Boolean(dialog?.classList.contains('is-dark'))
+    },
+    logoSrc(career) {
+      return this.isDark() && career.logoDark
+        ? career.logoDark
+        : career.logo
+    },
     goToUrl(url) {
       window.open(url, '_blank', 'noopener,noreferrer')
     },
-    alert: function(msg) {
-      alert(msg);
+    onLogoError(careerId) {
+      if (!this.logoErrors[careerId]) {
+        if (import.meta.env.DEV) {
+          console.warn(`[ProjectsComponent] Logo failed to load for: ${careerId}`)
+        }
+        this.logoErrors = { ...this.logoErrors, [careerId]: true }
+      }
     },
-  }
-};
+    showCareerDetails(careerId) {
+      const career = this.careers.find(c => c.id === careerId)
+      if (!career) {return}
+      this.selectedCareer = career
+      const dialog = document.getElementById('dialog-career-details')
+      if (!dialog) {return}
+      dialog.showModal()
+    },
+  },
+}
 </script>
+
+<template>
+  <!-- PROJECTS CONTAINER -->
+  <div id="projects-container">
+    <dialog id="dialog-projects" ref="careersDialog" class="nes-dialog">
+      <h1 class="title">My Career</h1>
+      <p class="subtitle">
+        See more by
+        <a @click="goToUrl('https://github.com/jcchikikomori')"
+          >contacting me</a
+        >
+        for my CV!
+      </p>
+      <div class="career-list">
+        <div
+          v-for="career in careers"
+          :key="career.id"
+          class="card"
+          @click="showCareerDetails(career.id)"
+        >
+          <div class="card-body">
+            <template v-if="career.logo && !logoErrors[career.id]">
+              <div class="card-body-logo">
+                <img
+                  :src="logoSrc(career)"
+                  :alt="career.company + ' logo'"
+                  class="career-logo"
+                  @error="onLogoError(career.id)"
+                />
+              </div>
+            </template>
+            <template v-else>
+              <div class="card-body-logo">
+                <i class="bi bi-x-lg career-logo-placeholder"></i>
+              </div>
+            </template>
+            <h6 class="card-title">{{ career.company }}</h6>
+            <div class="card-body-flex">
+              <span
+              v-if="career.platforms.length > 0"
+              class="platform-icons"
+            >
+              <i
+                v-for="icon in career.platforms"
+                :key="icon"
+                :class="'bi ' + icon"
+              ></i>
+              </span>
+              <p class="card-text">
+                <small class="text-muted">{{ career.dates }}</small>
+              </p>
+            </div>
+            <button
+              type="button"
+              class="btn nes-btn is-default career-details-trigger"
+              @click.stop="showCareerDetails(career.id)"
+            >View Details</button>
+          </div>
+        </div>
+      </div>
+
+      <menu class="dialog-menu">
+        <button type="button" class="btn nes-btn is-primary is-block" @click="$refs.careersDialog.close()">Okay</button>
+      </menu>
+    </dialog>
+    <dialog id="dialog-career-details" ref="detailsDialog" class="nes-dialog">
+      <div class="career-details-header">
+        <template v-if="selectedCareer.logo && !logoErrors[selectedCareer.id]">
+          <img
+            :src="logoSrc(selectedCareer)"
+            :alt="selectedCareer.company + ' logo'"
+            class="career-details-logo"
+            @error="onLogoError(selectedCareer.id)"
+          />
+        </template>
+        <h2 class="title">{{ selectedCareer.company }}</h2>
+      </div>
+      <div class="career-details-content">
+        <div class="career-details-media">
+          <img
+            :src="selectedCareer.screenshots[0] || '/img/projects/placeholder.png'"
+            :alt="selectedCareer.company + ' screenshot'"
+            class="career-screenshot"
+          />
+        </div>
+        <div class="career-details-info">
+          <div class="info-section">
+            <h3>Description</h3>
+            <p>{{ selectedCareer.description || 'No description available.' }}</p>
+          </div>
+          <div class="info-section">
+            <h3>Period</h3>
+            <p>{{ selectedCareer.dates }}</p>
+          </div>
+          <div class="info-section" v-if="selectedCareer.platforms && selectedCareer.platforms.length">
+            <h3>Platforms</h3>
+            <div class="platform-icons">
+              <i
+                v-for="icon in selectedCareer.platforms"
+                :key="icon"
+                :class="'bi ' + icon"
+              ></i>
+            </div>
+          </div>
+          <button
+            type="button"
+            v-if="selectedCareer.clickAction === 'url' && selectedCareer.url"
+            class="btn nes-btn is-default career-cta"
+            @click="goToUrl(selectedCareer.url)"
+          >Visit Project</button>
+          <button
+            type="button"
+            v-else
+            class="btn nes-btn is-disabled career-cta"
+          >Project Unavailable</button>
+        </div>
+      </div>
+      <menu class="dialog-menu">
+        <button type="button" class="btn nes-btn is-primary is-block" @click="$refs.detailsDialog.close()">Close</button>
+      </menu>
+    </dialog>
+  </div>
+</template>

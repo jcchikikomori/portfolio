@@ -27,7 +27,7 @@ describe('main.js', () => {
             addListener: vi.fn(),
             removeListener: vi.fn(),
             addEventListener: vi.fn((event, handler) => {
-                if (event === 'change') changeHandler = handler
+                if (event === 'change') {changeHandler = handler}
             }),
             removeEventListener: vi.fn(),
             dispatchEvent: vi.fn(),
@@ -35,8 +35,8 @@ describe('main.js', () => {
     })
 
     afterEach(() => {
-        if (appDiv && appDiv.parentNode) appDiv.parentNode.removeChild(appDiv)
-        if (logoEl && logoEl.parentNode) logoEl.parentNode.removeChild(logoEl)
+        if (appDiv && appDiv.parentNode) {appDiv.parentNode.removeChild(appDiv)}
+        if (logoEl && logoEl.parentNode) {logoEl.parentNode.removeChild(logoEl)}
         document.body.classList.remove('dark')
         consoleErrorSpy.mockRestore()
     })
