@@ -42,11 +42,11 @@ export default {
         this.logoErrors = { ...this.logoErrors, [careerId]: true }
       }
     },
-    showScreenshots(careerId) {
+    showCareerDetails(careerId) {
       const career = this.careers.find(c => c.id === careerId)
       if (!career) {return}
       this.selectedCareer = career
-      const dialog = document.getElementById('dialog-screenshots')
+      const dialog = document.getElementById('dialog-career-details')
       if (!dialog) {return}
       dialog.showModal()
     },
@@ -91,9 +91,6 @@ export default {
                 </div>
               </template>
               <h6 class="card-title">{{ career.company }}</h6>
-              <!-- <p v-if="career.description" class="card-text">
-                {{ career.description }}
-              </p> -->
               <div class="card-body-flex">
                 <span
                 v-if="career.platforms.length > 0"
@@ -110,14 +107,9 @@ export default {
                 </p>
               </div>
               <button
-                v-if="career.screenshots.length > 0"
-                class="btn nes-btn is-default screenshot-trigger"
-                @click.stop="showScreenshots(career.id)"
-              >Screenshots</button>
-              <button
-                v-if="career.screenshots.length <= 0"
-                class="btn nes-btn is-disabled screenshot-trigger"
-              >Screenshots</button>
+                class="btn nes-btn is-default career-details-trigger"
+                @click.stop="showCareerDetails(career.id)"
+              >View Details</button>
             </div>
           </div>
         </div>
@@ -127,27 +119,56 @@ export default {
         </menu>
       </form>
     </dialog>
-    <dialog id="dialog-screenshots" class="nes-dialog">
+    <dialog id="dialog-career-details" class="nes-dialog">
       <form method="dialog">
-        <div class="screenshot-header">
+        <div class="career-details-header">
           <template v-if="selectedCareer.logo && !logoErrors[selectedCareer.id]">
             <img
               :src="logoSrc(selectedCareer)"
               :alt="selectedCareer.company + ' logo'"
-              class="screenshot-logo"
+              class="career-details-logo"
               @error="onLogoError(selectedCareer.id)"
             />
           </template>
-          <h2 class="title">{{ selectedCareer.company }} Screenshots</h2>
+          <h2 class="title">{{ selectedCareer.company }}</h2>
         </div>
-        <div class="screenshot-gallery">
-          <img
-            v-for="(src, index) in selectedCareer.screenshots"
-            :key="index"
-            :src="src"
-            :alt="selectedCareer.company + ' screenshot ' + (index + 1)"
-            class="screenshot-img"
-          />
+        <div class="career-details-content">
+          <div class="career-details-media">
+            <img
+              :src="selectedCareer.screenshots[0] || '/img/projects/placeholder.png'"
+              :alt="selectedCareer.company + ' screenshot'"
+              class="career-screenshot"
+            />
+          </div>
+          <div class="career-details-info">
+            <div class="info-section">
+              <h3>Description</h3>
+              <p>{{ selectedCareer.description || 'No description available.' }}</p>
+            </div>
+            <div class="info-section">
+              <h3>Period</h3>
+              <p>{{ selectedCareer.dates }}</p>
+            </div>
+            <div class="info-section" v-if="selectedCareer.platforms && selectedCareer.platforms.length">
+              <h3>Platforms</h3>
+              <div class="platform-icons">
+                <i
+                  v-for="icon in selectedCareer.platforms"
+                  :key="icon"
+                  :class="'bi ' + icon"
+                ></i>
+              </div>
+            </div>
+            <button
+              v-if="selectedCareer.clickAction === 'url' && selectedCareer.url"
+              class="btn nes-btn is-primary career-cta"
+              @click.stop="goToUrl(selectedCareer.url)"
+            >View Project</button>
+            <button
+              v-else
+              class="btn nes-btn is-disabled career-cta"
+            >Project Unavailable</button>
+          </div>
         </div>
         <menu class="dialog-menu">
           <button class="btn nes-btn is-primary is-block">Close</button>
