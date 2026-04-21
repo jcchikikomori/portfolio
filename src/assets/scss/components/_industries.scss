@@ -1,0 +1,22 @@
+#dialog-industries {
+  max-width: 960px;
+
+  .industry-card {
+    margin-bottom: 1rem;
+    text-align: center;
+
+    .industry-icon {
+      font-size: 2rem;
+    }
+
+    .industry-companies {
+      font-size: 12px;
+    }
+  }
+
+  &.is-dark {
+    .industry-card {
+      color: #fff;
+    }
+  }
+}

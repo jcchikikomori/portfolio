@@ -104,4 +104,37 @@ describe('ProfileComponent.vue', () => {
         expect(call[1]).toBe('_blank')
         expect(call[2]).toBe('noopener,noreferrer')
     })
+
+    it('Industries button click opens industries dialog', async () => {
+        const industriesDialog = document.getElementById('dialog-industries')
+        if (industriesDialog) {
+            industriesDialog.showModal = vi.fn()
+        }
+        const industriesBtn = wrapper.findAll('button').find(b => b.text().includes('Industries'))
+        await industriesBtn.trigger('click')
+        const dialog = document.getElementById('dialog-industries')
+        expect(dialog.showModal).toHaveBeenCalled()
+    })
+
+    it('showIndustries does nothing when dialog element is absent', async () => {
+        const original = document.getElementById.bind(document)
+        vi.spyOn(document, 'getElementById').mockImplementation((id) => {
+            if (id === 'dialog-industries') return null
+            return original(id)
+        })
+        const industriesBtn = wrapper.findAll('button').find(b => b.text().includes('Industries'))
+        // Should not throw
+        await industriesBtn.trigger('click')
+        vi.restoreAllMocks()
+    })
+
+    it('Industries button does NOT have is-disabled class', () => {
+        const industriesBtn = wrapper.findAll('button').find(b => b.text().includes('Industries'))
+        expect(industriesBtn.classes()).not.toContain('is-disabled')
+    })
+
+    it('Industries button has is-default class', () => {
+        const industriesBtn = wrapper.findAll('button').find(b => b.text().includes('Industries'))
+        expect(industriesBtn.classes()).toContain('is-default')
+    })
 })
