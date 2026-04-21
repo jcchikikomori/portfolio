@@ -61,13 +61,13 @@ describe('ProjectsComponent.vue', () => {
         })
     })
 
-    it('renders description when career has one', () => {
+    it('does not render description (temporarily disabled for details dialog migration)', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         careers.forEach((career, index) => {
             if (career.description) {
                 const body = cards[index].find('.card-body')
-                expect(body.text()).toContain(career.description)
+                expect(body.text()).not.toContain(career.description)
             }
         })
     })
@@ -233,18 +233,19 @@ describe('ProjectsComponent.vue', () => {
         expect(dialog.classes()).toContain('nes-dialog')
     })
 
-    it('screenshot trigger not rendered for cards with empty screenshots', () => {
+    it('screenshot trigger disabled for cards with empty screenshots', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         careers.forEach((career, index) => {
             if (career.screenshots.length === 0) {
                 const trigger = cards[index].find('.screenshot-trigger')
-                expect(trigger.exists()).toBe(false)
+                expect(trigger.exists()).toBe(true)
+                expect(trigger.classes()).toContain('is-disabled')
             }
         })
     })
 
-    it('screenshot trigger rendered for cards with non-empty screenshots', () => {
+    it('screenshot trigger enabled for cards with non-empty screenshots', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         const careersWithScreenshots = careers.filter(c => c.screenshots.length > 0)
@@ -253,6 +254,7 @@ describe('ProjectsComponent.vue', () => {
             if (career.screenshots.length > 0) {
                 const trigger = cards[index].find('.screenshot-trigger')
                 expect(trigger.exists()).toBe(true)
+                expect(trigger.classes()).toContain('is-default')
             }
         })
     })
