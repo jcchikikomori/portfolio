@@ -23,6 +23,22 @@ search SCSS/CSS for a corresponding `display: none` or `display: block` on the
 same selector and update it in the same commit. Failure to do so produces a
 blank page that is only caught at UI QA.
 
+## Dialog Animation Rules
+
+`showModal()` natively sets `[open]` on the `<dialog>` element. Target it with CSS
+directly — do not add or remove a JS class to trigger animations:
+
+```css
+/* correct */
+dialog.nes-dialog[open] { animation: nes-open 0.4s steps(8) forwards; }
+
+/* wrong — unnecessary JS coupling */
+/* dialog.nes-dialog.is-open { ... } */
+```
+
+CSS-only animation changes do not affect Vitest JS coverage. Verify dialog animations
+in the browser via DevTools (check `animationName`, duration, and timing function).
+
 ## Environment Variables (Mandatory)
 
 This project uses Vite. Do not use `process.env` anywhere in source files:
