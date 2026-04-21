@@ -4,7 +4,7 @@
 }
 
 dialog.nes-dialog[open] {
-    animation: nes-open 0.4s steps(8, end) forwards;
+    animation: nes-open 0.4s steps(8) forwards;
 }
 
 @keyframes breathing-visualizer {

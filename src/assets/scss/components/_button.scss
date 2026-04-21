@@ -1,3 +1,11 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
+
+.containers .btn-group-vertical {
+    width: 100%;
+}
+
+.btn.nes-btn {
+    border-radius: 0;
+}
