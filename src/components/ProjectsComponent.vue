@@ -12,107 +12,45 @@
           for my CV!
         </p>
         <div class="card-group">
-          <div class="card">
+          <div
+            class="card"
+            v-for="career in careers"
+            :key="career.id"
+          >
             <div
-              class="card-img-top placeholder"
-              alt="Accenture"
-              v-on:click="goToUrl('https://accenture.com')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">Accenture</h6>
-              <!-- <p class="card-text"></p> -->
-              <p class="card-text">
-                <small class="text-muted">2022-present</small>
-              </p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top chatgenie"
-              alt="Chatgenie.ph"
-              v-on:click="goToUrl('https://chatgenie.ph')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">Chatgenie.ph</h6>
-              <p class="card-text">
-                Developed some integrations for Chatgenie.ph
-                Such as GCash (GLife), Viber, Facebook & Instagram
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2019-2022</small>
-              </p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top hello-php"
-              alt="php7-starter"
-              v-on:click="alert('Preview not available anymore.')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">hello-php</h6>
-              <p class="card-text">
-                For protyping PHP app with user authentication
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2017-present</small>
-              </p>
-            </div>
-          </div>
-          <!-- <div class="card">
-            <img
-              src="img/projects/placeholder.png"
               class="card-img-top"
-              alt="PayMaya"
-              v-on:click="goToUrl('https://github.com/jcchikikomori?org=PayMaya&year_list=1')"
-            />
-            <div class="card-body">
-              <h6 class="card-title">PayMaya</h6>
-              <p class="card-text">
-                Contributed the issues & fixes for their SDKs.
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2020</small>
-              </p>
-            </div>
-          </div> -->
-          <div class="card">
-            <div
-              class="card-img-top gcash-miniprogram"
-              alt="GCash Mini Program"
-              v-on:click="goToUrl('https://miniprogram.gcash.com')"
+              :class="career.imgClass"
+              :alt="career.company"
+              v-on:click="handleCardClick(career)"
             ></div>
             <div class="card-body">
-              <h6 class="card-title">GCash Mini Program</h6>
-              <p class="card-text">
-                For serving Chatgenie merchants for GLife<br />
+              <template v-if="career.logo && !logoErrors[career.id]">
+                <img
+                  :src="logoSrc(career)"
+                  :alt="career.company + ' logo'"
+                  class="career-logo"
+                  @error="onLogoError(career.id)"
+                />
+              </template>
+              <template v-else>
+                <i class="bi bi-x-lg career-logo-placeholder"></i>
+              </template>
+              <h6 class="card-title">{{ career.company }}</h6>
+              <p v-if="career.description" class="card-text">
+                {{ career.description }}
               </p>
+              <span
+                v-if="career.platforms.length > 0"
+                class="platform-icons"
+              >
+                <i
+                  v-for="icon in career.platforms"
+                  :key="icon"
+                  :class="'bi ' + icon"
+                ></i>
+              </span>
               <p class="card-text">
-                <small class="text-muted">2020-2022</small>
-              </p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top covemanila"
-              alt="Cove Manila"
-              v-on:click="alert('Preview not available anymore.')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">Cove Manila WordPress Project</h6>
-              <p class="card-text"><small class="text-muted">2019</small></p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top mcdelivery"
-              alt="McDelivery PH"
-              v-on:click="goToUrl('https://web.archive.org/web/20191228231219if_/https://www.mcdelivery.com.ph/')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">McDelivery PH for Android</h6>
-              <p class="card-text">
-                <small class="text-muted">2019 - 2021</small>
+                <small class="text-muted">{{ career.dates }}</small>
               </p>
             </div>
           </div>
@@ -127,16 +65,43 @@
 </template>
 
 <script>
+import { careers } from '../data/careers.js'
+
 export default {
   name: "ProjectsComponent",
   components: {},
+  data() {
+    return {
+      careers,
+      logoErrors: {},
+    }
+  },
   methods: {
+    isDark() {
+      const dialog = document.getElementById('dialog-projects')
+      return !!dialog?.classList.contains('is-dark')
+    },
+    logoSrc(career) {
+      return this.isDark() && career.logoDark
+        ? career.logoDark
+        : career.logo
+    },
     goToUrl(url) {
       window.open(url, '_blank', 'noopener,noreferrer')
     },
-    alert: function(msg) {
-      alert(msg);
+    alert(msg) {
+      alert(msg)
     },
-  }
-};
+    handleCardClick(career) {
+      if (career.clickAction === 'url') {
+        this.goToUrl(career.url)
+      } else {
+        this.alert(career.alertMsg)
+      }
+    },
+    onLogoError(careerId) {
+      this.logoErrors = { ...this.logoErrors, [careerId]: true }
+    },
+  },
+}
 </script>
