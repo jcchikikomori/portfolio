@@ -7,10 +7,25 @@
 
     .industry-icon {
       font-size: 2rem;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 1.5rem;
+      }
     }
 
     .industry-companies {
       font-size: 12px;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 11px;
+        padding-left: 0;
+        list-style: none;
+      }
+    }
+
+    @include mq($from: smallest, $until: mobile) {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
     }
   }
 
