@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+
 import ProfileComponent from '../components/ProfileComponent.vue'
 
 describe('ProfileComponent.vue', () => {
@@ -33,7 +34,7 @@ describe('ProfileComponent.vue', () => {
     it('showProjects does nothing when dialog element is absent', async () => {
         const original = document.getElementById.bind(document)
         vi.spyOn(document, 'getElementById').mockImplementation((id) => {
-            if (id === 'dialog-projects') return null
+            if (id === 'dialog-projects') {return null}
             return original(id)
         })
         const careersBtn = wrapper.findAll('button').find(b => b.text().includes('Careers'))
@@ -45,7 +46,7 @@ describe('ProfileComponent.vue', () => {
     it('showSpotify does nothing when dialog element is absent', async () => {
         const original = document.getElementById.bind(document)
         vi.spyOn(document, 'getElementById').mockImplementation((id) => {
-            if (id === 'dialog-spotify') return null
+            if (id === 'dialog-spotify') {return null}
             return original(id)
         })
         const musicBtn = wrapper.findAll('button').find(b => b.text().includes('Music'))
@@ -119,7 +120,7 @@ describe('ProfileComponent.vue', () => {
     it('showIndustries does nothing when dialog element is absent', async () => {
         const original = document.getElementById.bind(document)
         vi.spyOn(document, 'getElementById').mockImplementation((id) => {
-            if (id === 'dialog-industries') return null
+            if (id === 'dialog-industries') {return null}
             return original(id)
         })
         const industriesBtn = wrapper.findAll('button').find(b => b.text().includes('Industries'))

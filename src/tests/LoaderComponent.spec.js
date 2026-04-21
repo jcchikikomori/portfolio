@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
+
 import LoaderComponent from '../components/LoaderComponent.vue'
 
 describe('LoaderComponent.vue', () => {

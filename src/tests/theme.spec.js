@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+
 import { darkMode, normalTheme } from '../theme.js'
 
 describe('theme.js', () => {

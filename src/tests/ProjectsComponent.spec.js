@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+
 import ProjectsComponent from '../components/ProjectsComponent.vue'
 import { careers } from '../data/careers.js'
 
@@ -13,6 +14,19 @@ describe('ProjectsComponent.vue', () => {
         const dialog = wrapper.find('#dialog-projects')
         expect(dialog.exists()).toBe(true)
         expect(dialog.classes()).toContain('nes-dialog')
+    })
+
+    it('renders career list with flexbox container class', () => {
+        const wrapper = mount(ProjectsComponent)
+        const careerList = wrapper.find('.career-list')
+        expect(careerList.exists()).toBe(true)
+    })
+
+    it('renders cards within flexbox container', () => {
+        const wrapper = mount(ProjectsComponent)
+        const careerList = wrapper.find('.career-list')
+        const cards = careerList.findAll('.card')
+        expect(cards.length).toBe(careers.length)
     })
 
     it('contact link calls window.open with noopener', async () => {
@@ -62,8 +76,7 @@ describe('ProjectsComponent.vue', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         const accentureIndex = careers.findIndex(c => c.id === 'accenture')
-        const imgTop = cards[accentureIndex].find('.card-img-top')
-        await imgTop.trigger('click')
+        await cards[accentureIndex].trigger('click')
         expect(window.open).toHaveBeenCalled()
         const call = window.open.mock.calls[0]
         expect(call[0]).toBe('https://accenture.com')
@@ -75,8 +88,7 @@ describe('ProjectsComponent.vue', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         const helloPhpIndex = careers.findIndex(c => c.id === 'hello-php')
-        const imgTop = cards[helloPhpIndex].find('.card-img-top')
-        await imgTop.trigger('click')
+        await cards[helloPhpIndex].trigger('click')
         expect(alertSpy).toHaveBeenCalledWith('Preview not available anymore.')
         alertSpy.mockRestore()
     })
@@ -85,8 +97,7 @@ describe('ProjectsComponent.vue', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         const chatgenieIndex = careers.findIndex(c => c.id === 'chatgenie')
-        const imgTop = cards[chatgenieIndex].find('.card-img-top')
-        await imgTop.trigger('click')
+        await cards[chatgenieIndex].trigger('click')
         expect(window.open).toHaveBeenCalled()
         const call = window.open.mock.calls[0]
         expect(call[0]).toBe('https://chatgenie.ph')
@@ -97,8 +108,7 @@ describe('ProjectsComponent.vue', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         const gcashIndex = careers.findIndex(c => c.id === 'gcash-miniprogram')
-        const imgTop = cards[gcashIndex].find('.card-img-top')
-        await imgTop.trigger('click')
+        await cards[gcashIndex].trigger('click')
         expect(window.open).toHaveBeenCalled()
         const call = window.open.mock.calls[0]
         expect(call[0]).toBe('https://miniprogram.gcash.com')
@@ -110,8 +120,7 @@ describe('ProjectsComponent.vue', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         const coveIndex = careers.findIndex(c => c.id === 'covemanila')
-        const imgTop = cards[coveIndex].find('.card-img-top')
-        await imgTop.trigger('click')
+        await cards[coveIndex].trigger('click')
         expect(alertSpy).toHaveBeenCalledWith('Preview not available anymore.')
         alertSpy.mockRestore()
     })
@@ -120,8 +129,7 @@ describe('ProjectsComponent.vue', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         const mcIndex = careers.findIndex(c => c.id === 'mcdelivery')
-        const imgTop = cards[mcIndex].find('.card-img-top')
-        await imgTop.trigger('click')
+        await cards[mcIndex].trigger('click')
         expect(window.open).toHaveBeenCalled()
         const call = window.open.mock.calls[0]
         expect(call[0]).toContain('mcdelivery.com.ph')
@@ -180,10 +188,19 @@ describe('ProjectsComponent.vue', () => {
     })
 
     it('does not render platform icon row when platforms is empty', () => {
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        const emptyPlatformIndex = careers.findIndex(c => c.platforms.length === 0)
-        const iconRow = cards[emptyPlatformIndex].find('.platform-icons')
+        const wrapper = mount(ProjectsComponent, {
+            data() {
+                return {
+                    careers: [
+                        {
+                            ...careers[0],
+                            platforms: [],
+                        },
+                    ],
+                }
+            },
+        })
+        const iconRow = wrapper.find('.platform-icons')
         expect(iconRow.exists()).toBe(false)
     })
 
@@ -266,7 +283,7 @@ describe('ProjectsComponent.vue', () => {
         const careerWithScreenshots = careers.find(c => c.screenshots.length > 0)
         const origGetById = document.getElementById
         document.getElementById = vi.fn((id) => {
-            if (id === 'dialog-screenshots') return null
+            if (id === 'dialog-screenshots') {return null}
             return origGetById.call(document, id)
         })
         expect(() => wrapper.vm.showScreenshots(careerWithScreenshots.id)).not.toThrow()
@@ -344,6 +361,131 @@ describe('ProjectsComponent.vue', () => {
         const logoImg = wrapper.find('.career-logo')
         expect(logoImg.exists()).toBe(true)
         expect(logoImg.attributes('src')).toBe('/img/logos/dark.svg')
+        wrapper.unmount()
+        container.remove()
+    })
+
+    it('handles multiple logo errors without duplicating state', async () => {
+        const wrapper = mount(ProjectsComponent, {
+            data() {
+                return {
+                    careers: [
+                        { ...careers[0], id: 'test1', logo: '/broken1.png' },
+                        { ...careers[1], id: 'test2', logo: '/broken2.png' }
+                    ]
+                }
+            }
+        })
+        const logos = wrapper.findAll('.career-logo')
+        await logos[0].trigger('error')
+        await logos[1].trigger('error')
+        expect(Object.keys(wrapper.vm.logoErrors).length).toBe(2)
+        expect(wrapper.vm.logoErrors.test1).toBe(true)
+        expect(wrapper.vm.logoErrors.test2).toBe(true)
+    })
+
+    it('screenshot dialog displays company logo in header', async () => {
+        const container = document.createElement('div')
+        document.body.appendChild(container)
+        const wrapper = mount(ProjectsComponent, {
+            attachTo: container,
+            data() {
+                return {
+                    careers: [
+                        {
+                            ...careers[0],
+                            logo: '/img/logos/test-company.png',
+                            screenshots: ['/img/screenshots/test.png']
+                        }
+                    ]
+                }
+            }
+        })
+
+        // Mock showModal before calling showScreenshots
+        const dialog = document.getElementById('dialog-screenshots')
+        dialog.showModal = vi.fn()
+
+        // Open screenshot dialog
+        wrapper.vm.showScreenshots(careers[0].id)
+        await wrapper.vm.$nextTick()
+
+        // Check if logo is in dialog header
+        const logoImg = wrapper.find('.screenshot-logo')
+        expect(logoImg.exists()).toBe(true)
+        expect(logoImg.attributes('src')).toBe('/img/logos/test-company.png')
+
+        wrapper.unmount()
+        container.remove()
+    })
+
+    it('screenshot dialog shows placeholder when logo is null', async () => {
+        const container = document.createElement('div')
+        document.body.appendChild(container)
+        const wrapper = mount(ProjectsComponent, {
+            attachTo: container,
+            data() {
+                return {
+                    careers: [
+                        {
+                            ...careers[0],
+                            logo: null,
+                            screenshots: ['/img/screenshots/test.png']
+                        }
+                    ]
+                }
+            }
+        })
+
+        // Mock showModal before calling showScreenshots
+        const dialog = document.getElementById('dialog-screenshots')
+        dialog.showModal = vi.fn()
+
+        wrapper.vm.showScreenshots(careers[0].id)
+        await wrapper.vm.$nextTick()
+
+        const placeholder = wrapper.find('.career-logo-placeholder')
+        expect(placeholder.exists()).toBe(true)
+        expect(placeholder.classes()).toContain('bi-x-lg')
+
+        wrapper.unmount()
+        container.remove()
+    })
+
+    it('screenshot dialog handles logo error with fallback', async () => {
+        const container = document.createElement('div')
+        document.body.appendChild(container)
+        const wrapper = mount(ProjectsComponent, {
+            attachTo: container,
+            data() {
+                return {
+                    careers: [
+                        {
+                            ...careers[0],
+                            logo: '/img/logos/broken.png',
+                            screenshots: ['/img/screenshots/test.png']
+                        }
+                    ]
+                }
+            }
+        })
+
+        // Mock showModal before calling showScreenshots
+        const dialog = document.getElementById('dialog-screenshots')
+        dialog.showModal = vi.fn()
+
+        wrapper.vm.showScreenshots(careers[0].id)
+        await wrapper.vm.$nextTick()
+
+        // Trigger error on screenshot logo
+        const logoImg = wrapper.find('.screenshot-logo')
+        expect(logoImg.exists()).toBe(true)
+        await logoImg.trigger('error')
+
+        // Should show placeholder after error
+        const placeholder = wrapper.find('.career-logo-placeholder')
+        expect(placeholder.exists()).toBe(true)
+
         wrapper.unmount()
         container.remove()
     })

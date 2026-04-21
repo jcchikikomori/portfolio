@@ -10,32 +10,26 @@
     margin-bottom: 0;
   }
 
-  .card-group {
-    @include mq($from: tablet, $until: desktop) {
-      display: unset;
-    }
-
-    @include mq($from: smallest, $until: mobile) {
-      flex-direction: column;
-    }
-
-    @include mq($from: smartphone, $until: tablet) {
-      flex-wrap: wrap;
-    }
+  .career-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
 
     & > .card {
       border: 1px solid rgba(0, 0, 0, 0.125) !important;
-      flex: 1 1 30%; /*grow | shrink | basis */
+      flex: 0 1 calc(33.333% - 1rem); // Desktop: 3 columns
       min-height: 25rem;
 
-      @include mq($from: smallest, $until: mobile) {
-        flex: 1 1 100%;
-        min-height: 18rem;
+      @include mq($from: smartphone, $until: tablet) {
+        flex: 0 1 calc(50% - 1rem); // Tablet: 2 columns
+        min-height: 20rem;
       }
 
-      @include mq($from: smartphone, $until: tablet) {
-        flex: 1 1 48%;
-        min-height: 20rem;
+      @include mq($from: smallest, $until: mobile) {
+        flex: 1 1 100%; // Mobile: 1 column
+        min-height: 18rem;
       }
 
       .card-img-top {
@@ -153,7 +147,7 @@
 
   // FOR DARK MODE
   &.is-dark {
-    .card-group {
+    .career-list {
       .card {
         .card-img-top {
           background-color: #212529;
@@ -185,6 +179,23 @@
 
 #dialog-screenshots {
   max-width: 800px;
+
+  .screenshot-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+
+    .screenshot-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .title {
+      margin: 0;
+    }
+  }
 
   .screenshot-gallery {
     display: flex;

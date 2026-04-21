@@ -11,18 +11,13 @@
           >
           for my CV!
         </p>
-        <div class="card-group">
+        <div class="career-list">
           <div
             class="card"
             v-for="career in careers"
             :key="career.id"
+            v-on:click="handleCardClick(career)"
           >
-            <div
-              class="card-img-top"
-              :class="career.imgClass"
-              :alt="career.company"
-              v-on:click="handleCardClick(career)"
-            ></div>
             <div class="card-body">
               <template v-if="career.logo && !logoErrors[career.id]">
                 <img
@@ -68,7 +63,17 @@
     </dialog>
     <dialog class="nes-dialog" id="dialog-screenshots">
       <form method="dialog">
-        <h2 class="title">{{ selectedCareer.company }} Screenshots</h2>
+        <div class="screenshot-header">
+          <template v-if="selectedCareer.logo && !logoErrors[selectedCareer.id]">
+            <img
+              :src="logoSrc(selectedCareer)"
+              :alt="selectedCareer.company + ' logo'"
+              class="screenshot-logo"
+              @error="onLogoError(selectedCareer.id)"
+            />
+          </template>
+          <h2 class="title">{{ selectedCareer.company }} Screenshots</h2>
+        </div>
         <div class="screenshot-gallery">
           <img
             v-for="(src, index) in selectedCareer.screenshots"
@@ -123,7 +128,12 @@ export default {
       }
     },
     onLogoError(careerId) {
-      this.logoErrors = { ...this.logoErrors, [careerId]: true }
+      if (!this.logoErrors[careerId]) {
+        if (import.meta.env.DEV) {
+          console.warn(`[ProjectsComponent] Logo failed to load for: ${careerId}`)
+        }
+        this.logoErrors = { ...this.logoErrors, [careerId]: true }
+      }
     },
     showScreenshots(careerId) {
       const career = this.careers.find(c => c.id === careerId)

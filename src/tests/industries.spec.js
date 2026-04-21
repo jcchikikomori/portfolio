@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { industries } from '../data/industries.js'
+
 import { careers } from '../data/careers.js'
+import { industries } from '../data/industries.js'
 
 describe('industries data module', () => {
     it('exports a non-empty array', () => {

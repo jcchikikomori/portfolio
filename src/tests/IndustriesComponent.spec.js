@@ -1,8 +1,9 @@
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
+
 import IndustriesComponent from '../components/IndustriesComponent.vue'
-import { industries } from '../data/industries.js'
 import { careers } from '../data/careers.js'
+import { industries } from '../data/industries.js'
 
 describe('IndustriesComponent.vue', () => {
     it('renders #dialog-industries with nes-dialog class', () => {
