@@ -1,17 +1,3 @@
-<style lang="scss" scoped>
-  .nes-container > .containers {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .updates-wrapper {
-      width: 100%;
-      margin-top: 1em;
-    }
-  }
-</style>
-
 <template>
   <!-- MAIN CONTAINER -->
   <div id="main-container" class="main-screen">
@@ -24,7 +10,7 @@
             src="/img/jcc_logo.png"
             width="200"
             alt="My Logo"
-          />
+          >
           <br /><br />
           <!-- <p>The Lazy Geek</p> -->
           <ul class="profile-list">
