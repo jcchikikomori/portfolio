@@ -52,12 +52,34 @@
               <p class="card-text">
                 <small class="text-muted">{{ career.dates }}</small>
               </p>
+              <button
+                v-if="career.screenshots.length > 0"
+                class="btn nes-btn is-default screenshot-trigger"
+                v-on:click.stop="showScreenshots(career.id)"
+              >Screenshots</button>
             </div>
           </div>
         </div>
 
         <menu class="dialog-menu">
           <button class="btn nes-btn is-primary is-block">Okay</button>
+        </menu>
+      </form>
+    </dialog>
+    <dialog class="nes-dialog" id="dialog-screenshots">
+      <form method="dialog">
+        <h2 class="title">{{ selectedCareer.company }} Screenshots</h2>
+        <div class="screenshot-gallery">
+          <img
+            v-for="(src, index) in selectedCareer.screenshots"
+            :key="index"
+            :src="src"
+            :alt="selectedCareer.company + ' screenshot ' + (index + 1)"
+            class="screenshot-img"
+          />
+        </div>
+        <menu class="dialog-menu">
+          <button class="btn nes-btn is-primary is-block">Close</button>
         </menu>
       </form>
     </dialog>
@@ -74,6 +96,7 @@ export default {
     return {
       careers,
       logoErrors: {},
+      selectedCareer: { company: '', screenshots: [] },
     }
   },
   methods: {
@@ -101,6 +124,14 @@ export default {
     },
     onLogoError(careerId) {
       this.logoErrors = { ...this.logoErrors, [careerId]: true }
+    },
+    showScreenshots(careerId) {
+      const career = this.careers.find(c => c.id === careerId)
+      if (!career) return
+      this.selectedCareer = career
+      const dialog = document.getElementById('dialog-screenshots')
+      if (!dialog) return
+      dialog.showModal()
     },
   },
 }

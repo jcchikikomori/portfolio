@@ -209,6 +209,84 @@ describe('ProjectsComponent.vue', () => {
         expect(wrapper.find('.career-logo').exists()).toBe(false)
     })
 
+    it('renders #dialog-screenshots with nes-dialog class', () => {
+        const wrapper = mount(ProjectsComponent)
+        const dialog = wrapper.find('#dialog-screenshots')
+        expect(dialog.exists()).toBe(true)
+        expect(dialog.classes()).toContain('nes-dialog')
+    })
+
+    it('screenshot trigger not rendered for cards with empty screenshots', () => {
+        const wrapper = mount(ProjectsComponent)
+        const cards = wrapper.findAll('.card')
+        careers.forEach((career, index) => {
+            if (career.screenshots.length === 0) {
+                const trigger = cards[index].find('.screenshot-trigger')
+                expect(trigger.exists()).toBe(false)
+            }
+        })
+    })
+
+    it('screenshot trigger rendered for cards with non-empty screenshots', () => {
+        const wrapper = mount(ProjectsComponent)
+        const cards = wrapper.findAll('.card')
+        const careersWithScreenshots = careers.filter(c => c.screenshots.length > 0)
+        expect(careersWithScreenshots.length).toBeGreaterThan(0)
+        careers.forEach((career, index) => {
+            if (career.screenshots.length > 0) {
+                const trigger = cards[index].find('.screenshot-trigger')
+                expect(trigger.exists()).toBe(true)
+            }
+        })
+    })
+
+    it('showScreenshots sets selectedCareer to matching career entry', () => {
+        const wrapper = mount(ProjectsComponent)
+        const careerWithScreenshots = careers.find(c => c.screenshots.length > 0)
+        wrapper.vm.showScreenshots(careerWithScreenshots.id)
+        expect(wrapper.vm.selectedCareer).toEqual(careerWithScreenshots)
+    })
+
+    it('showScreenshots calls dialog.showModal() on #dialog-screenshots', () => {
+        const container = document.createElement('div')
+        document.body.appendChild(container)
+        const wrapper = mount(ProjectsComponent, { attachTo: container })
+        const dialog = document.getElementById('dialog-screenshots')
+        const showModalSpy = vi.fn()
+        dialog.showModal = showModalSpy
+        const careerWithScreenshots = careers.find(c => c.screenshots.length > 0)
+        wrapper.vm.showScreenshots(careerWithScreenshots.id)
+        expect(showModalSpy).toHaveBeenCalled()
+        wrapper.unmount()
+        container.remove()
+    })
+
+    it('showScreenshots does nothing when dialog element is absent', () => {
+        const wrapper = mount(ProjectsComponent)
+        const careerWithScreenshots = careers.find(c => c.screenshots.length > 0)
+        const origGetById = document.getElementById
+        document.getElementById = vi.fn((id) => {
+            if (id === 'dialog-screenshots') return null
+            return origGetById.call(document, id)
+        })
+        expect(() => wrapper.vm.showScreenshots(careerWithScreenshots.id)).not.toThrow()
+        document.getElementById = origGetById
+    })
+
+    it('showScreenshots does nothing when career ID is not found', () => {
+        const container = document.createElement('div')
+        document.body.appendChild(container)
+        const wrapper = mount(ProjectsComponent, { attachTo: container })
+        const dialog = document.getElementById('dialog-screenshots')
+        const showModalSpy = vi.fn()
+        dialog.showModal = showModalSpy
+        wrapper.vm.showScreenshots('nonexistent-id')
+        expect(wrapper.vm.selectedCareer.company).toBe('')
+        expect(showModalSpy).not.toHaveBeenCalled()
+        wrapper.unmount()
+        container.remove()
+    })
+
     it('dark mode uses logoDark when available', async () => {
         const container = document.createElement('div')
         document.body.appendChild(container)

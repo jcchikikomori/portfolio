@@ -110,6 +110,11 @@
     }
   }
 
+  .screenshot-trigger {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
   // FOR DARK MODE
   &.is-dark {
     .card-group {
@@ -138,6 +143,29 @@
           }
         }
       }
+    }
+  }
+}
+
+#dialog-screenshots {
+  max-width: 800px;
+
+  .screenshot-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .screenshot-img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #212529;
+  }
+
+  &.is-dark {
+    .screenshot-img {
+      border-color: #fff;
     }
   }
 }

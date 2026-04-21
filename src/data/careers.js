@@ -43,7 +43,7 @@ export const careers = [
         platforms: [],
         clickAction: 'url',
         alertMsg: null,
-        screenshots: [],
+        screenshots: ['/img/projects/chatgenie.png'],
     },
     {
         id: 'hello-php',
@@ -71,7 +71,7 @@ export const careers = [
         platforms: [],
         clickAction: 'url',
         alertMsg: null,
-        screenshots: [],
+        screenshots: ['/img/projects/miniprogram.png'],
     },
     {
         id: 'covemanila',
@@ -85,7 +85,7 @@ export const careers = [
         platforms: [],
         clickAction: 'alert',
         alertMsg: 'Preview not available anymore.',
-        screenshots: [],
+        screenshots: ['/img/projects/covemanila.png'],
     },
     {
         id: 'mcdelivery',
@@ -99,6 +99,6 @@ export const careers = [
         platforms: [],
         clickAction: 'url',
         alertMsg: null,
-        screenshots: [],
+        screenshots: ['/img/projects/mcdelivery.png'],
     },
 ]
