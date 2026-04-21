@@ -20,7 +20,7 @@
     & > .card {
       border: 1px solid rgba(0, 0, 0, 0.125) !important;
       flex: 0 1 calc(33.333% - 1rem); // Desktop: 3 columns
-      min-height: 25rem;
+      // min-height: 25rem;
 
       @include mq($from: smartphone, $until: tablet) {
         flex: 0 1 calc(50% - 1rem); // Tablet: 2 columns
@@ -74,8 +74,8 @@
       }
 
       .career-logo {
-        width: 32px;
-        height: 32px;
+        width: 64px;
+        height: 64px;
         object-fit: contain;
 
         @include mq($from: smallest, $until: mobile) {
@@ -85,8 +85,8 @@
       }
 
       .career-logo-placeholder {
-        width: 32px;
-        height: 32px;
+        width: 64px;
+        height: 64px;
         display: inline-block;
         text-align: center;
         color: #6c757d;
@@ -115,10 +115,6 @@
         // TODO: Set this as variable
         // TODO: Color not final
         background: #e3e3e4;
-
-        .text-muted {
-          color: #000 !important;
-        }
       }
     }
 
@@ -132,6 +128,11 @@
         text-align: center;
         word-break: break-word;
         hyphens: auto;
+
+        // Design override
+        .text-muted {
+          color: #000 !important;
+        }
       }
     }
   }
@@ -157,6 +158,13 @@
           background: #212529;
           border-top: #fff 1px solid;
           color: #fff;
+
+          .card-text {
+            // Design override
+            .text-muted {
+              color: #fff !important;
+            }
+          }
         }
 
         .career-logo-placeholder {
@@ -167,10 +175,6 @@
           // TODO: Set this as variable
           // TODO: Color not final
           background: #4d565f;
-
-          .text-muted {
-            color: #fff !important;
-          }
         }
       }
     }

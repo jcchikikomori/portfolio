@@ -15,7 +15,8 @@
 @import "layout/header", "layout/nes", "layout/footer";
 
 // 5. Components
-@import "components/button", "components/media", "components/projects", "components/industries";
+@import "components/button", "components/card";
+@import "components/media", "components/projects", "components/industries";
 
 // 6. Page-specific styles
 @import "pages/home";
