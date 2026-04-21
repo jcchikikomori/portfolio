@@ -1,2 +1,2 @@
-ignores: ["@types/jquery", "sass-mq", "@vue/*", "@babel/*", "bootstrap", "core-js", "@vitest/coverage-v8", "autoprefixer"]
+ignores: ["@types/jquery", "sass-mq", "@vue/*", "@babel/*", "bootstrap", "core-js", "@vitest/coverage-v8", "autoprefixer", "postcss-scss", "stylelint", "stylelint-config-prettier-scss", "stylelint-config-standard-scss"]
 skip-missing: true
