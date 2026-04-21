@@ -4,6 +4,9 @@ docs/qa/
 docs/**/*.png
 docs/**/*.html
 docs/**/*.json
+docs/plans/
+!docs/adr/
+!docs/design/
 
 # NodeJS
 .DS_Store
