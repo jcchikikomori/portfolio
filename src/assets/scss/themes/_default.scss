@@ -130,8 +130,11 @@ div.containers {
 #dialog-projects,
 #dialog-spotify,
 #dialog-screenshots,
-#dialog-industries {
-  height: auto;
+#dialog-industries,
+#dialog-career-details,
+#dialog-industry-projects {
+  max-height: 90vh;
+  overflow-y: auto;
   min-width: 35rem;
 
   @include mq($from: smallest, $until: mobile) {

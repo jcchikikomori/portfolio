@@ -61,7 +61,7 @@ describe('ProjectsComponent.vue', () => {
         })
     })
 
-    it('does not render description (temporarily disabled for details dialog migration)', () => {
+    it('does not render description (handled by CareerDetailsComponent)', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         careers.forEach((career, index) => {
@@ -72,28 +72,33 @@ describe('ProjectsComponent.vue', () => {
         })
     })
 
-    it('card click opens career details modal', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, { attachTo: container })
-        const cards = wrapper.findAll('.card')
-        const dialog = document.getElementById('dialog-career-details')
-        const showModalSpy = vi.fn()
-        dialog.showModal = showModalSpy
-        
-        await cards[0].trigger('click')
-        expect(showModalSpy).toHaveBeenCalled()
-        
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('card click sets selectedCareer correctly', async () => {
+    it('card click dispatches open-career-details event', async () => {
+        const dispatchEventSpy = vi.spyOn(window, 'dispatchEvent')
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
         
         await cards[0].trigger('click')
-        expect(wrapper.vm.selectedCareer).toEqual(careers[0])
+        
+        expect(dispatchEventSpy).toHaveBeenCalled()
+        const event = dispatchEventSpy.mock.calls[0][0]
+        expect(event.type).toBe('open-career-details')
+        expect(event.detail.careerId).toBe(careers[0].id)
+        
+        dispatchEventSpy.mockRestore()
+    })
+
+    it('View Details button dispatches open-career-details event', async () => {
+        const dispatchEventSpy = vi.spyOn(window, 'dispatchEvent')
+        const wrapper = mount(ProjectsComponent)
+        const button = wrapper.find('.career-details-trigger')
+        
+        await button.trigger('click')
+        
+        expect(dispatchEventSpy).toHaveBeenCalled()
+        const event = dispatchEventSpy.mock.calls[0][0]
+        expect(event.type).toBe('open-career-details')
+        
+        dispatchEventSpy.mockRestore()
     })
 
     it('renders placeholder icon for careers with null logo', () => {
@@ -186,13 +191,6 @@ describe('ProjectsComponent.vue', () => {
         expect(wrapper.find('.career-logo').exists()).toBe(false)
     })
 
-    it('renders #dialog-career-details with nes-dialog class', () => {
-        const wrapper = mount(ProjectsComponent)
-        const dialog = wrapper.find('#dialog-career-details')
-        expect(dialog.exists()).toBe(true)
-        expect(dialog.classes()).toContain('nes-dialog')
-    })
-
     it('career details trigger rendered for all cards', () => {
         const wrapper = mount(ProjectsComponent)
         const cards = wrapper.findAll('.card')
@@ -204,51 +202,21 @@ describe('ProjectsComponent.vue', () => {
         })
     })
 
-    it('showCareerDetails sets selectedCareer to matching career entry', () => {
+    it('showCareerDetails dispatches event with careerId', () => {
+        const dispatchEventSpy = vi.spyOn(window, 'dispatchEvent')
         const wrapper = mount(ProjectsComponent)
         const testCareer = careers[0]
+        
         wrapper.vm.showCareerDetails(testCareer.id)
-        expect(wrapper.vm.selectedCareer).toEqual(testCareer)
-    })
-
-    it('showCareerDetails calls dialog.showModal() on #dialog-career-details', () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, { attachTo: container })
-        const dialog = document.getElementById('dialog-career-details')
-        const showModalSpy = vi.fn()
-        dialog.showModal = showModalSpy
-        const testCareer = careers[0]
-        wrapper.vm.showCareerDetails(testCareer.id)
-        expect(showModalSpy).toHaveBeenCalled()
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('showCareerDetails does nothing when dialog element is absent', () => {
-        const wrapper = mount(ProjectsComponent)
-        const testCareer = careers[0]
-        const origGetById = document.getElementById
-        document.getElementById = vi.fn((id) => {
-            if (id === 'dialog-career-details') {return null}
-            return origGetById.call(document, id)
-        })
-        expect(() => wrapper.vm.showCareerDetails(testCareer.id)).not.toThrow()
-        document.getElementById = origGetById
-    })
-
-    it('showCareerDetails does nothing when career ID is not found', () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, { attachTo: container })
-        const dialog = document.getElementById('dialog-career-details')
-        const showModalSpy = vi.fn()
-        dialog.showModal = showModalSpy
-        wrapper.vm.showCareerDetails('nonexistent-id')
-        expect(wrapper.vm.selectedCareer.company).toBe('')
-        expect(showModalSpy).not.toHaveBeenCalled()
-        wrapper.unmount()
-        container.remove()
+        
+        expect(dispatchEventSpy).toHaveBeenCalledWith(
+            expect.objectContaining({
+                type: 'open-career-details',
+                detail: { careerId: testCareer.id }
+            })
+        )
+        
+        dispatchEventSpy.mockRestore()
     })
 
     it('dark mode falls back to logo when logoDark is null', async () => {
@@ -331,345 +299,6 @@ describe('ProjectsComponent.vue', () => {
         expect(wrapper.vm.logoErrors.test2).toBe(true)
     })
 
-    it('career details dialog displays company logo in header', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            logo: '/img/logos/test-company.png',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        // Mock showModal before calling showCareerDetails
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        // Open career details dialog
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        // Check if logo is in dialog header
-        const logoImg = wrapper.find('.career-details-logo')
-        expect(logoImg.exists()).toBe(true)
-        expect(logoImg.attributes('src')).toBe('/img/logos/test-company.png')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog shows placeholder when logo is null', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            logo: null,
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        // Mock showModal before calling showCareerDetails
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const placeholder = wrapper.find('.career-logo-placeholder')
-        expect(placeholder.exists()).toBe(true)
-        expect(placeholder.classes()).toContain('bi-x-lg')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog handles logo error with fallback', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            logo: '/img/logos/broken.png',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        // Mock showModal before calling showCareerDetails
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        // Trigger error on career details logo
-        const logoImg = wrapper.find('.career-details-logo')
-        expect(logoImg.exists()).toBe(true)
-        await logoImg.trigger('error')
-
-        // Should show placeholder after error
-        const placeholder = wrapper.find('.career-logo-placeholder')
-        expect(placeholder.exists()).toBe(true)
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog displays description', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            description: 'Test description for career',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const infoSection = wrapper.find('.career-details-info')
-        expect(infoSection.text()).toContain('Test description for career')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog displays period dates', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            dates: '2020-2023',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const infoSection = wrapper.find('.career-details-info')
-        expect(infoSection.text()).toContain('2020-2023')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog displays platform icons', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            platforms: ['bi-globe', 'bi-phone'],
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const platformIcons = wrapper.find('.career-details-info .platform-icons')
-        expect(platformIcons.exists()).toBe(true)
-        const icons = platformIcons.findAll('i')
-        expect(icons.length).toBe(2)
-        expect(icons[0].classes()).toContain('bi-globe')
-        expect(icons[1].classes()).toContain('bi-phone')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog shows Visit Project button for url clickAction', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            clickAction: 'url',
-                            url: 'https://example.com',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const ctaButton = wrapper.find('.career-cta')
-        expect(ctaButton.exists()).toBe(true)
-        expect(ctaButton.text()).toBe('Visit Project')
-        expect(ctaButton.classes()).toContain('is-default')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('Visit Project button calls window.open with correct URL', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            clickAction: 'url',
-                            url: 'https://example.com',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const visitButton = wrapper.find('.career-cta')
-        await visitButton.trigger('click')
-        
-        expect(window.open).toHaveBeenCalled()
-        const call = window.open.mock.calls[0]
-        expect(call[0]).toBe('https://example.com')
-        expect(call[2]).toBe('noopener,noreferrer')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog shows disabled button for alert clickAction', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            clickAction: 'alert',
-                            url: null,
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const ctaButton = wrapper.find('.career-cta')
-        expect(ctaButton.exists()).toBe(true)
-        expect(ctaButton.text()).toBe('Project Unavailable')
-        expect(ctaButton.classes()).toContain('is-disabled')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog shows placeholder image when no screenshots', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            screenshots: []
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const screenshot = wrapper.find('.career-screenshot')
-        expect(screenshot.exists()).toBe(true)
-        expect(screenshot.attributes('src')).toBe('/img/projects/placeholder.png')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
     it('close button closes careers dialog', async () => {
         const container = document.createElement('div')
         document.body.appendChild(container)
@@ -681,42 +310,6 @@ describe('ProjectsComponent.vue', () => {
         
         // Get the close button from the dialog-menu in careers dialog
         const closeButton = wrapper.findAll('.dialog-menu button').filter(b => b.text() === 'Okay')[0]
-        expect(closeButton.exists()).toBe(true)
-        
-        await closeButton.trigger('click')
-        expect(closeSpy).toHaveBeenCalled()
-        
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('close button closes career details dialog', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-        
-        const detailsDialog = document.getElementById('dialog-career-details')
-        const closeSpy = vi.fn()
-        detailsDialog.close = closeSpy
-        detailsDialog.showModal = vi.fn()
-        
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-        
-        // Get the close button from the dialog-menu in details dialog
-        const closeButton = wrapper.findAll('#dialog-career-details .dialog-menu button').filter(b => b.text() === 'Close')[0]
         expect(closeButton.exists()).toBe(true)
         
         await closeButton.trigger('click')

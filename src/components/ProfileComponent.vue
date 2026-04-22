@@ -76,6 +76,8 @@
       <ProjectsComponent></ProjectsComponent>
       <SpotifyComponent></SpotifyComponent>
       <IndustriesComponent></IndustriesComponent>
+      <CareerDetailsComponent></CareerDetailsComponent>
+      <IndustryProjectsComponent></IndustryProjectsComponent>
     </section>
   </div>
 </template>
@@ -84,6 +86,8 @@
   import ProjectsComponent from './ProjectsComponent.vue';
   import SpotifyComponent from './SpotifyComponent.vue';
   import IndustriesComponent from './IndustriesComponent.vue';
+  import CareerDetailsComponent from './CareerDetailsComponent.vue';
+  import IndustryProjectsComponent from './IndustryProjectsComponent.vue';
   import packageInfo from '../../package.json';
 
   export default {
@@ -92,6 +96,8 @@
       ProjectsComponent,
       SpotifyComponent,
       IndustriesComponent,
+      CareerDetailsComponent,
+      IndustryProjectsComponent,
     },
     methods: {
       goToUrl(url) {

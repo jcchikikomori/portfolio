@@ -8,7 +8,6 @@
       return {
         careers,
         logoErrors: {},
-        selectedCareer: { company: '', screenshots: [] },
       };
     },
     methods: {
@@ -32,16 +31,11 @@
         }
       },
       showCareerDetails(careerId) {
-        const career = this.careers.find((c) => c.id === careerId);
-        if (!career) {
-          return;
-        }
-        this.selectedCareer = career;
-        const dialog = document.getElementById('dialog-career-details');
-        if (!dialog) {
-          return;
-        }
-        dialog.showModal();
+        window.dispatchEvent(
+          new CustomEvent('open-career-details', {
+            detail: { careerId },
+          })
+        );
       },
     },
   };
@@ -110,66 +104,9 @@
         </button>
       </menu>
     </dialog>
-    <dialog id="dialog-career-details" ref="detailsDialog" class="nes-dialog">
-      <div class="career-details-header">
-        <template v-if="selectedCareer.logo && !logoErrors[selectedCareer.id]">
-          <img
-            :src="logoSrc(selectedCareer)"
-            :alt="selectedCareer.company + ' logo'"
-            class="career-details-logo"
-            @error="onLogoError(selectedCareer.id)"
-          />
-        </template>
-        <h2 class="title">{{ selectedCareer.company }}</h2>
-      </div>
-      <div class="career-details-content">
-        <div class="career-details-media">
-          <img
-            :src="selectedCareer.screenshots[0] || '/img/projects/placeholder.png'"
-            :alt="selectedCareer.company + ' screenshot'"
-            class="career-screenshot"
-          />
-        </div>
-        <div class="career-details-info">
-          <div class="info-section">
-            <h3>Description</h3>
-            <p>{{ selectedCareer.description || 'No description available.' }}</p>
-          </div>
-          <div class="info-section">
-            <h3>Period</h3>
-            <p>{{ selectedCareer.dates }}</p>
-          </div>
-          <div
-            v-if="selectedCareer.platforms && selectedCareer.platforms.length"
-            class="info-section"
-          >
-            <h3>Platforms</h3>
-            <div class="platform-icons">
-              <i v-for="icon in selectedCareer.platforms" :key="icon" :class="'bi ' + icon"></i>
-            </div>
-          </div>
-          <button
-            v-if="selectedCareer.clickAction === 'url' && selectedCareer.url"
-            type="button"
-            class="nes-btn is-default nes-pointer career-cta"
-            @click="goToUrl(selectedCareer.url)"
-          >
-            Visit Project
-          </button>
-          <button v-else type="button" class="nes-btn is-disabled career-cta">
-            Project Unavailable
-          </button>
-        </div>
-      </div>
-      <menu class="dialog-menu">
-        <button
-          type="button"
-          class="nes-btn is-primary nes-pointer is-block"
-          @click="$refs.detailsDialog.close()"
-        >
-          Close
-        </button>
-      </menu>
-    </dialog>
   </div>
 </template>
+
+<style scoped>
+  /* Styles are defined in _projects.scss */
+</style>
