@@ -19,6 +19,6 @@
 
 <script>
   export default {
-    name: "LoaderComponent"
+    name: 'LoaderComponent',
   };
 </script>

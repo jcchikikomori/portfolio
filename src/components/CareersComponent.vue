@@ -52,11 +52,7 @@
         for my CV!
       </p>
       <div class="career-list">
-        <div
-          v-for="career in careers"
-          :key="career.id"
-          class="career-card nes-container"
-        >
+        <div v-for="career in careers" :key="career.id" class="career-card nes-container">
           <div class="career-logo-wrapper">
             <template v-if="career.logo && !logoErrors[career.id]">
               <img

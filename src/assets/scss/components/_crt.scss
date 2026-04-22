@@ -1,0 +1,45 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the CRT filter overlay component.
+// -----------------------------------------------------------------------------
+
+// Overlay container
+.crt-filter {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-crt-overlay, 9999);
+
+  // Scanlines via pseudo-element
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  }
+}
+
+// Hidden by default, shown when enabled
+body:not(.crt-enabled) .crt-filter {
+  display: none;
+}
+
+// Reduced motion override
+@media (prefers-reduced-motion: reduce) {
+  .crt-filter {
+    display: none !important;
+  }
+}
+
+// Toggle button positioning
+.crt-toggle {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: var(--z-crt-toggle, 10000);
+}
