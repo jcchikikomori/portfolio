@@ -16,7 +16,7 @@
         if (this.selectedFilter === 'all') {
           return this.projects;
         }
-        return this.projects.filter((p) => p.category === this.selectedFilter);
+        return this.projects.filter(this.matchesCategoryFilter);
       },
     },
     methods: {
@@ -54,6 +54,9 @@
           mobile: 'Mobile',
         };
         return labels[industry] || industry;
+      },
+      matchesCategoryFilter(project) {
+        return project.category === this.selectedFilter;
       },
     },
   };

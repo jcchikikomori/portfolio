@@ -59,10 +59,40 @@ describe('ProjectDetailsComponent.vue', () => {
     wrapper.vm.showProjectDetails(project.id);
     await wrapper.vm.$nextTick();
 
-    const descriptionSection = wrapper.findAll('.info-section').find(s => 
-      s.find('h3').text() === 'Description'
-    );
+    const descriptionSection = wrapper
+      .findAll('.info-section')
+      .find((s) => s.find('h3').text() === 'Description');
     expect(descriptionSection).toBeTruthy();
+  });
+
+  it('renders fallback text when project has no description', async () => {
+    const wrapperNoDesc = mount(ProjectDetailsComponent, {
+      attachTo: container,
+      data() {
+        return {
+          selectedProject: {
+            id: 'test-no-desc',
+            name: 'Test Project',
+            description: null,
+            industry: 'web',
+            category: 'personal',
+            dates: '2024',
+            screenshots: [],
+            platforms: [],
+          },
+        };
+      },
+    });
+
+    await wrapperNoDesc.vm.$nextTick();
+
+    const descriptionSection = wrapperNoDesc
+      .findAll('.info-section')
+      .find((s) => s.find('h3').text() === 'Description');
+    expect(descriptionSection).toBeTruthy();
+    expect(descriptionSection.find('p').text()).toBe('No description available.');
+
+    wrapperNoDesc.unmount();
   });
 
   it('renders project period/dates section', async () => {
@@ -70,21 +100,21 @@ describe('ProjectDetailsComponent.vue', () => {
     wrapper.vm.showProjectDetails(project.id);
     await wrapper.vm.$nextTick();
 
-    const periodSection = wrapper.findAll('.info-section').find(s => 
-      s.find('h3').text() === 'Period'
-    );
+    const periodSection = wrapper
+      .findAll('.info-section')
+      .find((s) => s.find('h3').text() === 'Period');
     expect(periodSection).toBeTruthy();
     expect(periodSection.find('p').text()).toBe(project.dates);
   });
 
   it('renders company badge for corporate projects', async () => {
-    const corporateProject = projects.find(p => p.category === 'corporate');
+    const corporateProject = projects.find((p) => p.category === 'corporate');
     wrapper.vm.showProjectDetails(corporateProject.id);
     await wrapper.vm.$nextTick();
 
-    const companySection = wrapper.findAll('.info-section').find(s => 
-      s.find('h3').text() === 'Company'
-    );
+    const companySection = wrapper
+      .findAll('.info-section')
+      .find((s) => s.find('h3').text() === 'Company');
     expect(companySection).toBeTruthy();
 
     const companyBadge = companySection.find('.company-badge');
@@ -92,28 +122,28 @@ describe('ProjectDetailsComponent.vue', () => {
   });
 
   it('does not render company section for personal projects', async () => {
-    const personalProject = projects.find(p => p.category === 'personal');
+    const personalProject = projects.find((p) => p.category === 'personal');
     wrapper.vm.showProjectDetails(personalProject.id);
     await wrapper.vm.$nextTick();
 
-    const companySection = wrapper.findAll('.info-section').find(s => 
-      s.find('h3').text() === 'Company'
-    );
+    const companySection = wrapper
+      .findAll('.info-section')
+      .find((s) => s.find('h3').text() === 'Company');
     expect(companySection).toBeFalsy();
   });
 
   it('clicking company badge dispatches open-career-details event', async () => {
     const dispatchEventSpy = vi.spyOn(window, 'dispatchEvent');
-    const corporateProject = projects.find(p => p.category === 'corporate');
-    
+    const corporateProject = projects.find((p) => p.category === 'corporate');
+
     wrapper.vm.showProjectDetails(corporateProject.id);
     await wrapper.vm.$nextTick();
 
-    const companySection = wrapper.findAll('.info-section').find(s => 
-      s.find('h3').text() === 'Company'
-    );
+    const companySection = wrapper
+      .findAll('.info-section')
+      .find((s) => s.find('h3').text() === 'Company');
     const companyBadge = companySection.find('.company-badge');
-    
+
     await companyBadge.trigger('click');
 
     expect(dispatchEventSpy).toHaveBeenCalled();
@@ -125,27 +155,27 @@ describe('ProjectDetailsComponent.vue', () => {
   });
 
   it('renders platform icons when project has platforms', async () => {
-    const project = projects.find(p => p.platforms.length > 0);
+    const project = projects.find((p) => p.platforms.length > 0);
     wrapper.vm.showProjectDetails(project.id);
     await wrapper.vm.$nextTick();
 
-    const platformsSection = wrapper.findAll('.info-section').find(s => 
-      s.find('h3').text() === 'Platforms'
-    );
+    const platformsSection = wrapper
+      .findAll('.info-section')
+      .find((s) => s.find('h3').text() === 'Platforms');
     expect(platformsSection).toBeTruthy();
-    
+
     const icons = platformsSection.findAll('.platform-icons i');
     expect(icons.length).toBe(project.platforms.length);
   });
 
   it('renders skills list', async () => {
-    const project = projects.find(p => p.skills.length > 0);
+    const project = projects.find((p) => p.skills.length > 0);
     wrapper.vm.showProjectDetails(project.id);
     await wrapper.vm.$nextTick();
 
-    const skillsSection = wrapper.findAll('.info-section').find(s => 
-      s.find('h3').text() === 'Skills'
-    );
+    const skillsSection = wrapper
+      .findAll('.info-section')
+      .find((s) => s.find('h3').text() === 'Skills');
     expect(skillsSection).toBeTruthy();
 
     const skills = skillsSection.findAll('.skill-tag');
@@ -153,7 +183,7 @@ describe('ProjectDetailsComponent.vue', () => {
   });
 
   it('shows Visit Project button when project has URL', async () => {
-    const project = projects.find(p => p.url);
+    const project = projects.find((p) => p.url);
     wrapper.vm.showProjectDetails(project.id);
     await wrapper.vm.$nextTick();
 
@@ -163,8 +193,22 @@ describe('ProjectDetailsComponent.vue', () => {
     expect(ctaButton.classes()).toContain('is-primary');
   });
 
+  it('emits go-to-url event when Visit Project button is clicked', async () => {
+    const project = projects.find((p) => p.url);
+    wrapper.vm.showProjectDetails(project.id);
+    await wrapper.vm.$nextTick();
+
+    const ctaButton = wrapper.find('.project-cta');
+    expect(ctaButton.exists()).toBe(true);
+
+    // Check that clicking emits the event
+    await ctaButton.trigger('click');
+    expect(wrapper.emitted('go-to-url')).toBeTruthy();
+    expect(wrapper.emitted('go-to-url')[0]).toEqual([project.url]);
+  });
+
   it('shows disabled Project Unavailable button when project has no URL', async () => {
-    const project = projects.find(p => !p.url);
+    const project = projects.find((p) => !p.url);
     wrapper.vm.showProjectDetails(project.id);
     await wrapper.vm.$nextTick();
 
@@ -198,9 +242,11 @@ describe('ProjectDetailsComponent.vue', () => {
     const dialog = document.getElementById('dialog-project-details');
     dialog.showModal = vi.fn();
 
-    window.dispatchEvent(new CustomEvent('open-project-details', {
-      detail: { projectId: project.id }
-    }));
+    window.dispatchEvent(
+      new CustomEvent('open-project-details', {
+        detail: { projectId: project.id },
+      })
+    );
 
     await wrapper.vm.$nextTick();
 
@@ -212,16 +258,21 @@ describe('ProjectDetailsComponent.vue', () => {
     const labels = {
       'e-commerce': 'E-Commerce',
       'online-payment': 'Online Payment',
-      'b2b': 'B2B',
-      'sales': 'Sales',
-      'devops': 'DevOps',
-      'web': 'Web',
-      'mobile': 'Mobile',
+      b2b: 'B2B',
+      sales: 'Sales',
+      devops: 'DevOps',
+      web: 'Web',
+      mobile: 'Mobile',
     };
 
     Object.entries(labels).forEach(([key, value]) => {
       expect(wrapper.vm.getIndustryLabel(key)).toBe(value);
     });
+  });
+
+  it('getIndustryLabel returns industry value when label not found', () => {
+    expect(wrapper.vm.getIndustryLabel('unknown-industry')).toBe('unknown-industry');
+    expect(wrapper.vm.getIndustryLabel('')).toBe('');
   });
 
   it('showProjectDetails does nothing for invalid projectId', () => {
@@ -235,16 +286,39 @@ describe('ProjectDetailsComponent.vue', () => {
   });
 
   it('computed selectedCareer returns correct career for corporate project', async () => {
-    const corporateProject = projects.find(p => p.category === 'corporate');
+    const corporateProject = projects.find((p) => p.category === 'corporate');
     wrapper.vm.showProjectDetails(corporateProject.id);
     await wrapper.vm.$nextTick();
 
-    const expectedCareer = careers.find(c => c.id === corporateProject.careerId);
+    const expectedCareer = careers.find((c) => c.id === corporateProject.careerId);
     expect(wrapper.vm.selectedCareer).toEqual(expectedCareer);
   });
 
+  it('computed selectedCareer returns null when careerId not found', async () => {
+    // Mount with a project that has invalid careerId
+    const wrapperInvalid = mount(ProjectDetailsComponent, {
+      attachTo: container,
+      data() {
+        return {
+          selectedProject: {
+            id: 'test-project',
+            name: 'Test',
+            careerId: 'non-existent-career',
+            industry: 'web',
+            description: 'Test description',
+            screenshots: ['/img/test.png'],
+            dates: '2024',
+          },
+        };
+      },
+    });
+
+    expect(wrapperInvalid.vm.selectedCareer).toBeNull();
+    wrapperInvalid.unmount();
+  });
+
   it('computed selectedCareer returns null for personal project', async () => {
-    const personalProject = projects.find(p => p.category === 'personal');
+    const personalProject = projects.find((p) => p.category === 'personal');
     wrapper.vm.showProjectDetails(personalProject.id);
     await wrapper.vm.$nextTick();
 
@@ -269,19 +343,19 @@ describe('ProjectDetailsComponent.vue', () => {
 
   it('showCareerDetails does nothing when selectedCareer is null', () => {
     const dispatchEventSpy = vi.spyOn(window, 'dispatchEvent');
-    
+
     // Ensure selectedCareer is null
     wrapper.setData({ selectedProject: null });
-    
+
     // Should not throw or dispatch
     wrapper.vm.showCareerDetails();
-    
+
     expect(dispatchEventSpy).not.toHaveBeenCalled();
     dispatchEventSpy.mockRestore();
   });
 
   it('onLogoError does not duplicate state for same projectId', async () => {
-    const project = projects.find(p => p.logo);
+    const project = projects.find((p) => p.logo);
     wrapper.vm.showProjectDetails(project.id);
     await wrapper.vm.$nextTick();
 
@@ -296,7 +370,7 @@ describe('ProjectDetailsComponent.vue', () => {
   });
 
   it('logoSrc uses logoDark in dark mode', async () => {
-    const project = projects.find(p => p.logo && p.logoDark);
+    const project = projects.find((p) => p.logo && p.logoDark);
     wrapper.vm.showProjectDetails(project.id);
     await wrapper.vm.$nextTick();
 
@@ -316,9 +390,9 @@ describe('ProjectDetailsComponent.vue', () => {
     const projectWithOnlyLightLogo = {
       ...projects[0],
       logo: 'https://example.com/logo.png',
-      logoDark: null
+      logoDark: null,
     };
-    
+
     wrapper.setData({ selectedProject: projectWithOnlyLightLogo });
     await wrapper.vm.$nextTick();
 
@@ -331,5 +405,71 @@ describe('ProjectDetailsComponent.vue', () => {
 
     // Clean up
     dialog.classList.remove('is-dark');
+  });
+
+  it('isDark returns true when dialog has is-dark class', () => {
+    const dialog = document.getElementById('dialog-project-details');
+    dialog.classList.add('is-dark');
+
+    expect(wrapper.vm.isDark()).toBe(true);
+
+    dialog.classList.remove('is-dark');
+  });
+
+  it('isDark returns false when dialog does not have is-dark class', () => {
+    const dialog = document.getElementById('dialog-project-details');
+    dialog.classList.remove('is-dark');
+
+    expect(wrapper.vm.isDark()).toBe(false);
+  });
+
+  it('isDark returns false when dialog element is not found', () => {
+    const origGetElementById = document.getElementById.bind(document);
+    vi.spyOn(document, 'getElementById').mockImplementation((id) => {
+      if (id === 'dialog-project-details') {
+        return null;
+      }
+      return origGetElementById.call(document, id);
+    });
+
+    expect(wrapper.vm.isDark()).toBe(false);
+
+    vi.restoreAllMocks();
+  });
+
+  it('img @error handler triggers onLogoError and shows placeholder', async () => {
+    const corporateProject = projects.find((p) => p.category === 'corporate' && p.logo);
+    wrapper.vm.showProjectDetails(corporateProject.id);
+    await wrapper.vm.$nextTick();
+
+    const logoImg = wrapper.find('.project-details-logo');
+    expect(logoImg.exists()).toBe(true);
+
+    // Trigger error event on img element
+    await logoImg.trigger('error');
+
+    // Should show placeholder after error
+    expect(wrapper.vm.logoErrors[corporateProject.id]).toBe(true);
+    const placeholder = wrapper.find('.project-details-logo-placeholder');
+    expect(placeholder.exists()).toBe(true);
+  });
+
+  it('company badge click triggers showCareerDetails', async () => {
+    const dispatchEventSpy = vi.spyOn(window, 'dispatchEvent');
+    const corporateProject = projects.find((p) => p.category === 'corporate');
+    wrapper.vm.showProjectDetails(corporateProject.id);
+    await wrapper.vm.$nextTick();
+
+    const companyBadge = wrapper.find('.company-badge');
+    expect(companyBadge.exists()).toBe(true);
+
+    await companyBadge.trigger('click');
+
+    expect(dispatchEventSpy).toHaveBeenCalled();
+    const event = dispatchEventSpy.mock.calls[0][0];
+    expect(event.type).toBe('open-career-details');
+    expect(event.detail).toHaveProperty('careerId');
+
+    dispatchEventSpy.mockRestore();
   });
 });
