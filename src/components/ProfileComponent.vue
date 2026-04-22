@@ -74,25 +74,22 @@
             <button class="nes-btn is-default nes-pointer is-block" @click="showSpotify">
               Music
             </button>
-            <button class="nes-btn is-default nes-pointer is-block" @click="showProjects">
+            <button class="nes-btn is-success nes-pointer is-block" @click="showProjects">
               Careers
             </button>
-            <button class="nes-btn is-default nes-pointer is-block" @click="showIndustries">
+            <button class="nes-btn is-success nes-pointer is-block" @click="showIndustries">
               Projects
             </button>
             <button
-              class="nes-btn is-default nes-pointer is-block"
+              class="nes-btn is-warning nes-pointer is-block"
               @click="goToUrl('https://jcchikikomori.github.io/blog')"
             >
               Blog
             </button>
-          </div>
-          <br /><br />
-          <div class="btn-group-vertical btn-block">
             <button
               id="linkedin-btn"
               type="button"
-              class="nes-btn is-default nes-pointer is-block"
+              class="nes-btn is-primary nes-pointer is-block"
               @click="goToUrl('https://linkedin.com/in/johncyrillcorsanes')"
             >
               <em class="nes-icon linkedin"></em> <span>LinkedIn</span>
@@ -100,7 +97,7 @@
             <button
               id="github-btn"
               type="button"
-              class="nes-btn is-default nes-pointer is-block"
+              class="nes-btn is-primary nes-pointer is-block"
               @click="goToUrl('https://github.com/jcchikikomori')"
             >
               <em class="nes-icon github"></em> <span>GitHub</span>
