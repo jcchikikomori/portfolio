@@ -12,79 +12,88 @@
     "plugin:import/recommended",
     "prettier"
   ],
-  "plugins": [
-    "vue",
-    "security",
-    "import"
-  ],
+  "plugins": ["vue", "security", "import"],
   "rules": {
-    // Vue 3 specific rules
-    "vue/multi-word-component-names": ["error", {
-      "ignores": ["Index", "Main", "Home", "About"]
-    }],
+    "vue/multi-word-component-names": [
+      "error",
+      {
+        "ignores": ["Index", "Main", "Home", "About"]
+      }
+    ],
     "vue/require-default-prop": "error",
     "vue/require-prop-types": "error",
     "vue/order-in-components": "error",
     "vue/attributes-order": "error",
-    "vue/component-tags-order": ["error", {
-      "order": ["script", "template", "style"]
-    }],
+    "vue/component-tags-order": [
+      "error",
+      {
+        "order": ["script", "template", "style"]
+      }
+    ],
     "vue/no-unused-refs": "error",
     "vue/no-unused-properties": "error",
     "vue/require-expose": "off",
 
-    // Import organization
-    "import/order": ["error", {
-      "groups": [
-        "builtin",
-        "external",
-        "internal",
-        ["parent", "sibling"],
-        "index",
-        "object",
-        "type"
-      ],
-      "pathGroups": [
-        {
-          "pattern": "vue",
-          "group": "external",
-          "position": "before"
-        },
-        {
-          "pattern": "@/**",
-          "group": "internal"
-        },
-        {
-          "pattern": "~/**",
-          "group": "internal"
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling"],
+          "index",
+          "object",
+          "type"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "vue",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "~/**",
+            "group": "internal"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
         }
-      ],
-      "pathGroupsExcludedImportTypes": ["builtin"],
-      "newlines-between": "always",
-      "alphabetize": {
-        "order": "asc",
-        "caseInsensitive": true
       }
-    }],
+    ],
     "import/no-unresolved": "error",
     "import/no-cycle": "error",
     "import/no-self-import": "error",
     "import/no-useless-path-segments": "error",
     "import/first": "error",
     "import/no-duplicates": "error",
-    "import/extensions": ["error", "ignorePackages", {
-      "js": "never",
-      "vue": "never"
-    }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "vue": "never"
+      }
+    ],
 
-    // Code quality
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "no-debugger": "error",
     "no-alert": "error",
-    "no-unused-vars": ["error", { 
-      "argsIgnorePattern": "^_",
-      "varsIgnorePattern": "^_"
-    }],
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
     "no-undef": "error",
     "no-var": "error",
     "prefer-const": "error",
@@ -99,12 +108,8 @@
     "no-async-promise-executor": "error",
     "no-promise-executor-return": "error",
     "no-case-declarations": "error",
-
-    // Security (additional to plugin:security)
     "security/detect-object-injection": "warn",
     "security/detect-non-literal-regexp": "warn",
-
-    // Best practices
     "array-callback-return": "error",
     "block-scoped-var": "error",
     "consistent-return": "error",
@@ -131,11 +136,14 @@
     "no-labels": "error",
     "no-lone-blocks": "error",
     "no-loop-func": "error",
-    "no-magic-numbers": ["warn", { 
-      "ignore": [0, 1, -1],
-      "ignoreArrayIndexes": true,
-      "enforceConst": true
-    }],
+    "no-magic-numbers": [
+      "warn",
+      {
+        "ignore": [0, 1, -1],
+        "ignoreArrayIndexes": true,
+        "enforceConst": true
+      }
+    ],
     "no-multi-spaces": "error",
     "no-multi-str": "error",
     "no-new": "error",
@@ -146,11 +154,14 @@
     "no-param-reassign": ["error", { "props": false }],
     "no-proto": "error",
     "no-redeclare": "error",
-    "no-restricted-properties": ["error", {
-      "object": "arguments",
-      "property": "callee",
-      "message": "arguments.callee is deprecated"
-    }],
+    "no-restricted-properties": [
+      "error",
+      {
+        "object": "arguments",
+        "property": "callee",
+        "message": "arguments.callee is deprecated"
+      }
+    ],
     "no-return-assign": "error",
     "no-script-url": "error",
     "no-self-assign": "error",
@@ -182,21 +193,14 @@
         "extensions": [".js", "vue"]
       },
       "alias": {
-        "map": [
-          ["@", "./src"]
-        ],
+        "map": [["@", "./src"]],
         "extensions": [".js", "vue", "scss"]
       }
     },
     "import/extensions": [".js", "vue"],
-    "import/ignore": [
-      "node_modules",
-      "\\.scss$",
-      "\\.css$"
-    ]
+    "import/ignore": ["node_modules", "\\.scss$", "\\.css$"]
   },
   "globals": {
-    // Vitest globals
     "describe": "readonly",
     "it": "readonly",
     "test": "readonly",
@@ -208,7 +212,6 @@
     "afterEach": "readonly",
     "suite": "readonly",
     "bench": "readonly",
-    // Browser globals
     "window": "readonly",
     "document": "readonly",
     "navigator": "readonly",
@@ -223,7 +226,6 @@
     "clearInterval": "readonly",
     "requestAnimationFrame": "readonly",
     "cancelAnimationFrame": "readonly",
-    // Vite globals
     "import": "readonly",
     "import.meta": "readonly",
     "import.meta.env": "readonly"
@@ -245,19 +247,26 @@
     {
       "files": ["**/*.spec.js", "**/*.test.js"],
       "rules": {
-        "no-console": "off",
+        "no-console": 0,
         "security/detect-object-injection": "off",
         "no-magic-numbers": "off",
         "no-empty-function": "off",
-        "no-unused-vars": ["error", { 
-          "argsIgnorePattern": "^_",
-          "varsIgnorePattern": "^_",
-          "caughtErrorsIgnorePattern": "^_"
-        }],
-        "import/extensions": ["error", "ignorePackages", {
-          "js": "always",
-          "vue": "never"
-        }]
+        "no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+          }
+        ],
+        "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "js": "always",
+            "vue": "never"
+          }
+        ]
       }
     },
     {

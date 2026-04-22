@@ -41,6 +41,7 @@ unknowns:
 ### Agreement Checklist
 
 #### Scope
+
 - [x] Refactor `ProjectsComponent.vue` from hardcoded HTML to data-driven `v-for`
 - [x] Extract career data to `src/data/careers.js`
 - [x] Add company logo images with light/dark mode variants
@@ -52,6 +53,7 @@ unknowns:
 - [x] Install `bootstrap-icons` dependency via pnpm
 
 #### Non-Scope (Explicitly not changing)
+
 - [x] `theme.js` -- unchanged; new dialogs auto-receive `.is-dark` via existing `querySelectorAll`
 - [x] `SpotifyComponent.vue` -- no changes
 - [x] `LoaderComponent.vue` -- no changes
@@ -62,6 +64,7 @@ unknowns:
 - [x] Backend / API integration -- no backend exists; data is static JS
 
 #### Constraints
+
 - [x] Parallel operation: No -- sequential feature PRs on `feature/41-my-career-history-re-design` branch
 - [x] Backward compatibility: Not required -- feature branch targets `develop`
 - [x] Performance measurement: Noted -- bootstrap-icons bundle size should be measured in build output
@@ -69,6 +72,7 @@ unknowns:
 - [x] PR size: Each PR <= 200 lines
 
 #### Agreement Reflection in Design
+
 - [x] Data extraction (PR 1) reflected in "Data Modules" section
 - [x] Bootstrap Icons install (PR 1) reflected in "Dependencies" section
 - [x] Logo assets (PR 2) reflected in "Logo Strategy" section
@@ -643,7 +647,7 @@ The screenshot dialog is a peer `<dialog>` element inside `ProjectsComponent.vue
       />
     </div>
     <menu class="dialog-menu">
-      <button class="btn nes-btn is-primary is-block">Close</button>
+      <button class="nes-btn is-primary nes-pointer is-block">Close</button>
     </menu>
   </form>
 </dialog>
@@ -684,6 +688,7 @@ Mobile responsive rules follow existing `sass-mq` breakpoint conventions:
 **Selection Reason**: Each PR delivers a complete, independently testable slice of functionality. The 6-PR split ensures each is under 200 lines, testable in isolation, and does not depend on parallel work. Each slice adds user-visible value (data extraction enables future PRs; icons add visual value; screenshot dialog adds interaction; industries adds a new section).
 
 **Alternatives considered**:
+
 - Horizontal Slice (foundation first): Would require implementing all data modules + all components + all SCSS before any visible result. Poor for incremental review.
 - Hybrid: Unnecessary given the clean vertical decomposition along feature boundaries.
 
@@ -829,18 +834,18 @@ No backward compatibility required -- this is a feature branch targeting `develo
 
 ## References
 
-- GitHub Issue #41: https://github.com/jcchikikomori/portfolio/issues/41
+- GitHub Issue #41: <https://github.com/jcchikikomori/portfolio/issues/41>
 - ADR-0001 Vue 3 + Vite Migration: `docs/adr/ADR-0001-vue3-vite-migration.md`
 - ADR-0002 Career History Redesign: `docs/adr/ADR-0002-career-history-redesign.md`
-- Bootstrap Icons: https://icons.getbootstrap.com/
-- Bootstrap Icons npm package: https://www.npmjs.com/package/bootstrap-icons
-- WCAG 2 AA Contrast Requirements: https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html
-- WebAIM Contrast Checker: https://webaim.org/resources/contrastchecker/
-- HTML `<dialog>` element: https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element
-- companieslogo.com (logo source): https://companieslogo.com
-- Vue 3 Options API: https://vuejs.org/api/options-state.html
-- NES.css documentation: https://nostalgic-css.github.io/NES.css/
-- sass-mq documentation: https://github.com/sass-mq/sass-mq
+- Bootstrap Icons: <https://icons.getbootstrap.com/>
+- Bootstrap Icons npm package: <https://www.npmjs.com/package/bootstrap-icons>
+- WCAG 2 AA Contrast Requirements: <https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html>
+- WebAIM Contrast Checker: <https://webaim.org/resources/contrastchecker/>
+- HTML `<dialog>` element: <https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element>
+- companieslogo.com (logo source): <https://companieslogo.com>
+- Vue 3 Options API: <https://vuejs.org/api/options-state.html>
+- NES.css documentation: <https://nostalgic-css.github.io/NES.css/>
+- sass-mq documentation: <https://github.com/sass-mq/sass-mq>
 
 ## Update History
 

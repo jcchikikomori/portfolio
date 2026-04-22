@@ -1,47 +1,50 @@
 <script>
-import { careers } from '../data/careers.js'
+  import { careers } from '../data/careers';
 
-export default {
-  name: "ProjectsComponent",
-  components: {},
-  data() {
-    return {
-      careers,
-      logoErrors: {},
-      selectedCareer: { company: '', screenshots: [] },
-    }
-  },
-  methods: {
-    isDark() {
-      const dialog = document.getElementById('dialog-projects')
-      return Boolean(dialog?.classList.contains('is-dark'))
+  export default {
+    name: 'ProjectsComponent',
+    components: {},
+    data() {
+      return {
+        careers,
+        logoErrors: {},
+        selectedCareer: { company: '', screenshots: [] },
+      };
     },
-    logoSrc(career) {
-      return this.isDark() && career.logoDark
-        ? career.logoDark
-        : career.logo
-    },
-    goToUrl(url) {
-      window.open(url, '_blank', 'noopener,noreferrer')
-    },
-    onLogoError(careerId) {
-      if (!this.logoErrors[careerId]) {
-        if (import.meta.env.DEV) {
-          console.warn(`[ProjectsComponent] Logo failed to load for: ${careerId}`)
+    methods: {
+      isDark() {
+        const dialog = document.getElementById('dialog-projects');
+        return Boolean(dialog?.classList.contains('is-dark'));
+      },
+      logoSrc(career) {
+        return this.isDark() && career.logoDark ? career.logoDark : career.logo;
+      },
+      goToUrl(url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      },
+      onLogoError(careerId) {
+        // eslint-disable-next-line security/detect-object-injection
+        if (!this.logoErrors[careerId]) {
+          if (import.meta.env.DEV) {
+            console.warn(`[ProjectsComponent] Logo failed to load for: ${careerId}`);
+          }
+          this.logoErrors = { ...this.logoErrors, [careerId]: true };
         }
-        this.logoErrors = { ...this.logoErrors, [careerId]: true }
-      }
+      },
+      showCareerDetails(careerId) {
+        const career = this.careers.find((c) => c.id === careerId);
+        if (!career) {
+          return;
+        }
+        this.selectedCareer = career;
+        const dialog = document.getElementById('dialog-career-details');
+        if (!dialog) {
+          return;
+        }
+        dialog.showModal();
+      },
     },
-    showCareerDetails(careerId) {
-      const career = this.careers.find(c => c.id === careerId)
-      if (!career) {return}
-      this.selectedCareer = career
-      const dialog = document.getElementById('dialog-career-details')
-      if (!dialog) {return}
-      dialog.showModal()
-    },
-  },
-}
+  };
 </script>
 
 <template>
@@ -51,9 +54,7 @@ export default {
       <h1 class="title">My Career</h1>
       <p class="subtitle">
         See more by
-        <a @click="goToUrl('https://github.com/jcchikikomori')"
-          >contacting me</a
-        >
+        <a @click="goToUrl('https://github.com/jcchikikomori')">contacting me</a>
         for my CV!
       </p>
       <div class="career-list">
@@ -81,15 +82,8 @@ export default {
             </template>
             <h6 class="card-title">{{ career.company }}</h6>
             <div class="card-body-flex">
-              <span
-              v-if="career.platforms.length > 0"
-              class="platform-icons"
-            >
-              <i
-                v-for="icon in career.platforms"
-                :key="icon"
-                :class="'bi ' + icon"
-              ></i>
+              <span v-if="career.platforms.length > 0" class="platform-icons">
+                <i v-for="icon in career.platforms" :key="icon" :class="'bi ' + icon"></i>
               </span>
               <p class="card-text">
                 <small class="text-muted">{{ career.dates }}</small>
@@ -97,15 +91,23 @@ export default {
             </div>
             <button
               type="button"
-              class="btn nes-btn is-default career-details-trigger"
+              class="nes-btn is-default nes-pointer career-details-trigger"
               @click.stop="showCareerDetails(career.id)"
-            >View Details</button>
+            >
+              View Details
+            </button>
           </div>
         </div>
       </div>
 
       <menu class="dialog-menu">
-        <button type="button" class="btn nes-btn is-primary is-block" @click="$refs.careersDialog.close()">Okay</button>
+        <button
+          type="button"
+          class="nes-btn is-primary nes-pointer is-block"
+          @click="$refs.careersDialog.close()"
+        >
+          Okay
+        </button>
       </menu>
     </dialog>
     <dialog id="dialog-career-details" ref="detailsDialog" class="nes-dialog">
@@ -137,31 +139,36 @@ export default {
             <h3>Period</h3>
             <p>{{ selectedCareer.dates }}</p>
           </div>
-          <div class="info-section" v-if="selectedCareer.platforms && selectedCareer.platforms.length">
+          <div
+            v-if="selectedCareer.platforms && selectedCareer.platforms.length"
+            class="info-section"
+          >
             <h3>Platforms</h3>
             <div class="platform-icons">
-              <i
-                v-for="icon in selectedCareer.platforms"
-                :key="icon"
-                :class="'bi ' + icon"
-              ></i>
+              <i v-for="icon in selectedCareer.platforms" :key="icon" :class="'bi ' + icon"></i>
             </div>
           </div>
           <button
-            type="button"
             v-if="selectedCareer.clickAction === 'url' && selectedCareer.url"
-            class="btn nes-btn is-default career-cta"
-            @click="goToUrl(selectedCareer.url)"
-          >Visit Project</button>
-          <button
             type="button"
-            v-else
-            class="btn nes-btn is-disabled career-cta"
-          >Project Unavailable</button>
+            class="nes-btn is-default nes-pointer career-cta"
+            @click="goToUrl(selectedCareer.url)"
+          >
+            Visit Project
+          </button>
+          <button v-else type="button" class="nes-btn is-disabled career-cta">
+            Project Unavailable
+          </button>
         </div>
       </div>
       <menu class="dialog-menu">
-        <button type="button" class="btn nes-btn is-primary is-block" @click="$refs.detailsDialog.close()">Close</button>
+        <button
+          type="button"
+          class="nes-btn is-primary nes-pointer is-block"
+          @click="$refs.detailsDialog.close()"
+        >
+          Close
+        </button>
       </menu>
     </dialog>
   </div>
