@@ -69,12 +69,12 @@ describe('industries data module', () => {
         }
     })
 
-    it('has exactly 4 industries', () => {
-        expect(industries.length).toBe(4)
+    it('has exactly 5 industries', () => {
+        expect(industries.length).toBe(5)
     })
 
     it('industry names match expected list', () => {
-        const expectedNames = ['E-Commerce', 'Online Payment', 'B2B', 'Inventory Management']
+        const expectedNames = ['E-Commerce', 'Online Payment', 'B2B', 'Sales', 'Personal']
         const actualNames = industries.map(i => i.name)
         expect(actualNames).toEqual(expectedNames)
     })

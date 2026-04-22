@@ -179,6 +179,22 @@ describe('CareerDetailsComponent.vue', () => {
         expect(dialog.showModal).not.toHaveBeenCalled()
     })
 
+    it('showCareerDetails does nothing when dialog element is not found', () => {
+        const career = careers[0]
+        const origGetElementById = document.getElementById
+        document.getElementById = vi.fn((id) => {
+            if (id === 'dialog-career-details') {
+                return null
+            }
+            return origGetElementById.call(document, id)
+        })
+
+        // Should not throw
+        expect(() => wrapper.vm.showCareerDetails(career.id)).not.toThrow()
+
+        document.getElementById = origGetElementById
+    })
+
     it('adds event listener on mount', () => {
         const addEventListenerSpy = vi.spyOn(window, 'addEventListener')
         const freshWrapper = mount(CareerDetailsComponent, { 

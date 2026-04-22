@@ -91,17 +91,16 @@ describe('IndustriesComponent.vue', () => {
     expect(closeSpy).toHaveBeenCalled();
   });
 
-  it('renders all 4 industries', () => {
+  it('renders all industries', () => {
     const cards = wrapper.findAll('.industry-card');
-    expect(cards.length).toBe(4);
+    expect(cards.length).toBe(industries.length);
   });
 
   it('industry icons are rendered correctly', () => {
-    const expectedIcons = ['bi-cart', 'bi-credit-card', 'bi-building', 'bi-box-seam'];
     const icons = wrapper.findAll('.industry-icon');
 
     icons.forEach((icon, index) => {
-      expect(icon.classes()).toContain(expectedIcons[index]);
+      expect(icon.classes()).toContain(industries[index].icon);
     });
   });
 

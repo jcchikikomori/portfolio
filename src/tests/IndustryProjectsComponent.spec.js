@@ -203,6 +203,22 @@ describe('IndustryProjectsComponent.vue', () => {
         expect(wrapper.vm.selectedIndustry).toBeNull()
     })
 
+    it('showIndustryProjects does nothing when dialog element is not found', () => {
+        const industry = industries[0]
+        const origGetElementById = document.getElementById
+        document.getElementById = vi.fn((id) => {
+            if (id === 'dialog-industry-projects') {
+                return null
+            }
+            return origGetElementById.call(document, id)
+        })
+
+        // Should not throw
+        expect(() => wrapper.vm.showIndustryProjects(industry.name)).not.toThrow()
+
+        document.getElementById = origGetElementById
+    })
+
     it('adds event listener on mount', () => {
         const addEventListenerSpy = vi.spyOn(window, 'addEventListener')
         const freshContainer = document.createElement('div')
