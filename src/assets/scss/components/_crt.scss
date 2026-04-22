@@ -37,9 +37,13 @@ body:not(.crt-enabled) .crt-filter {
 }
 
 // Toggle button positioning
-.crt-toggle {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  z-index: var(--z-crt-toggle, 10000);
+body {
+  .nes-btn.crt-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 1rem;
+    width: 3.5rem;
+    min-width: unset;
+    z-index: var(--z-crt-toggle, 10000);
+  }
 }
