@@ -294,7 +294,7 @@ describe('ProjectDetailsComponent.vue', () => {
     expect(wrapper.vm.selectedCareer).toEqual(expectedCareer);
   });
 
-  it('computed selectedCareer returns null when careerId not found', async () => {
+  it('computed selectedCareer returns null when careerId not found', () => {
     // Mount with a project that has invalid careerId
     const wrapperInvalid = mount(ProjectDetailsComponent, {
       attachTo: container,

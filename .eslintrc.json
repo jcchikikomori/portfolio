@@ -184,9 +184,14 @@
     "wrap-iife": ["error", "inside"],
     "yoda": "error"
   },
+  "parser": "vue-eslint-parser",
   "parserOptions": {
     "ecmaVersion": 2022,
-    "sourceType": "module"
+    "sourceType": "module",
+    "parser": {
+      "js": "espree",
+      "ts": "@typescript-eslint/parser"
+    }
   },
   "settings": {
     "import/resolver": {
