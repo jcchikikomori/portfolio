@@ -19,11 +19,12 @@
     </div>
     <button
       class="nes-btn is-default crt-toggle nes-pointer"
+      :class="{ 'is-disabled': !crtEnabled }"
       @click="toggleCrt"
-      aria-label="Toggle CRT filter"
-      title="Toggle CRT filter"
+      :aria-label="crtEnabled ? 'Disable CRT filter' : 'Enable CRT filter'"
+      :title="crtEnabled ? 'Disable CRT filter' : 'Enable CRT filter'"
     >
-      <i class="nes-icon star"></i>
+      <i class="nes-icon star" :class="{ 'is-empty': !crtEnabled }"></i>
     </button>
   </div>
 </template>
@@ -37,11 +38,22 @@
     components: {
       ProfileComponent,
     },
+    data() {
+      return {
+        crtEnabled: false,
+      };
+    },
     methods: {
-      toggleCrt,
+      toggleCrt() {
+        toggleCrt();
+        this.crtEnabled = document.body.classList.contains('crt-enabled');
+      },
     },
     mounted() {
       initCrt();
+      // Read initial state from localStorage
+      const savedState = localStorage.getItem('crt-enabled');
+      this.crtEnabled = savedState === 'true';
     },
   };
 </script>
