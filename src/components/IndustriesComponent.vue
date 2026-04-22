@@ -25,7 +25,7 @@
   <!-- INDUSTRIES CONTAINER -->
   <div id="industries-container">
     <dialog id="dialog-industries" ref="industriesDialog" class="nes-dialog">
-      <h1 class="title">Industries</h1>
+      <h1 class="title">Projects</h1>
 
       <div class="industries-grid">
         <div

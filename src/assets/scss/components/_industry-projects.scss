@@ -56,14 +56,14 @@
 
     .project-skills {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 0.5rem;
       margin-top: 0.5rem;
 
       .skill-item {
         display: flex;
-        align-items: center;
-        gap: 0.25rem;
+        align-items: flex-end;
+        gap: 1rem;
         font-size: 0.75rem;
 
         i {

@@ -1,3 +1,57 @@
+<script>
+  import CareerDetailsComponent from './CareerDetailsComponent.vue';
+  import IndustriesComponent from './IndustriesComponent.vue';
+  import IndustryProjectsComponent from './IndustryProjectsComponent.vue';
+  import ProjectsComponent from './ProjectsComponent.vue';
+  import SpotifyComponent from './SpotifyComponent.vue';
+  import packageInfo from '../../package.json';
+
+  export default {
+    name: 'ProfileComponent',
+    components: {
+      ProjectsComponent,
+      SpotifyComponent,
+      IndustriesComponent,
+      CareerDetailsComponent,
+      IndustryProjectsComponent,
+    },
+    data() {
+      return {
+        app_version: packageInfo.version,
+      };
+    },
+    methods: {
+      goToUrl(url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      },
+      showProjects: () => {
+        const projectsDialog = document.getElementById('dialog-projects');
+        if (!projectsDialog) {
+          return;
+        }
+        projectsDialog.showModal();
+        projectsDialog.classList.add('-is-open');
+        projectsDialog.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      showSpotify: () => {
+        const spotifyDialog = document.getElementById('dialog-spotify');
+        if (!spotifyDialog) {
+          return;
+        }
+        spotifyDialog.classList.remove('-is-open');
+        spotifyDialog.showModal();
+      },
+      showIndustries: () => {
+        const industriesDialog = document.getElementById('dialog-industries');
+        if (!industriesDialog) {
+          return;
+        }
+        industriesDialog.showModal();
+      },
+    },
+  };
+</script>
+
 <template>
   <!-- MAIN CONTAINER -->
   <div id="main-container" class="main-screen">
@@ -17,18 +71,18 @@
           </ul>
 
           <div class="btn-group-vertical btn-block">
-            <button v-on:click="showSpotify" class="nes-btn is-default nes-pointer is-block">
+            <button class="nes-btn is-default nes-pointer is-block" @click="showSpotify">
               Music
             </button>
-            <button v-on:click="showProjects" class="nes-btn is-default nes-pointer is-block">
+            <button class="nes-btn is-default nes-pointer is-block" @click="showProjects">
               Careers
             </button>
-            <button v-on:click="showIndustries" class="nes-btn is-default nes-pointer is-block">
-              Industries
+            <button class="nes-btn is-default nes-pointer is-block" @click="showIndustries">
+              Projects
             </button>
             <button
-              v-on:click="goToUrl('https://jcchikikomori.github.io/blog')"
               class="nes-btn is-default nes-pointer is-block"
+              @click="goToUrl('https://jcchikikomori.github.io/blog')"
             >
               Blog
             </button>
@@ -36,18 +90,18 @@
           <br /><br />
           <div class="btn-group-vertical btn-block">
             <button
-              v-on:click="goToUrl('https://linkedin.com/in/johncyrillcorsanes')"
               id="linkedin-btn"
               type="button"
               class="nes-btn is-default nes-pointer is-block"
+              @click="goToUrl('https://linkedin.com/in/johncyrillcorsanes')"
             >
               <em class="nes-icon linkedin"></em> <span>LinkedIn</span>
             </button>
             <button
-              v-on:click="goToUrl('https://github.com/jcchikikomori')"
               id="github-btn"
               type="button"
               class="nes-btn is-default nes-pointer is-block"
+              @click="goToUrl('https://github.com/jcchikikomori')"
             >
               <em class="nes-icon github"></em> <span>GitHub</span>
             </button>
@@ -59,7 +113,7 @@
               Portfolio Build
               <a
                 href="#"
-                v-on:click="
+                @click="
                   goToUrl('https://github.com/jcchikikomori/portfolio/releases/tag/v' + app_version)
                 "
               >
@@ -81,51 +135,3 @@
     </section>
   </div>
 </template>
-
-<script>
-  import ProjectsComponent from './ProjectsComponent.vue';
-  import SpotifyComponent from './SpotifyComponent.vue';
-  import IndustriesComponent from './IndustriesComponent.vue';
-  import CareerDetailsComponent from './CareerDetailsComponent.vue';
-  import IndustryProjectsComponent from './IndustryProjectsComponent.vue';
-  import packageInfo from '../../package.json';
-
-  export default {
-    name: 'ProfileComponent',
-    components: {
-      ProjectsComponent,
-      SpotifyComponent,
-      IndustriesComponent,
-      CareerDetailsComponent,
-      IndustryProjectsComponent,
-    },
-    methods: {
-      goToUrl(url) {
-        window.open(url, '_blank', 'noopener,noreferrer');
-      },
-      showProjects: () => {
-        const projectsDialog = document.getElementById('dialog-projects');
-        if (!projectsDialog) return;
-        projectsDialog.showModal();
-        projectsDialog.classList.add('-is-open');
-        projectsDialog.scrollTo({ top: 0, behavior: 'smooth' });
-      },
-      showSpotify: () => {
-        const spotifyDialog = document.getElementById('dialog-spotify');
-        if (!spotifyDialog) return;
-        spotifyDialog.classList.remove('-is-open');
-        spotifyDialog.showModal();
-      },
-      showIndustries: () => {
-        const industriesDialog = document.getElementById('dialog-industries');
-        if (!industriesDialog) return;
-        industriesDialog.showModal();
-      },
-    },
-    data() {
-      return {
-        app_version: packageInfo.version,
-      };
-    },
-  };
-</script>

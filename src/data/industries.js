@@ -82,11 +82,11 @@ export const industries = [
     icon: 'bi-building',
     projects: [
       {
-        name: 'Enterprise Cloud Solutions',
+        name: 'Accenture',
         careerId: 'accenture',
         description: 'Cloud infrastructure and consulting for enterprise clients',
         skills: [
-          { name: 'AWS', icon: 'bi-cloud' },
+          { name: 'SaaS', icon: 'bi-cloud' },
           { name: 'Cloud Architecture', icon: 'bi-hdd-network' },
           { name: 'Consulting', icon: 'bi-people' },
           { name: 'DevOps', icon: 'bi-gear' },
@@ -106,24 +106,43 @@ export const industries = [
     ],
   },
   {
-    name: 'Inventory Management',
+    name: 'Sales',
     icon: 'bi-box-seam',
     projects: [
       {
-        name: 'Chatgenie Merchant Dashboard',
-        careerId: 'chatgenie',
-        description: 'Real-time inventory tracking and order management system',
+        name: 'Engagia App',
+        careerId: 'tradynamics',
+        description: 'End-to-end integrated sales force automation system',
         skills: [
-          { name: 'Vue.js', icon: 'bi-filetype-js' },
-          { name: 'Database', icon: 'bi-database' },
+          { name: 'Android', icon: 'bi-android' },
+          { name: 'Java', icon: 'bi-filetype-java' },
+          { name: 'REST API', icon: 'bi-arrow-left-right' },
           { name: 'Real-time', icon: 'bi-lightning' },
           { name: 'Analytics', icon: 'bi-graph-up' },
         ],
       },
       {
-        name: 'Open Source Inventory Tools',
+        name: 'Engagia EMS (Web)',
+        careerId: 'tradynamics',
+        description: 'EMS of the Engagia App',
+        skills: [
+          { name: 'PHP', icon: 'bi-filetype-php' },
+          { name: 'CakePHP', icon: 'bi-filetype-php' },
+          { name: 'MySQL', icon: 'bi-database' },
+          { name: 'Real-time', icon: 'bi-lightning' },
+          { name: 'Analytics', icon: 'bi-graph-up' },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Personal',
+    icon: 'bi-box-seam',
+    projects: [
+      {
+        name: 'Open Source PHP framework',
         careerId: 'hello-php',
-        description: 'PHP-based inventory management prototype with authentication',
+        description: 'PHP-based naked web framework',
         skills: [
           { name: 'PHP', icon: 'bi-filetype-php' },
           { name: 'MySQL', icon: 'bi-database' },
