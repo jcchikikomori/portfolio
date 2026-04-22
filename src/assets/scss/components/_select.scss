@@ -1,0 +1,15 @@
+body {
+  .nes-select {
+    select {
+      border-image-repeat: unset;
+    }
+  }
+
+  &.dark {
+    .nes-select {
+      &::after {
+        color: #fff;
+      }
+    }
+  }
+}

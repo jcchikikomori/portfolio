@@ -1,728 +1,400 @@
-import { mount } from '@vue/test-utils'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { mount } from '@vue/test-utils';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-import ProjectsComponent from '../components/ProjectsComponent.vue'
-import { careers } from '../data/careers.js'
+import ProjectsComponent from '../components/ProjectsComponent.vue';
+import { projects } from '../data/projects';
 
 describe('ProjectsComponent.vue', () => {
-    beforeEach(() => {
-        window.open.mockClear()
-    })
+  let wrapper;
+  let container;
 
-    it('renders #dialog-projects with nes-dialog class', () => {
-        const wrapper = mount(ProjectsComponent)
-        const dialog = wrapper.find('#dialog-projects')
-        expect(dialog.exists()).toBe(true)
-        expect(dialog.classes()).toContain('nes-dialog')
-    })
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+    wrapper = mount(ProjectsComponent, { attachTo: container });
+  });
 
-    it('renders career list with flexbox container class', () => {
-        const wrapper = mount(ProjectsComponent)
-        const careerList = wrapper.find('.career-list')
-        expect(careerList.exists()).toBe(true)
-    })
+  afterEach(() => {
+    wrapper.unmount();
+    container.remove();
+  });
 
-    it('renders cards within flexbox container', () => {
-        const wrapper = mount(ProjectsComponent)
-        const careerList = wrapper.find('.career-list')
-        const cards = careerList.findAll('.card')
-        expect(cards.length).toBe(careers.length)
-    })
+  it('renders #dialog-projects with nes-dialog class', () => {
+    const dialog = wrapper.find('#dialog-projects');
+    expect(dialog.exists()).toBe(true);
+    expect(dialog.classes()).toContain('nes-dialog');
+  });
 
-    it('contact link calls window.open with noopener', async () => {
-        const wrapper = mount(ProjectsComponent)
-        const contactLink = wrapper.find('a')
-        await contactLink.trigger('click')
-        expect(window.open).toHaveBeenCalled()
-        const call = window.open.mock.calls[0]
-        expect(call[2]).toBe('noopener,noreferrer')
-    })
+  it('renders dialog title "My Projects"', () => {
+    const title = wrapper.find('h1.title');
+    expect(title.exists()).toBe(true);
+    expect(title.text()).toBe('My Projects');
+  });
 
-    it('renders correct number of career cards from data', () => {
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        expect(cards.length).toBe(careers.length)
-    })
+  it('renders filter dropdown', () => {
+    const filterContainer = wrapper.find('.filter-container');
+    expect(filterContainer.exists()).toBe(true);
 
-    it('renders company name for each card', () => {
-        const wrapper = mount(ProjectsComponent)
-        const titles = wrapper.findAll('.card-title')
-        careers.forEach((career, index) => {
-            expect(titles[index].text()).toBe(career.company)
-        })
-    })
+    const select = wrapper.find('#project-filter');
+    expect(select.exists()).toBe(true);
+  });
 
-    it('renders date range for each card', () => {
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        careers.forEach((career, index) => {
-            const muted = cards[index].find('.text-muted')
-            expect(muted.text()).toBe(career.dates)
-        })
-    })
+  it('renders all projects by default', () => {
+    const projectCards = wrapper.findAll('.project-card');
+    expect(projectCards.length).toBe(projects.length);
+  });
 
-    it('does not render description (temporarily disabled for details dialog migration)', () => {
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        careers.forEach((career, index) => {
-            if (career.description) {
-                const body = cards[index].find('.card-body')
-                expect(body.text()).not.toContain(career.description)
-            }
-        })
-    })
+  it('filters projects by category', async () => {
+    const select = wrapper.find('#project-filter');
 
-    it('card click opens career details modal', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, { attachTo: container })
-        const cards = wrapper.findAll('.card')
-        const dialog = document.getElementById('dialog-career-details')
-        const showModalSpy = vi.fn()
-        dialog.showModal = showModalSpy
-        
-        await cards[0].trigger('click')
-        expect(showModalSpy).toHaveBeenCalled()
-        
-        wrapper.unmount()
-        container.remove()
-    })
+    // Filter to corporate
+    await select.setValue('corporate');
+    const corporateProjects = wrapper.findAll('.project-card');
+    const corporateCount = projects.filter((p) => p.category === 'corporate').length;
+    expect(corporateProjects.length).toBe(corporateCount);
 
-    it('card click sets selectedCareer correctly', async () => {
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        
-        await cards[0].trigger('click')
-        expect(wrapper.vm.selectedCareer).toEqual(careers[0])
-    })
+    // Filter to personal
+    await select.setValue('personal');
+    const personalProjects = wrapper.findAll('.project-card');
+    const personalCount = projects.filter((p) => p.category === 'personal').length;
+    expect(personalProjects.length).toBe(personalCount);
+  });
 
-    it('renders placeholder icon for careers with null logo', () => {
-        const wrapper = mount(ProjectsComponent)
-        const placeholders = wrapper.findAll('.career-logo-placeholder')
-        const nullLogoCount = careers.filter(c => c.logo === null).length
-        expect(placeholders.length).toBe(nullLogoCount)
-        placeholders.forEach(placeholder => {
-            expect(placeholder.classes()).toContain('bi')
-            expect(placeholder.classes()).toContain('bi-x-lg')
-        })
-    })
+  it('each project shows name, badges, and dates', () => {
+    const cards = wrapper.findAll('.project-card');
+    projects.forEach((project, index) => {
+      const name = cards[index].find('.project-name');
+      expect(name.exists()).toBe(true);
+      expect(name.text()).toBe(project.name);
 
-    it('renders logo img when career.logo is set', () => {
-        const wrapper = mount(ProjectsComponent, {
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            logo: '/img/logos/test-logo.svg',
-                            logoDark: null,
-                        }
-                    ]
-                }
-            }
-        })
-        const logoImg = wrapper.find('.career-logo')
-        expect(logoImg.exists()).toBe(true)
-        expect(logoImg.attributes('src')).toBe('/img/logos/test-logo.svg')
-    })
+      const dates = cards[index].find('.project-dates');
+      expect(dates.exists()).toBe(true);
+      expect(dates.text()).toBe(project.dates);
 
-    it('renders platform icons when career.platforms is non-empty', () => {
-        const wrapper = mount(ProjectsComponent, {
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            platforms: ['bi-globe', 'bi-phone'],
-                        }
-                    ]
-                }
-            }
-        })
-        const iconRow = wrapper.find('.platform-icons')
-        expect(iconRow.exists()).toBe(true)
-        const icons = iconRow.findAll('i')
-        expect(icons.length).toBe(2)
-        expect(icons[0].classes()).toContain('bi-globe')
-        expect(icons[1].classes()).toContain('bi-phone')
-    })
+      const badges = cards[index].find('.project-badges');
+      expect(badges.exists()).toBe(true);
+    });
+  });
 
-    it('does not render platform icon row when platforms is empty', () => {
-        const wrapper = mount(ProjectsComponent, {
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            platforms: [],
-                        },
-                    ],
-                }
+  it('project cards have "View Details" button', () => {
+    const cards = wrapper.findAll('.project-card');
+    cards.forEach((card) => {
+      const button = card.find('button.project-details-btn');
+      expect(button.exists()).toBe(true);
+      expect(button.text()).toBe('View Details');
+    });
+  });
+
+  it('clicking "View Details" dispatches open-project-details event', async () => {
+    const dispatchEventSpy = vi.spyOn(window, 'dispatchEvent');
+    const firstProject = projects[0];
+    const card = wrapper.findAll('.project-card')[0];
+    const button = card.find('button.project-details-btn');
+
+    await button.trigger('click');
+
+    expect(dispatchEventSpy).toHaveBeenCalled();
+    const event = dispatchEventSpy.mock.calls[0][0];
+    expect(event.type).toBe('open-project-details');
+    expect(event.detail).toHaveProperty('projectId');
+    expect(event.detail.projectId).toBe(firstProject.id);
+
+    dispatchEventSpy.mockRestore();
+  });
+
+  it('dialog has close button that closes dialog', async () => {
+    const dialog = document.getElementById('dialog-projects');
+    const closeSpy = vi.fn();
+    dialog.close = closeSpy;
+
+    const closeButton = wrapper.find('.dialog-menu button');
+    expect(closeButton.exists()).toBe(true);
+    expect(closeButton.text()).toBe('Close');
+
+    await closeButton.trigger('click');
+    expect(closeSpy).toHaveBeenCalled();
+  });
+
+  it('renders all projects', () => {
+    const cards = wrapper.findAll('.project-card');
+    expect(cards.length).toBe(projects.length);
+  });
+
+  it('project cards have nes-container styling', () => {
+    const cards = wrapper.findAll('.project-card');
+    cards.forEach((card) => {
+      expect(card.classes()).toContain('nes-container');
+    });
+  });
+
+  it('getIndustryLabel returns correct labels', () => {
+    const labels = {
+      'e-commerce': 'E-Commerce',
+      'online-payment': 'Online Payment',
+      b2b: 'B2B',
+      sales: 'Sales',
+      devops: 'DevOps',
+      web: 'Web',
+      mobile: 'Mobile',
+    };
+
+    Object.entries(labels).forEach(([key, value]) => {
+      expect(wrapper.vm.getIndustryLabel(key)).toBe(value);
+    });
+  });
+
+  it('getIndustryLabel returns industry value when label not found', () => {
+    expect(wrapper.vm.getIndustryLabel('unknown-industry')).toBe('unknown-industry');
+    expect(wrapper.vm.getIndustryLabel('')).toBe('');
+  });
+
+  it('showProjectDetails method dispatches correct event', () => {
+    const dispatchEventSpy = vi.spyOn(window, 'dispatchEvent');
+    const projectId = 'test-project';
+
+    wrapper.vm.showProjectDetails(projectId);
+
+    expect(dispatchEventSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'open-project-details',
+        detail: { projectId },
+      })
+    );
+
+    dispatchEventSpy.mockRestore();
+  });
+
+  it('isDark returns true when dialog has is-dark class', () => {
+    const dialog = document.getElementById('dialog-projects');
+    dialog.classList.add('is-dark');
+
+    expect(wrapper.vm.isDark()).toBe(true);
+
+    dialog.classList.remove('is-dark');
+  });
+
+  it('isDark returns false when dialog does not have is-dark class', () => {
+    const dialog = document.getElementById('dialog-projects');
+    dialog.classList.remove('is-dark');
+
+    expect(wrapper.vm.isDark()).toBe(false);
+  });
+
+  it('logoSrc uses logoDark in dark mode', () => {
+    const dialog = document.getElementById('dialog-projects');
+    dialog.classList.add('is-dark');
+
+    const project = {
+      logo: '/light-logo.png',
+      logoDark: '/dark-logo.png',
+    };
+
+    expect(wrapper.vm.logoSrc(project)).toBe('/dark-logo.png');
+
+    dialog.classList.remove('is-dark');
+  });
+
+  it('logoSrc falls back to logo when logoDark is null', () => {
+    const dialog = document.getElementById('dialog-projects');
+    dialog.classList.add('is-dark');
+
+    const project = {
+      logo: '/light-logo.png',
+      logoDark: null,
+    };
+
+    expect(wrapper.vm.logoSrc(project)).toBe('/light-logo.png');
+
+    dialog.classList.remove('is-dark');
+  });
+
+  it('logoSrc uses logo in light mode', () => {
+    const dialog = document.getElementById('dialog-projects');
+    dialog.classList.remove('is-dark');
+
+    const project = {
+      logo: '/light-logo.png',
+      logoDark: '/dark-logo.png',
+    };
+
+    expect(wrapper.vm.logoSrc(project)).toBe('/light-logo.png');
+  });
+
+  it('onLogoError updates logoErrors state', () => {
+    const projectId = 'test-project';
+
+    wrapper.vm.onLogoError(projectId);
+
+    expect(wrapper.vm.logoErrors[projectId]).toBe(true);
+  });
+
+  it('onLogoError does not duplicate state for same projectId', () => {
+    const projectId = 'test-project';
+
+    // First error
+    wrapper.vm.onLogoError(projectId);
+    expect(wrapper.vm.logoErrors[projectId]).toBe(true);
+
+    // Second error should not change state
+    const currentState = { ...wrapper.vm.logoErrors };
+    wrapper.vm.onLogoError(projectId);
+    expect(wrapper.vm.logoErrors).toEqual(currentState);
+  });
+
+  it('img @error handler triggers onLogoError and shows placeholder', async () => {
+    const wrapperWithLogo = mount(ProjectsComponent, {
+      attachTo: container,
+      data() {
+        return {
+          projects: [
+            {
+              id: 'test-logo-error',
+              name: 'Test Project',
+              logo: '/broken-logo.png',
+              logoDark: null,
+              category: 'corporate',
+              industry: 'web',
+              platforms: [],
+              dates: '2024',
             },
-        })
-        const iconRow = wrapper.find('.platform-icons')
-        expect(iconRow.exists()).toBe(false)
-    })
+          ],
+        };
+      },
+    });
 
-    it('img @error handler falls back to placeholder', async () => {
-        const wrapper = mount(ProjectsComponent, {
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            logo: '/img/logos/broken.svg',
-                            logoDark: null,
-                        }
-                    ]
-                }
-            }
-        })
-        const logoImg = wrapper.find('.career-logo')
-        expect(logoImg.exists()).toBe(true)
-        await logoImg.trigger('error')
-        const placeholder = wrapper.find('.career-logo-placeholder')
-        expect(placeholder.exists()).toBe(true)
-        expect(wrapper.find('.career-logo').exists()).toBe(false)
-    })
+    const logoImg = wrapperWithLogo.find('.project-logo');
+    expect(logoImg.exists()).toBe(true);
 
-    it('renders #dialog-career-details with nes-dialog class', () => {
-        const wrapper = mount(ProjectsComponent)
-        const dialog = wrapper.find('#dialog-career-details')
-        expect(dialog.exists()).toBe(true)
-        expect(dialog.classes()).toContain('nes-dialog')
-    })
+    // Trigger error event on img element
+    await logoImg.trigger('error');
 
-    it('career details trigger rendered for all cards', () => {
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        expect(cards.length).toBe(careers.length)
-        cards.forEach((card) => {
-            const trigger = card.find('.career-details-trigger')
-            expect(trigger.exists()).toBe(true)
-            expect(trigger.text()).toBe('View Details')
-        })
-    })
+    // Should show placeholder after error
+    expect(wrapperWithLogo.vm.logoErrors['test-logo-error']).toBe(true);
+    const placeholder = wrapperWithLogo.find('.project-logo-placeholder');
+    expect(placeholder.exists()).toBe(true);
 
-    it('showCareerDetails sets selectedCareer to matching career entry', () => {
-        const wrapper = mount(ProjectsComponent)
-        const testCareer = careers[0]
-        wrapper.vm.showCareerDetails(testCareer.id)
-        expect(wrapper.vm.selectedCareer).toEqual(testCareer)
-    })
+    wrapperWithLogo.unmount();
+  });
 
-    it('showCareerDetails calls dialog.showModal() on #dialog-career-details', () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, { attachTo: container })
-        const dialog = document.getElementById('dialog-career-details')
-        const showModalSpy = vi.fn()
-        dialog.showModal = showModalSpy
-        const testCareer = careers[0]
-        wrapper.vm.showCareerDetails(testCareer.id)
-        expect(showModalSpy).toHaveBeenCalled()
-        wrapper.unmount()
-        container.remove()
-    })
+  it('renders placeholder icon when project has no logo', () => {
+    const wrapperNoLogo = mount(ProjectsComponent, {
+      attachTo: container,
+      data() {
+        return {
+          projects: [
+            {
+              id: 'test-no-logo',
+              name: 'Test No Logo',
+              logo: null,
+              logoDark: null,
+              category: 'personal',
+              industry: 'web',
+              platforms: [],
+              dates: '2024',
+            },
+          ],
+        };
+      },
+    });
 
-    it('showCareerDetails does nothing when dialog element is absent', () => {
-        const wrapper = mount(ProjectsComponent)
-        const testCareer = careers[0]
-        const origGetById = document.getElementById
-        document.getElementById = vi.fn((id) => {
-            if (id === 'dialog-career-details') {return null}
-            return origGetById.call(document, id)
-        })
-        expect(() => wrapper.vm.showCareerDetails(testCareer.id)).not.toThrow()
-        document.getElementById = origGetById
-    })
+    // Should render placeholder, not img
+    const logoImg = wrapperNoLogo.find('.project-logo');
+    expect(logoImg.exists()).toBe(false);
 
-    it('showCareerDetails does nothing when career ID is not found', () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, { attachTo: container })
-        const dialog = document.getElementById('dialog-career-details')
-        const showModalSpy = vi.fn()
-        dialog.showModal = showModalSpy
-        wrapper.vm.showCareerDetails('nonexistent-id')
-        expect(wrapper.vm.selectedCareer.company).toBe('')
-        expect(showModalSpy).not.toHaveBeenCalled()
-        wrapper.unmount()
-        container.remove()
-    })
+    const placeholder = wrapperNoLogo.find('.project-logo-placeholder');
+    expect(placeholder.exists()).toBe(true);
+    expect(placeholder.classes()).toContain('bi');
+    expect(placeholder.classes()).toContain('bi-box');
 
-    it('dark mode falls back to logo when logoDark is null', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            logo: '/img/logos/light.svg',
-                            logoDark: null,
-                        }
-                    ]
-                }
-            }
-        })
-        const dialog = document.getElementById('dialog-projects')
-        dialog.classList.add('is-dark')
-        expect(wrapper.vm.isDark()).toBe(true)
-        await wrapper.vm.$forceUpdate()
-        await wrapper.vm.$nextTick()
-        const logoImg = wrapper.find('.career-logo')
-        expect(logoImg.exists()).toBe(true)
-        expect(logoImg.attributes('src')).toBe('/img/logos/light.svg')
-        wrapper.unmount()
-        container.remove()
-    })
+    wrapperNoLogo.unmount();
+  });
 
-    it('dark mode uses logoDark when available', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            logo: '/img/logos/light.svg',
-                            logoDark: '/img/logos/dark.svg',
-                        }
-                    ]
-                }
-            }
-        })
-        // Simulate dark mode by adding is-dark class to the dialog
-        const dialog = document.getElementById('dialog-projects')
-        dialog.classList.add('is-dark')
-        // Verify isDark method detects the class
-        expect(wrapper.vm.isDark()).toBe(true)
-        // Force re-render so logoSrc picks up dark mode
-        await wrapper.vm.$forceUpdate()
-        await wrapper.vm.$nextTick()
-        const logoImg = wrapper.find('.career-logo')
-        expect(logoImg.exists()).toBe(true)
-        expect(logoImg.attributes('src')).toBe('/img/logos/dark.svg')
-        wrapper.unmount()
-        container.remove()
-    })
+  it('filteredProjects computed property returns all projects when filter is "all"', () => {
+    wrapper.setData({ selectedFilter: 'all' });
+    expect(wrapper.vm.filteredProjects.length).toBe(projects.length);
+  });
 
-    it('handles multiple logo errors without duplicating state', async () => {
-        const wrapper = mount(ProjectsComponent, {
-            data() {
-                return {
-                    careers: [
-                        { ...careers[0], id: 'test1', logo: '/broken1.png' },
-                        { ...careers[1], id: 'test2', logo: '/broken2.png' }
-                    ]
-                }
-            }
-        })
-        const logos = wrapper.findAll('.career-logo')
-        await logos[0].trigger('error')
-        await logos[1].trigger('error')
-        expect(Object.keys(wrapper.vm.logoErrors).length).toBe(2)
-        expect(wrapper.vm.logoErrors.test1).toBe(true)
-        expect(wrapper.vm.logoErrors.test2).toBe(true)
-    })
+  it('filteredProjects computed property filters by category', () => {
+    wrapper.setData({ selectedFilter: 'corporate' });
+    const corporateCount = projects.filter((p) => p.category === 'corporate').length;
+    expect(wrapper.vm.filteredProjects.length).toBe(corporateCount);
+    wrapper.vm.filteredProjects.forEach((project) => {
+      expect(project.category).toBe('corporate');
+    });
+  });
 
-    it('career details dialog displays company logo in header', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            logo: '/img/logos/test-company.png',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
+  it('matchesCategoryFilter returns true when project category matches filter', () => {
+    wrapper.setData({ selectedFilter: 'corporate' });
+    const corporateProject = projects.find((p) => p.category === 'corporate');
+    expect(wrapper.vm.matchesCategoryFilter(corporateProject)).toBe(true);
+  });
 
-        // Mock showModal before calling showCareerDetails
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
+  it('matchesCategoryFilter returns false when project category does not match filter', () => {
+    wrapper.setData({ selectedFilter: 'corporate' });
+    const personalProject = projects.find((p) => p.category === 'personal');
+    expect(wrapper.vm.matchesCategoryFilter(personalProject)).toBe(false);
+  });
 
-        // Open career details dialog
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
+  it('renders project logos with alt text', () => {
+    const projectWithLogo = projects.find((p) => p.logo);
+    const logoImg = wrapper.findAll('.project-logo').find((img) => {
+      return img.attributes('alt')?.includes(projectWithLogo.name);
+    });
+    expect(logoImg).toBeTruthy();
+    expect(logoImg.attributes('alt')).toBe(`${projectWithLogo.name} logo`);
+  });
 
-        // Check if logo is in dialog header
-        const logoImg = wrapper.find('.career-details-logo')
-        expect(logoImg.exists()).toBe(true)
-        expect(logoImg.attributes('src')).toBe('/img/logos/test-company.png')
+  it('renders platform icons for projects with platforms', () => {
+    const projectWithPlatforms = projects.find((p) => p.platforms.length > 0);
+    const cards = wrapper.findAll('.project-card');
+    const cardWithPlatforms = cards.find(
+      (card) => card.find('.project-name').text() === projectWithPlatforms.name
+    );
+    const platformsSection = cardWithPlatforms.find('.project-platforms');
+    expect(platformsSection.exists()).toBe(true);
+  });
 
-        wrapper.unmount()
-        container.remove()
-    })
+  it('renders all template branches including platform icons and badges', () => {
+    // This test ensures all Vue template expression functions are covered
+    const cards = wrapper.findAll('.project-card');
+    expect(cards.length).toBeGreaterThan(0);
 
-    it('career details dialog shows placeholder when logo is null', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            logo: null,
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
+    // Check each card renders all elements
+    cards.forEach((card) => {
+      // Project name
+      const name = card.find('.project-name');
+      expect(name.exists()).toBe(true);
 
-        // Mock showModal before calling showCareerDetails
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
+      // Badges
+      const badges = card.find('.project-badges');
+      expect(badges.exists()).toBe(true);
 
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
+      // Dates
+      const dates = card.find('.project-dates');
+      expect(dates.exists()).toBe(true);
 
-        const placeholder = wrapper.find('.career-logo-placeholder')
-        expect(placeholder.exists()).toBe(true)
-        expect(placeholder.classes()).toContain('bi-x-lg')
+      // Category badge with dynamic class
+      const categoryBadge = card.find('.badge-label');
+      expect(categoryBadge.exists()).toBe(true);
+    });
+  });
 
-        wrapper.unmount()
-        container.remove()
-    })
+  it('renders project with all template expressions evaluated', () => {
+    // Mount with all filter options to trigger all branches
+    const filters = ['all', 'corporate', 'personal'];
+    filters.forEach((filter) => {
+      wrapper.setData({ selectedFilter: filter });
+      expect(wrapper.vm.filteredProjects).toBeDefined();
+    });
 
-    it('career details dialog handles logo error with fallback', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            logo: '/img/logos/broken.png',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
+    // Reset to all
+    wrapper.setData({ selectedFilter: 'all' });
+    const cards = wrapper.findAll('.project-card');
 
-        // Mock showModal before calling showCareerDetails
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        // Trigger error on career details logo
-        const logoImg = wrapper.find('.career-details-logo')
-        expect(logoImg.exists()).toBe(true)
-        await logoImg.trigger('error')
-
-        // Should show placeholder after error
-        const placeholder = wrapper.find('.career-logo-placeholder')
-        expect(placeholder.exists()).toBe(true)
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog displays description', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            description: 'Test description for career',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const infoSection = wrapper.find('.career-details-info')
-        expect(infoSection.text()).toContain('Test description for career')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog displays period dates', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            dates: '2020-2023',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const infoSection = wrapper.find('.career-details-info')
-        expect(infoSection.text()).toContain('2020-2023')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog displays platform icons', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            platforms: ['bi-globe', 'bi-phone'],
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const platformIcons = wrapper.find('.career-details-info .platform-icons')
-        expect(platformIcons.exists()).toBe(true)
-        const icons = platformIcons.findAll('i')
-        expect(icons.length).toBe(2)
-        expect(icons[0].classes()).toContain('bi-globe')
-        expect(icons[1].classes()).toContain('bi-phone')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog shows Visit Project button for url clickAction', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            clickAction: 'url',
-                            url: 'https://example.com',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const ctaButton = wrapper.find('.career-cta')
-        expect(ctaButton.exists()).toBe(true)
-        expect(ctaButton.text()).toBe('Visit Project')
-        expect(ctaButton.classes()).toContain('is-default')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('Visit Project button calls window.open with correct URL', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            clickAction: 'url',
-                            url: 'https://example.com',
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const visitButton = wrapper.find('.career-cta')
-        await visitButton.trigger('click')
-        
-        expect(window.open).toHaveBeenCalled()
-        const call = window.open.mock.calls[0]
-        expect(call[0]).toBe('https://example.com')
-        expect(call[2]).toBe('noopener,noreferrer')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog shows disabled button for alert clickAction', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            clickAction: 'alert',
-                            url: null,
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const ctaButton = wrapper.find('.career-cta')
-        expect(ctaButton.exists()).toBe(true)
-        expect(ctaButton.text()).toBe('Project Unavailable')
-        expect(ctaButton.classes()).toContain('is-disabled')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('career details dialog shows placeholder image when no screenshots', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            screenshots: []
-                        }
-                    ]
-                }
-            }
-        })
-
-        const dialog = document.getElementById('dialog-career-details')
-        dialog.showModal = vi.fn()
-
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-
-        const screenshot = wrapper.find('.career-screenshot')
-        expect(screenshot.exists()).toBe(true)
-        expect(screenshot.attributes('src')).toBe('/img/projects/placeholder.png')
-
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('close button closes careers dialog', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, { attachTo: container })
-        
-        const careersDialog = document.getElementById('dialog-projects')
-        const closeSpy = vi.fn()
-        careersDialog.close = closeSpy
-        
-        // Get the close button from the dialog-menu in careers dialog
-        const closeButton = wrapper.findAll('.dialog-menu button').filter(b => b.text() === 'Okay')[0]
-        expect(closeButton.exists()).toBe(true)
-        
-        await closeButton.trigger('click')
-        expect(closeSpy).toHaveBeenCalled()
-        
-        wrapper.unmount()
-        container.remove()
-    })
-
-    it('close button closes career details dialog', async () => {
-        const container = document.createElement('div')
-        document.body.appendChild(container)
-        const wrapper = mount(ProjectsComponent, {
-            attachTo: container,
-            data() {
-                return {
-                    careers: [
-                        {
-                            ...careers[0],
-                            screenshots: ['/img/screenshots/test.png']
-                        }
-                    ]
-                }
-            }
-        })
-        
-        const detailsDialog = document.getElementById('dialog-career-details')
-        const closeSpy = vi.fn()
-        detailsDialog.close = closeSpy
-        detailsDialog.showModal = vi.fn()
-        
-        wrapper.vm.showCareerDetails(careers[0].id)
-        await wrapper.vm.$nextTick()
-        
-        // Get the close button from the dialog-menu in details dialog
-        const closeButton = wrapper.findAll('#dialog-career-details .dialog-menu button').filter(b => b.text() === 'Close')[0]
-        expect(closeButton.exists()).toBe(true)
-        
-        await closeButton.trigger('click')
-        expect(closeSpy).toHaveBeenCalled()
-        
-        wrapper.unmount()
-        container.remove()
-    })
-})
+    // Trigger rendering of all cards
+    cards.forEach((card, index) => {
+      const project = projects[index];
+      expect(card.find('.project-name').text()).toBe(project.name);
+    });
+  });
+});

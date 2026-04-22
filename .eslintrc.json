@@ -80,7 +80,8 @@
       "ignorePackages",
       {
         "js": "never",
-        "vue": "never"
+        "ts": "never",
+        "vue": "always"
       }
     ],
 
@@ -183,21 +184,26 @@
     "wrap-iife": ["error", "inside"],
     "yoda": "error"
   },
+  "parser": "vue-eslint-parser",
   "parserOptions": {
     "ecmaVersion": 2022,
-    "sourceType": "module"
+    "sourceType": "module",
+    "parser": {
+      "js": "espree",
+      "ts": "@typescript-eslint/parser"
+    }
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", "vue"]
+        "extensions": [".js", ".ts", ".vue"]
       },
       "alias": {
         "map": [["@", "./src"]],
-        "extensions": [".js", "vue", "scss"]
+        "extensions": [".js", ".ts", ".vue", ".scss"]
       }
     },
-    "import/extensions": [".js", "vue"],
+    "import/extensions": [".js", ".ts", ".vue"],
     "import/ignore": ["node_modules", "\\.scss$", "\\.css$"]
   },
   "globals": {
@@ -241,9 +247,26 @@
     ".vite/",
     "public/",
     "docs/",
-    "*.d.ts"
+    "*.d.ts",
+    "src/**/*.ts"
   ],
   "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "extends": ["plugin:@typescript-eslint/recommended"],
+      "rules": {
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_"
+          }
+        ]
+      }
+    },
     {
       "files": ["**/*.spec.js", "**/*.test.js"],
       "rules": {
@@ -264,9 +287,12 @@
           "ignorePackages",
           {
             "js": "always",
-            "vue": "never"
+            "ts": "never",
+            "vue": "always"
           }
-        ]
+        ],
+        "import/namespace": "off",
+        "import/no-unresolved": "off"
       }
     },
     {

@@ -25,6 +25,9 @@
     "vue": "^3.4"
   },
   "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.0",
+    "@typescript-eslint/parser": "^8.59.0",
     "@vitejs/plugin-vue": "^5.0.0",
     "@vitest/coverage-v8": "^2.1.9",
     "@vue/test-utils": "^2",
@@ -44,9 +47,11 @@
     "stylelint": "^17.8.0",
     "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-standard-scss": "^17.0.0",
+    "typescript": "^6.0.3",
     "vite": "^5.0.0",
     "vite-plugin-pwa": "^0.20.0",
-    "vitest": "^2.1.9"
+    "vitest": "^2.1.9",
+    "vue-tsc": "^3.2.7"
   },
   "postcss": {
     "plugins": {

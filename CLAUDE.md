@@ -25,29 +25,32 @@ blank page that is only caught at UI QA.
 
 ## Dialog Animation Rules
 
-`showModal()` natively sets `[open]` on the `<dialog>` element. Target it with CSS
-directly — do not add or remove a JS class to trigger animations:
+`showModal()` natively sets `[open]` on the `<dialog>` element. Target it with
+CSS directly — do not add or remove a JS class to trigger animations:
 
 ```css
 /* correct */
-dialog.nes-dialog[open] { animation: nes-open 0.4s steps(8) forwards; }
+dialog.nes-dialog[open] {
+  animation: nes-open 0.4s steps(8) forwards;
+}
 
 /* wrong — unnecessary JS coupling */
 /* dialog.nes-dialog.is-open { ... } */
 ```
 
-CSS-only animation changes do not affect Vitest JS coverage. Verify dialog animations
-in the browser via DevTools (check `animationName`, duration, and timing function).
+CSS-only animation changes do not affect Vitest JS coverage. Verify dialog
+animations in the browser via DevTools (check `animationName`, duration, and
+timing function).
 
 ## Environment Variables (Mandatory)
 
 This project uses Vite. Do not use `process.env` anywhere in source files:
 
-| Wrong (webpack/Vue CLI) | Correct (Vite) |
-|---|---|
-| `process.env.NODE_ENV` | `import.meta.env.MODE` |
-| `process.env.BASE_URL` | `import.meta.env.BASE_URL` |
-| `process.env.VUE_APP_*` | `import.meta.env.VITE_*` |
+| Wrong (webpack/Vue CLI) | Correct (Vite)             |
+| ----------------------- | -------------------------- |
+| `process.env.NODE_ENV`  | `import.meta.env.MODE`     |
+| `process.env.BASE_URL`  | `import.meta.env.BASE_URL` |
+| `process.env.VUE_APP_*` | `import.meta.env.VITE_*`   |
 
 ## ESLint Config
 
@@ -63,22 +66,83 @@ Do not use `plugin:security/recommended` — that targets the new flat config AP
 ## PWA / vite-plugin-pwa
 
 `<link rel="manifest">` is not injected during `vite dev`. This is expected
-behavior. Only verify manifest injection against a production build (`vite build`)
-or `vite preview`.
+behavior. Only verify manifest injection against a production build
+(`vite build`) or `vite preview`.
 
 ## Sass Build Warnings
 
 Bootstrap SCSS ships legacy `@import` syntax. The resulting Sass deprecation
-warnings in build output are non-blocking. `css.preprocessorOptions.scss.quietDeps: true`
-in `vite.config.js` suppresses them. Do not treat these warnings as failures.
+warnings in build output are non-blocking.
+`css.preprocessorOptions.scss.quietDeps: true` in `vite.config.js` suppresses
+them. Do not treat these warnings as failures.
 
 ## Test Coverage Floor
 
-Baseline: 37 tests, 100% line/branch/function/statement coverage (Vitest v2).
-Do not ship changes that regress coverage below 100%.
+Baseline: All tests passing with 100% line/branch/function/statement coverage
+(Vitest v2). Do not ship changes that regress coverage below 100%.
+
+Current metrics can be verified by running `pnpm run test` — the coverage report
+shows the test count and all coverage percentages at the bottom of the output.
+
+### Vue Component Coverage Patterns
+
+To achieve 100% coverage on Vue components, test these commonly missed branches:
+
+1. **Template @error handlers:** Trigger with `await img.trigger('error')`
+2. **v-else branches:** Mount with empty/null data to trigger else conditions
+3. **Method fallbacks:** Pass unknown/empty values to exercise default cases
+4. **Optional chaining:** Test with null/undefined nested objects
+5. **Event emissions:** Verify with `wrapper.emitted('eventName')`
+
+Example test structure:
+
+```javascript
+// Test error handler
+const img = wrapper.find('img');
+await img.trigger('error');
+expect(wrapper.vm.imageError).toBe(true);
+
+// Test v-else branch
+const wrapper = mount(Component, { props: { items: [] } });
+expect(wrapper.find('.empty-state').exists()).toBe(true);
+
+// Test method fallback
+expect(wrapper.vm.getLabel('UNKNOWN')).toBe('Unknown');
+
+// Test event emission
+await button.trigger('click');
+expect(wrapper.emitted('close')).toHaveLength(1);
+```
+
+### Data Changes Require Spec Updates
+
+When adding or removing data entities (projects, careers, skills), always update
+corresponding spec files to maintain 100% coverage:
+
+1. **Update count assertions** — Tests validate exact array lengths
+2. **Update validation arrays** — Expected industries, categories, types
+3. **Update type definitions** — If adding new categories/industries
+4. **Run tests immediately** — Expect failures; fix before committing
+
+Pattern: Adding a project requires updating project count, adding new industries
+to validation arrays, and updating type definitions. All tests must pass at 100%
+coverage before shipping.
+
+## Package Manager Commands
+
+**Always use pnpm** — never npm or yarn:
+
+| npm command        | pnpm equivalent     |
+| ------------------ | ------------------- |
+| `npm install`      | `pnpm install`      |
+| `npm run test`     | `pnpm run test`     |
+| `npm run dev`      | `pnpm run dev`      |
+| `npm run build`    | `pnpm run build`    |
+| `npm add <pkg>`    | `pnpm add <pkg>`    |
+| `npm remove <pkg>` | `pnpm remove <pkg>` |
 
 ## Git Rules (Mandatory)
 
 - Never run `git commit` or `git push` — commits require GPG signing by the user
 - Only stage changes with `git add`; user commits manually in their own terminal
-- Branch flow: feature/* → develop → master
+- Branch flow: feature/\* → develop → master
