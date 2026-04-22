@@ -8,7 +8,6 @@
     data() {
       return {
         selectedProject: null,
-        logoErrors: {},
       };
     },
     computed: {
@@ -30,18 +29,7 @@
         const dialog = document.getElementById('dialog-project-details');
         return Boolean(dialog?.classList.contains('is-dark'));
       },
-      logoSrc(project) {
-        return this.isDark() && project.logoDark ? project.logoDark : project.logo;
-      },
-      onLogoError(projectId) {
-        // eslint-disable-next-line security/detect-object-injection
-        if (!this.logoErrors[projectId]) {
-          if (import.meta.env.DEV) {
-            console.warn(`[ProjectDetailsComponent] Logo failed to load for: ${projectId}`);
-          }
-          this.logoErrors = { ...this.logoErrors, [projectId]: true };
-        }
-      },
+
       getProjectById(projectId) {
         return projects.find((p) => p.id === projectId) || null;
       },
@@ -93,19 +81,8 @@
   <!-- PROJECT DETAILS DIALOG -->
   <dialog id="dialog-project-details" ref="detailsDialog" class="nes-dialog">
     <template v-if="selectedProject">
-      <!-- Header with Logo and Title -->
+      <!-- Header with Title -->
       <div class="project-details-header">
-        <template v-if="selectedProject.logo && !logoErrors[selectedProject.id]">
-          <img
-            :src="logoSrc(selectedProject)"
-            :alt="selectedProject.name + ' logo'"
-            class="project-details-logo"
-            @error="onLogoError(selectedProject.id)"
-          />
-        </template>
-        <template v-else>
-          <i class="bi bi-box project-details-logo-placeholder"></i>
-        </template>
         <h2 class="title">{{ selectedProject.name }}</h2>
       </div>
 

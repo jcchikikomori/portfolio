@@ -1,6 +1,6 @@
 /**
  * Portfolio Type Definitions
- * 
+ *
  * This file contains TypeScript type definitions for the portfolio data store.
  * Uses basic type checking (non-strict mode) for gradual adoption.
  */
@@ -9,13 +9,13 @@
 export type ProjectCategory = 'corporate' | 'personal';
 
 /** Industry classification for projects */
-export type ProjectIndustry = 
-  | 'e-commerce' 
-  | 'online-payment' 
-  | 'b2b' 
-  | 'sales' 
-  | 'devops' 
-  | 'web' 
+export type ProjectIndustry =
+  | 'e-commerce'
+  | 'online-payment'
+  | 'b2b'
+  | 'sales'
+  | 'devops'
+  | 'web'
   | 'mobile';
 
 /** Skill with icon representation */
@@ -44,6 +44,8 @@ export interface Career {
   logoDark: string | null;
   /** Platform icons (bi-* classes) */
   platforms: string[];
+  /** Logo/image copyright notice or attribution */
+  logoCopyrightNotice?: string;
 }
 
 /** Project worked on during career */

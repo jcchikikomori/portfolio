@@ -71,7 +71,7 @@
       <!-- Media Section -->
       <div class="career-details-media">
         <img
-          :src="selectedCareer.logo || '/img/projects/placeholder.png'"
+          :src="logoSrc(selectedCareer) || '/img/projects/placeholder.png'"
           :alt="selectedCareer.company + ' logo'"
           class="career-screenshot"
         />
@@ -95,6 +95,9 @@
           <div class="platform-icons">
             <i v-for="icon in selectedCareer.platforms" :key="icon" :class="'bi ' + icon"></i>
           </div>
+        </div>
+        <div v-if="selectedCareer.logoCopyrightNotice" class="info-section copyright-notice">
+          <p class="copyright-text">{{ selectedCareer.logoCopyrightNotice }}</p>
         </div>
         <button
           v-if="selectedCareer.url"

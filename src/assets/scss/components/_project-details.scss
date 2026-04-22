@@ -19,33 +19,6 @@
     padding-bottom: 0.5rem;
     border-bottom: 2px solid #212529;
 
-    .project-details-logo {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-
-      @include mq($from: smallest, $until: mobile) {
-        width: 36px;
-        height: 36px;
-      }
-    }
-
-    .project-details-logo-placeholder {
-      width: 48px;
-      height: 48px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #6c757d;
-      font-size: 1.5rem;
-
-      @include mq($from: smallest, $until: mobile) {
-        width: 36px;
-        height: 36px;
-        font-size: 1.25rem;
-      }
-    }
-
     .title {
       margin: 0;
       flex: 1;
@@ -138,6 +111,7 @@
     @include mq($from: tablet) {
       flex: 0 0 50%;
       padding-right: 1rem;
+      text-align: left;
     }
 
     .info-section {

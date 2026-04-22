@@ -32,7 +32,7 @@ describe('ProjectDetailsComponent.vue', () => {
     expect(dialog.classes()).toContain('nes-dialog');
   });
 
-  it('renders project header with logo and name', async () => {
+  it('renders project header with name', async () => {
     const project = projects[0];
     wrapper.vm.showProjectDetails(project.id);
     await wrapper.vm.$nextTick();
@@ -354,59 +354,6 @@ describe('ProjectDetailsComponent.vue', () => {
     dispatchEventSpy.mockRestore();
   });
 
-  it('onLogoError does not duplicate state for same projectId', async () => {
-    const project = projects.find((p) => p.logo);
-    wrapper.vm.showProjectDetails(project.id);
-    await wrapper.vm.$nextTick();
-
-    // First error
-    wrapper.vm.onLogoError(project.id);
-    expect(wrapper.vm.logoErrors[project.id]).toBe(true);
-
-    // Second error should not change state
-    const currentState = { ...wrapper.vm.logoErrors };
-    wrapper.vm.onLogoError(project.id);
-    expect(wrapper.vm.logoErrors).toEqual(currentState);
-  });
-
-  it('logoSrc uses logoDark in dark mode', async () => {
-    const project = projects.find((p) => p.logo && p.logoDark);
-    wrapper.vm.showProjectDetails(project.id);
-    await wrapper.vm.$nextTick();
-
-    // Simulate dark mode
-    const dialog = document.getElementById('dialog-project-details');
-    dialog.classList.add('is-dark');
-
-    const logoSrc = wrapper.vm.logoSrc(project);
-    expect(logoSrc).toBe(project.logoDark);
-
-    // Clean up
-    dialog.classList.remove('is-dark');
-  });
-
-  it('logoSrc falls back to logo when logoDark is null', async () => {
-    // Find or create a project with logo but no logoDark
-    const projectWithOnlyLightLogo = {
-      ...projects[0],
-      logo: 'https://example.com/logo.png',
-      logoDark: null,
-    };
-
-    wrapper.setData({ selectedProject: projectWithOnlyLightLogo });
-    await wrapper.vm.$nextTick();
-
-    // Simulate dark mode
-    const dialog = document.getElementById('dialog-project-details');
-    dialog.classList.add('is-dark');
-
-    const logoSrc = wrapper.vm.logoSrc(projectWithOnlyLightLogo);
-    expect(logoSrc).toBe(projectWithOnlyLightLogo.logo);
-
-    // Clean up
-    dialog.classList.remove('is-dark');
-  });
-
   it('isDark returns true when dialog has is-dark class', () => {
     const dialog = document.getElementById('dialog-project-details');
     dialog.classList.add('is-dark');
@@ -435,23 +382,6 @@ describe('ProjectDetailsComponent.vue', () => {
     expect(wrapper.vm.isDark()).toBe(false);
 
     vi.restoreAllMocks();
-  });
-
-  it('img @error handler triggers onLogoError and shows placeholder', async () => {
-    const corporateProject = projects.find((p) => p.category === 'corporate' && p.logo);
-    wrapper.vm.showProjectDetails(corporateProject.id);
-    await wrapper.vm.$nextTick();
-
-    const logoImg = wrapper.find('.project-details-logo');
-    expect(logoImg.exists()).toBe(true);
-
-    // Trigger error event on img element
-    await logoImg.trigger('error');
-
-    // Should show placeholder after error
-    expect(wrapper.vm.logoErrors[corporateProject.id]).toBe(true);
-    const placeholder = wrapper.find('.project-details-logo-placeholder');
-    expect(placeholder.exists()).toBe(true);
   });
 
   it('company badge click triggers showCareerDetails', async () => {
