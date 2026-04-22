@@ -1,7 +1,7 @@
 <script>
   import CareerDetailsComponent from './CareerDetailsComponent.vue';
-  import IndustriesComponent from './IndustriesComponent.vue';
-  import IndustryProjectsComponent from './IndustryProjectsComponent.vue';
+  import CareersComponent from './CareersComponent.vue';
+  import ProjectDetailsComponent from './ProjectDetailsComponent.vue';
   import ProjectsComponent from './ProjectsComponent.vue';
   import SpotifyComponent from './SpotifyComponent.vue';
   import packageInfo from '../../package.json';
@@ -9,11 +9,11 @@
   export default {
     name: 'ProfileComponent',
     components: {
+      CareersComponent,
       ProjectsComponent,
+      ProjectDetailsComponent,
       SpotifyComponent,
-      IndustriesComponent,
       CareerDetailsComponent,
-      IndustryProjectsComponent,
     },
     data() {
       return {
@@ -24,29 +24,28 @@
       goToUrl(url) {
         window.open(url, '_blank', 'noopener,noreferrer');
       },
-      showProjects: () => {
+      showCareers() {
+        const careersDialog = document.getElementById('dialog-careers');
+        if (!careersDialog) {
+          return;
+        }
+        careersDialog.showModal();
+        careersDialog.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      showSpotify() {
+        const spotifyDialog = document.getElementById('dialog-spotify');
+        if (!spotifyDialog) {
+          return;
+        }
+        spotifyDialog.showModal();
+      },
+      showProjects() {
         const projectsDialog = document.getElementById('dialog-projects');
         if (!projectsDialog) {
           return;
         }
         projectsDialog.showModal();
-        projectsDialog.classList.add('-is-open');
         projectsDialog.scrollTo({ top: 0, behavior: 'smooth' });
-      },
-      showSpotify: () => {
-        const spotifyDialog = document.getElementById('dialog-spotify');
-        if (!spotifyDialog) {
-          return;
-        }
-        spotifyDialog.classList.remove('-is-open');
-        spotifyDialog.showModal();
-      },
-      showIndustries: () => {
-        const industriesDialog = document.getElementById('dialog-industries');
-        if (!industriesDialog) {
-          return;
-        }
-        industriesDialog.showModal();
       },
     },
   };
@@ -74,10 +73,10 @@
             <button class="nes-btn is-default nes-pointer is-block" @click="showSpotify">
               Music
             </button>
-            <button class="nes-btn is-success nes-pointer is-block" @click="showProjects">
+            <button class="nes-btn is-success nes-pointer is-block" @click="showCareers">
               Careers
             </button>
-            <button class="nes-btn is-success nes-pointer is-block" @click="showIndustries">
+            <button class="nes-btn is-success nes-pointer is-block" @click="showProjects">
               Projects
             </button>
             <button
@@ -124,11 +123,11 @@
         </div>
       </div>
 
+      <CareersComponent></CareersComponent>
       <ProjectsComponent></ProjectsComponent>
+      <ProjectDetailsComponent></ProjectDetailsComponent>
       <SpotifyComponent></SpotifyComponent>
-      <IndustriesComponent></IndustriesComponent>
       <CareerDetailsComponent></CareerDetailsComponent>
-      <IndustryProjectsComponent></IndustryProjectsComponent>
     </section>
   </div>
 </template>

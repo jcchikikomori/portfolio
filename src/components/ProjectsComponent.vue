@@ -1,41 +1,59 @@
 <script>
-  import { careers } from '../data/careers';
+  import { projects } from '../data/projects';
 
   export default {
     name: 'ProjectsComponent',
     components: {},
     data() {
       return {
-        careers,
+        projects,
+        selectedFilter: 'all',
         logoErrors: {},
       };
+    },
+    computed: {
+      filteredProjects() {
+        if (this.selectedFilter === 'all') {
+          return this.projects;
+        }
+        return this.projects.filter((p) => p.category === this.selectedFilter);
+      },
     },
     methods: {
       isDark() {
         const dialog = document.getElementById('dialog-projects');
         return Boolean(dialog?.classList.contains('is-dark'));
       },
-      logoSrc(career) {
-        return this.isDark() && career.logoDark ? career.logoDark : career.logo;
+      logoSrc(project) {
+        return this.isDark() && project.logoDark ? project.logoDark : project.logo;
       },
-      goToUrl(url) {
-        window.open(url, '_blank', 'noopener,noreferrer');
-      },
-      onLogoError(careerId) {
+      onLogoError(projectId) {
         // eslint-disable-next-line security/detect-object-injection
-        if (!this.logoErrors[careerId]) {
+        if (!this.logoErrors[projectId]) {
           if (import.meta.env.DEV) {
-            console.warn(`[ProjectsComponent] Logo failed to load for: ${careerId}`);
+            console.warn(`[ProjectsComponent] Logo failed to load for: ${projectId}`);
           }
-          this.logoErrors = { ...this.logoErrors, [careerId]: true };
+          this.logoErrors = { ...this.logoErrors, [projectId]: true };
         }
       },
-      showCareerDetails(careerId) {
+      showProjectDetails(projectId) {
         window.dispatchEvent(
-          new CustomEvent('open-career-details', {
-            detail: { careerId },
+          new CustomEvent('open-project-details', {
+            detail: { projectId },
           })
         );
+      },
+      getIndustryLabel(industry) {
+        const labels = {
+          'e-commerce': 'E-Commerce',
+          'online-payment': 'Online Payment',
+          b2b: 'B2B',
+          sales: 'Sales',
+          devops: 'DevOps',
+          web: 'Web',
+          mobile: 'Mobile',
+        };
+        return labels[industry] || industry;
       },
     },
   };
@@ -44,47 +62,77 @@
 <template>
   <!-- PROJECTS CONTAINER -->
   <div id="projects-container">
-    <dialog id="dialog-projects" ref="careersDialog" class="nes-dialog">
-      <h1 class="title">My Career</h1>
-      <p class="subtitle">
-        See more by
-        <a @click="goToUrl('https://github.com/jcchikikomori')">contacting me</a>
-        for my CV!
-      </p>
-      <div class="career-list">
+    <dialog id="dialog-projects" ref="projectsDialog" class="nes-dialog">
+      <h1 class="title">My Projects</h1>
+
+      <!-- Filter Dropdown -->
+      <div class="filter-container">
+        <label for="project-filter">Filter:</label>
+        <div class="nes-select">
+          <select id="project-filter" v-model="selectedFilter">
+            <option value="all">All Projects</option>
+            <option value="corporate">Corporate</option>
+            <option value="personal">Personal</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid">
         <div
-          v-for="career in careers"
-          :key="career.id"
-          class="career-card nes-container"
+          v-for="project in filteredProjects"
+          :key="project.id"
+          class="project-card nes-container"
         >
-          <div class="career-logo-wrapper">
-            <template v-if="career.logo && !logoErrors[career.id]">
+          <!-- Project Logo -->
+          <div class="project-logo-wrapper">
+            <template v-if="project.logo && !logoErrors[project.id]">
               <img
-                :src="logoSrc(career)"
-                :alt="career.company + ' logo'"
-                class="career-logo"
-                @error="onLogoError(career.id)"
+                :src="logoSrc(project)"
+                :alt="project.name + ' logo'"
+                class="project-logo"
+                @error="onLogoError(project.id)"
               />
             </template>
             <template v-else>
-              <i class="bi bi-x-lg career-logo-placeholder"></i>
+              <i class="bi bi-box project-logo-placeholder"></i>
             </template>
           </div>
 
-          <h3 class="career-title">{{ career.company }}</h3>
+          <!-- Project Name -->
+          <h3 class="project-name">{{ project.name }}</h3>
 
-          <div v-if="career.platforms.length > 0" class="career-platforms">
-            <span class="platform-icons">
-              <i v-for="icon in career.platforms" :key="icon" :class="'bi ' + icon"></i>
+          <!-- Badges -->
+          <div class="project-badges">
+            <span
+              :class="[
+                'badge',
+                'nes-badge',
+                project.category === 'corporate' ? 'is-primary' : 'is-success',
+              ]"
+            >
+              <span class="badge-label">{{ project.category }}</span>
+            </span>
+            <span class="badge industry-badge">
+              {{ getIndustryLabel(project.industry) }}
             </span>
           </div>
 
-          <p class="career-dates">{{ career.dates }}</p>
+          <!-- Platforms -->
+          <div v-if="project.platforms.length > 0" class="project-platforms">
+            <span class="platform-icons">
+              <i v-for="icon in project.platforms" :key="icon" :class="'bi ' + icon"></i>
+            </span>
+          </div>
 
+          <!-- Dates -->
+          <p class="project-dates">{{ project.dates }}</p>
+
+          <!-- View Details Button -->
           <button
             type="button"
-            class="nes-btn is-default nes-pointer career-details-trigger"
-            @click="showCareerDetails(career.id)"
+            class="nes-btn is-default nes-pointer project-details-btn"
+            @click="showProjectDetails(project.id)"
           >
             View Details
           </button>
@@ -95,9 +143,9 @@
         <button
           type="button"
           class="nes-btn is-primary nes-pointer is-block"
-          @click="$refs.careersDialog.close()"
+          @click="$refs.projectsDialog.close()"
         >
-          Okay
+          Close
         </button>
       </menu>
     </dialog>
@@ -105,5 +153,5 @@
 </template>
 
 <style scoped>
-  /* Styles are defined in _projects.scss */
+  /* Component-specific styles - main styles in _projects.scss */
 </style>

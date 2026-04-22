@@ -6,7 +6,7 @@
     components: {},
     data() {
       return {
-        selectedCareer: { company: '', screenshots: [] },
+        selectedCareer: { company: '' },
         logoErrors: {},
       };
     },
@@ -65,27 +65,19 @@
   <!-- CAREER DETAILS DIALOG -->
   <dialog id="dialog-career-details" ref="detailsDialog" class="nes-dialog">
     <div class="career-details-header">
-      <template v-if="selectedCareer.logo && !logoErrors[selectedCareer.id]">
-        <img
-          :src="logoSrc(selectedCareer)"
-          :alt="selectedCareer.company + ' logo'"
-          class="career-details-logo"
-          @error="onLogoError(selectedCareer.id)"
-        />
-      </template>
-      <template v-else>
-        <i class="bi bi-x-lg career-logo-placeholder"></i>
-      </template>
       <h2 class="title">{{ selectedCareer.company }}</h2>
     </div>
     <div class="career-details-content">
+      <!-- Media Section -->
       <div class="career-details-media">
         <img
-          :src="selectedCareer.screenshots[0] || '/img/projects/placeholder.png'"
-          :alt="selectedCareer.company + ' screenshot'"
+          :src="selectedCareer.logo || '/img/projects/placeholder.png'"
+          :alt="selectedCareer.company + ' logo'"
           class="career-screenshot"
         />
       </div>
+
+      <!-- Info Section -->
       <div class="career-details-info">
         <div class="info-section">
           <h3>Description</h3>
@@ -105,15 +97,15 @@
           </div>
         </div>
         <button
-          v-if="selectedCareer.clickAction === 'url' && selectedCareer.url"
+          v-if="selectedCareer.url"
           type="button"
-          class="nes-btn is-default nes-pointer career-cta"
+          class="nes-btn is-primary nes-pointer career-cta"
           @click="goToUrl(selectedCareer.url)"
         >
-          Visit Project
+          Visit Company
         </button>
         <button v-else type="button" class="nes-btn is-disabled career-cta">
-          Project Unavailable
+          Website Unavailable
         </button>
       </div>
     </div>

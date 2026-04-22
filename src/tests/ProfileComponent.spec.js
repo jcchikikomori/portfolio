@@ -19,6 +19,11 @@ describe('ProfileComponent.vue', () => {
     if (spotifyDialog) {
       spotifyDialog.showModal = vi.fn();
     }
+    const careersDialog = document.getElementById('dialog-careers');
+    if (careersDialog) {
+      careersDialog.showModal = vi.fn();
+      careersDialog.scrollTo = vi.fn();
+    }
     const projectsDialog = document.getElementById('dialog-projects');
     if (projectsDialog) {
       projectsDialog.showModal = vi.fn();
@@ -31,10 +36,10 @@ describe('ProfileComponent.vue', () => {
     attachDiv.remove();
   });
 
-  it('showProjects does nothing when dialog element is absent', async () => {
+  it('showCareers does nothing when dialog element is absent', async () => {
     const original = document.getElementById.bind(document);
     vi.spyOn(document, 'getElementById').mockImplementation((id) => {
-      if (id === 'dialog-projects') {
+      if (id === 'dialog-careers') {
         return null;
       }
       return original(id);
@@ -66,11 +71,11 @@ describe('ProfileComponent.vue', () => {
     expect(spotifyDialog.showModal).toHaveBeenCalled();
   });
 
-  it('Careers button opens Projects dialog', async () => {
+  it('Careers button opens Careers dialog', async () => {
     const careersBtn = wrapper.findAll('button').find((b) => b.text().includes('Careers'));
     await careersBtn.trigger('click');
-    const projectsDialog = document.getElementById('dialog-projects');
-    expect(projectsDialog.showModal).toHaveBeenCalled();
+    const careersDialog = document.getElementById('dialog-careers');
+    expect(careersDialog.showModal).toHaveBeenCalled();
   });
 
   it('LinkedIn button calls window.open with noopener', async () => {
@@ -110,28 +115,24 @@ describe('ProfileComponent.vue', () => {
     expect(call[2]).toBe('noopener,noreferrer');
   });
 
-  it('Projects button click opens industries dialog', async () => {
-    const industriesDialog = document.getElementById('dialog-industries');
-    if (industriesDialog) {
-      industriesDialog.showModal = vi.fn();
-    }
-    const industriesBtn = wrapper.findAll('button').find((b) => b.text().includes('Projects'));
-    await industriesBtn.trigger('click');
-    const dialog = document.getElementById('dialog-industries');
-    expect(dialog.showModal).toHaveBeenCalled();
+  it('Projects button click opens projects dialog', async () => {
+    const projectsBtn = wrapper.findAll('button').find((b) => b.text().includes('Projects'));
+    await projectsBtn.trigger('click');
+    const projectsDialog = document.getElementById('dialog-projects');
+    expect(projectsDialog.showModal).toHaveBeenCalled();
   });
 
-  it('showIndustries does nothing when dialog element is absent', async () => {
+  it('showProjects does nothing when dialog element is absent', async () => {
     const original = document.getElementById.bind(document);
     vi.spyOn(document, 'getElementById').mockImplementation((id) => {
-      if (id === 'dialog-industries') {
+      if (id === 'dialog-projects') {
         return null;
       }
       return original(id);
     });
-    const industriesBtn = wrapper.findAll('button').find((b) => b.text().includes('Projects'));
+    const projectsBtn = wrapper.findAll('button').find((b) => b.text().includes('Projects'));
     // Should not throw
-    await industriesBtn.trigger('click');
+    await projectsBtn.trigger('click');
     vi.restoreAllMocks();
   });
 

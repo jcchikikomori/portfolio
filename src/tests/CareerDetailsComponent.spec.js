@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 import CareerDetailsComponent from '../components/CareerDetailsComponent.vue'
-import { careers } from '../data/careers.js'
+import { careers } from '../data/careers'
 
 describe('CareerDetailsComponent.vue', () => {
     let wrapper
@@ -36,7 +36,7 @@ describe('CareerDetailsComponent.vue', () => {
         expect(dialog).toBeTruthy()
     })
 
-    it('renders career header with logo and company name', async () => {
+    it('renders career header with company name', async () => {
         const career = careers[0]
         wrapper.vm.showCareerDetails(career.id)
         await wrapper.vm.$nextTick()
@@ -83,46 +83,35 @@ describe('CareerDetailsComponent.vue', () => {
         expect(icons.length).toBe(career.platforms.length)
     })
 
-    it('shows Visit Project button when career has URL', async () => {
-        const career = careers.find(c => c.clickAction === 'url' && c.url)
+    it('shows Visit Company button when career has URL', async () => {
+        const career = careers.find(c => c.url)
         wrapper.vm.showCareerDetails(career.id)
         await wrapper.vm.$nextTick()
 
         const ctaButton = wrapper.find('.career-cta')
         expect(ctaButton.exists()).toBe(true)
-        expect(ctaButton.text()).toBe('Visit Project')
-        expect(ctaButton.classes()).toContain('is-default')
+        expect(ctaButton.text()).toBe('Visit Company')
+        expect(ctaButton.classes()).toContain('is-primary')
     })
 
-    it('shows disabled Project Unavailable button when career has no URL', async () => {
-        const career = careers.find(c => c.clickAction === 'alert' || !c.url)
-        wrapper.vm.showCareerDetails(career.id)
+    it('shows disabled Website Unavailable button when career has no URL', async () => {
+        // Create a mock career without URL since all real careers have URLs
+        const careerWithoutUrl = {
+            ...careers[0],
+            id: 'test-no-url',
+            url: null
+        }
+        
+        // Temporarily add to careers or use component data
+        wrapper.setData({
+            selectedCareer: careerWithoutUrl
+        })
         await wrapper.vm.$nextTick()
 
         const ctaButton = wrapper.find('.career-cta')
         expect(ctaButton.exists()).toBe(true)
-        expect(ctaButton.text()).toBe('Project Unavailable')
+        expect(ctaButton.text()).toBe('Website Unavailable')
         expect(ctaButton.classes()).toContain('is-disabled')
-    })
-
-    it('renders career screenshot when available', async () => {
-        const career = careers.find(c => c.screenshots.length > 0)
-        wrapper.vm.showCareerDetails(career.id)
-        await wrapper.vm.$nextTick()
-
-        const screenshot = wrapper.find('.career-screenshot')
-        expect(screenshot.exists()).toBe(true)
-        expect(screenshot.attributes('src')).toBe(career.screenshots[0])
-    })
-
-    it('renders placeholder screenshot when no screenshots available', async () => {
-        const career = careers.find(c => c.screenshots.length === 0)
-        wrapper.vm.showCareerDetails(career.id)
-        await wrapper.vm.$nextTick()
-
-        const screenshot = wrapper.find('.career-screenshot')
-        expect(screenshot.exists()).toBe(true)
-        expect(screenshot.attributes('src')).toContain('placeholder')
     })
 
     it('dialog has close button', () => {
@@ -233,16 +222,6 @@ describe('CareerDetailsComponent.vue', () => {
         expect(wrapper.vm.logoErrors[career.id]).toBe(true)
     })
 
-    it('shows placeholder icon when logo fails to load', async () => {
-        const career = careers.find(c => c.logo)
-        wrapper.vm.logoErrors = { [career.id]: true }
-        wrapper.vm.showCareerDetails(career.id)
-        await wrapper.vm.$nextTick()
-
-        const placeholder = wrapper.find('.career-logo-placeholder')
-        expect(placeholder.exists()).toBe(true)
-    })
-
     it('uses dark mode logo when dialog has is-dark class', async () => {
         const career = careers.find(c => c.logoDark)
         const dialog = document.getElementById('dialog-career-details')
@@ -279,8 +258,8 @@ describe('CareerDetailsComponent.vue', () => {
         windowOpenSpy.mockRestore()
     })
 
-    it('Visit Project button calls goToUrl when clicked', async () => {
-        const career = careers.find(c => c.clickAction === 'url' && c.url)
+    it('Visit Company button calls goToUrl when clicked', async () => {
+        const career = careers.find(c => c.url)
         const goToUrlSpy = vi.spyOn(wrapper.vm, 'goToUrl')
 
         wrapper.vm.showCareerDetails(career.id)
