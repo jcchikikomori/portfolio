@@ -22,11 +22,14 @@ describe('ProjectsComponent.vue', () => {
         expect(careerList.exists()).toBe(true)
     })
 
-    it('renders cards within flexbox container', () => {
+    it('renders career cards within flexbox container', () => {
         const wrapper = mount(ProjectsComponent)
         const careerList = wrapper.find('.career-list')
-        const cards = careerList.findAll('.card')
+        const cards = careerList.findAll('.career-card')
         expect(cards.length).toBe(careers.length)
+        cards.forEach(card => {
+            expect(card.classes()).toContain('nes-container')
+        })
     })
 
     it('contact link calls window.open with noopener', async () => {
@@ -40,51 +43,36 @@ describe('ProjectsComponent.vue', () => {
 
     it('renders correct number of career cards from data', () => {
         const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
+        const cards = wrapper.findAll('.career-card')
         expect(cards.length).toBe(careers.length)
     })
 
     it('renders company name for each card', () => {
         const wrapper = mount(ProjectsComponent)
-        const titles = wrapper.findAll('.card-title')
+        const cards = wrapper.findAll('.career-card')
         careers.forEach((career, index) => {
-            expect(titles[index].text()).toBe(career.company)
+            const title = cards[index].find('.career-title')
+            expect(title.text()).toBe(career.company)
         })
     })
 
     it('renders date range for each card', () => {
         const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
+        const cards = wrapper.findAll('.career-card')
         careers.forEach((career, index) => {
-            const muted = cards[index].find('.text-muted')
-            expect(muted.text()).toBe(career.dates)
+            const dates = cards[index].find('.career-dates')
+            expect(dates.text()).toBe(career.dates)
         })
     })
 
     it('does not render description (handled by CareerDetailsComponent)', () => {
         const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
+        const cards = wrapper.findAll('.career-card')
         careers.forEach((career, index) => {
             if (career.description) {
-                const body = cards[index].find('.card-body')
-                expect(body.text()).not.toContain(career.description)
+                expect(cards[index].text()).not.toContain(career.description)
             }
         })
-    })
-
-    it('card click dispatches open-career-details event', async () => {
-        const dispatchEventSpy = vi.spyOn(window, 'dispatchEvent')
-        const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
-        
-        await cards[0].trigger('click')
-        
-        expect(dispatchEventSpy).toHaveBeenCalled()
-        const event = dispatchEventSpy.mock.calls[0][0]
-        expect(event.type).toBe('open-career-details')
-        expect(event.detail.careerId).toBe(careers[0].id)
-        
-        dispatchEventSpy.mockRestore()
     })
 
     it('View Details button dispatches open-career-details event', async () => {
@@ -193,7 +181,7 @@ describe('ProjectsComponent.vue', () => {
 
     it('career details trigger rendered for all cards', () => {
         const wrapper = mount(ProjectsComponent)
-        const cards = wrapper.findAll('.card')
+        const cards = wrapper.findAll('.career-card')
         expect(cards.length).toBe(careers.length)
         cards.forEach((card) => {
             const trigger = card.find('.career-details-trigger')

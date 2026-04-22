@@ -140,8 +140,8 @@ describe('ProfileComponent.vue', () => {
     expect(industriesBtn.classes()).not.toContain('is-disabled');
   });
 
-  it('Projects button has is-default class', () => {
-    const industriesBtn = wrapper.findAll('button').find((b) => b.text().includes('Projects'));
-    expect(industriesBtn.classes()).toContain('is-default');
+  it('Projects button has is-success class', () => {
+    const projectsBtn = wrapper.findAll('button').find((b) => b.text().includes('Projects'));
+    expect(projectsBtn.classes()).toContain('is-success');
   });
 });

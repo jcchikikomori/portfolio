@@ -1,5 +1,5 @@
 #dialog-projects {
-  max-width: 800px;
+  max-width: 900px;
   width: 90vw;
   margin: auto;
   padding: 1rem;
@@ -23,62 +23,29 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    padding: 0.5rem;
+
+    @include mq($from: smallest, $until: tablet) {
+      gap: 0.75rem;
+    }
+  }
+
+  .career-card {
+    flex: 0 1 calc(50% - 1rem); // 2 columns on tablet+
+    min-width: 280px;
     padding: 1rem;
+    text-align: center;
+    border: 4px solid #212529;
+    background: #fff;
 
-    & > .card {
-      border: 1px solid rgba(0, 0, 0, 0.125) !important;
-      flex: 0 1 calc(33.333% - 1rem); // Desktop: 3 columns
+    @include mq($from: smallest, $until: tablet) {
+      flex: 1 1 100%; // 1 column on mobile
+      min-width: auto;
+      padding: 0.75rem;
+    }
 
-      @include mq($from: tablet) {
-        flex: 0 1 calc(50% - 1rem); // Tablet: 2 columns
-      }
-
-      @include mq($from: smallest, $until: tablet) {
-        flex: 1 1 100%; // Mobile: 1 column
-        min-height: auto;
-      }
-
-      .card-img-top {
-        min-height: 20vh;
-        background-image: url(/public/img/projects/placeholder.png);
-        background-repeat: no-repeat;
-        background-position: top center;
-        background-size: cover;
-        // Disabled: use `nes-pointer` class.
-        // cursor: pointer;
-
-        &.chatgenie {
-          background-image: url(/public/img/projects/chatgenie.png);
-          background-position: top left;
-        }
-
-        &.hello-php {
-          background-image: url(/public/img/projects/placeholder.png);
-        }
-
-        &.gcash-miniprogram {
-          background-image: url(/public/img/projects/miniprogram.png);
-          background-position: top left;
-        }
-
-        &.covemanila {
-          background-image: url(/public/img/projects/covemanila.png);
-          background-position: top left;
-        }
-
-        &.mcdelivery {
-          background-image: url(/public/img/projects/mcdelivery.png);
-          background-position: top left;
-        }
-
-        @include mq($from: smallest, $until: mobile) {
-          height: 10rem;
-        }
-
-        @include mq($from: smartphone, $until: tablet) {
-          height: 12rem;
-        }
-      }
+    .career-logo-wrapper {
+      margin-bottom: 0.5rem;
 
       .career-logo {
         width: 64px;
@@ -86,105 +53,90 @@
         object-fit: contain;
 
         @include mq($from: smallest, $until: mobile) {
-          width: 24px;
-          height: 24px;
+          width: 48px;
+          height: 48px;
         }
       }
 
       .career-logo-placeholder {
         width: 64px;
         height: 64px;
-        display: inline-block;
-        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         color: #6c757d;
+        font-size: 1.5rem;
 
         @include mq($from: smallest, $until: mobile) {
-          width: 24px;
-          height: 24px;
-          font-size: 0.75rem;
+          width: 48px;
+          height: 48px;
+          font-size: 1.25rem;
         }
       }
+    }
+
+    .career-title {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 0.875rem;
+      }
+    }
+
+    .career-platforms {
+      margin-bottom: 0.5rem;
 
       .platform-icons {
-        font-size: 1rem;
-        margin-top: 0.25rem;
+        font-size: 1.25rem;
+        display: block;
 
         @include mq($from: smallest, $until: mobile) {
-          font-size: 0.85rem;
+          font-size: 1rem;
         }
 
         i {
           margin-right: 0.25rem;
         }
       }
+    }
 
-      &:hover > .card-body {
-        // TODO: Set this as variable
-        // TODO: Color not final
-        background: #e3e3e4;
+    .career-dates {
+      margin: 0 0 0.75rem 0;
+      font-size: 0.875rem;
+      color: #6c757d;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 0.8rem;
       }
     }
 
-    .card .card-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      .card-text {
-        font-size: 13px;
-        text-align: center;
-        word-break: break-word;
-        hyphens: auto;
-
-        // Design override
-        .text-muted {
-          color: #000 !important;
-        }
-      }
-    }
-  }
-
-  .career-details-trigger {
-    font-size: 0.75rem;
-    margin-top: 0.5rem;
-    min-height: 44px;
-
-    @include mq($from: smallest, $until: mobile) {
-      width: 100%;
+    .career-details-trigger {
+      font-size: 0.75rem;
       min-height: 44px;
+      width: 100%;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 0.7rem;
+      }
     }
   }
 
   // FOR DARK MODE
   &.is-dark {
-    .career-list {
-      .card {
-        .card-img-top {
-          background-color: #212529;
-        }
+    .career-card {
+      background: #212529;
+      border-color: #fff;
+      color: #fff;
 
-        .card-body {
-          background: #212529;
-          border-top: #fff 1px solid;
-          color: #fff;
-
-          .card-text {
-            // Design override
-            .text-muted {
-              color: #fff !important;
-            }
-          }
-        }
-
+      .career-logo-wrapper {
         .career-logo-placeholder {
           color: #fff;
         }
+      }
 
-        &:hover > .card-body {
-          // TODO: Set this as variable
-          // TODO: Color not final
-          background: #4d565f;
-        }
+      .career-dates {
+        color: #adb5bd;
       }
     }
   }

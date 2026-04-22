@@ -55,42 +55,39 @@
         <div
           v-for="career in careers"
           :key="career.id"
-          class="card"
-          @click="showCareerDetails(career.id)"
+          class="career-card nes-container"
         >
-          <div class="card-body">
+          <div class="career-logo-wrapper">
             <template v-if="career.logo && !logoErrors[career.id]">
-              <div class="card-body-logo">
-                <img
-                  :src="logoSrc(career)"
-                  :alt="career.company + ' logo'"
-                  class="career-logo"
-                  @error="onLogoError(career.id)"
-                />
-              </div>
+              <img
+                :src="logoSrc(career)"
+                :alt="career.company + ' logo'"
+                class="career-logo"
+                @error="onLogoError(career.id)"
+              />
             </template>
             <template v-else>
-              <div class="card-body-logo">
-                <i class="bi bi-x-lg career-logo-placeholder"></i>
-              </div>
+              <i class="bi bi-x-lg career-logo-placeholder"></i>
             </template>
-            <h6 class="card-title">{{ career.company }}</h6>
-            <div class="card-body-flex">
-              <span v-if="career.platforms.length > 0" class="platform-icons">
-                <i v-for="icon in career.platforms" :key="icon" :class="'bi ' + icon"></i>
-              </span>
-              <p class="card-text">
-                <small class="text-muted">{{ career.dates }}</small>
-              </p>
-            </div>
-            <button
-              type="button"
-              class="nes-btn is-default nes-pointer career-details-trigger"
-              @click.stop="showCareerDetails(career.id)"
-            >
-              View Details
-            </button>
           </div>
+
+          <h3 class="career-title">{{ career.company }}</h3>
+
+          <div v-if="career.platforms.length > 0" class="career-platforms">
+            <span class="platform-icons">
+              <i v-for="icon in career.platforms" :key="icon" :class="'bi ' + icon"></i>
+            </span>
+          </div>
+
+          <p class="career-dates">{{ career.dates }}</p>
+
+          <button
+            type="button"
+            class="nes-btn is-default nes-pointer career-details-trigger"
+            @click="showCareerDetails(career.id)"
+          >
+            View Details
+          </button>
         </div>
       </div>
 
