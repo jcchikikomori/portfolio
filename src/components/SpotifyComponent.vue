@@ -1,24 +1,20 @@
-<style lang="scss" scoped>
-#dialog-spotify {
-  height: fit-content;
-  .title {
-    margin: 0;
-  }
-
-  .subtitle {
-    font-size: 14px;
-  }
-
-  .dialog-menu {
-    padding: 0; // tentative
-  }
-}
-</style>
+<script>
+  export default {
+    name: 'SpotifyComponent',
+    components: {},
+    methods: {
+      closeSpotify: () => {
+        // visualizerIsOff();
+        console.debug('SpotifyComponent: Spotify dialog closed.');
+      },
+    },
+  };
+</script>
 
 <template>
   <!-- SPOTIFY CONTAINER -->
   <div id="spotify-container">
-    <dialog class="nes-dialog" id="dialog-spotify">
+    <dialog id="dialog-spotify" class="nes-dialog">
       <form method="dialog">
         <p class="title">My Chosen Music</p>
         <p class="subtitle">powered by Spotify</p>
@@ -32,10 +28,8 @@
           allow="encrypted-media"
         ></iframe>
         <menu class="dialog-menu">
-          <button
-            v-on:click="closeSpotify()"
-            class="btn nes-btn is-primary is-block">
-              Close
+          <button class="nes-btn is-primary nes-pointer is-block" @click="closeSpotify()">
+            Close
           </button>
         </menu>
       </form>
@@ -43,15 +37,19 @@
   </div>
 </template>
 
-<script>
-  export default {
-    name: "SpotifyComponent",
-    components: {},
-    methods: {
-      closeSpotify: () => {
-        // visualizerIsOff();
-        console.debug("SpotifyComponent: Spotify dialog closed.");
-      }
-    },
-  };
-</script>
+<style lang="scss" scoped>
+  #dialog-spotify {
+    height: fit-content;
+    .title {
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 14px;
+    }
+
+    .dialog-menu {
+      padding: 0; // tentative
+    }
+  }
+</style>

@@ -9,3 +9,19 @@
     margin-top: 1em;
   }
 }
+
+// Design override
+.main-screen {
+  .nes-dialog {
+    &::backdrop,
+    & > .backdrop {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    &.is-dark:not(.is-rounded)::before {
+      position: absolute;
+      width: calc(100% - 8px);
+      margin: 0 auto;
+    }
+  }
+}
