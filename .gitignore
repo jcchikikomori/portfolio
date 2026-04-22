@@ -7,6 +7,9 @@ docs/**/*.json
 docs/plans/
 !docs/adr/
 !docs/design/
+qa-screenshots/
+qa*.png
+*/qa*.png
 
 # NodeJS
 .DS_Store
