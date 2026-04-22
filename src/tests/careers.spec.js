@@ -8,8 +8,8 @@ describe('careers data module', () => {
     expect(careers.length).toBeGreaterThan(0);
   });
 
-  it('exports exactly 3 employment entries', () => {
-    expect(careers).toHaveLength(3);
+  it('exports exactly 4 employment entries', () => {
+    expect(careers).toHaveLength(4);
   });
 
   it('every entry has required string fields (id, company, description, dates) that are non-empty', () => {

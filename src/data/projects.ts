@@ -1,12 +1,12 @@
 /**
  * Projects Data
- * 
+ *
  * All projects worked on, both corporate and personal.
  * Corporate projects link to a career (careerId).
  * Personal projects have careerId as null.
  */
 
-import { Project } from "@/types/index.ts";
+import { Project } from '@/types/index.ts';
 
 export const projects: Project[] = [
   // Corporate Projects - Engagia
@@ -121,9 +121,9 @@ export const projects: Project[] = [
     name: 'Cove Manila CMS',
     category: 'corporate',
     industry: 'b2b',
-    careerId: 'chatgenie',
+    careerId: 'gorated',
     description: 'WordPress-based content management system for hospitality industry',
-    dates: '2019 - 2020',
+    dates: '2019',
     url: null,
     logo: 'https://logo.clearbit.com/okadamanila.com',
     logoDark: 'https://logo.clearbit.com/okadamanila.com',
@@ -141,9 +141,9 @@ export const projects: Project[] = [
     name: 'McDelivery PH',
     category: 'corporate',
     industry: 'e-commerce',
-    careerId: 'chatgenie',
+    careerId: 'gorated',
     description: 'Android food delivery application with real-time order tracking',
-    dates: '2019 - 2021',
+    dates: '2020 - 2021',
     url: 'https://web.archive.org/web/20191228231219if_/https://www.mcdelivery.com.ph/',
     logo: 'https://logo.clearbit.com/mcdonalds.com',
     logoDark: 'https://logo.clearbit.com/mcdonalds.com',

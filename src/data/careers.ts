@@ -21,6 +21,16 @@ export const careers: Career[] = [
     logoCopyrightNotice: 'Logo © Engagia & Trade Dynamics Consulting. All rights reserved.',
   },
   {
+    id: 'gorated',
+    company: 'Gorated',
+    description: 'SaaS consultancy startup helping companies build solutions',
+    dates: '2019 - 2022',
+    url: null,
+    logo: null,
+    logoDark: null,
+    platforms: ['bi-globe', 'bi-phone', 'bi-cart'],
+  },
+  {
     id: 'chatgenie',
     company: 'Chatgenie.ph',
     description:
