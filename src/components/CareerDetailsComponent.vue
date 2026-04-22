@@ -10,6 +10,12 @@
         logoErrors: {},
       };
     },
+    mounted() {
+      window.addEventListener('open-career-details', this.handleOpenCareerDetails);
+    },
+    beforeUnmount() {
+      window.removeEventListener('open-career-details', this.handleOpenCareerDetails);
+    },
     methods: {
       isDark() {
         const dialog = document.getElementById('dialog-career-details');
@@ -51,12 +57,6 @@
           this.showCareerDetails(careerId);
         }
       },
-    },
-    mounted() {
-      window.addEventListener('open-career-details', this.handleOpenCareerDetails);
-    },
-    beforeUnmount() {
-      window.removeEventListener('open-career-details', this.handleOpenCareerDetails);
     },
   };
 </script>
@@ -102,7 +102,7 @@
         <button
           v-if="selectedCareer.url"
           type="button"
-          class="nes-btn is-primary nes-pointer career-cta"
+          class="nes-btn is-warning nes-pointer career-cta"
           @click="goToUrl(selectedCareer.url)"
         >
           Visit Company

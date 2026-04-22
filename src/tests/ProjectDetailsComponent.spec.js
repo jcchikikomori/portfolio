@@ -190,7 +190,7 @@ describe('ProjectDetailsComponent.vue', () => {
     const ctaButton = wrapper.find('.project-cta');
     expect(ctaButton.exists()).toBe(true);
     expect(ctaButton.text()).toBe('Visit Project');
-    expect(ctaButton.classes()).toContain('is-primary');
+    expect(ctaButton.classes()).toContain('is-warning');
   });
 
   it('emits go-to-url event when Visit Project button is clicked', async () => {

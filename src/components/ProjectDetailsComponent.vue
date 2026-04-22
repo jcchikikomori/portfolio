@@ -166,7 +166,7 @@
           <button
             v-if="selectedProject.url"
             type="button"
-            class="nes-btn is-primary nes-pointer project-cta"
+            class="nes-btn is-warning nes-pointer project-cta"
             @click="$emit('go-to-url', selectedProject.url)"
           >
             Visit Project
