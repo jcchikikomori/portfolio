@@ -78,8 +78,11 @@ them. Do not treat these warnings as failures.
 
 ## Test Coverage Floor
 
-Baseline: 37 tests, 100% line/branch/function/statement coverage (Vitest v2). Do
-not ship changes that regress coverage below 100%.
+Baseline: All tests passing with 100% line/branch/function/statement coverage
+(Vitest v2). Do not ship changes that regress coverage below 100%.
+
+Current metrics can be verified by running `pnpm run test` — the coverage report
+shows the test count and all coverage percentages at the bottom of the output.
 
 ### Vue Component Coverage Patterns
 
@@ -110,6 +113,20 @@ expect(wrapper.vm.getLabel('UNKNOWN')).toBe('Unknown');
 await button.trigger('click');
 expect(wrapper.emitted('close')).toHaveLength(1);
 ```
+
+### Data Changes Require Spec Updates
+
+When adding or removing data entities (projects, careers, skills), always update
+corresponding spec files to maintain 100% coverage:
+
+1. **Update count assertions** — Tests validate exact array lengths
+2. **Update validation arrays** — Expected industries, categories, types
+3. **Update type definitions** — If adding new categories/industries
+4. **Run tests immediately** — Expect failures; fix before committing
+
+Pattern: Adding a project requires updating project count, adding new industries
+to validation arrays, and updating type definitions. All tests must pass at 100%
+coverage before shipping.
 
 ## Package Manager Commands
 

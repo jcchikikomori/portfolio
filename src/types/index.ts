@@ -16,7 +16,8 @@ export type ProjectIndustry =
   | 'sales'
   | 'devops'
   | 'web'
-  | 'mobile';
+  | 'mobile'
+  | 'llm';
 
 /** Skill with icon representation */
 export interface Skill {
