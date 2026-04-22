@@ -1,0 +1,49 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the CRT filter overlay component.
+// -----------------------------------------------------------------------------
+
+// Overlay container
+.crt-filter {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-crt-overlay, 9999);
+
+  // Scanlines via pseudo-element
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      var(--crt-scanline-color, rgba(0, 0, 0, 0.12)),
+      var(--crt-scanline-color, rgba(0, 0, 0, 0.12)) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  }
+}
+
+// Hidden by default, shown when enabled
+body:not(.crt-enabled) .crt-filter {
+  display: none;
+}
+
+// Reduced motion override
+@media (prefers-reduced-motion: reduce) {
+  .crt-filter {
+    display: none !important;
+  }
+}
+
+// Toggle button positioning
+body {
+  .nes-btn.crt-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 1rem;
+    width: 3.5rem;
+    min-width: unset;
+    z-index: var(--z-crt-toggle, 10000);
+  }
+}

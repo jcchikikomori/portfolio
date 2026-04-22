@@ -1,12 +1,8 @@
 {
-  "extends": [
-    "stylelint-config-standard-scss",
-    "stylelint-config-prettier-scss"
-  ],
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier-scss"],
   "plugins": [],
   "customSyntax": "postcss-scss",
   "rules": {
-    // SCSS specific rules
     "scss/at-rule-no-unknown": [
       true,
       {
@@ -34,16 +30,13 @@
     "scss/dollar-variable-pattern": null,
     "scss/percent-placeholder-pattern": null,
     "scss/comment-no-empty": null,
-    
-    // Naming conventions - BEM style
+
     "selector-class-pattern": [
       "^[a-z]([a-z0-9-]+)?(__[a-z0-9]+)?(--[a-z0-9-]+)?$",
       {
         "message": "Expected class name to follow BEM convention (block__element--modifier)"
       }
     ],
-    
-    // Limit nesting depth
     "max-nesting-depth": [
       3,
       {
@@ -51,48 +44,26 @@
         "severity": "warning"
       }
     ],
-    
-    // Property order (concentric CSS)
     "order/properties-order": null,
-    
-    // Declaration block
     "declaration-block-no-redundant-longhand-properties": null,
     "declaration-block-no-shorthand-property-overrides": true,
-    
-    // Color
     "color-named": "never",
     "color-hex-length": "short",
     "color-hex-case": "lower",
     "color-no-invalid-hex": true,
-    
-    // Number
     "number-leading-zero": "always",
     "number-no-trailing-zeros": true,
-    
-    // Length
     "length-zero-no-unit": true,
-    
-    // Font
     "font-family-name-quotes": "always-where-recommended",
     "font-family-no-duplicate-names": true,
-    
-    // Function
     "function-url-quotes": "always",
     "function-name-case": "lower",
-    
-    // String
     "string-no-newline": true,
     "string-quotes": "double",
-    
-    // Unit
     "unit-case": "lower",
-    
-    // Value
     "value-keyword-case": "lower",
     "value-list-comma-newline-after": "always-multi-line",
     "value-list-comma-space-after": "always-single-line",
-    
-    // Property
     "property-case": "lower",
     "property-no-vendor-prefix": [
       true,
@@ -100,8 +71,6 @@
         "ignoreProperties": ["appearance", "text-size-adjust"]
       }
     ],
-    
-    // Declaration
     "declaration-property-value-no-unknown": null,
     "declaration-no-important": [
       true,
@@ -109,8 +78,6 @@
         "severity": "warning"
       }
     ],
-    
-    // Selector
     "selector-no-qualifying-type": [
       true,
       {
@@ -128,16 +95,12 @@
         "ignorePseudoClasses": ["export", "import", "global", "local", "external", "is-dark"]
       }
     ],
-    
-    // Media
     "media-feature-name-no-unknown": [
       true,
       {
         "ignoreMediaFeatureNames": ["prefers-color-scheme"]
       }
     ],
-    
-    // General
     "no-empty-source": null,
     "no-descending-specificity": [
       true,
@@ -152,11 +115,5 @@
       }
     ]
   },
-  "ignoreFiles": [
-    "node_modules/**/*",
-    "dist/**/*",
-    "coverage/**/*",
-    "**/*.js",
-    "**/*.vue"
-  ]
+  "ignoreFiles": ["node_modules/**/*", "dist/**/*", "coverage/**/*", "**/*.js", "**/*.vue"]
 }
