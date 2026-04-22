@@ -125,7 +125,7 @@
 
       <CareersComponent></CareersComponent>
       <ProjectsComponent></ProjectsComponent>
-      <ProjectDetailsComponent></ProjectDetailsComponent>
+      <ProjectDetailsComponent @go-to-url="goToUrl"></ProjectDetailsComponent>
       <SpotifyComponent></SpotifyComponent>
       <CareerDetailsComponent></CareerDetailsComponent>
     </section>
