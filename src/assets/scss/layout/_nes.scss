@@ -41,4 +41,11 @@
       margin: 0 auto;
     }
   }
+
+  #dialog-spotify {
+    &::backdrop,
+    & > .backdrop {
+      background: none;
+    }
+  }
 }
