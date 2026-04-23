@@ -9,8 +9,8 @@ import type { Slogan } from '@/types/index.ts';
 
 export const slogans: Slogan[] = [
   {
-    message: 'こんにちは！サイです！よろしく お願いします!',
-    randomize: false,
+    message: 'こんにちは！サイです！よろしく お願いします! Turn on the CRT filter (Star button) for the full experience!',
+    randomize: true,
     enabled: true,
     default: true,
   },

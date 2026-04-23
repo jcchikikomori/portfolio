@@ -2,10 +2,14 @@
 import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-import ProfileComponent from '../components/ProfileComponent.vue';
 import OsdComponent from '../components/OsdComponent.vue';
+import ProfileComponent from '../components/ProfileComponent.vue';
 import VisualizerComponent from '../components/VisualizerComponent.vue';
 import * as slogansModule from '../data/slogans';
+
+// Expected default slogan text (matches slogans.ts)
+const DEFAULT_SLOGAN =
+  'こんにちは！サイです！よろしく お願いします! Turn on the CRT filter (Star button) for the full experience!';
 
 describe('ProfileComponent.vue', () => {
   let wrapper;
@@ -75,7 +79,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
       expect(localStorageMock.setItem).toHaveBeenCalledWith('slogan-initialized', 'true');
 
       sloganWrapper.unmount();
@@ -107,7 +111,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
 
       sloganWrapper.unmount();
     });
@@ -121,7 +125,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert: Should fallback to default slogan
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
 
       // Cleanup
       spy.mockRestore();
@@ -186,7 +190,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert: Should fallback to first slogan in array
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
 
       // Cleanup
       Object.defineProperty(slogansModule, 'defaultSlogan', {
@@ -249,7 +253,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert: Should fallback to first slogan in array
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
 
       // Cleanup
       Object.defineProperty(slogansModule, 'defaultSlogan', {
@@ -313,7 +317,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert: Should fallback to first slogan in array
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
 
       // Cleanup
       spy.mockRestore();

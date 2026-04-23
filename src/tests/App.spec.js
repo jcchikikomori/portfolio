@@ -138,4 +138,66 @@ describe('App.vue', () => {
     // Aria-label should indicate CRT is enabled
     expect(button.attributes('aria-label')).toBe('Disable CRT filter');
   });
+
+  describe('CRT barrel distortion SVG filter', () => {
+    it('renders SVG filter container with correct id', () => {
+      const wrapper = mount(App);
+      const svg = wrapper.find('#crt-svg-filters');
+      expect(svg.exists()).toBe(true);
+    });
+
+    it('SVG filter has aria-hidden="true" for accessibility', () => {
+      const wrapper = mount(App);
+      const svg = wrapper.find('#crt-svg-filters');
+      expect(svg.attributes('aria-hidden')).toBe('true');
+    });
+
+    it('SVG filter has role="presentation" for accessibility', () => {
+      const wrapper = mount(App);
+      const svg = wrapper.find('#crt-svg-filters');
+      expect(svg.attributes('role')).toBe('presentation');
+    });
+
+    it('SVG filter has crt-svg-filters class for styling', () => {
+      const wrapper = mount(App);
+      const svg = wrapper.find('#crt-svg-filters');
+      expect(svg.classes()).toContain('crt-svg-filters');
+    });
+
+    it('SVG contains defs element with filter definition', () => {
+      const wrapper = mount(App);
+      const defs = wrapper.find('#crt-svg-filters defs');
+      expect(defs.exists()).toBe(true);
+    });
+
+    it('SVG contains barrel distortion filter with correct id', () => {
+      const wrapper = mount(App);
+      const filter = wrapper.find('#crt-svg-filters filter#crt-barrel');
+      expect(filter.exists()).toBe(true);
+    });
+
+    it('barrel filter contains feImage element', () => {
+      const wrapper = mount(App);
+      const feImage = wrapper.find('#crt-svg-filters filter#crt-barrel feImage');
+      expect(feImage.exists()).toBe(true);
+    });
+
+    it('barrel filter contains feDisplacementMap element', () => {
+      const wrapper = mount(App);
+      const feDisplacementMap = wrapper.find(
+        '#crt-svg-filters filter#crt-barrel feDisplacementMap'
+      );
+      expect(feDisplacementMap.exists()).toBe(true);
+    });
+
+    it('feDisplacementMap has correct channel selectors', () => {
+      const wrapper = mount(App);
+      const feDisplacementMap = wrapper.find(
+        '#crt-svg-filters filter#crt-barrel feDisplacementMap'
+      );
+      // SVG attributes preserve camelCase in JSDOM
+      expect(feDisplacementMap.attributes('xChannelSelector')).toBe('R');
+      expect(feDisplacementMap.attributes('yChannelSelector')).toBe('G');
+    });
+  });
 });

@@ -272,7 +272,7 @@ describe('SpotifyComponent.vue - Iframe API', () => {
     consoleSpy.mockRestore();
   });
 
-  it('handles case when embedController is null during destroy', async () => {
+  it('handles case when embedController is null during destroy', () => {
     // Mount without initializing the controller
     wrapper = mount(SpotifyComponent, {
       attachTo: document.getElementById('spotify-container'),
@@ -285,7 +285,7 @@ describe('SpotifyComponent.vue - Iframe API', () => {
     expect(() => wrapper.unmount()).not.toThrow();
   });
 
-  it('logs error when addPlaybackListeners called without embedController', async () => {
+  it('logs error when addPlaybackListeners called without embedController', () => {
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     wrapper = mount(SpotifyComponent, {
@@ -335,7 +335,7 @@ describe('SpotifyComponent.vue - Iframe API', () => {
     consoleSpy.mockRestore();
   });
 
-  it('logs error when embed-iframe element is not found', async () => {
+  it('logs error when embed-iframe element is not found', () => {
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
     // Remove the existing embed-iframe element created in beforeEach

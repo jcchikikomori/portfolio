@@ -29,10 +29,37 @@ body:not(.crt-enabled) .crt-filter {
   display: none;
 }
 
-// Reduced motion override
+// -----------------------------------------------------------------------------
+// CRT Barrel Distortion Effect
+// Applies convex bulge effect to simulate curved CRT glass tube
+// -----------------------------------------------------------------------------
+body.crt-enabled {
+  // Apply barrel distortion filter to entire viewport
+  filter: url(#crt-barrel);
+
+  // Slight vignette effect to enhance CRT look
+  &::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: var(--z-crt-overlay, 9999);
+    box-shadow: inset 0 0 80px 20px rgba(0, 0, 0, 0.25);
+  }
+}
+
+// Reduced motion override - disable all CRT effects
 @media (prefers-reduced-motion: reduce) {
   .crt-filter {
     display: none !important;
+  }
+
+  body.crt-enabled {
+    filter: none !important;
+
+    &::after {
+      display: none !important;
+    }
   }
 }
 
