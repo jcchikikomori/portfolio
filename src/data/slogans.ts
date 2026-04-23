@@ -15,38 +15,38 @@ export const slogans: Slogan[] = [
     default: true,
   },
   {
-    message: 'Building digital experiences that matter.',
+    message: 'Hello World!',
     randomize: true,
     enabled: true,
     default: false,
   },
   {
-    message: 'コードを書くのが好きです。', // "I love writing code."
+    message: 'Mabuhay!',
     randomize: true,
     enabled: true,
     default: false,
   },
   {
     message:
-      'This is a very long slogan that is designed to test text wrapping capabilities in the UI component to ensure that long messages display properly without breaking the layout or causing overflow issues.',
-    randomize: true,
-    enabled: false,
-    default: false,
-  },
-  {
-    message: 'Full-stack developer.',
-    randomize: false,
-    enabled: false,
-    default: false,
-  },
-  {
-    message: '常に学び続けるエンジニアです。', // "I am an engineer who always keeps learning."
+      'I\'m just Running In The 90s!!',
     randomize: true,
     enabled: true,
     default: false,
   },
   {
-    message: 'Hi!',
+    message: 'Cyber talking, cybersex is on the line',
+    randomize: true,
+    enabled: true,
+    default: false,
+  },
+  {
+    message: '私は近いうちに日本に行きたかった…。',
+    randomize: true,
+    enabled: true,
+    default: false,
+  },
+  {
+    message: 'Get the satellite, if you want to see me. Talking on the net, I know the way you like it. Get your credit card \'cause I need no money. All I wanna get is you, baby',
     randomize: true,
     enabled: true,
     default: false,

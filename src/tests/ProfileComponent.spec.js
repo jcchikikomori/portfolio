@@ -1,3 +1,4 @@
+/* eslint-disable no-import-assign */
 import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 

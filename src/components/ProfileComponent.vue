@@ -1,5 +1,4 @@
 <script>
-
   import { slogans, defaultSlogan, getRandomizableSlogans } from '@/data/slogans';
 
   import CareerDetailsComponent from './CareerDetailsComponent.vue';
