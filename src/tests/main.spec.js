@@ -43,7 +43,7 @@ describe('main.js', () => {
     if (logoEl && logoEl.parentNode) {
       logoEl.parentNode.removeChild(logoEl);
     }
-    document.body.classList.remove('dark');
+    document.body.classList.remove('is-dark');
     consoleErrorSpy.mockRestore();
   });
 
@@ -76,13 +76,13 @@ describe('main.js', () => {
     }));
     await import('../main.js');
     window.onload();
-    expect(document.body.classList.contains('dark')).toBe(true);
+    expect(document.body.classList.contains('is-dark')).toBe(true);
   });
 
   it('window.onload applies normal theme when matchMedia does not prefer dark', async () => {
     await import('../main.js');
     window.onload();
-    expect(document.body.classList.contains('dark')).toBe(false);
+    expect(document.body.classList.contains('is-dark')).toBe(false);
   });
 
   it('matchMedia change event switches to dark mode', async () => {
@@ -91,15 +91,15 @@ describe('main.js', () => {
     // changeHandler is set by the matchMedia.addEventListener mock
     expect(changeHandler).not.toBeNull();
     changeHandler({ matches: true });
-    expect(document.body.classList.contains('dark')).toBe(true);
+    expect(document.body.classList.contains('is-dark')).toBe(true);
   });
 
   it('matchMedia change event switches to light mode', async () => {
     await import('../main.js');
-    document.body.classList.add('dark');
+    document.body.classList.add('is-dark');
     window.onload();
     expect(changeHandler).not.toBeNull();
     changeHandler({ matches: false });
-    expect(document.body.classList.contains('dark')).toBe(false);
+    expect(document.body.classList.contains('is-dark')).toBe(false);
   });
 });

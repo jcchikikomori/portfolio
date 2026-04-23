@@ -31,7 +31,7 @@
   .nes-dialog {
     &::backdrop,
     & > .backdrop {
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.5);
     }
 
     &.is-dark:not(.is-rounded)::before {
@@ -39,6 +39,13 @@
       height: calc(100% - 8px);
       width: calc(100% - 8px);
       margin: 0 auto;
+    }
+  }
+
+  #dialog-spotify {
+    &::backdrop,
+    & > .backdrop {
+      background: none;
     }
   }
 }

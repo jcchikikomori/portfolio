@@ -29,10 +29,50 @@ body:not(.crt-enabled) .crt-filter {
   display: none;
 }
 
-// Reduced motion override
+// -----------------------------------------------------------------------------
+// CRT Barrel Distortion Effect
+// Applies convex bulge effect to simulate curved CRT glass tube
+// Only active on tablet and larger screens (>= 768px) for performance
+// -----------------------------------------------------------------------------
+body.crt-enabled {
+  // Apply barrel distortion filter to entire viewport (tablet and up only)
+  filter: url(#crt-barrel);
+
+  // Slight vignette effect to enhance CRT look
+  &::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: var(--z-crt-overlay, 9999);
+    box-shadow: inset 0 0 80px 20px rgba(0, 0, 0, 0.25);
+  }
+}
+
+// Disable barrel distortion on mobile for performance
+// Keep scanlines visible as they're lightweight
+@media (max-width: 767px) {
+  body.crt-enabled {
+    filter: none;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+// Reduced motion override - disable all CRT effects
 @media (prefers-reduced-motion: reduce) {
   .crt-filter {
     display: none !important;
+  }
+
+  body.crt-enabled {
+    filter: none !important;
+
+    &::after {
+      display: none !important;
+    }
   }
 }
 
@@ -41,9 +81,27 @@ body {
   .nes-btn.crt-toggle {
     position: fixed;
     bottom: 2rem;
-    right: 1rem;
+    right: 2rem;
     width: 3.5rem;
     min-width: unset;
     z-index: var(--z-crt-toggle, 10000);
+    transition: bottom 200ms ease;
+
+    @include mq($from: smallest, $until: tablet) {
+      right: 1rem;
+    }
+  }
+
+  // Move CRT toggle up when media is playing to avoid visualizer overlap
+  // Only on tablet and larger screens where visualizer is visible
+  &.media-playing .nes-btn.crt-toggle {
+    bottom: 4.5rem;
+  }
+}
+
+// On mobile, keep toggle button at normal position since visualizer is hidden
+@media (max-width: 767px) {
+  body.media-playing .nes-btn.crt-toggle {
+    bottom: 2rem !important;
   }
 }

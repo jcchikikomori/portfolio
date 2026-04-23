@@ -3,9 +3,11 @@
 
   import CareerDetailsComponent from './CareerDetailsComponent.vue';
   import CareersComponent from './CareersComponent.vue';
+  import OsdComponent from './OsdComponent.vue';
   import ProjectDetailsComponent from './ProjectDetailsComponent.vue';
   import ProjectsComponent from './ProjectsComponent.vue';
   import SpotifyComponent from './SpotifyComponent.vue';
+  import VisualizerComponent from './VisualizerComponent.vue';
   import packageInfo from '../../package.json';
 
   const SLOGAN_INITIALIZED_KEY = 'slogan-initialized';
@@ -14,19 +16,26 @@
     name: 'ProfileComponent',
     components: {
       CareersComponent,
+      OsdComponent,
       ProjectsComponent,
       ProjectDetailsComponent,
       SpotifyComponent,
       CareerDetailsComponent,
+      VisualizerComponent,
     },
     data() {
       return {
         app_version: packageInfo.version,
         currentSlogan: '',
+        isMediaPlaying: false,
       };
     },
     mounted() {
       this.selectSlogan();
+      window.addEventListener('media-playing-change', this.onMediaPlayingChange);
+    },
+    beforeUnmount() {
+      window.removeEventListener('media-playing-change', this.onMediaPlayingChange);
     },
     methods: {
       goToUrl(url) {
@@ -79,6 +88,13 @@
           // localStorage unavailable: fallback to default
           this.currentSlogan = defaultSlogan?.message || slogans[0]?.message || '';
         }
+      },
+      /**
+       * Handle media playing state changes from theme.js
+       * @param {CustomEvent} event - Event with detail.isPlaying boolean
+       */
+      onMediaPlayingChange(event) {
+        this.isMediaPlaying = event.detail.isPlaying;
       },
     },
   };
@@ -159,5 +175,11 @@
       <SpotifyComponent></SpotifyComponent>
       <CareerDetailsComponent></CareerDetailsComponent>
     </section>
+
+    <!-- Visualizer strip at bottom of page -->
+    <VisualizerComponent :is-playing="isMediaPlaying"></VisualizerComponent>
+
+    <!-- CRT OSD indicator -->
+    <OsdComponent :is-playing="isMediaPlaying"></OsdComponent>
   </div>
 </template>

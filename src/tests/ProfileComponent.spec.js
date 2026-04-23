@@ -2,8 +2,14 @@
 import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
+import OsdComponent from '../components/OsdComponent.vue';
 import ProfileComponent from '../components/ProfileComponent.vue';
+import VisualizerComponent from '../components/VisualizerComponent.vue';
 import * as slogansModule from '../data/slogans';
+
+// Expected default slogan text (matches slogans.ts)
+const DEFAULT_SLOGAN =
+  'こんにちは！サイです！よろしく お願いします! Turn on the CRT filter (Star button) for the full experience!';
 
 describe('ProfileComponent.vue', () => {
   let wrapper;
@@ -73,7 +79,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
       expect(localStorageMock.setItem).toHaveBeenCalledWith('slogan-initialized', 'true');
 
       sloganWrapper.unmount();
@@ -105,7 +111,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
 
       sloganWrapper.unmount();
     });
@@ -119,7 +125,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert: Should fallback to default slogan
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
 
       // Cleanup
       spy.mockRestore();
@@ -184,7 +190,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert: Should fallback to first slogan in array
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
 
       // Cleanup
       Object.defineProperty(slogansModule, 'defaultSlogan', {
@@ -247,7 +253,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert: Should fallback to first slogan in array
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
 
       // Cleanup
       Object.defineProperty(slogansModule, 'defaultSlogan', {
@@ -311,7 +317,7 @@ describe('ProfileComponent.vue', () => {
       const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
 
       // Assert: Should fallback to first slogan in array
-      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(sloganWrapper.vm.currentSlogan).toBe(DEFAULT_SLOGAN);
 
       // Cleanup
       spy.mockRestore();
@@ -470,5 +476,223 @@ describe('ProfileComponent.vue', () => {
   it('Projects button has is-success class', () => {
     const projectsBtn = wrapper.findAll('button').find((b) => b.text().includes('Projects'));
     expect(projectsBtn.classes()).toContain('is-success');
+  });
+
+  describe('VisualizerComponent integration', () => {
+    let attachDivVisualizer;
+    let localStorageMock;
+
+    beforeEach(() => {
+      localStorageMock = {
+        getItem: vi.fn().mockReturnValue(null),
+        setItem: vi.fn(),
+        removeItem: vi.fn(),
+      };
+      Object.defineProperty(window, 'localStorage', {
+        value: localStorageMock,
+        writable: true,
+      });
+
+      attachDivVisualizer = document.createElement('div');
+      document.body.appendChild(attachDivVisualizer);
+    });
+
+    afterEach(() => {
+      if (attachDivVisualizer) {
+        attachDivVisualizer.remove();
+      }
+    });
+
+    it('renders VisualizerComponent in the template', () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+      const visualizer = visualizerWrapper.findComponent(VisualizerComponent);
+      expect(visualizer.exists()).toBe(true);
+      visualizerWrapper.unmount();
+    });
+
+    it('isMediaPlaying data starts as false', () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(false);
+      visualizerWrapper.unmount();
+    });
+
+    it('passes isMediaPlaying prop to VisualizerComponent', () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+      const visualizer = visualizerWrapper.findComponent(VisualizerComponent);
+      expect(visualizer.props('isPlaying')).toBe(false);
+      visualizerWrapper.unmount();
+    });
+
+    it('updates isMediaPlaying when media-playing-change event fires with true', async () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: true },
+        })
+      );
+
+      await visualizerWrapper.vm.$nextTick();
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(true);
+
+      visualizerWrapper.unmount();
+    });
+
+    it('updates isMediaPlaying when media-playing-change event fires with false', async () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+
+      // First set to true
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: true },
+        })
+      );
+      await visualizerWrapper.vm.$nextTick();
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(true);
+
+      // Then set to false
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: false },
+        })
+      );
+      await visualizerWrapper.vm.$nextTick();
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(false);
+
+      visualizerWrapper.unmount();
+    });
+
+    it('VisualizerComponent receives updated isPlaying prop', async () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+      const visualizer = visualizerWrapper.findComponent(VisualizerComponent);
+
+      expect(visualizer.props('isPlaying')).toBe(false);
+
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: true },
+        })
+      );
+
+      await visualizerWrapper.vm.$nextTick();
+      expect(visualizer.props('isPlaying')).toBe(true);
+
+      visualizerWrapper.unmount();
+    });
+
+    it('removes event listener on beforeUnmount', () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+
+      // Unmount to trigger beforeUnmount
+      visualizerWrapper.unmount();
+
+      // Dispatch event after unmount - should not throw
+      expect(() => {
+        window.dispatchEvent(
+          new CustomEvent('media-playing-change', {
+            detail: { isPlaying: true },
+          })
+        );
+      }).not.toThrow();
+    });
+
+    it('onMediaPlayingChange method updates isMediaPlaying correctly', () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+
+      // Test with true
+      visualizerWrapper.vm.onMediaPlayingChange({ detail: { isPlaying: true } });
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(true);
+
+      // Test with false
+      visualizerWrapper.vm.onMediaPlayingChange({ detail: { isPlaying: false } });
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(false);
+
+      visualizerWrapper.unmount();
+    });
+  });
+
+  describe('OsdComponent integration', () => {
+    let attachDivOsd;
+    let localStorageMock;
+
+    beforeEach(() => {
+      vi.useFakeTimers();
+      localStorageMock = {
+        getItem: vi.fn().mockReturnValue(null),
+        setItem: vi.fn(),
+        removeItem: vi.fn(),
+      };
+      Object.defineProperty(window, 'localStorage', {
+        value: localStorageMock,
+        writable: true,
+      });
+
+      attachDivOsd = document.createElement('div');
+      document.body.appendChild(attachDivOsd);
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+      if (attachDivOsd) {
+        attachDivOsd.remove();
+      }
+    });
+
+    it('renders OsdComponent in the template', () => {
+      const osdWrapper = mount(ProfileComponent, { attachTo: attachDivOsd });
+      const osd = osdWrapper.findComponent(OsdComponent);
+      expect(osd.exists()).toBe(true);
+      osdWrapper.unmount();
+    });
+
+    it('passes isMediaPlaying prop to OsdComponent', () => {
+      const osdWrapper = mount(ProfileComponent, { attachTo: attachDivOsd });
+      const osd = osdWrapper.findComponent(OsdComponent);
+      expect(osd.props('isPlaying')).toBe(false);
+      osdWrapper.unmount();
+    });
+
+    it('OsdComponent receives updated isPlaying prop when media starts', async () => {
+      const osdWrapper = mount(ProfileComponent, { attachTo: attachDivOsd });
+      const osd = osdWrapper.findComponent(OsdComponent);
+
+      expect(osd.props('isPlaying')).toBe(false);
+
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: true },
+        })
+      );
+
+      await osdWrapper.vm.$nextTick();
+      expect(osd.props('isPlaying')).toBe(true);
+
+      osdWrapper.unmount();
+    });
+
+    it('OsdComponent receives updated isPlaying prop when media stops', async () => {
+      const osdWrapper = mount(ProfileComponent, { attachTo: attachDivOsd });
+      const osd = osdWrapper.findComponent(OsdComponent);
+
+      // Start playing
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: true },
+        })
+      );
+      await osdWrapper.vm.$nextTick();
+      expect(osd.props('isPlaying')).toBe(true);
+
+      // Stop playing
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: false },
+        })
+      );
+      await osdWrapper.vm.$nextTick();
+      expect(osd.props('isPlaying')).toBe(false);
+
+      osdWrapper.unmount();
+    });
   });
 });

@@ -27,15 +27,15 @@ describe('theme.js', () => {
     vi.restoreAllMocks();
   });
 
-  it('darkMode adds dark class to body', () => {
+  it('darkMode adds is-dark class to body', () => {
     darkMode();
-    expect(document.body.classList.contains('dark')).toBe(true);
+    expect(document.body.classList.contains('is-dark')).toBe(true);
   });
 
-  it('normalTheme removes dark class from body', () => {
+  it('normalTheme removes is-dark class from body', () => {
     darkMode();
     normalTheme();
-    expect(document.body.classList.contains('dark')).toBe(false);
+    expect(document.body.classList.contains('is-dark')).toBe(false);
   });
 
   it('darkMode sets logo to white variant', () => {

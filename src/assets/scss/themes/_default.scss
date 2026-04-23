@@ -78,6 +78,11 @@ div.containers {
   .nes-container {
     display: inline-block;
     max-width: 400px;
+
+    @include mq($from: smallest, $until: tablet) {
+      max-width: 100%;
+      padding: 1rem;
+    }
   }
 }
 
@@ -148,7 +153,9 @@ div.containers {
 }
 
 #profile-container {
+  width: fit-content;
   border: none !important;
+  margin: 0 auto;
   padding: 0;
   clip-path: inset(0 0 100% 0);
   animation: nes-open 400ms steps(8) forwards;

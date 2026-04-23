@@ -69,8 +69,7 @@ describe('slogans data module', () => {
   });
 
   it('has expected randomizable pool size', () => {
-    // Based on current data: 6 slogans have enabled=true and randomize=true
     const pool = getRandomizableSlogans();
-    expect(pool.length).toBe(6);
+    expect(pool.length).toBe(7);
   });
 });

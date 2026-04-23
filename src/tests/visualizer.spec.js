@@ -1,10 +1,36 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
+import * as themeModule from '../theme.js';
 import { handlePlayback } from '../visualizer.js';
 
 describe('visualizer.js', () => {
   beforeEach(() => {
     document.body.className = '';
+    vi.clearAllMocks();
+  });
+
+  it('calls setMediaPlaying(true) when AudioContext is running', () => {
+    const setMediaPlayingSpy = vi.spyOn(themeModule, 'setMediaPlaying');
+    window.AudioContext = vi.fn().mockImplementation(() => ({
+      state: 'running',
+      createAnalyser: vi.fn(),
+      createMediaElementSource: vi.fn(),
+    }));
+    handlePlayback();
+    expect(setMediaPlayingSpy).toHaveBeenCalledWith(true);
+    setMediaPlayingSpy.mockRestore();
+  });
+
+  it('calls setMediaPlaying(false) when AudioContext is suspended', () => {
+    const setMediaPlayingSpy = vi.spyOn(themeModule, 'setMediaPlaying');
+    window.AudioContext = vi.fn().mockImplementation(() => ({
+      state: 'suspended',
+      createAnalyser: vi.fn(),
+      createMediaElementSource: vi.fn(),
+    }));
+    handlePlayback();
+    expect(setMediaPlayingSpy).toHaveBeenCalledWith(false);
+    setMediaPlayingSpy.mockRestore();
   });
 
   it('adds breathing-visualizer class when AudioContext is running', () => {
