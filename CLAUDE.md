@@ -42,6 +42,40 @@ CSS-only animation changes do not affect Vitest JS coverage. Verify dialog
 animations in the browser via DevTools (check `animationName`, duration, and
 timing function).
 
+## CSS Conventions
+
+### Dark Mode Targeting
+
+Use `.is-dark` class on the body element for dark mode styles (not `body.dark`):
+
+```scss
+/* correct */
+body.is-dark .element {
+  color: var(--color-text-dark);
+}
+
+/* wrong — not project convention */
+body.dark .element {
+  color: var(--color-text-dark);
+}
+```
+
+This convention is used by Theme.js and should be followed for consistency.
+
+## Vue Component Patterns
+
+### API Consistency Within Components
+
+When modifying existing Vue components, maintain the current API style:
+
+- **ProfileComponent** uses **Options API** — add new features using `data()`,
+  `methods`, `computed`
+- Reserve Composition API with `<script setup>` for new components or explicit
+  migration PRs
+
+**Why:** Mixed API patterns within the same component create cognitive overhead
+and reduce maintainability.
+
 ## Environment Variables (Mandatory)
 
 This project uses Vite. Do not use `process.env` anywhere in source files:
@@ -93,6 +127,20 @@ To achieve 100% coverage on Vue components, test these commonly missed branches:
 3. **Method fallbacks:** Pass unknown/empty values to exercise default cases
 4. **Optional chaining:** Test with null/undefined nested objects
 5. **Event emissions:** Verify with `wrapper.emitted('eventName')`
+6. **Math.random() mocking:** Mock for deterministic testing of randomization
+   logic
+
+Example test structure:
+
+```javascript
+// Mock Math.random for deterministic testing
+const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0.5);
+// Test boundary values
+randomSpy.mockReturnValue(0); // First item
+randomSpy.mockReturnValue(0.99); // Last item
+// Always restore
+randomSpy.mockRestore();
+```
 
 Example test structure:
 
