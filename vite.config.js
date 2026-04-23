@@ -15,8 +15,8 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'John Cyrill Corsanes — Portfolio',
-        short_name: 'JCC Portfolio',
+        name: '@jcchikikomori',
+        short_name: '@jcchikikomori',
         theme_color: '#209cee',
         background_color: '#ffffff',
         display: 'standalone',
