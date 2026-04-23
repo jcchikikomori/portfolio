@@ -49,7 +49,7 @@
         }
 
         const options = {
-          width: '450',
+          width: '100%',
           height: '450',
           uri: 'spotify:playlist:0ibvqi75kCZBSey9DddtTG',
         };
@@ -142,9 +142,16 @@
     }
 
     .spotify-iframe-container {
-      width: 450px;
-      height: 450px;
+      width: 100%;
+      max-width: 450px;
+      height: auto;
+      aspect-ratio: 1 / 1;
       margin: 0 auto;
+
+      // Responsive adjustments for mobile
+      @media (max-width: 480px) {
+        max-width: 100%;
+      }
     }
 
     .dialog-menu {

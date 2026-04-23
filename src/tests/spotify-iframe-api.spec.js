@@ -98,7 +98,7 @@ describe('SpotifyComponent.vue - Iframe API', () => {
     expect(mockCreateController).toHaveBeenCalledWith(
       expect.any(HTMLDivElement),
       expect.objectContaining({
-        width: '450',
+        width: '100%',
         height: '450',
         uri: expect.stringContaining('spotify:'),
       }),
