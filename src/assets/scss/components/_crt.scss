@@ -86,6 +86,10 @@ body {
     min-width: unset;
     z-index: var(--z-crt-toggle, 10000);
     transition: bottom 200ms ease;
+
+    @include mq($from: smallest, $until: tablet) {
+      right: 1rem;
+    }
   }
 
   // Move CRT toggle up when media is playing to avoid visualizer overlap
