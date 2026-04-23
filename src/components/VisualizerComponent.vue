@@ -101,6 +101,16 @@
     pointer-events: none;
     image-rendering: pixelated;
     background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 300ms ease-out,
+      visibility 300ms ease-out;
+
+    &.is-playing {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
   .v-bar {

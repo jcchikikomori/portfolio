@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import ProfileComponent from '../components/ProfileComponent.vue';
+import OsdComponent from '../components/OsdComponent.vue';
 import VisualizerComponent from '../components/VisualizerComponent.vue';
 import * as slogansModule from '../data/slogans';
 
@@ -603,6 +604,91 @@ describe('ProfileComponent.vue', () => {
       expect(visualizerWrapper.vm.isMediaPlaying).toBe(false);
 
       visualizerWrapper.unmount();
+    });
+  });
+
+  describe('OsdComponent integration', () => {
+    let attachDivOsd;
+    let localStorageMock;
+
+    beforeEach(() => {
+      vi.useFakeTimers();
+      localStorageMock = {
+        getItem: vi.fn().mockReturnValue(null),
+        setItem: vi.fn(),
+        removeItem: vi.fn(),
+      };
+      Object.defineProperty(window, 'localStorage', {
+        value: localStorageMock,
+        writable: true,
+      });
+
+      attachDivOsd = document.createElement('div');
+      document.body.appendChild(attachDivOsd);
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+      if (attachDivOsd) {
+        attachDivOsd.remove();
+      }
+    });
+
+    it('renders OsdComponent in the template', () => {
+      const osdWrapper = mount(ProfileComponent, { attachTo: attachDivOsd });
+      const osd = osdWrapper.findComponent(OsdComponent);
+      expect(osd.exists()).toBe(true);
+      osdWrapper.unmount();
+    });
+
+    it('passes isMediaPlaying prop to OsdComponent', () => {
+      const osdWrapper = mount(ProfileComponent, { attachTo: attachDivOsd });
+      const osd = osdWrapper.findComponent(OsdComponent);
+      expect(osd.props('isPlaying')).toBe(false);
+      osdWrapper.unmount();
+    });
+
+    it('OsdComponent receives updated isPlaying prop when media starts', async () => {
+      const osdWrapper = mount(ProfileComponent, { attachTo: attachDivOsd });
+      const osd = osdWrapper.findComponent(OsdComponent);
+
+      expect(osd.props('isPlaying')).toBe(false);
+
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: true },
+        })
+      );
+
+      await osdWrapper.vm.$nextTick();
+      expect(osd.props('isPlaying')).toBe(true);
+
+      osdWrapper.unmount();
+    });
+
+    it('OsdComponent receives updated isPlaying prop when media stops', async () => {
+      const osdWrapper = mount(ProfileComponent, { attachTo: attachDivOsd });
+      const osd = osdWrapper.findComponent(OsdComponent);
+
+      // Start playing
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: true },
+        })
+      );
+      await osdWrapper.vm.$nextTick();
+      expect(osd.props('isPlaying')).toBe(true);
+
+      // Stop playing
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: false },
+        })
+      );
+      await osdWrapper.vm.$nextTick();
+      expect(osd.props('isPlaying')).toBe(false);
+
+      osdWrapper.unmount();
     });
   });
 });

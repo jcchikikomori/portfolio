@@ -87,7 +87,7 @@
 
 // -----------------------------------------------------------------------------
 // CRT Turn-Off Animation
-// Simulates CRT TV power-off with collapse to horizontal line
+// Simulates CRT TV power-off with white flash then collapse to horizontal line
 // -----------------------------------------------------------------------------
 @keyframes crt-turn-off {
   0% {
@@ -96,15 +96,22 @@
     filter: brightness(1);
   }
 
-  40% {
-    opacity: 0.8;
-    transform: scaleY(0.6);
-    filter: brightness(1.5) saturate(0.3);
+  // White flash / static burst
+  15% {
+    opacity: 1;
+    transform: scaleY(1);
+    filter: brightness(4) saturate(0) contrast(3);
   }
 
-  70% {
-    opacity: 0.4;
-    transform: scaleY(0.05);
+  30% {
+    opacity: 1;
+    transform: scaleY(0.8);
+    filter: brightness(2.5) saturate(0.1);
+  }
+
+  60% {
+    opacity: 0.7;
+    transform: scaleY(0.08);
     filter: brightness(2);
   }
 
@@ -127,6 +134,36 @@
 
   50% {
     height: var(--bar-max-h, 20px);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// OSD Flicker Animation
+// Simulates CRT OSD text flicker on appearance
+// -----------------------------------------------------------------------------
+@keyframes osd-flicker {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.7;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 

@@ -48,7 +48,7 @@ body.media-playing::before {
 
 // Media was playing (fade-out state): CRT turn-off animation
 body.media-was-playing::before {
-  animation: crt-turn-off 400ms steps(6) forwards;
+  animation: crt-turn-off 280ms steps(6) forwards;
 }
 
 // Dark mode overlay for synthwave backdrop (using ::after)

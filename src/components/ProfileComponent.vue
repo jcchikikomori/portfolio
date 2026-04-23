@@ -3,6 +3,7 @@
 
   import CareerDetailsComponent from './CareerDetailsComponent.vue';
   import CareersComponent from './CareersComponent.vue';
+  import OsdComponent from './OsdComponent.vue';
   import ProjectDetailsComponent from './ProjectDetailsComponent.vue';
   import ProjectsComponent from './ProjectsComponent.vue';
   import SpotifyComponent from './SpotifyComponent.vue';
@@ -15,6 +16,7 @@
     name: 'ProfileComponent',
     components: {
       CareersComponent,
+      OsdComponent,
       ProjectsComponent,
       ProjectDetailsComponent,
       SpotifyComponent,
@@ -176,5 +178,8 @@
 
     <!-- Visualizer strip at bottom of page -->
     <VisualizerComponent :is-playing="isMediaPlaying"></VisualizerComponent>
+
+    <!-- CRT OSD indicator -->
+    <OsdComponent :is-playing="isMediaPlaying"></OsdComponent>
   </div>
 </template>
