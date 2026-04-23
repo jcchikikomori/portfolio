@@ -17,47 +17,69 @@ body {
     transition: background-image 100ms ease-in-out;
     animation: breathing-visualizer 1100ms infinite ease-in-out;
   }
-
-  // Media playing state - synthwave backdrop
-  &.media-playing {
-    background-image: url("/img/large/synthwave-8493014.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: background-image 500ms ease-in-out;
-    animation: none; // Stop breathing animation when synthwave is active
-  }
 }
 
-// Dark mode overlay for synthwave backdrop
-body.is-dark.media-playing::before {
+// -----------------------------------------------------------------------------
+// Media Playing Backdrop - Animated pseudo-element approach
+// Uses ::before for the synthwave image backdrop with CRT turn-on/off animations
+// Uses ::after for the dark/light mode overlay
+// -----------------------------------------------------------------------------
+
+// Always-present backdrop pseudo-element (hidden by default)
+body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  background-image: url("/img/large/synthwave-8493014.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -2;
+  transform-origin: center center;
+}
+
+// Media playing: CRT turn-on animation
+body.media-playing::before {
+  opacity: 1;
+  animation: crt-turn-on 700ms steps(8) forwards;
+}
+
+// Media was playing (fade-out state): CRT turn-off animation
+body.media-was-playing::before {
+  animation: crt-turn-off 400ms steps(6) forwards;
+}
+
+// Dark mode overlay for synthwave backdrop (using ::after)
+body.is-dark.media-playing::after {
+  content: "";
+  position: fixed;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
   pointer-events: none;
   z-index: -1;
 }
 
-// Light mode overlay for synthwave backdrop
-body:not(.is-dark).media-playing::before {
+// Light mode overlay for synthwave backdrop (using ::after)
+body:not(.is-dark).media-playing::after {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-color: rgba(255, 255, 255, 0.3);
   pointer-events: none;
   z-index: -1;
 }
 
-// Reduced motion support - disable transitions
+// Reduced motion support - disable animations, use instant transition
 @media (prefers-reduced-motion: reduce) {
-  body.media-playing {
-    transition: none;
+  body.media-playing::before {
+    animation: none;
+    opacity: 1;
+  }
+
+  body.media-was-playing::before {
+    animation: none;
+    opacity: 0;
   }
 }

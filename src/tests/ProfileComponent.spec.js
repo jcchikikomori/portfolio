@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import ProfileComponent from '../components/ProfileComponent.vue';
+import VisualizerComponent from '../components/VisualizerComponent.vue';
 import * as slogansModule from '../data/slogans';
 
 describe('ProfileComponent.vue', () => {
@@ -470,5 +471,138 @@ describe('ProfileComponent.vue', () => {
   it('Projects button has is-success class', () => {
     const projectsBtn = wrapper.findAll('button').find((b) => b.text().includes('Projects'));
     expect(projectsBtn.classes()).toContain('is-success');
+  });
+
+  describe('VisualizerComponent integration', () => {
+    let attachDivVisualizer;
+    let localStorageMock;
+
+    beforeEach(() => {
+      localStorageMock = {
+        getItem: vi.fn().mockReturnValue(null),
+        setItem: vi.fn(),
+        removeItem: vi.fn(),
+      };
+      Object.defineProperty(window, 'localStorage', {
+        value: localStorageMock,
+        writable: true,
+      });
+
+      attachDivVisualizer = document.createElement('div');
+      document.body.appendChild(attachDivVisualizer);
+    });
+
+    afterEach(() => {
+      if (attachDivVisualizer) {
+        attachDivVisualizer.remove();
+      }
+    });
+
+    it('renders VisualizerComponent in the template', () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+      const visualizer = visualizerWrapper.findComponent(VisualizerComponent);
+      expect(visualizer.exists()).toBe(true);
+      visualizerWrapper.unmount();
+    });
+
+    it('isMediaPlaying data starts as false', () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(false);
+      visualizerWrapper.unmount();
+    });
+
+    it('passes isMediaPlaying prop to VisualizerComponent', () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+      const visualizer = visualizerWrapper.findComponent(VisualizerComponent);
+      expect(visualizer.props('isPlaying')).toBe(false);
+      visualizerWrapper.unmount();
+    });
+
+    it('updates isMediaPlaying when media-playing-change event fires with true', async () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: true },
+        })
+      );
+
+      await visualizerWrapper.vm.$nextTick();
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(true);
+
+      visualizerWrapper.unmount();
+    });
+
+    it('updates isMediaPlaying when media-playing-change event fires with false', async () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+
+      // First set to true
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: true },
+        })
+      );
+      await visualizerWrapper.vm.$nextTick();
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(true);
+
+      // Then set to false
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: false },
+        })
+      );
+      await visualizerWrapper.vm.$nextTick();
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(false);
+
+      visualizerWrapper.unmount();
+    });
+
+    it('VisualizerComponent receives updated isPlaying prop', async () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+      const visualizer = visualizerWrapper.findComponent(VisualizerComponent);
+
+      expect(visualizer.props('isPlaying')).toBe(false);
+
+      window.dispatchEvent(
+        new CustomEvent('media-playing-change', {
+          detail: { isPlaying: true },
+        })
+      );
+
+      await visualizerWrapper.vm.$nextTick();
+      expect(visualizer.props('isPlaying')).toBe(true);
+
+      visualizerWrapper.unmount();
+    });
+
+    it('removes event listener on beforeUnmount', () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+
+      // Unmount to trigger beforeUnmount
+      visualizerWrapper.unmount();
+
+      // Dispatch event after unmount - should not throw
+      expect(() => {
+        window.dispatchEvent(
+          new CustomEvent('media-playing-change', {
+            detail: { isPlaying: true },
+          })
+        );
+      }).not.toThrow();
+    });
+
+    it('onMediaPlayingChange method updates isMediaPlaying correctly', () => {
+      const visualizerWrapper = mount(ProfileComponent, { attachTo: attachDivVisualizer });
+
+      // Test with true
+      visualizerWrapper.vm.onMediaPlayingChange({ detail: { isPlaying: true } });
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(true);
+
+      // Test with false
+      visualizerWrapper.vm.onMediaPlayingChange({ detail: { isPlaying: false } });
+      expect(visualizerWrapper.vm.isMediaPlaying).toBe(false);
+
+      visualizerWrapper.unmount();
+    });
   });
 });

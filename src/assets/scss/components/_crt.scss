@@ -45,5 +45,11 @@ body {
     width: 3.5rem;
     min-width: unset;
     z-index: var(--z-crt-toggle, 10000);
+    transition: bottom 200ms ease;
+  }
+
+  // Move CRT toggle up when media is playing to avoid visualizer overlap
+  &.media-playing .nes-btn.crt-toggle {
+    bottom: 4.5rem;
   }
 }
