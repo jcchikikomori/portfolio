@@ -46,7 +46,7 @@ timing function).
 
 ### Dark Mode Targeting
 
-Use `.is-dark` class on the body element for dark mode styles (not `body.dark`):
+Use `.is-dark` class on the body element for dark mode styles (old implementation: `body.dark`):
 
 ```scss
 /* correct */

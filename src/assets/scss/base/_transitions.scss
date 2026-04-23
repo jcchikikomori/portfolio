@@ -6,12 +6,58 @@ body,
 
 body {
   background-color: #fff;
-  &.dark {
+
+  // KNOWN ISSUE FIX: Changed body.dark to body.is-dark per project convention
+  &.is-dark {
     background-color: #212529;
   }
+
   &.breathing-visualizer {
     background-image: linear-gradient(0deg, #4b4f18 0%, #212529 11%, #212529 28%, #212529 100%);
     transition: background-image 100ms ease-in-out;
     animation: breathing-visualizer 1100ms infinite ease-in-out;
+  }
+
+  // Media playing state - synthwave backdrop
+  &.media-playing {
+    background-image: url("/img/large/synthwave-8493014.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 500ms ease-in-out;
+    animation: none; // Stop breathing animation when synthwave is active
+  }
+}
+
+// Dark mode overlay for synthwave backdrop
+body.is-dark.media-playing::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  z-index: -1;
+}
+
+// Light mode overlay for synthwave backdrop
+body:not(.is-dark).media-playing::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  z-index: -1;
+}
+
+// Reduced motion support - disable transitions
+@media (prefers-reduced-motion: reduce) {
+  body.media-playing {
+    transition: none;
   }
 }

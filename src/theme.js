@@ -1,5 +1,5 @@
 export const darkMode = () => {
-  document.body.classList.add('dark');
+  document.body.classList.add('is-dark');
   const logo = document.getElementById('profile-logo');
   if (logo) {
     logo.setAttribute('src', 'img/jcc_logo_w.png');
@@ -9,7 +9,7 @@ export const darkMode = () => {
 };
 
 export const normalTheme = () => {
-  document.body.classList.remove('dark');
+  document.body.classList.remove('is-dark');
   const logo = document.getElementById('profile-logo');
   if (logo) {
     logo.setAttribute('src', 'img/jcc_logo.png');
@@ -53,4 +53,35 @@ export const initCrt = () => {
   } else {
     disableCrt();
   }
+};
+
+/**
+ * Set media playing state by adding/removing 'media-playing' class
+ * @param {boolean} isPlaying - true to add class, false to remove
+ */
+export const setMediaPlaying = (isPlaying) => {
+  // Add null check for document.body (SSR/test safety)
+  if (!document.body) {
+    return;
+  }
+  if (isPlaying) {
+    document.body.classList.add('media-playing');
+  } else {
+    document.body.classList.remove('media-playing');
+  }
+};
+
+/**
+ * Check if media is currently playing
+ * @returns {boolean} true if 'media-playing' class is present
+ */
+export const isMediaPlaying = () => {
+  return document.body ? document.body.classList.contains('media-playing') : false;
+};
+
+/**
+ * Toggle media playing state
+ */
+export const toggleMediaPlaying = () => {
+  setMediaPlaying(!isMediaPlaying());
 };
