@@ -137,7 +137,7 @@
 
           <br /><br />
           <p>
-            <span style="font-size: 9px">
+            <span class="portfolio-version is-uppercase" style="font-size: 9px">
               Portfolio Build
               <a
                 href="#"
@@ -150,7 +150,9 @@
             </span>
           </p>
           <p>
-            <span style="font-size: 9px"> Powered by VueJS </span>
+            <span class="portfolio-build is-uppercase" style="font-size: 9px">
+              Powered by VueJS
+            </span>
           </p>
         </div>
       </div>
