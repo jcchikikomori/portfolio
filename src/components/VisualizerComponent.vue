@@ -158,4 +158,11 @@
       height: var(--bar-max-h, 20px);
     }
   }
+
+  // Hide visualizer on mobile for performance (tablet and up only)
+  @media (max-width: 767px) {
+    .visualizer-strip {
+      display: none !important;
+    }
+  }
 </style>

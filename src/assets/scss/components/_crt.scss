@@ -32,9 +32,10 @@ body:not(.crt-enabled) .crt-filter {
 // -----------------------------------------------------------------------------
 // CRT Barrel Distortion Effect
 // Applies convex bulge effect to simulate curved CRT glass tube
+// Only active on tablet and larger screens (>= 768px) for performance
 // -----------------------------------------------------------------------------
 body.crt-enabled {
-  // Apply barrel distortion filter to entire viewport
+  // Apply barrel distortion filter to entire viewport (tablet and up only)
   filter: url(#crt-barrel);
 
   // Slight vignette effect to enhance CRT look
@@ -45,6 +46,18 @@ body.crt-enabled {
     pointer-events: none;
     z-index: var(--z-crt-overlay, 9999);
     box-shadow: inset 0 0 80px 20px rgba(0, 0, 0, 0.25);
+  }
+}
+
+// Disable barrel distortion on mobile for performance
+// Keep scanlines visible as they're lightweight
+@media (max-width: 767px) {
+  body.crt-enabled {
+    filter: none;
+
+    &::after {
+      display: none;
+    }
   }
 }
 
@@ -76,7 +89,15 @@ body {
   }
 
   // Move CRT toggle up when media is playing to avoid visualizer overlap
+  // Only on tablet and larger screens where visualizer is visible
   &.media-playing .nes-btn.crt-toggle {
     bottom: 4.5rem;
+  }
+}
+
+// On mobile, keep toggle button at normal position since visualizer is hidden
+@media (max-width: 767px) {
+  body.media-playing .nes-btn.crt-toggle {
+    bottom: 2rem !important;
   }
 }
