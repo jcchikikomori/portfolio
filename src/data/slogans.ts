@@ -46,7 +46,7 @@ export const slogans: Slogan[] = [
     default: false,
   },
   {
-    message: 'Get the satellite, if you want to see me. Talking on the net, I know the way you like it. Get your credit card \'cause I need no money. All I wanna get is you, baby',
+    message: 'The Lazy Geek',
     randomize: true,
     enabled: true,
     default: false,

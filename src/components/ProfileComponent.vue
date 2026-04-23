@@ -96,7 +96,6 @@
         <div class="nes-container is-centered">
           <img id="profile-logo" src="/img/jcc_logo.png" width="200" alt="My Logo" />
           <br /><br />
-          <!-- <p>The Lazy Geek</p> -->
           <div class="slogan-container">
             {{ currentSlogan }}
           </div>
@@ -112,7 +111,7 @@
               Projects
             </button>
             <button
-              class="nes-btn is-warning nes-pointer is-block"
+              class="nes-btn is-primary nes-pointer is-block"
               @click="goToUrl('https://jcchikikomori.github.io/blog')"
             >
               Blog

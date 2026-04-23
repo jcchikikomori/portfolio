@@ -1,13 +1,31 @@
-<style lang="scss">
-  @import './assets/scss/main';
+<script>
+  import ProfileComponent from './components/ProfileComponent.vue';
+  import { toggleCrt, initCrt } from './theme';
 
-  .app {
-    .-content {
-      padding-top: 15px;
-      padding-bottom: 15px;
-    }
-  }
-</style>
+  export default {
+    name: 'App',
+    components: {
+      ProfileComponent,
+    },
+    data() {
+      return {
+        crtEnabled: false,
+      };
+    },
+    mounted() {
+      initCrt();
+      // Read initial state from localStorage
+      const savedState = localStorage.getItem('crt-enabled');
+      this.crtEnabled = savedState === 'true';
+    },
+    methods: {
+      toggleCrt() {
+        toggleCrt();
+        this.crtEnabled = document.body.classList.contains('crt-enabled');
+      },
+    },
+  };
+</script>
 
 <template>
   <div id="app" class="app container">
@@ -20,40 +38,22 @@
     <button
       class="nes-btn is-default crt-toggle nes-pointer"
       :class="{ 'is-disabled': !crtEnabled }"
-      @click="toggleCrt"
       :aria-label="crtEnabled ? 'Disable CRT filter' : 'Enable CRT filter'"
       :title="crtEnabled ? 'Disable CRT filter' : 'Enable CRT filter'"
+      @click="toggleCrt"
     >
       <i class="nes-icon star" :class="{ 'is-empty': !crtEnabled }"></i>
     </button>
   </div>
 </template>
 
-<script>
-  import ProfileComponent from './components/ProfileComponent.vue';
-  import { toggleCrt, initCrt } from './theme.js';
+<style lang="scss">
+  @import './assets/scss/main';
 
-  export default {
-    name: 'App',
-    components: {
-      ProfileComponent,
-    },
-    data() {
-      return {
-        crtEnabled: false,
-      };
-    },
-    methods: {
-      toggleCrt() {
-        toggleCrt();
-        this.crtEnabled = document.body.classList.contains('crt-enabled');
-      },
-    },
-    mounted() {
-      initCrt();
-      // Read initial state from localStorage
-      const savedState = localStorage.getItem('crt-enabled');
-      this.crtEnabled = savedState === 'true';
-    },
-  };
-</script>
+  .app {
+    .-content {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+  }
+</style>
