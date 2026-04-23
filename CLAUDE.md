@@ -46,7 +46,8 @@ timing function).
 
 ### Dark Mode Targeting
 
-Use `.is-dark` class on the body element for dark mode styles (old implementation: `body.dark`):
+Use `.is-dark` class on the body element for dark mode styles (old
+implementation: `body.dark`):
 
 ```scss
 /* correct */
@@ -194,3 +195,20 @@ coverage before shipping.
 - Never run `git commit` or `git push` — commits require GPG signing by the user
 - Only stage changes with `git add`; user commits manually in their own terminal
 - Branch flow: feature/\* → develop → master
+
+## UI Testing (Manual Verification Required)
+
+Manual UI verification in a browser requires the user to start the dev server
+manually. **DO NOT** attempt to run `pnpm run dev` or start servers inside an
+LLM session.
+
+**Correct workflow:**
+
+1. User runs `pnpm run dev` in their own terminal
+2. User provides the local URL (e.g., <http://localhost:5173>) to the agent
+3. Agent uses DevTools MCP or other browser tools to inspect the running
+   application
+
+**Why:** Dev servers require persistent processes that cannot be maintained
+across LLM tool invocations. Manual server management by the user ensures
+consistent, reliable UI testing.
