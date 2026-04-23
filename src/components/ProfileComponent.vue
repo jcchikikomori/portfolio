@@ -1,10 +1,14 @@
 <script>
+  import { slogans, defaultSlogan, getRandomizableSlogans } from '@/data/slogans';
+
   import CareerDetailsComponent from './CareerDetailsComponent.vue';
   import CareersComponent from './CareersComponent.vue';
   import ProjectDetailsComponent from './ProjectDetailsComponent.vue';
   import ProjectsComponent from './ProjectsComponent.vue';
   import SpotifyComponent from './SpotifyComponent.vue';
   import packageInfo from '../../package.json';
+
+  const SLOGAN_INITIALIZED_KEY = 'slogan-initialized';
 
   export default {
     name: 'ProfileComponent',
@@ -18,7 +22,11 @@
     data() {
       return {
         app_version: packageInfo.version,
+        currentSlogan: '',
       };
+    },
+    mounted() {
+      this.selectSlogan();
     },
     methods: {
       goToUrl(url) {
@@ -47,6 +55,31 @@
         projectsDialog.showModal();
         projectsDialog.scrollTo({ top: 0, behavior: 'smooth' });
       },
+      selectSlogan() {
+        try {
+          const isReturning = localStorage.getItem(SLOGAN_INITIALIZED_KEY);
+
+          if (!isReturning) {
+            // First visit: show default slogan
+            this.currentSlogan = defaultSlogan?.message || slogans[0]?.message || '';
+            localStorage.setItem(SLOGAN_INITIALIZED_KEY, 'true');
+          } else {
+            // Returning visit: show random slogan from pool
+            const pool = getRandomizableSlogans();
+            if (pool.length > 0) {
+              const randomIndex = Math.floor(Math.random() * pool.length);
+              // eslint-disable-next-line security/detect-object-injection
+              this.currentSlogan = pool[randomIndex].message;
+            } else {
+              // Fallback if pool is empty
+              this.currentSlogan = defaultSlogan?.message || slogans[0]?.message || '';
+            }
+          }
+        } catch (e) {
+          // localStorage unavailable: fallback to default
+          this.currentSlogan = defaultSlogan?.message || slogans[0]?.message || '';
+        }
+      },
     },
   };
 </script>
@@ -64,10 +97,9 @@
           <img id="profile-logo" src="/img/jcc_logo.png" width="200" alt="My Logo" />
           <br /><br />
           <!-- <p>The Lazy Geek</p> -->
-          <ul class="profile-list">
-            <li>A Lazy Geek with</li>
-            <li>Back Pains & Music Addiction</li>
-          </ul>
+          <div class="slogan-container">
+            {{ currentSlogan }}
+          </div>
 
           <div class="btn-group-vertical btn-block">
             <button class="nes-btn is-default nes-pointer is-block" @click="showSpotify">
@@ -105,7 +137,7 @@
 
           <br /><br />
           <p>
-            <span style="font-size: 9px">
+            <span class="portfolio-version is-uppercase" style="font-size: 9px">
               Portfolio Build
               <a
                 href="#"
@@ -118,7 +150,9 @@
             </span>
           </p>
           <p>
-            <span style="font-size: 9px"> Powered by VueJS </span>
+            <span class="portfolio-build is-uppercase" style="font-size: 9px">
+              Powered by VueJS
+            </span>
           </p>
         </div>
       </div>

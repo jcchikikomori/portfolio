@@ -4,7 +4,32 @@
 // -----------------------------------------------------------------------------
 
 body {
-  font-family: "Press Start 2P", sans-serif;
+  font-family: var(--font-family-base);
+
+  // Specific font for other elements.
+  h1,
+  .title,
+  .subtitle,
+  .slogan-container {
+    font-family: var(--font-family-title);
+    line-height: normal;
+  }
+
+  .title,
+  .slogan-container {
+    text-transform: uppercase;
+    margin: -1rem 0 1rem 0;
+  }
+
+  .badge,
+  .badge .badge-label,
+  .career-title,
+  .career-details-trigger,
+  .is-uppercase,
+  .project-name,
+  .project-details-btn {
+    text-transform: uppercase;
+  }
 }
 
 a {

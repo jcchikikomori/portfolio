@@ -1,7 +1,9 @@
+/* eslint-disable no-import-assign */
 import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import ProfileComponent from '../components/ProfileComponent.vue';
+import * as slogansModule from '../data/slogans';
 
 describe('ProfileComponent.vue', () => {
   let wrapper;
@@ -34,6 +36,330 @@ describe('ProfileComponent.vue', () => {
   afterEach(() => {
     wrapper.unmount();
     attachDiv.remove();
+  });
+
+  describe('slogan display', () => {
+    let localStorageMock;
+    let attachDivSlogan;
+
+    beforeEach(() => {
+      // Setup localStorage mock
+      localStorageMock = {
+        getItem: vi.fn(),
+        setItem: vi.fn(),
+        removeItem: vi.fn(),
+      };
+      Object.defineProperty(window, 'localStorage', {
+        value: localStorageMock,
+        writable: true,
+      });
+
+      attachDivSlogan = document.createElement('div');
+      document.body.appendChild(attachDivSlogan);
+    });
+
+    afterEach(() => {
+      vi.restoreAllMocks();
+      if (attachDivSlogan) {
+        attachDivSlogan.remove();
+      }
+    });
+
+    it('should display default slogan on first visit', () => {
+      // Arrange: no localStorage entry
+      localStorageMock.getItem.mockReturnValue(null);
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert
+      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('slogan-initialized', 'true');
+
+      sloganWrapper.unmount();
+    });
+
+    it('should display random slogan on returning visit', () => {
+      // Arrange: localStorage indicates returning visitor
+      localStorageMock.getItem.mockReturnValue('true');
+      const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0);
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert
+      expect(sloganWrapper.vm.currentSlogan).toBeDefined();
+      expect(sloganWrapper.vm.currentSlogan.length).toBeGreaterThan(0);
+      randomSpy.mockRestore();
+
+      sloganWrapper.unmount();
+    });
+
+    it('should fallback to default when localStorage is unavailable', () => {
+      // Arrange: localStorage throws error
+      localStorageMock.getItem.mockImplementation(() => {
+        throw new Error('localStorage unavailable');
+      });
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert
+      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+
+      sloganWrapper.unmount();
+    });
+
+    it('should fallback to default when randomization pool is empty', () => {
+      // Arrange: mock getRandomizableSlogans to return empty array
+      localStorageMock.getItem.mockReturnValue('true');
+      const spy = vi.spyOn(slogansModule, 'getRandomizableSlogans').mockReturnValue([]);
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert: Should fallback to default slogan
+      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+
+      // Cleanup
+      spy.mockRestore();
+      sloganWrapper.unmount();
+    });
+
+    it('should render slogan-container in template', async () => {
+      localStorageMock.getItem.mockReturnValue(null);
+
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Wait for Vue to render
+      await sloganWrapper.vm.$nextTick();
+
+      const container = sloganWrapper.find('.slogan-container');
+      expect(container.exists()).toBe(true);
+      expect(container.text()).toContain('こんにちは');
+
+      sloganWrapper.unmount();
+    });
+
+    it('should use Math.random to select from pool on returning visit', () => {
+      // Arrange: localStorage indicates returning visitor
+      localStorageMock.getItem.mockReturnValue('true');
+      const randomSpy = vi.spyOn(Math, 'random').mockReturnValue(0.5);
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert: Math.random should have been called to pick from pool
+      expect(randomSpy).toHaveBeenCalled();
+      expect(sloganWrapper.vm.currentSlogan).toBeDefined();
+
+      randomSpy.mockRestore();
+      sloganWrapper.unmount();
+    });
+
+    it('should not call localStorage.setItem on returning visit', () => {
+      // Arrange: localStorage indicates returning visitor
+      localStorageMock.getItem.mockReturnValue('true');
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert: setItem should not be called for returning visitors
+      expect(localStorageMock.setItem).not.toHaveBeenCalledWith('slogan-initialized', 'true');
+
+      sloganWrapper.unmount();
+    });
+
+    it('should fallback to slogans[0] when defaultSlogan is null on first visit', () => {
+      // Arrange: mock defaultSlogan to be null
+      localStorageMock.getItem.mockReturnValue(null);
+      const originalDefaultSlogan = slogansModule.defaultSlogan;
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: null,
+        writable: true,
+        configurable: true,
+      });
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert: Should fallback to first slogan in array
+      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+
+      // Cleanup
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: originalDefaultSlogan,
+        writable: true,
+        configurable: true,
+      });
+      sloganWrapper.unmount();
+    });
+
+    it('should fallback to empty string when both defaultSlogan and slogans[0] are null', () => {
+      // Arrange: mock both defaultSlogan and slogans to be null/empty
+      localStorageMock.getItem.mockReturnValue(null);
+      const originalDefaultSlogan = slogansModule.defaultSlogan;
+      const originalSlogans = slogansModule.slogans;
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: null,
+        writable: true,
+        configurable: true,
+      });
+      Object.defineProperty(slogansModule, 'slogans', {
+        value: [],
+        writable: true,
+        configurable: true,
+      });
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert: Should fallback to empty string
+      expect(sloganWrapper.vm.currentSlogan).toBe('');
+
+      // Cleanup
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: originalDefaultSlogan,
+        writable: true,
+        configurable: true,
+      });
+      Object.defineProperty(slogansModule, 'slogans', {
+        value: originalSlogans,
+        writable: true,
+        configurable: true,
+      });
+      sloganWrapper.unmount();
+    });
+
+    it('should fallback to slogans[0] when defaultSlogan is null in catch block', () => {
+      // Arrange: localStorage throws and defaultSlogan is null
+      localStorageMock.getItem.mockImplementation(() => {
+        throw new Error('localStorage unavailable');
+      });
+      const originalDefaultSlogan = slogansModule.defaultSlogan;
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: null,
+        writable: true,
+        configurable: true,
+      });
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert: Should fallback to first slogan in array
+      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+
+      // Cleanup
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: originalDefaultSlogan,
+        writable: true,
+        configurable: true,
+      });
+      sloganWrapper.unmount();
+    });
+
+    it('should fallback to empty string when both defaultSlogan and slogans are null in catch block', () => {
+      // Arrange: localStorage throws, defaultSlogan is null, and slogans is empty
+      localStorageMock.getItem.mockImplementation(() => {
+        throw new Error('localStorage unavailable');
+      });
+      const originalDefaultSlogan = slogansModule.defaultSlogan;
+      const originalSlogans = slogansModule.slogans;
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: null,
+        writable: true,
+        configurable: true,
+      });
+      Object.defineProperty(slogansModule, 'slogans', {
+        value: [],
+        writable: true,
+        configurable: true,
+      });
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert: Should fallback to empty string
+      expect(sloganWrapper.vm.currentSlogan).toBe('');
+
+      // Cleanup
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: originalDefaultSlogan,
+        writable: true,
+        configurable: true,
+      });
+      Object.defineProperty(slogansModule, 'slogans', {
+        value: originalSlogans,
+        writable: true,
+        configurable: true,
+      });
+      sloganWrapper.unmount();
+    });
+
+    it('should fallback to slogans[0] when defaultSlogan is null and pool is empty', () => {
+      // Arrange: returning visitor, pool is empty, defaultSlogan is null
+      localStorageMock.getItem.mockReturnValue('true');
+      const originalDefaultSlogan = slogansModule.defaultSlogan;
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: null,
+        writable: true,
+        configurable: true,
+      });
+      const spy = vi.spyOn(slogansModule, 'getRandomizableSlogans').mockReturnValue([]);
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert: Should fallback to first slogan in array
+      expect(sloganWrapper.vm.currentSlogan).toBe('こんにちは！サイです！よろしく お願いします!');
+
+      // Cleanup
+      spy.mockRestore();
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: originalDefaultSlogan,
+        writable: true,
+        configurable: true,
+      });
+      sloganWrapper.unmount();
+    });
+
+    it('should fallback to empty string when defaultSlogan is null, slogans is empty, and pool is empty', () => {
+      // Arrange: returning visitor, pool is empty, defaultSlogan is null, slogans is empty
+      localStorageMock.getItem.mockReturnValue('true');
+      const originalDefaultSlogan = slogansModule.defaultSlogan;
+      const originalSlogans = slogansModule.slogans;
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: null,
+        writable: true,
+        configurable: true,
+      });
+      Object.defineProperty(slogansModule, 'slogans', {
+        value: [],
+        writable: true,
+        configurable: true,
+      });
+      const spy = vi.spyOn(slogansModule, 'getRandomizableSlogans').mockReturnValue([]);
+
+      // Act
+      const sloganWrapper = mount(ProfileComponent, { attachTo: attachDivSlogan });
+
+      // Assert: Should fallback to empty string
+      expect(sloganWrapper.vm.currentSlogan).toBe('');
+
+      // Cleanup
+      spy.mockRestore();
+      Object.defineProperty(slogansModule, 'defaultSlogan', {
+        value: originalDefaultSlogan,
+        writable: true,
+        configurable: true,
+      });
+      Object.defineProperty(slogansModule, 'slogans', {
+        value: originalSlogans,
+        writable: true,
+        configurable: true,
+      });
+      sloganWrapper.unmount();
+    });
   });
 
   it('showCareers does nothing when dialog element is absent', async () => {
