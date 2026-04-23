@@ -88,10 +88,7 @@
   <!-- MAIN CONTAINER -->
   <div id="main-container" class="main-screen">
     <!-- MAIN INFO -->
-    <section
-      id="profile-container"
-      class="nes-container animate__animated animate__fadeIn animate__faster"
-    >
+    <section id="profile-container" class="nes-container">
       <div class="containers">
         <div class="nes-container is-centered">
           <img id="profile-logo" src="/img/jcc_logo.png" width="200" alt="My Logo" />

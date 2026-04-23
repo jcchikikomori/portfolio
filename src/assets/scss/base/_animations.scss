@@ -1,3 +1,13 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes nes-open {
   from {
     clip-path: inset(0 0 100% 0);
@@ -6,10 +16,6 @@
   to {
     clip-path: inset(0 0 0% 0);
   }
-}
-
-dialog.nes-dialog[open] {
-  animation: nes-open 300ms steps(8) forwards;
 }
 
 @keyframes breathing-visualizer {
@@ -36,4 +42,9 @@ dialog.nes-dialog[open] {
   100% {
     background-image: inherit;
   }
+}
+
+// TRIGGERS
+dialog.nes-dialog[open] {
+  animation: nes-open 300ms steps(8) forwards;
 }
