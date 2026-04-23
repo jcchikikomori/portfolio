@@ -6,14 +6,24 @@
 body {
   font-family: var(--font-family-base);
 
+  // Specific font for other elements.
   h1,
   .title,
   .subtitle,
   .slogan-container {
     font-family: var(--font-family-title);
     line-height: normal;
-    top: -1rem;
-    position: relative;
+  }
+
+  .title {
+    margin: -1rem 0 1rem 0;
+  }
+
+  .badge,
+  .badge .badge-label,
+  .career-details-trigger,
+  .project-details-btn {
+    text-transform: uppercase;
   }
 }
 
