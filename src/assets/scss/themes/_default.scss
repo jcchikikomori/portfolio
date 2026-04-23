@@ -79,8 +79,9 @@ div.containers {
     display: inline-block;
     max-width: 400px;
 
-    @include mq($from: smallest, $until: mobile) {
-      max-width: 320px;
+    @include mq($from: smallest, $until: tablet) {
+      max-width: 100%;
+      padding: 1rem;
     }
   }
 }
