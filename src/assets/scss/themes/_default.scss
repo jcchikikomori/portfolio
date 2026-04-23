@@ -4,7 +4,17 @@
 // -----------------------------------------------------------------------------
 
 body {
-  font-family: "Press Start 2P", sans-serif;
+  font-family: var(--font-family-base);
+
+  h1,
+  .title,
+  .subtitle,
+  .slogan-container {
+    font-family: var(--font-family-title);
+    line-height: normal;
+    top: -1rem;
+    position: relative;
+  }
 }
 
 a {

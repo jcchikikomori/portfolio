@@ -81,3 +81,21 @@ export interface Project {
 
 /** Filter options for project list */
 export type ProjectFilter = 'all' | 'corporate' | 'personal';
+
+/**
+ * Slogan data structure for randomizer feature
+ * @property message - The slogan text content
+ * @property randomize - Whether this slogan can appear in random selection
+ * @property enabled - Whether this slogan is active/displayable
+ * @property default - Whether this is the default slogan (exactly one must be true)
+ */
+export interface Slogan {
+  /** The slogan text content */
+  message: string;
+  /** Whether this slogan can appear in random selection */
+  randomize: boolean;
+  /** Whether this slogan is active/displayable */
+  enabled: boolean;
+  /** Whether this is the default slogan (exactly one must be true) */
+  default: boolean;
+}

@@ -9,7 +9,8 @@
 // 3. Base stuff
 @import "base/reset";
 @import "base/root"; // CSS custom properties
-@import "base/base", "base/fonts", "base/typography", "base/helpers";
+@import "base/base", "base/typography", "base/helpers";
+@import "base/fonts/baraduke";
 @import "base/animations", "base/transitions";
 
 // 4. Layout-related sections
