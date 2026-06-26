@@ -1,5 +1,6 @@
 <script>
   import { careers } from '../data/careers';
+  import { assetUrl } from '../utils/assetUrl';
 
   export default {
     name: 'CareerDetailsComponent',
@@ -17,12 +18,13 @@
       window.removeEventListener('open-career-details', this.handleOpenCareerDetails);
     },
     methods: {
+      assetUrl,
       isDark() {
         const dialog = document.getElementById('dialog-career-details');
         return Boolean(dialog?.classList.contains('is-dark'));
       },
       logoSrc(career) {
-        return this.isDark() && career.logoDark ? career.logoDark : career.logo;
+        return assetUrl(this.isDark() && career.logoDark ? career.logoDark : career.logo);
       },
       goToUrl(url) {
         window.open(url, '_blank', 'noopener,noreferrer');
@@ -71,7 +73,7 @@
       <!-- Media Section -->
       <div class="career-details-media">
         <img
-          :src="logoSrc(selectedCareer) || '/img/projects/placeholder.png'"
+          :src="logoSrc(selectedCareer) || assetUrl('/img/projects/placeholder.png')"
           :alt="selectedCareer.company + ' logo'"
           class="career-screenshot"
         />

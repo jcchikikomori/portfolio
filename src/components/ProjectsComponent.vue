@@ -1,5 +1,6 @@
 <script>
   import { projects } from '../data/projects';
+  import { assetUrl } from '../utils/assetUrl';
 
   export default {
     name: 'ProjectsComponent',
@@ -20,12 +21,13 @@
       },
     },
     methods: {
+      assetUrl,
       isDark() {
         const dialog = document.getElementById('dialog-projects');
         return Boolean(dialog?.classList.contains('is-dark'));
       },
       logoSrc(project) {
-        return this.isDark() && project.logoDark ? project.logoDark : project.logo;
+        return assetUrl(this.isDark() && project.logoDark ? project.logoDark : project.logo);
       },
       onLogoError(projectId) {
         // eslint-disable-next-line security/detect-object-injection
