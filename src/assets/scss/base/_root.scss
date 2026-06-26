@@ -1,0 +1,182 @@
+// -----------------------------------------------------------------------------
+// Root CSS Custom Properties for Theming
+// This file defines all CSS variables for consistent theming across the app
+// -----------------------------------------------------------------------------
+
+:root {
+  // -----------------------------------------------------------------------------
+  // Color Palette
+  // -----------------------------------------------------------------------------
+
+  // Primary Colors
+  --color-primary: #212529;
+  --color-primary-light: #4d565f;
+  --color-primary-dark: #000;
+
+  // Secondary Colors
+  --color-secondary: #6c757d;
+  --color-secondary-light: #adb5bd;
+  --color-secondary-dark: #495057;
+
+  // Background Colors
+  --color-bg: #fff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-tertiary: #e9ecef;
+
+  // Text Colors
+  --color-text: #212529;
+  --color-text-secondary: #6c757d;
+  --color-text-muted: #000;
+  --color-text-inverse: #fff;
+
+  // Link Colors
+  --color-link: #555;
+  --color-link-hover: #555;
+  --color-link-active: #555;
+
+  // Border Colors
+  --color-border: rgba(0, 0, 0, 0.125);
+  --color-border-solid: #212529;
+  --color-border-light: #fff;
+
+  // Accent Colors
+  --color-accent: #e3e3e4;
+  --color-accent-dark: #4d565f;
+
+  // -----------------------------------------------------------------------------
+  // Typography
+  // -----------------------------------------------------------------------------
+
+  // Font Family
+  --font-family-base: "Press Start 2P", sans-serif;
+  // https://gist.github.com/prantlf/fbd12acc69a022edd589dea48dafe3f8
+  --font-family-title:
+    "Baraduke", "Press Start 2P", "Hiragino Kaku Gothic Pro", Osaka, メイリオ, Meiryo,
+    "ＭＳ Ｐゴシック", "MS PGothic", "ＭＳ ゴシック", "MS Gothic", "Noto Sans CJK JP", TakaoPGothic,
+    monospace;
+  --font-family-mono: monospace;
+
+  // Font Sizes
+  --font-size-xs: 0.5rem;
+  --font-size-sm: 0.65rem;
+  --font-size-base: 0.8rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+
+  // Font Weights
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  // Line Heights
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-loose: 1.8;
+
+  // -----------------------------------------------------------------------------
+  // Spacing
+  // -----------------------------------------------------------------------------
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 2.5rem;
+
+  // -----------------------------------------------------------------------------
+  // Layout
+  // -----------------------------------------------------------------------------
+
+  --container-max-width: 1280px;
+  --container-padding: 1rem;
+  --dialog-min-width: 35rem;
+  --dialog-padding: 2.5rem;
+  --card-gap: 1rem;
+  --logo-size: 64px;
+  --logo-size-sm: 24px;
+
+  // -----------------------------------------------------------------------------
+  // Transitions
+  // -----------------------------------------------------------------------------
+
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  // -----------------------------------------------------------------------------
+  // Z-Index Scale
+  // -----------------------------------------------------------------------------
+
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-tooltip: 700;
+  --z-github-link: 999;
+  --z-crt-overlay: 9999;
+  --z-crt-toggle: 10000;
+
+  // -----------------------------------------------------------------------------
+  // CRT Filter Colors
+  // -----------------------------------------------------------------------------
+
+  --crt-scanline-color: rgba(0, 0, 0, 0.12);
+}
+
+// -----------------------------------------------------------------------------
+// Dark Mode Theme
+// -----------------------------------------------------------------------------
+
+.is-dark {
+  --color-bg: #212529;
+  --color-bg-secondary: #2c3035;
+  --color-bg-tertiary: #343a40;
+  --color-text: #fff;
+  --color-text-secondary: #adb5bd;
+  --color-text-muted: #fff;
+  --color-text-inverse: #212529;
+  --color-link: #fff;
+  --color-link-hover: #fff;
+  --color-link-active: #fff;
+  --color-border: rgba(255, 255, 255, 0.125);
+  --color-border-solid: #fff;
+  --color-border-light: #212529;
+  --color-accent: #4d565f;
+  --color-accent-dark: #343a40;
+
+  // CRT Filter Colors (Dark Mode)
+  --crt-scanline-color: rgba(255, 255, 255, 0.12);
+}
+
+// -----------------------------------------------------------------------------
+// High Contrast Mode Support
+// -----------------------------------------------------------------------------
+
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #000;
+    --color-text: #000;
+  }
+
+  .is-dark {
+    --color-border: #fff;
+    --color-text: #fff;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Reduced Motion Support
+// -----------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0.01ms;
+    --transition-base: 0.01ms;
+    --transition-slow: 0.01ms;
+  }
+}

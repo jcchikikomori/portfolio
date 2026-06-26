@@ -1,150 +1,160 @@
+<script>
+  import { projects } from '../data/projects';
+
+  export default {
+    name: 'ProjectsComponent',
+    components: {},
+    data() {
+      return {
+        projects,
+        selectedFilter: 'all',
+        logoErrors: {},
+      };
+    },
+    computed: {
+      filteredProjects() {
+        if (this.selectedFilter === 'all') {
+          return this.projects;
+        }
+        return this.projects.filter(this.matchesCategoryFilter);
+      },
+    },
+    methods: {
+      isDark() {
+        const dialog = document.getElementById('dialog-projects');
+        return Boolean(dialog?.classList.contains('is-dark'));
+      },
+      logoSrc(project) {
+        return this.isDark() && project.logoDark ? project.logoDark : project.logo;
+      },
+      onLogoError(projectId) {
+        // eslint-disable-next-line security/detect-object-injection
+        if (!this.logoErrors[projectId]) {
+          if (import.meta.env.DEV) {
+            console.warn(`[ProjectsComponent] Logo failed to load for: ${projectId}`);
+          }
+          this.logoErrors = { ...this.logoErrors, [projectId]: true };
+        }
+      },
+      showProjectDetails(projectId) {
+        window.dispatchEvent(
+          new CustomEvent('open-project-details', {
+            detail: { projectId },
+          })
+        );
+      },
+      getIndustryLabel(industry) {
+        const labels = {
+          'e-commerce': 'E-Commerce',
+          'online-payment': 'Online Payment',
+          b2b: 'B2B',
+          sales: 'Sales',
+          devops: 'DevOps',
+          web: 'Web',
+          mobile: 'Mobile',
+        };
+        return labels[industry] || industry;
+      },
+      matchesCategoryFilter(project) {
+        return project.category === this.selectedFilter;
+      },
+    },
+  };
+</script>
+
 <template>
   <!-- PROJECTS CONTAINER -->
   <div id="projects-container">
-    <dialog class="nes-dialog" id="dialog-projects">
-      <form method="dialog">
-        <h1 class="title">My Career History</h1>
-        <p class="subtitle">
-          See more by
-          <a v-on:click="goToUrl('https://github.com/jcchikikomori')"
-            >contacting me</a
-          >
-          for my CV!
-        </p>
-        <div class="card-group">
-          <div class="card">
-            <div
-              class="card-img-top placeholder"
-              alt="Accenture"
-              v-on:click="goToUrl('https://accenture.com')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">Accenture</h6>
-              <!-- <p class="card-text"></p> -->
-              <p class="card-text">
-                <small class="text-muted">2022-present</small>
-              </p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top chatgenie"
-              alt="Chatgenie.ph"
-              v-on:click="goToUrl('https://chatgenie.ph')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">Chatgenie.ph</h6>
-              <p class="card-text">
-                Developed some integrations for Chatgenie.ph
-                Such as GCash (GLife), Viber, Facebook & Instagram
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2019-2022</small>
-              </p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top hello-php"
-              alt="php7-starter"
-              v-on:click="alert('Preview not available anymore.')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">hello-php</h6>
-              <p class="card-text">
-                For protyping PHP app with user authentication
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2017-present</small>
-              </p>
-            </div>
-          </div>
-          <!-- <div class="card">
-            <img
-              src="img/projects/placeholder.png"
-              class="card-img-top"
-              alt="PayMaya"
-              v-on:click="goToUrl('https://github.com/jcchikikomori?org=PayMaya&year_list=1')"
-            />
-            <div class="card-body">
-              <h6 class="card-title">PayMaya</h6>
-              <p class="card-text">
-                Contributed the issues & fixes for their SDKs.
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2020</small>
-              </p>
-            </div>
-          </div> -->
-          <div class="card">
-            <div
-              class="card-img-top gcash-miniprogram"
-              alt="GCash Mini Program"
-              v-on:click="goToUrl('https://miniprogram.gcash.com')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">GCash Mini Program</h6>
-              <p class="card-text">
-                For serving Chatgenie merchants for GLife<br />
-              </p>
-              <p class="card-text">
-                <small class="text-muted">2020-2022</small>
-              </p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top covemanila"
-              alt="Cove Manila"
-              v-on:click="alert('Preview not available anymore.')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">Cove Manila WordPress Project</h6>
-              <p class="card-text"><small class="text-muted">2019</small></p>
-            </div>
-          </div>
-          <div class="card">
-            <div
-              class="card-img-top mcdelivery"
-              alt="McDelivery PH"
-              v-on:click="goToUrl('https://web.archive.org/web/20191228231219if_/https://www.mcdelivery.com.ph/')"
-            ></div>
-            <div class="card-body">
-              <h6 class="card-title">McDelivery PH for Android</h6>
-              <p class="card-text">
-                <small class="text-muted">2019 - 2021</small>
-              </p>
-            </div>
-          </div>
-        </div>
+    <dialog id="dialog-projects" ref="projectsDialog" class="nes-dialog">
+      <h1 class="title">My Projects</h1>
 
-        <menu class="dialog-menu">
-          <button class="btn nes-btn is-primary is-block">Okay</button>
-        </menu>
-      </form>
+      <!-- Filter Dropdown -->
+      <div class="filter-container">
+        <label for="project-filter">Filter:</label>
+        <div class="nes-select">
+          <select id="project-filter" v-model="selectedFilter">
+            <option value="all">All Projects</option>
+            <option value="corporate">Corporate</option>
+            <option value="personal">Personal</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid">
+        <div
+          v-for="project in filteredProjects"
+          :key="project.id"
+          class="project-card nes-container"
+        >
+          <!-- Project Logo -->
+          <div class="project-logo-wrapper">
+            <template v-if="project.logo && !logoErrors[project.id]">
+              <img
+                :src="logoSrc(project)"
+                :alt="project.name + ' logo'"
+                class="project-logo"
+                @error="onLogoError(project.id)"
+              />
+            </template>
+            <template v-else>
+              <i class="bi bi-box project-logo-placeholder"></i>
+            </template>
+          </div>
+
+          <!-- Project Name -->
+          <h3 class="project-name">{{ project.name }}</h3>
+
+          <!-- Badges -->
+          <div class="project-badges">
+            <span
+              :class="[
+                'badge',
+                'nes-badge',
+                project.category === 'corporate' ? 'is-primary' : 'is-success',
+              ]"
+            >
+              <span class="badge-label">{{ project.category }}</span>
+            </span>
+            <span class="badge industry-badge">
+              {{ getIndustryLabel(project.industry) }}
+            </span>
+          </div>
+
+          <!-- Platforms -->
+          <div v-if="project.platforms.length > 0" class="project-platforms">
+            <span class="platform-icons">
+              <i v-for="icon in project.platforms" :key="icon" :class="'bi ' + icon"></i>
+            </span>
+          </div>
+
+          <!-- Dates -->
+          <p class="project-dates">{{ project.dates }}</p>
+
+          <!-- View Details Button -->
+          <button
+            type="button"
+            class="nes-btn is-default nes-pointer project-details-btn"
+            @click="showProjectDetails(project.id)"
+          >
+            View Details
+          </button>
+        </div>
+      </div>
+
+      <menu class="dialog-menu">
+        <button
+          type="button"
+          class="nes-btn is-primary nes-pointer is-block"
+          @click="$refs.projectsDialog.close()"
+        >
+          Close
+        </button>
+      </menu>
     </dialog>
   </div>
 </template>
 
-<script>
-import $ from "jquery";
-
-export default {
-  name: "ProjectsComponent",
-  components: {},
-  methods: {
-    goToUrl: function(url, includeTarget = true) {
-      $("#redirect").attr("href", url);
-      if (!includeTarget) {
-        $("#redirect").attr("target", null);
-      } else {
-        $("#redirect").attr("target", "_blank");
-      }
-      $("#redirect")[0].click();
-    },
-    alert: function(msg) {
-      alert(msg);
-    },
-  }
-};
-</script>
+<style scoped>
+  /* Component-specific styles - main styles in _projects.scss */
+</style>

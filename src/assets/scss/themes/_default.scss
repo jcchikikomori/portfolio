@@ -4,7 +4,32 @@
 // -----------------------------------------------------------------------------
 
 body {
-  font-family: "Press Start 2P", sans-serif;
+  font-family: var(--font-family-base);
+
+  // Specific font for other elements.
+  h1,
+  .title,
+  .subtitle,
+  .slogan-container {
+    font-family: var(--font-family-title);
+    line-height: normal;
+  }
+
+  .title,
+  .slogan-container {
+    text-transform: uppercase;
+    margin: -1rem 0 1rem 0;
+  }
+
+  .badge,
+  .badge .badge-label,
+  .career-title,
+  .career-details-trigger,
+  .is-uppercase,
+  .project-name,
+  .project-details-btn {
+    text-transform: uppercase;
+  }
 }
 
 a {
@@ -53,6 +78,11 @@ div.containers {
   .nes-container {
     display: inline-block;
     max-width: 400px;
+
+    @include mq($from: smallest, $until: tablet) {
+      max-width: 100%;
+      padding: 1rem;
+    }
   }
 }
 
@@ -123,14 +153,23 @@ div.containers {
 }
 
 #profile-container {
-  display: none;
+  width: fit-content;
   border: none !important;
+  margin: 0 auto;
   padding: 0;
+  clip-path: inset(0 0 100% 0);
+  animation: nes-open 400ms steps(8) forwards;
+  animation-delay: 400ms;
 }
 
 #dialog-projects,
-#dialog-spotify {
-  height: auto;
+#dialog-spotify,
+#dialog-screenshots,
+#dialog-industries,
+#dialog-career-details,
+#dialog-industry-projects {
+  max-height: 90vh;
+  overflow-y: auto;
   min-width: 35rem;
 
   @include mq($from: smallest, $until: mobile) {

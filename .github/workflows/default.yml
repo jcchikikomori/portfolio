@@ -13,20 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x, 22.x]
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install and check for dependencies
+          cache: 'pnpm'
+      - name: Install dependencies
         run: |
-          npm install -g pnpm
-          pnpm install --no-frozen-lockfile
+          pnpm install --frozen-lockfile
           pnpx depcheck
       - name: Testing ☢️
         run: |
@@ -34,3 +38,5 @@ jobs:
       - name: Build 🔧
         run: |
           pnpm run build
+      - name: Test
+        run: pnpm run test

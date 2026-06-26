@@ -1,0 +1,143 @@
+#dialog-careers {
+  max-width: 900px;
+  width: 90vw;
+  margin: auto;
+  padding: 1rem;
+
+  @include mq($from: smallest, $until: mobile) {
+    width: 95vw;
+    padding: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .dialog-menu {
+    padding: 0; // tentative
+    margin-bottom: 0;
+  }
+
+  .career-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+
+    @include mq($from: smallest, $until: tablet) {
+      gap: 0.75rem;
+    }
+  }
+
+  .career-card {
+    flex: 0 1 calc(50% - 1rem); // 2 columns on tablet+
+    min-width: 280px;
+    padding: 1rem;
+    text-align: center;
+    border: 4px solid #212529;
+    background: #fff;
+
+    @include mq($from: smallest, $until: tablet) {
+      flex: 1 1 100%; // 1 column on mobile
+      min-width: auto;
+      padding: 0.75rem;
+    }
+
+    .career-logo-wrapper {
+      margin-bottom: 0.5rem;
+
+      .career-logo {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+
+        @include mq($from: smallest, $until: mobile) {
+          width: 48px;
+          height: 48px;
+        }
+      }
+
+      .career-logo-placeholder {
+        width: 64px;
+        height: 64px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        font-size: 1.5rem;
+
+        @include mq($from: smallest, $until: mobile) {
+          width: 48px;
+          height: 48px;
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    .career-title {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 0.875rem;
+      }
+    }
+
+    .career-platforms {
+      margin-bottom: 0.5rem;
+
+      .platform-icons {
+        font-size: 1.25rem;
+        display: block;
+
+        @include mq($from: smallest, $until: mobile) {
+          font-size: 1rem;
+        }
+
+        i {
+          margin-right: 0.25rem;
+        }
+      }
+    }
+
+    .career-dates {
+      margin: 0 0 0.75rem 0;
+      font-size: 0.875rem;
+      color: #6c757d;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 0.8rem;
+      }
+    }
+
+    .career-details-trigger {
+      font-size: 0.75rem;
+      min-height: 44px;
+      width: 100%;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 0.7rem;
+      }
+    }
+  }
+
+  // FOR DARK MODE
+  &.is-dark {
+    .career-card {
+      background: #212529;
+      border-color: #fff;
+      color: #fff;
+
+      .career-logo-wrapper {
+        .career-logo-placeholder {
+          color: #fff;
+        }
+      }
+
+      .career-dates {
+        color: #adb5bd;
+      }
+    }
+  }
+}

@@ -1,27 +1,45 @@
 # portfolio
 
-## Deprecation Notice
-
-Will migrate to version 3 very soon.
-The version 2 is no longer maintained due to outdated dependencies.
+Personal portfolio site built with Vue 3, Vite, and Bootstrap 5.
 
 ## Requirements
 
-- NodeJS 18
-- VueJS CLI
-- `pnpm`
+- Node.js 22 LTS (see `.nvmrc`)
+- pnpm
 
 ## Setup
 
-### First step
+```bash
+pnpm install
+```
 
-- Run required packages `pnpm install -g eslint prettier`
-- Then run `pnpm install` 
+## Development
 
-### Building
+```bash
+pnpm run dev
+```
 
-- `pnpm run build`
+## Build
+
+```bash
+pnpm run build
+```
+
+## Preview production build
+
+```bash
+pnpm run preview
+```
 
 ## Testing
 
-- `pnpm run serve`
+```bash
+pnpm run test
+```
+
+## Linting and formatting
+
+```bash
+pnpm run lint
+pnpm run format
+```

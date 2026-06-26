@@ -8,14 +8,20 @@
 
 // 3. Base stuff
 @import "base/reset";
-@import "base/base", "base/fonts", "base/typography", "base/helpers";
+@import "base/root"; // CSS custom properties
+@import "base/base", "base/typography", "base/helpers";
+@import "base/fonts/baraduke";
 @import "base/animations", "base/transitions";
 
 // 4. Layout-related sections
-@import "layout/header", "layout/footer";
+@import "layout/header", "layout/nes", "layout/footer";
 
 // 5. Components
-@import "components/media", "components/projects";
+@import "components/button", "components/card";
+@import "components/media", "components/careers", "components/projects", "components/select";
+@import "components/career-details";
+@import "components/project-details";
+@import "components/crt";
 
 // 6. Page-specific styles
 @import "pages/home";

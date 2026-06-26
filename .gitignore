@@ -1,3 +1,17 @@
+# Claude
+.claude/
+docs/qa/
+docs/**/*.png
+docs/**/*.html
+docs/**/*.json
+docs/plans/
+!docs/adr/
+!docs/design/
+qa-screenshots/
+qa*.png
+*/qa*.png
+
+# NodeJS
 .DS_Store
 node_modules
 dist

@@ -1,114 +1,250 @@
 #dialog-projects {
-  max-width: 1280px;
+  max-width: 900px;
+  width: 90vw;
+  margin: auto;
+  padding: 1rem;
 
-  .subtitle {
-    font-size: 13px;
+  @include mq($from: smallest, $until: mobile) {
+    width: 95vw;
+    padding: 0.75rem;
   }
 
-  .dialog-menu {
-    padding: 0; // tentative
-    margin-bottom: 0;
+  .title {
+    text-align: center;
   }
 
-  .card-group {
-    @include mq($from: tablet, $until: desktop) {
-      display: unset;
+  // Filter dropdown container
+  .filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    label {
+      font-size: 0.875rem;
     }
 
-    & > .card {
-      border: 1px solid rgba(0, 0, 0, 0.125) !important;
-      flex: 1 1 30%; /*grow | shrink | basis */
-      min-height: 25rem;
+    .nes-select {
+      min-width: 150px;
 
-      // TODO: Not yet mobile-friendly
-      .card-img-top {
-        min-height: 20vh;
-        background-image: url(/public/img/projects/placeholder.png);
-        background-repeat: no-repeat;
-        background-position: top center;
-        background-size: cover;
-        cursor: pointer;
+      select {
+        font-size: 0.875rem;
+      }
+    }
 
-        &.chatgenie {
-          background-image: url(/public/img/projects/chatgenie.png);
-          background-position: top left;
+    @include mq($from: smallest, $until: mobile) {
+      flex-direction: column;
+      gap: 0.25rem;
+
+      label {
+        font-size: 0.8rem;
+      }
+
+      .nes-select {
+        min-width: 120px;
+        width: 100%;
+      }
+    }
+  }
+
+  // Projects grid
+  .projects-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+
+    @include mq($from: smallest, $until: tablet) {
+      gap: 0.75rem;
+    }
+  }
+
+  // Project cards
+  .project-card {
+    flex: 0 1 calc(50% - 1rem); // 2 columns on tablet+
+    height: 100%;
+    min-width: 280px;
+    padding: 1rem;
+    text-align: center;
+    border: 4px solid #212529;
+    background: #fff;
+
+    @include mq($from: smallest, $until: tablet) {
+      flex: 1 1 100%; // 1 column on mobile
+      min-width: auto;
+      padding: 0.75rem;
+    }
+
+    .project-logo-wrapper {
+      margin-bottom: 0.5rem;
+
+      .project-logo {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+
+        @include mq($from: smallest, $until: mobile) {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      .project-logo-placeholder {
+        width: 48px;
+        height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        font-size: 1.25rem;
+
+        @include mq($from: smallest, $until: mobile) {
+          width: 40px;
+          height: 40px;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .project-name {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 0.875rem;
+      }
+    }
+
+    .project-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+
+      .badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+
+        &.nes-badge {
+          display: inline-block;
+          padding: 0;
+
+          .badge-label {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+          }
+
+          &.is-primary {
+            background: #209cee;
+            color: #fff;
+          }
+
+          &.is-success {
+            background: #92cc41;
+            color: #212529;
+          }
         }
 
-        &.hello-php {
-          background-image: url(/public/img/projects/placeholder.png);
-        }
-
-        &.gcash-miniprogram {
-          background-image: url(/public/img/projects/miniprogram.png);
-          background-position: top left;
-        }
-
-        &.covemanila {
-          background-image: url(/public/img/projects/covemanila.png);
-          background-position: top left;
-        }
-
-        &.mcdelivery {
-          background-image: url(/public/img/projects/mcdelivery.png);
-          background-position: top left;
+        &.industry-badge {
+          background: #f7f7f7;
+          border: 2px solid #212529;
+          color: #6c757d;
         }
 
         @include mq($from: smallest, $until: mobile) {
-          height: 10rem;
-        }
-
-        @include mq($from: smartphone, $until: tablet) {
-          height: 12rem;
-        }
-      }
-
-      &:hover > .card-body {
-        // TODO: Set this as variable
-        // TODO: Color not final
-        background: #e3e3e4;
-
-        .text-muted {
-          color: #000 !important;
+          font-size: 0.65rem;
         }
       }
     }
 
-    .card .card-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .project-platforms {
+      margin-bottom: 0.5rem;
 
-      .card-text {
-        font-size: 13px;
-        text-align: center;
-        word-break: break-word;
-        hyphens: auto;
+      .platform-icons {
+        font-size: 1.1rem;
+        display: block;
+
+        @include mq($from: smallest, $until: mobile) {
+          font-size: 1rem;
+        }
+
+        i {
+          margin-right: 0.25rem;
+        }
+      }
+    }
+
+    .project-dates {
+      margin: 0 0 0.75rem 0;
+      font-size: 0.8rem;
+      color: #6c757d;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 0.75rem;
+      }
+    }
+
+    .project-details-btn {
+      font-size: 0.75rem;
+      min-height: 44px;
+      width: 100%;
+
+      @include mq($from: smallest, $until: mobile) {
+        font-size: 0.7rem;
       }
     }
   }
 
-  // FOR DARK MODE
+  .dialog-menu {
+    margin-top: 1rem;
+    padding: 0;
+
+    @include mq($from: smallest, $until: mobile) {
+      margin-top: 0.75rem;
+    }
+  }
+
+  // Dark mode
   &.is-dark {
-    .card-group {
-      .card {
-        .card-img-top {
-          background-color: #212529;
-        }
+    .filter-container {
+      label {
+        color: #fff;
+      }
 
-        .card-body {
+      .nes-select {
+        select {
           background: #212529;
-          border-top: #fff 1px solid;
+          color: #fff;
+          border-color: #fff;
         }
+      }
+    }
 
-        &:hover > .card-body {
-          // TODO: Set this as variable
-          // TODO: Color not final
-          background: #4d565f;
+    .project-card {
+      background: #212529;
+      border-color: #fff;
+      color: #fff;
 
-          .text-muted {
-            color: #fff !important;
-          }
+      .project-logo-wrapper {
+        .project-logo-placeholder {
+          color: #fff;
         }
+      }
+
+      .project-badges {
+        .industry-badge {
+          background: #343a40;
+          border-color: #fff;
+          color: #adb5bd;
+        }
+      }
+
+      .project-dates {
+        color: #adb5bd;
       }
     }
   }
