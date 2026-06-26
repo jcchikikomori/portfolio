@@ -29,6 +29,7 @@
 
 <template>
   <div id="app" class="app container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- SVG Filter Definitions for CRT Barrel Distortion -->
     <svg id="crt-svg-filters" aria-hidden="true" role="presentation" class="crt-svg-filters">
       <defs>
@@ -52,11 +53,11 @@
     </svg>
 
     <div class="crt-filter" aria-hidden="true"></div>
-    <div class="row -content">
+    <main id="main-content" class="row -content" tabindex="-1">
       <div class="col-md-12">
         <ProfileComponent></ProfileComponent>
       </div>
-    </div>
+    </main>
     <button
       class="nes-btn is-default crt-toggle nes-pointer"
       :class="{ 'is-disabled': !crtEnabled }"
@@ -86,5 +87,34 @@
     height: 0;
     overflow: hidden;
     pointer-events: none;
+  }
+
+  .skip-link {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+
+    &:focus {
+      position: fixed;
+      top: 0.5rem;
+      left: 0.5rem;
+      z-index: 9999;
+      width: auto;
+      height: auto;
+      padding: 0.5rem 1rem;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      outline: 2px solid var(--color-primary);
+    }
   }
 </style>

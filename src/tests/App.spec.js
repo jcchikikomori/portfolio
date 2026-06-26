@@ -139,6 +139,33 @@ describe('App.vue', () => {
     expect(button.attributes('aria-label')).toBe('Disable CRT filter');
   });
 
+  describe('skip link', () => {
+    it('renders skip link anchor', () => {
+      const wrapper = mount(App);
+      expect(wrapper.find('a.skip-link').exists()).toBe(true);
+    });
+
+    it('skip link points to #main-content', () => {
+      const wrapper = mount(App);
+      const skipLink = wrapper.find('a.skip-link');
+      expect(skipLink.attributes('href')).toBe('#main-content');
+    });
+
+    it('skip link is the first child of #app before SVG filters', () => {
+      const wrapper = mount(App);
+      expect(wrapper.find('#app > a.skip-link').exists()).toBe(true);
+      const appHtml = wrapper.find('#app').html();
+      const skipLinkIndex = appHtml.indexOf('<a href="#main-content"');
+      const svgFilterIndex = appHtml.indexOf('id="crt-svg-filters"');
+      expect(skipLinkIndex).toBeLessThan(svgFilterIndex);
+    });
+
+    it('renders main content landmark with tabindex', () => {
+      const wrapper = mount(App);
+      expect(wrapper.find('main#main-content[tabindex="-1"]').exists()).toBe(true);
+    });
+  });
+
   describe('CRT barrel distortion SVG filter', () => {
     it('renders SVG filter container with correct id', () => {
       const wrapper = mount(App);
