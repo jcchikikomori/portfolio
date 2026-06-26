@@ -84,7 +84,7 @@
     right: 1rem;
     padding: 0.25rem 0.75rem;
     background-color: $osd-blue;
-    border: 2px solid lighten($osd-blue, 20%);
+    border: 2px solid adjust($osd-blue, 20%);
     z-index: var(--z-crt-toggle);
     pointer-events: none;
     opacity: 0;

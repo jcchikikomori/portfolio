@@ -29,6 +29,7 @@
 
 <template>
   <div id="app" class="app container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- SVG Filter Definitions for CRT Barrel Distortion -->
     <svg id="crt-svg-filters" aria-hidden="true" role="presentation" class="crt-svg-filters">
       <defs>
@@ -52,11 +53,11 @@
     </svg>
 
     <div class="crt-filter" aria-hidden="true"></div>
-    <div class="row -content">
+    <main id="main-content" class="row -content" tabindex="-1">
       <div class="col-md-12">
         <ProfileComponent></ProfileComponent>
       </div>
-    </div>
+    </main>
     <button
       class="nes-btn is-default crt-toggle nes-pointer"
       :class="{ 'is-disabled': !crtEnabled }"
@@ -86,5 +87,48 @@
     height: 0;
     overflow: hidden;
     pointer-events: none;
+  }
+
+  .skip-link {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+
+    &:focus {
+      position: fixed;
+      top: 0.5rem;
+      left: 0.5rem;
+      // Render above CRT toggle and overlay so the focused link is always visible
+      z-index: calc(var(--z-crt-toggle, 10000) + 1);
+      width: auto;
+      height: auto;
+      padding: 0.75rem 1rem;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-weight: bold;
+      text-decoration: none;
+      // border: 4px solid var(--color-primary);
+      border: 4px solid white;
+      outline: 4px solid var(--color-bg);
+      outline-offset: 2px;
+      box-shadow: 4px 4px 0 var(--color-primary-dark);
+    }
+  }
+
+  // Hide the skip link when any modal dialog is open. Dialogs rendered with
+  // showModal() live in the browser top layer, so a page-level skip link would
+  // appear behind them; it is also not useful while focus is trapped in a modal.
+  body:has(dialog[open]) .skip-link {
+    display: none !important;
   }
 </style>
