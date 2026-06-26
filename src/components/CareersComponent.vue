@@ -1,5 +1,6 @@
 <script>
   import { careers } from '../data/careers';
+  import { assetUrl } from '../utils/assetUrl';
 
   export default {
     name: 'CareersComponent',
@@ -11,12 +12,13 @@
       };
     },
     methods: {
+      assetUrl,
       isDark() {
         const dialog = document.getElementById('dialog-careers');
         return Boolean(dialog?.classList.contains('is-dark'));
       },
       logoSrc(career) {
-        return this.isDark() && career.logoDark ? career.logoDark : career.logo;
+        return assetUrl(this.isDark() && career.logoDark ? career.logoDark : career.logo);
       },
       goToUrl(url) {
         window.open(url, '_blank', 'noopener,noreferrer');

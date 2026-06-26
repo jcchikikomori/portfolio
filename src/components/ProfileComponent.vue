@@ -9,6 +9,7 @@
   import SpotifyComponent from './SpotifyComponent.vue';
   import VisualizerComponent from './VisualizerComponent.vue';
   import packageInfo from '../../package.json';
+  import { assetUrl } from '@/utils/assetUrl';
 
   const SLOGAN_INITIALIZED_KEY = 'slogan-initialized';
 
@@ -38,6 +39,7 @@
       window.removeEventListener('media-playing-change', this.onMediaPlayingChange);
     },
     methods: {
+      assetUrl,
       goToUrl(url) {
         window.open(url, '_blank', 'noopener,noreferrer');
       },
@@ -107,7 +109,7 @@
     <section id="profile-container" class="nes-container">
       <div class="containers">
         <div class="nes-container is-centered">
-          <img id="profile-logo" src="/img/jcc_logo.png" width="200" alt="My Logo" />
+          <img id="profile-logo" :src="assetUrl('/img/jcc_logo.png')" width="200" alt="My Logo" />
           <br /><br />
           <div class="slogan-container">
             {{ currentSlogan }}

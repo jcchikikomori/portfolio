@@ -1,6 +1,7 @@
 <script>
   import { careers } from '../data/careers';
   import { projects } from '../data/projects';
+  import { assetUrl } from '../utils/assetUrl';
 
   export default {
     name: 'ProjectDetailsComponent',
@@ -25,6 +26,7 @@
       window.removeEventListener('open-project-details', this.handleOpenProjectDetails);
     },
     methods: {
+      assetUrl,
       isDark() {
         const dialog = document.getElementById('dialog-project-details');
         return Boolean(dialog?.classList.contains('is-dark'));
@@ -107,7 +109,7 @@
         <!-- Media Section -->
         <div class="project-details-media">
           <img
-            :src="selectedProject.screenshots[0] || '/img/projects/placeholder.png'"
+            :src="assetUrl(selectedProject.screenshots[0]) || assetUrl('/img/projects/placeholder.png')"
             :alt="selectedProject.name + ' screenshot'"
             class="project-screenshot"
           />
