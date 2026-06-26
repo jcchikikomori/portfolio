@@ -104,17 +104,30 @@
       position: fixed;
       top: 0.5rem;
       left: 0.5rem;
-      z-index: 9999;
+      // Render above CRT toggle and overlay so the focused link is always visible
+      z-index: calc(var(--z-crt-toggle, 10000) + 1);
       width: auto;
       height: auto;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1rem;
       margin: 0;
       overflow: visible;
       clip: auto;
       white-space: normal;
       background-color: var(--color-bg);
       color: var(--color-text);
-      outline: 2px solid var(--color-primary);
+      font-weight: bold;
+      text-decoration: none;
+      border: 4px solid var(--color-primary);
+      outline: 4px solid var(--color-bg);
+      outline-offset: 2px;
+      box-shadow: 4px 4px 0 var(--color-primary-dark);
     }
+  }
+
+  // Hide the skip link when any modal dialog is open. Dialogs rendered with
+  // showModal() live in the browser top layer, so a page-level skip link would
+  // appear behind them; it is also not useful while focus is trapped in a modal.
+  body:has(dialog[open]) .skip-link {
+    display: none !important;
   }
 </style>
