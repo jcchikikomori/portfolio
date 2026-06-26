@@ -133,6 +133,7 @@
               id="linkedin-btn"
               type="button"
               class="nes-btn is-primary nes-pointer is-block"
+              aria-label="LinkedIn Profile"
               @click="goToUrl('https://www.linkedin.com/in/jcchikikomori/')"
             >
               <em class="nes-icon linkedin"></em> <span>LinkedIn</span>
@@ -141,6 +142,7 @@
               id="github-btn"
               type="button"
               class="nes-btn is-primary nes-pointer is-block"
+              aria-label="GitHub Profile"
               @click="goToUrl('https://github.com/jcchikikomori')"
             >
               <em class="nes-icon github"></em> <span>GitHub</span>
