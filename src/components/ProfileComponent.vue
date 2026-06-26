@@ -133,7 +133,7 @@
               id="linkedin-btn"
               type="button"
               class="nes-btn is-primary nes-pointer is-block"
-              @click="goToUrl('https://linkedin.com/in/johncyrillcorsanes')"
+              @click="goToUrl('https://www.linkedin.com/in/jcchikikomori/')"
             >
               <em class="nes-icon linkedin"></em> <span>LinkedIn</span>
             </button>

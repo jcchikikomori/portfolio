@@ -117,7 +117,8 @@
       color: var(--color-text);
       font-weight: bold;
       text-decoration: none;
-      border: 4px solid var(--color-primary);
+      // border: 4px solid var(--color-primary);
+      border: 4px solid white;
       outline: 4px solid var(--color-bg);
       outline-offset: 2px;
       box-shadow: 4px 4px 0 var(--color-primary-dark);
