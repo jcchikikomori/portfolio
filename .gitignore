@@ -11,6 +11,10 @@ qa-screenshots/
 qa*.png
 */qa*.png
 
+# opencode
+.opencode/
+.omo/
+
 # NodeJS
 .DS_Store
 node_modules
