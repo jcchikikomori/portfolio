@@ -23,8 +23,3 @@ window.AudioContext = vi.fn().mockImplementation(() => ({
 
 // spy on window.open
 window.open = vi.fn();
-
-// mock register-service-worker
-vi.mock('register-service-worker', () => ({
-  register: vi.fn(),
-}));
