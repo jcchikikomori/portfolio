@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x, 22.x]
+        node-version: [22.x]
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -32,6 +32,12 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
           pnpx depcheck
+      - name: Audit production dependencies 🔍
+        run: pnpm audit --prod --audit-level=high
+        continue-on-error: true
+      - name: Audit full dependency tree (informational) 🔍
+        run: pnpm audit --audit-level=critical
+        continue-on-error: true
       - name: Testing ☢️
         run: |
           pnpm run lint

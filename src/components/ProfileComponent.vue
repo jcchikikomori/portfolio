@@ -86,6 +86,7 @@
           }
         } catch (e) {
           // localStorage unavailable: fallback to default
+          console.debug('ProfileComponent: localStorage unavailable, using default slogan', e);
           this.currentSlogan = defaultSlogan?.message || slogans[0]?.message || '';
         }
       },

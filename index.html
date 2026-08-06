@@ -5,6 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Content Security Policy -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-eval' https://www.googletagmanager.com https://open.spotify.com https://embed-cdn.spotifycdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://logo.clearbit.com https://cdn.prod.website-files.com https://gw.alipayobjects.com https://www.php.net; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; frame-src https://open.spotify.com; base-uri 'self'; form-action 'self'; object-src 'none';"
+    />
+
     <!-- SEO -->
     <title>@jcchikikomori — Portfolio</title>
     <meta name="description" content="Software Developer" />
@@ -40,14 +46,6 @@
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VQG3XQESGF"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-VQG3XQESGF');
-    </script>
   </head>
 
   <body>

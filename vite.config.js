@@ -64,7 +64,7 @@ export default defineConfig({
       reporter: ['text', 'lcov'],
       thresholds: { lines: 95, branches: 95, functions: 95 },
       include: ['src/**/*.{js,vue}'],
-      exclude: ['src/tests/**', 'src/registerServiceWorker.js'],
+      exclude: ['src/tests/**'],
     },
   },
 });
